@@ -4,10 +4,345 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMS Clinical Assistant</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #101820;
+            color: white;
+        }
+
+        header {
+            background: #18242f;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #e63946;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin-bottom: 0;
+            color: #b8c1c8;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: #18242f;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #344451;
+            padding-bottom: 10px;
+        }
+
+        .vitals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #101820;
+            border: 1px solid #4d5c68;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #d5dce1;
+        }
+
+        .symptoms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .check {
+            background: #101820;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .check input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #e63946;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #c92f3b;
+        }
+
+        #results {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .notice {
+            font-size: 13px;
+            color: #9caab5;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
+
+<header>
     <h1>EMS Clinical Assistant</h1>
-    <p>Enter patient findings to begin.</p>
+    <p>Clinical findings & differential reference</p>
+</header>
+
+<div class="container">
+
+    <!-- VITALS -->
+
+    <div class="section">
+        <h2>Vitals</h2>
+
+        <div class="vitals">
+
+            <div>
+                <label>Heart Rate</label>
+                <input type="number" id="hr" placeholder="HR">
+            </div>
+
+            <div>
+                <label>Systolic BP</label>
+                <input type="number" id="sbp" placeholder="SBP">
+            </div>
+
+            <div>
+                <label>Respiratory Rate</label>
+                <input type="number" id="rr" placeholder="RR">
+            </div>
+
+            <div>
+                <label>SpO₂</label>
+                <input type="number" id="spo2" placeholder="%">
+            </div>
+
+            <div>
+                <label>EtCO₂</label>
+                <input type="number" id="etco2" placeholder="mmHg">
+            </div>
+
+            <div>
+                <label>Temperature</label>
+                <input type="number" id="temp" step="0.1" placeholder="°F">
+            </div>
+
+            <div>
+                <label>BGL</label>
+                <input type="number" id="bgl" placeholder="mg/dL">
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- SIGNS / SYMPTOMS -->
+
+    <div class="section">
+
+        <h2>Signs & Symptoms</h2>
+
+        <div class="symptoms">
+
+            <label class="check">
+                <input type="checkbox" value="ams">
+                Altered Mental Status
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="chestPain">
+                Chest Pain
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="dyspnea">
+                Dyspnea
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="syncope">
+                Syncope
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="diaphoresis">
+                Diaphoresis
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="nausea">
+                Nausea / Vomiting
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="weakness">
+                Weakness
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="dizziness">
+                Dizziness
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="seizure">
+                Seizure
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="headache">
+                Headache
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="fever">
+                Fever
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="abdominalPain">
+                Abdominal Pain
+            </label>
+
+        </div>
+    </div>
+
+
+    <!-- ASSESSMENT -->
+
+    <div class="section">
+
+        <h2>Assessment Findings</h2>
+
+        <div class="symptoms">
+
+            <label class="check">
+                <input type="checkbox" value="wheezing">
+                Wheezing
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="crackles">
+                Crackles
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="absentLung">
+                Unilateral Absent Lung Sounds
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="jvd">
+                JVD
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="edema">
+                Peripheral Edema
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="hives">
+                Hives / Urticaria
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="cyanosis">
+                Cyanosis
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="neuroDeficit">
+                Focal Neurological Deficit
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="pinpoint">
+                Pinpoint Pupils
+            </label>
+
+            <label class="check">
+                <input type="checkbox" value="dilated">
+                Dilated Pupils
+            </label>
+
+        </div>
+    </div>
+
+
+    <button onclick="analyzePatient()">ANALYZE FINDINGS</button>
+
+
+    <div id="results" class="section">
+        <h2>Clinical Considerations</h2>
+        <div id="resultContent"></div>
+    </div>
+
+
+    <div class="notice">
+        Educational clinical reference only. Not a substitute for local protocols,
+        medical direction, or clinical judgment.
+    </div>
+
+</div>
+
+
+<script>
+function analyzePatient() {
+
+    const results = document.getElementById("results");
+    const content = document.getElementById("resultContent");
+
+    results.style.display = "block";
+
+    content.innerHTML = `
+        <p>Diagnostic engine coming next.</p>
+        <p>Your selected findings will be analyzed here.</p>
+    `;
+
+}
+</script>
+
 </body>
 </html>
