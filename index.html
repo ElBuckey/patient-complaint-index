@@ -202,138 +202,43 @@
 </div>
 
 
-    <!-- SIGNS / SYMPTOMS -->
+    <!-- FINDINGS -->
 
-    <div class="section">
+<div class="section">
+    <h2>Clinical Findings</h2>
 
-        <h2>Signs & Symptoms</h2>
+    <label for="findingSearch">Add signs, symptoms, or assessment findings</label>
 
-        <div class="symptoms">
+    <div class="finding-search-container">
+        <input
+            type="text"
+            id="findingSearch"
+            placeholder="Search findings..."
+            autocomplete="off"
+        >
 
-            <label class="check">
-                <input type="checkbox" value="ams">
-                Altered Mental Status
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="chestPain">
-                Chest Pain
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="dyspnea">
-                Dyspnea
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="syncope">
-                Syncope
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="diaphoresis">
-                Diaphoresis
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="nausea">
-                Nausea / Vomiting
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="weakness">
-                Weakness
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="dizziness">
-                Dizziness
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="seizure">
-                Seizure
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="headache">
-                Headache
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="fever">
-                Fever
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="abdominalPain">
-                Abdominal Pain
-            </label>
-
-        </div>
+        <div id="suggestions" class="suggestions"></div>
     </div>
 
+    <div class="quick-title">Common Findings</div>
 
-    <!-- ASSESSMENT -->
-
-    <div class="section">
-
-        <h2>Assessment Findings</h2>
-
-        <div class="symptoms">
-
-            <label class="check">
-                <input type="checkbox" value="wheezing">
-                Wheezing
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="crackles">
-                Crackles
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="absentLung">
-                Unilateral Absent Lung Sounds
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="jvd">
-                JVD
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="edema">
-                Peripheral Edema
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="hives">
-                Hives / Urticaria
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="cyanosis">
-                Cyanosis
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="neuroDeficit">
-                Focal Neurological Deficit
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="pinpoint">
-                Pinpoint Pupils
-            </label>
-
-            <label class="check">
-                <input type="checkbox" value="dilated">
-                Dilated Pupils
-            </label>
-
-        </div>
+    <div class="quick-picks">
+        <button type="button" onclick="addFinding('Chest Pain')">Chest Pain</button>
+        <button type="button" onclick="addFinding('Dyspnea')">Dyspnea</button>
+        <button type="button" onclick="addFinding('Altered Mental Status')">AMS</button>
+        <button type="button" onclick="addFinding('Syncope / Near Syncope')">Syncope</button>
+        <button type="button" onclick="addFinding('Seizure')">Seizure</button>
+        <button type="button" onclick="addFinding('Weakness')">Weakness</button>
     </div>
+
+    <div class="selected-title">Selected Findings</div>
+
+    <div id="selectedFindings" class="selected-findings">
+        <span id="noFindings" class="no-findings">
+            No findings selected
+        </span>
+    </div>
+</div>
 
 
     <button onclick="analyzePatient()">ANALYZE FINDINGS</button>
