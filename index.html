@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>EMS Clinical Assistant</title>
 
     <style>
@@ -54,13 +56,20 @@
 
         .vitals {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
         }
 
-        input, select {
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #d5dce1;
+        }
+
+        select,
+        input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: #101820;
             border: 1px solid #4d5c68;
             border-radius: 6px;
@@ -68,38 +77,12 @@
             font-size: 16px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #d5dce1;
-        }
-
-        .symptoms {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-
-        .check {
-            background: #101820;
-            padding: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .check input {
-            width: auto;
-            margin-right: 8px;
-        }
-
         button {
-            width: 100%;
-            padding: 16px;
             border: none;
             border-radius: 8px;
             background: #e63946;
             color: white;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
@@ -108,9 +91,121 @@
             background: #c92f3b;
         }
 
+        .analyze-button {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+        }
+
+        .finding-search-container {
+            position: relative;
+        }
+
+        .suggestions {
+            display: none;
+            position: absolute;
+            width: 100%;
+            max-height: 280px;
+            overflow-y: auto;
+            background: #101820;
+            border: 1px solid #4d5c68;
+            border-radius: 6px;
+            z-index: 10;
+        }
+
+        .suggestion {
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #293844;
+        }
+
+        .suggestion:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion:hover {
+            background: #243442;
+        }
+
+        .suggestion-category {
+            font-size: 12px;
+            color: #8fa0ad;
+            margin-top: 3px;
+        }
+
+        .quick-title,
+        .selected-title {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #d5dce1;
+        }
+
+        .quick-picks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .quick-picks button {
+            width: auto;
+            padding: 9px 13px;
+            background: #344451;
+            font-size: 14px;
+        }
+
+        .quick-picks button:hover {
+            background: #435766;
+        }
+
+        .selected-findings {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 50px;
+            padding: 10px;
+            background: #101820;
+            border-radius: 6px;
+        }
+
+        .finding-tag {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 11px;
+            background: #344451;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .finding-tag button {
+            width: auto;
+            padding: 0;
+            background: none;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .finding-tag button:hover {
+            background: none;
+            color: #ff8b94;
+        }
+
+        .no-findings {
+            color: #82909b;
+            padding: 5px;
+        }
+
         #results {
             display: none;
             margin-top: 20px;
+        }
+
+        .result-card {
+            background: #101820;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
         }
 
         .notice {
@@ -118,161 +213,576 @@
             color: #9caab5;
             text-align: center;
             margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            header {
+                padding: 16px;
+            }
         }
     </style>
 </head>
 
+
 <body>
 
-<header>
-    <h1>EMS Clinical Assistant</h1>
-    <p>Clinical findings & differential reference</p>
-</header>
+    <header>
+        <h1>EMS Clinical Assistant</h1>
+        <p>Clinical findings & differential reference</p>
+    </header>
 
-<div class="container">
 
-    <!-- VITALS -->
+    <div class="container">
 
-<div class="section">
-    <h2>Vitals</h2>
+        <!-- VITALS -->
 
-    <div class="vitals">
+        <div class="section">
 
-        <div>
-            <label>Heart Rate</label>
-            <select id="hr">
-                <option value="">Select</option>
-                <option value="tachycardic">Tachycardic / Fast</option>
-                <option value="normal">Normal</option>
-                <option value="bradycardic">Bradycardic / Slow</option>
-            </select>
+            <h2>Vitals</h2>
+
+            <div class="vitals">
+
+                <div>
+                    <label for="hr">Heart Rate</label>
+                    <select id="hr">
+                        <option value="">Select</option>
+                        <option value="tachycardic">Tachycardic / Fast</option>
+                        <option value="normal">Normal</option>
+                        <option value="bradycardic">Bradycardic / Slow</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="bp">Blood Pressure</label>
+                    <select id="bp">
+                        <option value="">Select</option>
+                        <option value="hypotensive">Hypotensive / Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="hypertensive">Hypertensive / High</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="breathing">Breathing</label>
+                    <select id="breathing">
+                        <option value="">Select</option>
+                        <option value="fast">Fast</option>
+                        <option value="normal">Normal</option>
+                        <option value="slow">Slow</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="o2">O₂</label>
+                    <select id="o2">
+                        <option value="">Select</option>
+                        <option value="high">High</option>
+                        <option value="normal">Normal</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="temp">Temperature</label>
+                    <select id="temp">
+                        <option value="">Select</option>
+                        <option value="warm">Warm</option>
+                        <option value="normal">Normal</option>
+                        <option value="cool">Cool</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="bgl">Blood Sugar</label>
+                    <select id="bgl">
+                        <option value="">Select</option>
+                        <option value="high">High</option>
+                        <option value="normal">Normal</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+
+            </div>
+
         </div>
 
-        <div>
-            <label>Blood Pressure (BP)</label>
-            <select id="bp">
-                <option value="">Select</option>
-                <option value="hypotensive">Hypotensive / Low</option>
-                <option value="normal">Normal</option>
-                <option value="hypertensive">Hypertensive / High</option>
-            </select>
+
+        <!-- CLINICAL FINDINGS -->
+
+        <div class="section">
+
+            <h2>Clinical Findings</h2>
+
+            <label for="findingSearch">
+                Add signs, symptoms, or assessment findings
+            </label>
+
+            <div class="finding-search-container">
+
+                <input
+                    type="text"
+                    id="findingSearch"
+                    placeholder="Search findings..."
+                    autocomplete="off"
+                >
+
+                <div id="suggestions" class="suggestions"></div>
+
+            </div>
+
+
+            <div class="quick-title">
+                Common Findings
+            </div>
+
+            <div class="quick-picks">
+
+                <button type="button" onclick="addFinding('Chest Pain')">
+                    Chest Pain
+                </button>
+
+                <button type="button" onclick="addFinding('Dyspnea')">
+                    Dyspnea
+                </button>
+
+                <button type="button" onclick="addFinding('Altered Mental Status')">
+                    AMS
+                </button>
+
+                <button type="button" onclick="addFinding('Syncope / Near Syncope')">
+                    Syncope
+                </button>
+
+                <button type="button" onclick="addFinding('Seizure')">
+                    Seizure
+                </button>
+
+                <button type="button" onclick="addFinding('Weakness')">
+                    Weakness
+                </button>
+
+            </div>
+
+
+            <div class="selected-title">
+                Selected Findings
+            </div>
+
+            <div id="selectedFindings" class="selected-findings">
+
+                <span class="no-findings">
+                    No findings selected
+                </span>
+
+            </div>
+
         </div>
 
-        <div>
-            <label>Breathing</label>
-            <select id="breathing">
-                <option value="">Select</option>
-                <option value="fast">Fast</option>
-                <option value="normal">Normal</option>
-                <option value="slow">Slow</option>
-            </select>
-        </div>
 
-        <div>
-            <label>O₂</label>
-            <select id="o2">
-                <option value="">Select</option>
-                <option value="high">High</option>
-                <option value="normal">Normal</option>
-                <option value="low">Low</option>
-            </select>
-        </div>
-
-        <div>
-            <label>Temperature</label>
-            <select id="temp">
-                <option value="">Select</option>
-                <option value="warm">Warm</option>
-                <option value="normal">Normal</option>
-                <option value="cool">Cool</option>
-            </select>
-        </div>
-
-        <div>
-            <label>Blood Sugar</label>
-            <select id="bgl">
-                <option value="">Select</option>
-                <option value="high">High</option>
-                <option value="normal">Normal</option>
-                <option value="low">Low</option>
-            </select>
-        </div>
-
-    </div>
-</div>
-
-
-    <!-- FINDINGS -->
-
-<div class="section">
-    <h2>Clinical Findings</h2>
-
-    <label for="findingSearch">Add signs, symptoms, or assessment findings</label>
-
-    <div class="finding-search-container">
-        <input
-            type="text"
-            id="findingSearch"
-            placeholder="Search findings..."
-            autocomplete="off"
+        <button
+            class="analyze-button"
+            type="button"
+            onclick="analyzePatient()"
         >
-
-        <div id="suggestions" class="suggestions"></div>
-    </div>
-
-    <div class="quick-title">Common Findings</div>
-
-    <div class="quick-picks">
-        <button type="button" onclick="addFinding('Chest Pain')">Chest Pain</button>
-        <button type="button" onclick="addFinding('Dyspnea')">Dyspnea</button>
-        <button type="button" onclick="addFinding('Altered Mental Status')">AMS</button>
-        <button type="button" onclick="addFinding('Syncope / Near Syncope')">Syncope</button>
-        <button type="button" onclick="addFinding('Seizure')">Seizure</button>
-        <button type="button" onclick="addFinding('Weakness')">Weakness</button>
-    </div>
-
-    <div class="selected-title">Selected Findings</div>
-
-    <div id="selectedFindings" class="selected-findings">
-        <span id="noFindings" class="no-findings">
-            No findings selected
-        </span>
-    </div>
-</div>
+            ANALYZE FINDINGS
+        </button>
 
 
-    <button onclick="analyzePatient()">ANALYZE FINDINGS</button>
+        <!-- RESULTS -->
+
+        <div id="results" class="section">
+
+            <h2>Clinical Considerations</h2>
+
+            <div id="resultContent"></div>
+
+        </div>
 
 
-    <div id="results" class="section">
-        <h2>Clinical Considerations</h2>
-        <div id="resultContent"></div>
+        <div class="notice">
+            Educational clinical reference only. Not a substitute for local protocols,
+            medical direction, or clinical judgment.
+        </div>
+
     </div>
 
 
-    <div class="notice">
-        Educational clinical reference only. Not a substitute for local protocols,
-        medical direction, or clinical judgment.
-    </div>
+    <script>
 
-</div>
+        const findings = [
+
+            // Symptoms
+            { name: "Altered Mental Status", category: "Symptoms" },
+            { name: "Chest Pain", category: "Symptoms" },
+            { name: "Dyspnea", category: "Symptoms" },
+            { name: "Syncope / Near Syncope", category: "Symptoms" },
+            { name: "Dizziness", category: "Symptoms" },
+            { name: "Weakness", category: "Symptoms" },
+            { name: "Diaphoresis", category: "Symptoms" },
+            { name: "Nausea / Vomiting", category: "Symptoms" },
+            { name: "Headache", category: "Symptoms" },
+            { name: "Seizure", category: "Symptoms" },
+            { name: "Fever / Chills", category: "Symptoms" },
+            { name: "Abdominal Pain", category: "Symptoms" },
+            { name: "Back Pain", category: "Symptoms" },
+            { name: "Palpitations", category: "Symptoms" },
+            { name: "Cough", category: "Symptoms" },
+            { name: "Hemoptysis", category: "Symptoms" },
+            { name: "Difficulty Swallowing", category: "Symptoms" },
+            { name: "Allergic Exposure", category: "Symptoms" },
+            { name: "Recent Illness", category: "Symptoms" },
+            { name: "Sudden Onset", category: "Symptoms" },
+            { name: "Gradual Onset", category: "Symptoms" },
+
+            // Respiratory
+            { name: "Wheezing", category: "Respiratory" },
+            { name: "Crackles", category: "Respiratory" },
+            { name: "Rhonchi", category: "Respiratory" },
+            { name: "Stridor", category: "Respiratory" },
+            { name: "Diminished Lung Sounds", category: "Respiratory" },
+            { name: "Unilateral Absent Lung Sounds", category: "Respiratory" },
+            { name: "Increased Work of Breathing", category: "Respiratory" },
+            { name: "Apnea / Inadequate Respirations", category: "Respiratory" },
+            { name: "Cyanosis", category: "Respiratory" },
+
+            // Cardiovascular
+            { name: "JVD", category: "Cardiovascular" },
+            { name: "Peripheral Edema", category: "Cardiovascular" },
+            { name: "Weak Peripheral Pulses", category: "Cardiovascular" },
+            { name: "Bounding Pulses", category: "Cardiovascular" },
+            { name: "Irregular Pulse", category: "Cardiovascular" },
+
+            // Neurological
+            { name: "Focal Neurological Deficit", category: "Neurological" },
+            { name: "Facial Droop", category: "Neurological" },
+            { name: "Slurred Speech", category: "Neurological" },
+            { name: "Unilateral Weakness", category: "Neurological" },
+            { name: "Pinpoint Pupils", category: "Neurological" },
+            { name: "Dilated Pupils", category: "Neurological" },
+            { name: "Unequal Pupils", category: "Neurological" },
+            { name: "Postictal", category: "Neurological" },
+
+            // Skin / General
+            { name: "Pale", category: "Skin / General" },
+            { name: "Cool / Clammy", category: "Skin / General" },
+            { name: "Flushed", category: "Skin / General" },
+            { name: "Hives / Urticaria", category: "Skin / General" },
+            { name: "Angioedema", category: "Skin / General" },
+            { name: "Dry Skin", category: "Skin / General" },
+
+            // Abdominal
+            { name: "Abdominal Tenderness", category: "Abdominal" },
+            { name: "Abdominal Distention", category: "Abdominal" },
+            { name: "Rigid Abdomen", category: "Abdominal" },
+            { name: "GI Bleeding", category: "Abdominal" }
+
+        ];
 
 
-<script>
-function analyzePatient() {
+        let selectedFindings = [];
 
-    const results = document.getElementById("results");
-    const content = document.getElementById("resultContent");
 
-    results.style.display = "block";
+        const search =
+            document.getElementById("findingSearch");
 
-    content.innerHTML = `
-        <p>Diagnostic engine coming next.</p>
-        <p>Your selected findings will be analyzed here.</p>
-    `;
+        const suggestions =
+            document.getElementById("suggestions");
 
-}
-</script>
+
+        search.addEventListener("input", function () {
+
+            const query =
+                search.value.toLowerCase().trim();
+
+            suggestions.innerHTML = "";
+
+            if (query === "") {
+                suggestions.style.display = "none";
+                return;
+            }
+
+
+            const matches = findings.filter(finding =>
+
+                finding.name.toLowerCase().includes(query)
+
+                &&
+
+                !selectedFindings.includes(finding.name)
+
+            );
+
+
+            if (matches.length === 0) {
+
+                suggestions.style.display = "none";
+                return;
+
+            }
+
+
+            matches.forEach(finding => {
+
+                const item =
+                    document.createElement("div");
+
+                item.className = "suggestion";
+
+                item.innerHTML = `
+                    <strong>${finding.name}</strong>
+                    <div class="suggestion-category">
+                        ${finding.category}
+                    </div>
+                `;
+
+                item.addEventListener("click", function () {
+                    addFinding(finding.name);
+                });
+
+                suggestions.appendChild(item);
+
+            });
+
+
+            suggestions.style.display = "block";
+
+        });
+
+
+        document.addEventListener("click", function (event) {
+
+            if (
+                !event.target.closest(".finding-search-container")
+            ) {
+                suggestions.style.display = "none";
+            }
+
+        });
+
+
+        function addFinding(name) {
+
+            if (!selectedFindings.includes(name)) {
+
+                selectedFindings.push(name);
+
+            }
+
+            search.value = "";
+
+            suggestions.style.display = "none";
+
+            displaySelectedFindings();
+
+        }
+
+
+        function removeFinding(name) {
+
+            selectedFindings =
+                selectedFindings.filter(
+                    finding => finding !== name
+                );
+
+            displaySelectedFindings();
+
+        }
+
+
+        function displaySelectedFindings() {
+
+            const container =
+                document.getElementById("selectedFindings");
+
+            container.innerHTML = "";
+
+
+            if (selectedFindings.length === 0) {
+
+                container.innerHTML = `
+                    <span class="no-findings">
+                        No findings selected
+                    </span>
+                `;
+
+                return;
+
+            }
+
+
+            selectedFindings.forEach(finding => {
+
+                const tag =
+                    document.createElement("div");
+
+                tag.className = "finding-tag";
+
+
+                const text =
+                    document.createElement("span");
+
+                text.textContent = finding;
+
+
+                const removeButton =
+                    document.createElement("button");
+
+                removeButton.type = "button";
+
+                removeButton.textContent = "×";
+
+                removeButton.setAttribute(
+                    "aria-label",
+                    "Remove " + finding
+                );
+
+                removeButton.addEventListener(
+                    "click",
+                    function () {
+                        removeFinding(finding);
+                    }
+                );
+
+
+                tag.appendChild(text);
+
+                tag.appendChild(removeButton);
+
+                container.appendChild(tag);
+
+            });
+
+        }
+
+
+        function analyzePatient() {
+
+            const results =
+                document.getElementById("results");
+
+            const content =
+                document.getElementById("resultContent");
+
+
+            const hr =
+                document.getElementById("hr").value;
+
+            const bp =
+                document.getElementById("bp").value;
+
+            const breathing =
+                document.getElementById("breathing").value;
+
+            const o2 =
+                document.getElementById("o2").value;
+
+            const temp =
+                document.getElementById("temp").value;
+
+            const bgl =
+                document.getElementById("bgl").value;
+
+
+            results.style.display = "block";
+
+
+            if (
+                selectedFindings.length === 0
+                &&
+                !hr
+                &&
+                !bp
+                &&
+                !breathing
+                &&
+                !o2
+                &&
+                !temp
+                &&
+                !bgl
+            ) {
+
+                content.innerHTML = `
+                    <div class="result-card">
+                        Select at least one vital or clinical finding.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            let vitalList = [];
+
+
+            if (hr) {
+                vitalList.push("Heart Rate: " + hr);
+            }
+
+            if (bp) {
+                vitalList.push("Blood Pressure: " + bp);
+            }
+
+            if (breathing) {
+                vitalList.push("Breathing: " + breathing);
+            }
+
+            if (o2) {
+                vitalList.push("O₂: " + o2);
+            }
+
+            if (temp) {
+                vitalList.push("Temperature: " + temp);
+            }
+
+            if (bgl) {
+                vitalList.push("Blood Sugar: " + bgl);
+            }
+
+
+            content.innerHTML = `
+                <div class="result-card">
+
+                    <strong>Current Inputs</strong>
+
+                    <p>
+                        ${
+                            vitalList.length
+                                ? vitalList.join("<br>")
+                                : "No vitals selected."
+                        }
+                    </p>
+
+                    <p>
+                        <strong>Clinical Findings:</strong><br>
+                        ${
+                            selectedFindings.length
+                                ? selectedFindings.join(", ")
+                                : "None selected."
+                        }
+                    </p>
+
+                    <p>
+                        Differential engine coming next.
+                    </p>
+
+                </div>
+            `;
+
+        }
+
+    </script>
 
 </body>
+
 </html>
