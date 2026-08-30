@@ -154,7 +154,6 @@
             background: #253542;
             color: white;
             font-size: 14px;
-            font-weight: normal;
             cursor: pointer;
         }
 
@@ -206,7 +205,6 @@
             background: #202e39;
             color: white;
             font-size: 18px;
-            line-height: 1;
             cursor: pointer;
         }
 
@@ -237,9 +235,67 @@
 
         .result-card {
             background: #101820;
-            padding: 16px;
+            padding: 18px;
             border-radius: 8px;
+            margin-bottom: 14px;
+            border-left: 4px solid #4d5c68;
+        }
+
+        .result-card.high {
+            border-left-color: #e63946;
+        }
+
+        .result-card.moderate {
+            border-left-color: #f0a202;
+        }
+
+        .result-card.lower {
+            border-left-color: #7d98a1;
+        }
+
+        .suspicion {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.6px;
+            margin-bottom: 5px;
+        }
+
+        .condition-name {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .result-subheading {
+            font-weight: bold;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+
+        .evidence-list {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .treatment-text {
+            color: #d9e0e5;
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            margin-top: 12px;
+            padding: 10px;
+            background: #382428;
+            border-radius: 6px;
             line-height: 1.5;
+        }
+
+        .no-match {
+            background: #101820;
+            padding: 18px;
+            border-radius: 8px;
+            line-height: 1.6;
         }
 
         .notice {
@@ -366,7 +422,7 @@
             <input
                 type="text"
                 id="findingSearch"
-                placeholder="Example: JVD, wheezing, facial droop..."
+                placeholder="Example: neck veins, wheezing, facial droop..."
                 autocomplete="off"
             >
 
@@ -385,16 +441,16 @@
                 Chest Pain
             </button>
 
-            <button class="quick-pill" type="button" data-finding="Dyspnea">
-                Dyspnea
+            <button class="quick-pill" type="button" data-finding="Shortness of Breath">
+                Shortness of Breath
             </button>
 
             <button class="quick-pill" type="button" data-finding="Altered Mental Status">
                 AMS
             </button>
 
-            <button class="quick-pill" type="button" data-finding="Syncope / Near Syncope">
-                Syncope
+            <button class="quick-pill" type="button" data-finding="Fainting / Near Fainting">
+                Fainting
             </button>
 
             <button class="quick-pill" type="button" data-finding="Seizure">
@@ -413,11 +469,9 @@
         </div>
 
         <div id="selectedFindings" class="selected-findings">
-
             <span class="no-findings">
                 No findings selected
             </span>
-
         </div>
 
     </div>
@@ -434,7 +488,7 @@
 
     <div id="results" class="section">
 
-        <h2>Clinical Considerations</h2>
+        <h2>Possible Causes</h2>
 
         <div id="resultContent"></div>
 
@@ -442,8 +496,8 @@
 
 
     <div class="notice">
-        Educational clinical reference only. Not a substitute for local protocols,
-        medical direction, or clinical judgment.
+        Educational reference only. This tool does not diagnose a patient.
+        Always follow local protocols, medical direction, and clinical judgment.
     </div>
 
 </div>
@@ -451,1077 +505,1405 @@
 
 <script>
 
-    const findings = [
-
-        {
-            name: "Altered Mental Status",
-            category: "Symptoms",
-            aliases: ["ams", "altered", "confusion", "confused"]
-        },
-
-        {
-            name: "Chest Pain",
-            category: "Symptoms",
-            aliases: ["chest discomfort", "pressure", "cp"]
-        },
-
-        {
-            name: "Dyspnea",
-            category: "Symptoms",
-            aliases: [
-                "shortness of breath",
-                "sob",
-                "difficulty breathing",
-                "breathing difficulty"
-            ]
-        },
-
-        {
-            name: "Syncope / Near Syncope",
-            category: "Symptoms",
-            aliases: [
-                "syncope",
-                "fainting",
-                "passed out",
-                "near syncope"
-            ]
-        },
-
-        {
-            name: "Dizziness",
-            category: "Symptoms",
-            aliases: [
-                "dizzy",
-                "lightheaded",
-                "lightheadedness"
-            ]
-        },
-
-        {
-            name: "Weakness",
-            category: "Symptoms",
-            aliases: [
-                "weak",
-                "general weakness"
-            ]
-        },
-
-        {
-            name: "Diaphoresis",
-            category: "Symptoms",
-            aliases: [
-                "sweating",
-                "sweaty"
-            ]
-        },
-
-        {
-            name: "Nausea / Vomiting",
-            category: "Symptoms",
-            aliases: [
-                "nausea",
-                "vomiting",
-                "emesis"
-            ]
-        },
-
-        {
-            name: "Headache",
-            category: "Symptoms",
-            aliases: ["head pain"]
-        },
-
-        {
-            name: "Seizure",
-            category: "Symptoms",
-            aliases: [
-                "convulsion",
-                "convulsions"
-            ]
-        },
-
-        {
-            name: "Fever / Chills",
-            category: "Symptoms",
-            aliases: [
-                "fever",
-                "chills",
-                "febrile"
-            ]
-        },
-
-        {
-            name: "Abdominal Pain",
-            category: "Symptoms",
-            aliases: [
-                "abd pain",
-                "stomach pain",
-                "belly pain"
-            ]
-        },
-
-        {
-            name: "Back Pain",
-            category: "Symptoms",
-            aliases: ["back"]
-        },
-
-        {
-            name: "Palpitations",
-            category: "Symptoms",
-            aliases: [
-                "heart racing",
-                "racing heart"
-            ]
-        },
-
-        {
-            name: "Cough",
-            category: "Symptoms",
-            aliases: ["coughing"]
-        },
-
-        {
-            name: "Hemoptysis",
-            category: "Symptoms",
-            aliases: [
-                "coughing blood",
-                "blood in sputum"
-            ]
-        },
-
-        {
-            name: "Difficulty Swallowing",
-            category: "Symptoms",
-            aliases: [
-                "dysphagia",
-                "swallowing difficulty"
-            ]
-        },
-
-        {
-            name: "Allergic Exposure",
-            category: "Symptoms",
-            aliases: [
-                "allergen",
-                "allergy exposure",
-                "allergic reaction"
-            ]
-        },
-
-        {
-            name: "Recent Illness",
-            category: "Symptoms",
-            aliases: [
-                "sick recently",
-                "infection"
-            ]
-        },
-
-        {
-            name: "Sudden Onset",
-            category: "Symptoms",
-            aliases: [
-                "sudden",
-                "acute onset"
-            ]
-        },
-
-        {
-            name: "Gradual Onset",
-            category: "Symptoms",
-            aliases: [
-                "gradual",
-                "progressive"
-            ]
-        },
-
-        {
-            name: "Wheezing",
-            category: "Respiratory",
-            aliases: [
-                "wheeze",
-                "wheezes"
-            ]
-        },
-
-        {
-            name: "Crackles",
-            category: "Respiratory",
-            aliases: [
-                "rales",
-                "wet lungs"
-            ]
-        },
-
-        {
-            name: "Rhonchi",
-            category: "Respiratory",
-            aliases: [
-                "rhonchus"
-            ]
-        },
-
-        {
-            name: "Stridor",
-            category: "Respiratory",
-            aliases: []
-        },
-
-        {
-            name: "Diminished Lung Sounds",
-            category: "Respiratory",
-            aliases: [
-                "diminished",
-                "decreased lung sounds"
-            ]
-        },
-
-        {
-            name: "Unilateral Absent Lung Sounds",
-            category: "Respiratory",
-            aliases: [
-                "absent lung sounds",
-                "one sided lung sounds",
-                "unilateral lung sounds"
-            ]
-        },
-
-        {
-            name: "Increased Work of Breathing",
-            category: "Respiratory",
-            aliases: [
-                "work of breathing",
-                "accessory muscles",
-                "labored breathing",
-                "retractions"
-            ]
-        },
-
-        {
-            name: "Apnea / Inadequate Respirations",
-            category: "Respiratory",
-            aliases: [
-                "apnea",
-                "apneic",
-                "inadequate breathing",
-                "respiratory depression"
-            ]
-        },
-
-        {
-            name: "Cyanosis",
-            category: "Respiratory",
-            aliases: [
-                "cyanotic",
-                "blue"
-            ]
-        },
-
-        {
-            name: "JVD",
-            category: "Cardiovascular",
-            aliases: [
-                "jugular",
-                "jugular vein distention",
-                "jugular venous distention",
-                "neck veins"
-            ]
-        },
-
-        {
-            name: "Peripheral Edema",
-            category: "Cardiovascular",
-            aliases: [
-                "edema",
-                "leg swelling",
-                "swollen legs"
-            ]
-        },
-
-        {
-            name: "Weak Peripheral Pulses",
-            category: "Cardiovascular",
-            aliases: [
-                "weak pulse",
-                "weak pulses"
-            ]
-        },
-
-        {
-            name: "Bounding Pulses",
-            category: "Cardiovascular",
-            aliases: [
-                "bounding pulse"
-            ]
-        },
-
-        {
-            name: "Irregular Pulse",
-            category: "Cardiovascular",
-            aliases: [
-                "irregular rhythm",
-                "irregular heart rate"
-            ]
-        },
-
-        {
-            name: "Focal Neurological Deficit",
-            category: "Neurological",
-            aliases: [
-                "neuro deficit",
-                "neurologic deficit"
-            ]
-        },
-
-        {
-            name: "Facial Droop",
-            category: "Neurological",
-            aliases: [
-                "face droop",
-                "facial weakness"
-            ]
-        },
-
-        {
-            name: "Slurred Speech",
-            category: "Neurological",
-            aliases: [
-                "dysarthria",
-                "speech difficulty"
-            ]
-        },
-
-        {
-            name: "Unilateral Weakness",
-            category: "Neurological",
-            aliases: [
-                "one sided weakness",
-                "left sided weakness",
-                "right sided weakness"
-            ]
-        },
-
-        {
-            name: "Pinpoint Pupils",
-            category: "Neurological",
-            aliases: [
-                "pinpoint",
-                "constricted pupils",
-                "miosis"
-            ]
-        },
-
-        {
-            name: "Dilated Pupils",
-            category: "Neurological",
-            aliases: [
-                "dilated",
-                "mydriasis"
-            ]
-        },
-
-        {
-            name: "Unequal Pupils",
-            category: "Neurological",
-            aliases: [
-                "anisocoria",
-                "unequal"
-            ]
-        },
-
-        {
-            name: "Postictal",
-            category: "Neurological",
-            aliases: [
-                "post seizure",
-                "after seizure"
-            ]
-        },
-
-        {
-            name: "Pale",
-            category: "Skin / General",
-            aliases: [
-                "pallor"
-            ]
-        },
-
-        {
-            name: "Cool / Clammy",
-            category: "Skin / General",
-            aliases: [
-                "clammy",
-                "cool skin",
-                "diaphoretic skin"
-            ]
-        },
-
-        {
-            name: "Flushed",
-            category: "Skin / General",
-            aliases: [
-                "red skin"
-            ]
-        },
-
-        {
-            name: "Hives / Urticaria",
-            category: "Skin / General",
-            aliases: [
-                "hives",
-                "urticaria",
-                "rash"
-            ]
-        },
-
-        {
-            name: "Angioedema",
-            category: "Skin / General",
-            aliases: [
-                "facial swelling",
-                "tongue swelling",
-                "lip swelling",
-                "airway swelling"
-            ]
-        },
-
-        {
-            name: "Dry Skin",
-            category: "Skin / General",
-            aliases: [
-                "dry"
-            ]
-        },
-
-        {
-            name: "Abdominal Tenderness",
-            category: "Abdominal",
-            aliases: [
-                "tender abdomen",
-                "abdominal tenderness"
-            ]
-        },
-
-        {
-            name: "Abdominal Distention",
-            category: "Abdominal",
-            aliases: [
-                "distended abdomen",
-                "abdominal distension"
-            ]
-        },
-
-        {
-            name: "Rigid Abdomen",
-            category: "Abdominal",
-            aliases: [
-                "rigidity",
-                "abdominal rigidity"
-            ]
-        },
-
-        {
-            name: "GI Bleeding",
-            category: "Abdominal",
-            aliases: [
-                "hematemesis",
-                "melena",
-                "bloody stool",
-                "vomiting blood"
-            ]
-        }
-
-    ];
-
-
-    let selectedFindings = [];
-
-    let currentMatches = [];
-
-    let highlightedIndex = -1;
-
-
-    const searchInput =
-        document.getElementById("findingSearch");
-
-    const suggestions =
-        document.getElementById("suggestions");
-
-    const selectedContainer =
-        document.getElementById("selectedFindings");
-
-    const analyzeButton =
-        document.getElementById("analyzeButton");
-
-    const quickPills =
-        document.querySelectorAll(".quick-pill");
-
-
-    function normalizeText(text) {
-        return text
-            .toLowerCase()
-            .trim();
-    }
-
-
-    function findingMatches(finding, query) {
-
-        const searchableText = [
-            finding.name,
-            finding.category,
-            ...finding.aliases
+/* =========================================================
+   FINDINGS DATABASE
+   Simple wording is displayed.
+   Medical terminology is kept as hidden search aliases.
+========================================================= */
+
+const findings = [
+
+    {
+        name: "Altered Mental Status",
+        category: "General",
+        aliases: ["ams", "altered", "confused", "confusion", "not acting right"]
+    },
+
+    {
+        name: "Chest Pain",
+        category: "General",
+        aliases: ["chest pressure", "chest discomfort", "cp"]
+    },
+
+    {
+        name: "Shortness of Breath",
+        category: "Breathing",
+        aliases: ["sob", "dyspnea", "difficulty breathing", "breathing difficulty"]
+    },
+
+    {
+        name: "Fainting / Near Fainting",
+        category: "General",
+        aliases: ["syncope", "near syncope", "fainted", "passed out"]
+    },
+
+    {
+        name: "Dizziness",
+        category: "General",
+        aliases: ["dizzy", "lightheaded", "light headed"]
+    },
+
+    {
+        name: "Weakness",
+        category: "General",
+        aliases: ["weak", "general weakness"]
+    },
+
+    {
+        name: "Sweating",
+        category: "Skin / General",
+        aliases: ["diaphoresis", "diaphoretic", "sweaty"]
+    },
+
+    {
+        name: "Nausea / Vomiting",
+        category: "General",
+        aliases: ["nausea", "vomiting", "emesis", "throwing up"]
+    },
+
+    {
+        name: "Headache",
+        category: "General",
+        aliases: ["head pain"]
+    },
+
+    {
+        name: "Seizure",
+        category: "Neurological",
+        aliases: ["convulsion", "convulsions"]
+    },
+
+    {
+        name: "Fever / Chills",
+        category: "General",
+        aliases: ["fever", "chills", "febrile"]
+    },
+
+    {
+        name: "Agitation",
+        category: "General",
+        aliases: ["agitated", "restless", "combative", "excited"]
+    },
+
+    {
+        name: "Very Sleepy / Hard to Wake",
+        category: "General",
+        aliases: ["somnolent", "lethargic", "hard to wake", "drowsy"]
+    },
+
+    {
+        name: "Sudden Onset",
+        category: "General",
+        aliases: ["sudden", "acute onset", "started suddenly"]
+    },
+
+    {
+        name: "Wheezing",
+        category: "Breathing",
+        aliases: ["wheeze", "wheezes"]
+    },
+
+    {
+        name: "Crackles",
+        category: "Breathing",
+        aliases: ["rales", "wet lungs"]
+    },
+
+    {
+        name: "Stridor",
+        category: "Breathing",
+        aliases: ["high pitched breathing", "upper airway noise"]
+    },
+
+    {
+        name: "Diminished Lung Sounds",
+        category: "Breathing",
+        aliases: ["diminished", "decreased lung sounds"]
+    },
+
+    {
+        name: "Absent Lung Sounds on One Side",
+        category: "Breathing",
+        aliases: [
+            "unilateral absent lung sounds",
+            "absent breath sounds",
+            "one sided absent lung sounds"
         ]
-        .join(" ")
-        .toLowerCase();
+    },
 
-        return searchableText.includes(query);
+    {
+        name: "Increased Work of Breathing",
+        category: "Breathing",
+        aliases: [
+            "labored breathing",
+            "accessory muscles",
+            "retractions",
+            "working hard to breathe"
+        ]
+    },
+
+    {
+        name: "Inadequate / Very Slow Breathing",
+        category: "Breathing",
+        aliases: [
+            "respiratory depression",
+            "slow respirations",
+            "inadequate respirations",
+            "hypoventilation"
+        ]
+    },
+
+    {
+        name: "Not Breathing",
+        category: "Breathing",
+        aliases: ["apnea", "apneic"]
+    },
+
+    {
+        name: "Blue Lips / Skin",
+        category: "Breathing",
+        aliases: ["cyanosis", "cyanotic", "blue"]
+    },
+
+    {
+        name: "Swollen Neck Veins",
+        category: "Cardiovascular",
+        aliases: [
+            "jvd",
+            "jugular vein distention",
+            "jugular venous distention",
+            "neck veins"
+        ]
+    },
+
+    {
+        name: "Weak Pulses",
+        category: "Cardiovascular",
+        aliases: ["weak pulse", "weak peripheral pulses"]
+    },
+
+    {
+        name: "Irregular Pulse",
+        category: "Cardiovascular",
+        aliases: ["irregular rhythm", "irregular heart rate"]
+    },
+
+    {
+        name: "Heavy Bleeding",
+        category: "Circulation",
+        aliases: ["hemorrhage", "blood loss", "bleeding heavily"]
+    },
+
+    {
+        name: "Signs of Dehydration",
+        category: "Circulation",
+        aliases: ["dehydrated", "dehydration", "dry mouth"]
+    },
+
+    {
+        name: "Vomiting / Diarrhea",
+        category: "Circulation",
+        aliases: ["diarrhea", "fluid loss", "vomiting and diarrhea"]
+    },
+
+    {
+        name: "Facial Droop",
+        category: "Neurological",
+        aliases: ["face droop", "facial weakness"]
+    },
+
+    {
+        name: "Slurred Speech",
+        category: "Neurological",
+        aliases: ["dysarthria", "speech difficulty", "slurring"]
+    },
+
+    {
+        name: "One-Sided Weakness",
+        category: "Neurological",
+        aliases: [
+            "unilateral weakness",
+            "one sided weakness",
+            "left sided weakness",
+            "right sided weakness"
+        ]
+    },
+
+    {
+        name: "One-Sided Numbness",
+        category: "Neurological",
+        aliases: [
+            "unilateral numbness",
+            "left sided numbness",
+            "right sided numbness"
+        ]
+    },
+
+    {
+        name: "Pinpoint Pupils",
+        category: "Neurological",
+        aliases: ["miosis", "constricted pupils", "small pupils"]
+    },
+
+    {
+        name: "Dilated Pupils",
+        category: "Neurological",
+        aliases: ["mydriasis", "large pupils"]
+    },
+
+    {
+        name: "Unequal Pupils",
+        category: "Neurological",
+        aliases: ["anisocoria", "different size pupils"]
+    },
+
+    {
+        name: "Unsteady Walking",
+        category: "Neurological",
+        aliases: ["ataxia", "unsteady gait", "stumbling"]
+    },
+
+    {
+        name: "Pale Skin",
+        category: "Skin / General",
+        aliases: ["pallor", "pale"]
+    },
+
+    {
+        name: "Cool / Clammy Skin",
+        category: "Skin / General",
+        aliases: ["clammy", "cool skin"]
+    },
+
+    {
+        name: "Flushed / Hot Skin",
+        category: "Skin / General",
+        aliases: ["flushed", "red skin", "hot skin"]
+    },
+
+    {
+        name: "Hives",
+        category: "Allergic",
+        aliases: ["urticaria", "rash", "welts"]
+    },
+
+    {
+        name: "Face / Lip / Tongue Swelling",
+        category: "Allergic",
+        aliases: [
+            "angioedema",
+            "facial swelling",
+            "lip swelling",
+            "tongue swelling",
+            "airway swelling"
+        ]
+    },
+
+    {
+        name: "Known Allergic Exposure",
+        category: "Allergic",
+        aliases: [
+            "allergen",
+            "allergic exposure",
+            "bee sting",
+            "food allergy",
+            "medication allergy"
+        ]
+    },
+
+    {
+        name: "Known Opioid Use",
+        category: "Toxicology",
+        aliases: [
+            "opioid",
+            "opiate",
+            "fentanyl",
+            "heroin",
+            "oxycodone",
+            "hydrocodone"
+        ]
+    },
+
+    {
+        name: "Known Alcohol Use",
+        category: "Toxicology",
+        aliases: [
+            "alcohol",
+            "drinking",
+            "etoh",
+            "intoxicated"
+        ]
+    },
+
+    {
+        name: "Known Stimulant Use",
+        category: "Toxicology",
+        aliases: [
+            "stimulant",
+            "cocaine",
+            "meth",
+            "methamphetamine",
+            "amphetamine"
+        ]
     }
 
+];
 
-    function performSearch() {
 
-        const query =
-            normalizeText(searchInput.value);
+/* =========================================================
+   DIFFERENTIAL DATABASE
+========================================================= */
 
-        suggestions.innerHTML = "";
-        highlightedIndex = -1;
+const conditions = [
 
-        if (!query) {
-            suggestions.style.display = "none";
-            currentMatches = [];
-            return;
-        }
+    {
+        name: "Tension Pneumothorax",
 
-        currentMatches =
-            findings.filter(finding => {
+        findings: {
+            "Absent Lung Sounds on One Side": 6,
+            "Swollen Neck Veins": 3,
+            "Shortness of Breath": 2,
+            "Sudden Onset": 2,
+            "Chest Pain": 2,
+            "Increased Work of Breathing": 2,
+            "Blue Lips / Skin": 1,
+            "Diminished Lung Sounds": 1
+        },
 
-                return (
-                    findingMatches(finding, query)
-                    &&
-                    !selectedFindings.includes(finding.name)
-                );
+        vitals: {
+            hr: {
+                tachycardic: 1
+            },
 
-            });
+            bp: {
+                hypotensive: 3
+            },
 
-        if (currentMatches.length === 0) {
+            breathing: {
+                fast: 2
+            },
 
-            const noResults =
-                document.createElement("div");
+            o2: {
+                low: 2
+            }
+        },
 
-            noResults.className =
-                "no-results";
+        treatment:
+            "Support airway, breathing, and oxygenation as needed. Consider immediate chest decompression when clinically indicated and allowed by local protocol. Rapid transport and frequent reassessment are important."
+    },
 
-            noResults.textContent =
-                "No matching findings";
 
-            suggestions.appendChild(noResults);
+    {
+        name: "Anaphylaxis",
 
-            suggestions.style.display =
-                "block";
+        findings: {
+            "Known Allergic Exposure": 4,
+            "Face / Lip / Tongue Swelling": 5,
+            "Hives": 3,
+            "Wheezing": 3,
+            "Stridor": 4,
+            "Shortness of Breath": 2,
+            "Increased Work of Breathing": 2,
+            "Nausea / Vomiting": 1,
+            "Dizziness": 1,
+            "Fainting / Near Fainting": 2
+        },
 
-            return;
-        }
+        vitals: {
+            hr: {
+                tachycardic: 1
+            },
 
-        currentMatches
-            .slice(0, 12)
-            .forEach((finding, index) => {
+            bp: {
+                hypotensive: 3
+            },
 
-                const item =
-                    document.createElement("div");
+            breathing: {
+                fast: 1
+            },
 
-                item.className =
-                    "suggestion";
+            o2: {
+                low: 1
+            }
+        },
 
-                const name =
-                    document.createElement("div");
+        treatment:
+            "Remove the trigger when possible. Epinephrine is the key treatment for suspected anaphylaxis when indicated by protocol. Support airway and breathing, give oxygen as needed, establish IV access when appropriate, and consider fluids for low blood pressure."
+    },
 
-                name.className =
-                    "suggestion-name";
 
-                name.textContent =
-                    finding.name;
+    {
+        name: "Opioid Overdose",
 
-                const category =
-                    document.createElement("div");
+        findings: {
+            "Known Opioid Use": 5,
+            "Pinpoint Pupils": 4,
+            "Very Sleepy / Hard to Wake": 3,
+            "Altered Mental Status": 2,
+            "Inadequate / Very Slow Breathing": 6,
+            "Not Breathing": 6,
+            "Blue Lips / Skin": 2
+        },
 
-                category.className =
-                    "suggestion-category";
+        vitals: {
+            hr: {
+                bradycardic: 1
+            },
 
-                category.textContent =
-                    finding.category;
+            breathing: {
+                slow: 5
+            },
 
-                item.appendChild(name);
-                item.appendChild(category);
+            o2: {
+                low: 2
+            }
+        },
 
-                item.addEventListener(
-                    "mousedown",
-                    function(event) {
+        treatment:
+            "Prioritize ventilation and airway support. Use a BVM when respirations are inadequate. Consider naloxone when opioid overdose is suspected and follow local protocol. Reassess breathing frequently."
+    },
 
-                        event.preventDefault();
 
-                        addFinding(
-                            finding.name
-                        );
+    {
+        name: "Hypoglycemia",
 
-                    }
-                );
+        findings: {
+            "Altered Mental Status": 3,
+            "Sweating": 2,
+            "Weakness": 2,
+            "Seizure": 3,
+            "Very Sleepy / Hard to Wake": 2,
+            "Dizziness": 1,
+            "Agitation": 1
+        },
 
-                suggestions.appendChild(item);
+        vitals: {
+            bgl: {
+                low: 8
+            },
 
-            });
+            hr: {
+                tachycardic: 1
+            }
+        },
 
-        suggestions.style.display =
-            "block";
+        treatment:
+            "Confirm blood glucose when possible. Treat low blood sugar according to the patient's mental status and ability to swallow. Consider oral glucose, IV dextrose, or glucagon as appropriate under local protocol."
+    },
+
+
+    {
+        name: "ACS / Heart Attack",
+
+        findings: {
+            "Chest Pain": 5,
+            "Sweating": 3,
+            "Nausea / Vomiting": 2,
+            "Shortness of Breath": 2,
+            "Weakness": 1,
+            "Dizziness": 1,
+            "Fainting / Near Fainting": 1
+        },
+
+        vitals: {
+            hr: {
+                tachycardic: 1,
+                bradycardic: 1
+            },
+
+            bp: {
+                hypotensive: 1
+            },
+
+            o2: {
+                low: 1
+            }
+        },
+
+        treatment:
+            "Obtain a 12-lead ECG when available, place the patient on cardiac monitoring, establish IV access as appropriate, and consider aspirin when indicated. Give oxygen for hypoxemia. Consider nitroglycerin only when appropriate and after checking blood pressure and contraindications."
+    },
+
+
+    {
+        name: "Asthma Exacerbation",
+
+        findings: {
+            "Wheezing": 5,
+            "Shortness of Breath": 3,
+            "Increased Work of Breathing": 3,
+            "Diminished Lung Sounds": 2,
+            "Blue Lips / Skin": 1
+        },
+
+        vitals: {
+            hr: {
+                tachycardic: 1
+            },
+
+            breathing: {
+                fast: 2
+            },
+
+            o2: {
+                low: 2
+            }
+        },
+
+        treatment:
+            "Support oxygenation and ventilation. Consider bronchodilator treatment according to local protocol. Severe cases may require additional medications, ventilatory support, and rapid transport."
+    },
+
+
+    {
+        name: "Hypovolemic Shock",
+
+        findings: {
+            "Heavy Bleeding": 6,
+            "Signs of Dehydration": 3,
+            "Vomiting / Diarrhea": 3,
+            "Weak Pulses": 3,
+            "Pale Skin": 2,
+            "Cool / Clammy Skin": 3,
+            "Altered Mental Status": 2,
+            "Weakness": 1,
+            "Dizziness": 1,
+            "Fainting / Near Fainting": 2
+        },
+
+        vitals: {
+            hr: {
+                tachycardic: 2
+            },
+
+            bp: {
+                hypotensive: 4
+            },
+
+            breathing: {
+                fast: 1
+            }
+        },
+
+        treatment:
+            "Identify and control major bleeding when present. Keep the patient warm, establish vascular access when appropriate, and provide fluid or blood-product resuscitation according to local protocol and the suspected cause of volume loss."
+    },
+
+
+    {
+        name: "Stroke",
+
+        findings: {
+            "Facial Droop": 5,
+            "One-Sided Weakness": 6,
+            "One-Sided Numbness": 4,
+            "Slurred Speech": 5,
+            "Altered Mental Status": 1,
+            "Headache": 1,
+            "Dizziness": 1,
+            "Sudden Onset": 2
+        },
+
+        vitals: {
+            bp: {
+                hypertensive: 1
+            }
+        },
+
+        treatment:
+            "Determine last known well time, perform a stroke assessment, check blood glucose, protect the airway when needed, and transport rapidly to an appropriate stroke-capable facility according to local protocol."
+    },
+
+
+    {
+        name: "Alcohol Intoxication",
+
+        findings: {
+            "Known Alcohol Use": 6,
+            "Slurred Speech": 3,
+            "Unsteady Walking": 4,
+            "Altered Mental Status": 2,
+            "Very Sleepy / Hard to Wake": 2,
+            "Nausea / Vomiting": 2,
+            "Dizziness": 1
+        },
+
+        vitals: {
+            breathing: {
+                slow: 1
+            },
+
+            bgl: {
+                low: 1
+            }
+        },
+
+        treatment:
+            "Protect the airway, monitor breathing, check blood glucose, assess for trauma or other causes of altered mental status, and provide supportive care. Do not assume alcohol is the only cause of altered mental status."
+    },
+
+
+    {
+        name: "Stimulant Overdose",
+
+        findings: {
+            "Known Stimulant Use": 6,
+            "Agitation": 4,
+            "Dilated Pupils": 2,
+            "Sweating": 2,
+            "Chest Pain": 3,
+            "Altered Mental Status": 2,
+            "Seizure": 2,
+            "Flushed / Hot Skin": 2
+        },
+
+        vitals: {
+            hr: {
+                tachycardic: 3
+            },
+
+            bp: {
+                hypertensive: 2
+            },
+
+            breathing: {
+                fast: 1
+            },
+
+            temp: {
+                warm: 2
+            }
+        },
+
+        treatment:
+            "Provide supportive care, cardiac monitoring, and temperature management when needed. Treat severe agitation, seizures, or other complications according to local protocol. Evaluate chest pain carefully because stimulant use can cause serious cardiac problems."
     }
 
-
-    searchInput.addEventListener(
-        "input",
-        performSearch
-    );
+];
 
 
-    searchInput.addEventListener(
-        "focus",
-        function() {
+/* =========================================================
+   SEARCH / TAG SYSTEM
+========================================================= */
 
-            if (
-                searchInput.value.trim() !== ""
-            ) {
-                performSearch();
-            }
-
-        }
-    );
+let selectedFindings = [];
+let currentMatches = [];
+let highlightedIndex = -1;
 
 
-    searchInput.addEventListener(
-        "keydown",
-        function(event) {
+const searchInput =
+    document.getElementById("findingSearch");
 
-            const items =
-                suggestions.querySelectorAll(
-                    ".suggestion"
-                );
+const suggestions =
+    document.getElementById("suggestions");
 
-            if (event.key === "ArrowDown") {
+const selectedContainer =
+    document.getElementById("selectedFindings");
 
-                event.preventDefault();
-
-                highlightedIndex++;
-
-                if (
-                    highlightedIndex >= items.length
-                ) {
-                    highlightedIndex = 0;
-                }
-
-                updateHighlightedItem(items);
-            }
-
-            else if (
-                event.key === "ArrowUp"
-            ) {
-
-                event.preventDefault();
-
-                highlightedIndex--;
-
-                if (
-                    highlightedIndex < 0
-                ) {
-                    highlightedIndex =
-                        items.length - 1;
-                }
-
-                updateHighlightedItem(items);
-            }
-
-            else if (
-                event.key === "Enter"
-            ) {
-
-                if (
-                    highlightedIndex >= 0
-                    &&
-                    currentMatches[
-                        highlightedIndex
-                    ]
-                ) {
-
-                    event.preventDefault();
-
-                    addFinding(
-                        currentMatches[
-                            highlightedIndex
-                        ].name
-                    );
-
-                }
-
-                else if (
-                    currentMatches.length === 1
-                ) {
-
-                    event.preventDefault();
-
-                    addFinding(
-                        currentMatches[0].name
-                    );
-
-                }
-
-            }
-
-            else if (
-                event.key === "Escape"
-            ) {
-
-                suggestions.style.display =
-                    "none";
-
-            }
-
-        }
-    );
+const quickPills =
+    document.querySelectorAll(".quick-pill");
 
 
-    function updateHighlightedItem(items) {
+function normalizeText(text) {
+    return text.toLowerCase().trim();
+}
 
-        items.forEach(
-            (item, index) => {
 
-                item.classList.toggle(
-                    "active",
-                    index === highlightedIndex
-                );
+function findingMatches(finding, query) {
 
-            }
-        );
+    const searchableText = [
+        finding.name,
+        finding.category,
+        ...finding.aliases
+    ]
+    .join(" ")
+    .toLowerCase();
 
+    return searchableText.includes(query);
+}
+
+
+function performSearch() {
+
+    const query = normalizeText(searchInput.value);
+
+    suggestions.innerHTML = "";
+    highlightedIndex = -1;
+
+    if (!query) {
+        suggestions.style.display = "none";
+        currentMatches = [];
+        return;
     }
 
+    currentMatches = findings.filter(finding => {
 
-    quickPills.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            function() {
-
-                const finding =
-                    button.dataset.finding;
-
-                if (
-                    selectedFindings.includes(finding)
-                ) {
-                    removeFinding(finding);
-                }
-
-                else {
-                    addFinding(finding);
-                }
-
-            }
+        return (
+            findingMatches(finding, query)
+            &&
+            !selectedFindings.includes(finding.name)
         );
 
     });
 
+    if (currentMatches.length === 0) {
 
-    function addFinding(name) {
+        const noResults =
+            document.createElement("div");
 
-        if (
-            !selectedFindings.includes(name)
-        ) {
-            selectedFindings.push(name);
-        }
+        noResults.className = "no-results";
+        noResults.textContent = "No matching findings";
 
-        searchInput.value = "";
+        suggestions.appendChild(noResults);
+        suggestions.style.display = "block";
 
-        suggestions.innerHTML = "";
-
-        suggestions.style.display =
-            "none";
-
-        renderSelectedFindings();
-        updateQuickPills();
+        return;
     }
 
+    currentMatches
+        .slice(0, 12)
+        .forEach((finding, index) => {
 
-    function removeFinding(name) {
+            const item =
+                document.createElement("div");
 
-        selectedFindings =
-            selectedFindings.filter(
-                finding =>
-                    finding !== name
+            item.className = "suggestion";
+
+            const name =
+                document.createElement("div");
+
+            name.className = "suggestion-name";
+            name.textContent = finding.name;
+
+            const category =
+                document.createElement("div");
+
+            category.className = "suggestion-category";
+            category.textContent = finding.category;
+
+            item.appendChild(name);
+            item.appendChild(category);
+
+            item.addEventListener(
+                "mousedown",
+                function(event) {
+
+                    event.preventDefault();
+
+                    addFinding(finding.name);
+
+                }
             );
 
-        renderSelectedFindings();
-        updateQuickPills();
+            suggestions.appendChild(item);
+
+        });
+
+    suggestions.style.display = "block";
+}
+
+
+searchInput.addEventListener("input", performSearch);
+
+
+searchInput.addEventListener(
+    "focus",
+    function() {
+
+        if (searchInput.value.trim() !== "") {
+            performSearch();
+        }
+
     }
+);
 
 
-    function updateQuickPills() {
+searchInput.addEventListener(
+    "keydown",
+    function(event) {
 
-        quickPills.forEach(button => {
+        const items =
+            suggestions.querySelectorAll(".suggestion");
+
+        if (event.key === "ArrowDown") {
+
+            event.preventDefault();
+
+            highlightedIndex++;
+
+            if (highlightedIndex >= items.length) {
+                highlightedIndex = 0;
+            }
+
+            updateHighlightedItem(items);
+        }
+
+        else if (event.key === "ArrowUp") {
+
+            event.preventDefault();
+
+            highlightedIndex--;
+
+            if (highlightedIndex < 0) {
+                highlightedIndex = items.length - 1;
+            }
+
+            updateHighlightedItem(items);
+        }
+
+        else if (event.key === "Enter") {
+
+            if (
+                highlightedIndex >= 0
+                &&
+                currentMatches[highlightedIndex]
+            ) {
+
+                event.preventDefault();
+
+                addFinding(
+                    currentMatches[highlightedIndex].name
+                );
+
+            }
+
+            else if (currentMatches.length === 1) {
+
+                event.preventDefault();
+
+                addFinding(currentMatches[0].name);
+            }
+
+        }
+
+        else if (event.key === "Escape") {
+
+            suggestions.style.display = "none";
+        }
+
+    }
+);
+
+
+function updateHighlightedItem(items) {
+
+    items.forEach((item, index) => {
+
+        item.classList.toggle(
+            "active",
+            index === highlightedIndex
+        );
+
+    });
+}
+
+
+quickPills.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        function() {
 
             const finding =
                 button.dataset.finding;
 
-            button.classList.toggle(
-                "selected",
-                selectedFindings.includes(finding)
-            );
+            if (selectedFindings.includes(finding)) {
+                removeFinding(finding);
+            }
 
-        });
+            else {
+                addFinding(finding);
+            }
 
+        }
+    );
+
+});
+
+
+function addFinding(name) {
+
+    if (!selectedFindings.includes(name)) {
+        selectedFindings.push(name);
     }
 
+    searchInput.value = "";
 
-    function renderSelectedFindings() {
+    suggestions.innerHTML = "";
+    suggestions.style.display = "none";
 
-        selectedContainer.innerHTML = "";
+    renderSelectedFindings();
+    updateQuickPills();
+}
 
-        if (
-            selectedFindings.length === 0
-        ) {
 
-            const empty =
-                document.createElement("span");
+function removeFinding(name) {
 
-            empty.className =
-                "no-findings";
+    selectedFindings =
+        selectedFindings.filter(
+            finding => finding !== name
+        );
 
-            empty.textContent =
-                "No findings selected";
+    renderSelectedFindings();
+    updateQuickPills();
+}
 
-            selectedContainer.appendChild(
-                empty
-            );
 
-            return;
-        }
+function updateQuickPills() {
 
-        selectedFindings.forEach(
-            findingName => {
+    quickPills.forEach(button => {
 
-                const tag =
-                    document.createElement("div");
+        const finding =
+            button.dataset.finding;
 
-                tag.className =
-                    "finding-tag";
+        button.classList.toggle(
+            "selected",
+            selectedFindings.includes(finding)
+        );
 
-                const label =
-                    document.createElement("span");
+    });
+}
 
-                label.textContent =
-                    findingName;
 
-                const removeButton =
-                    document.createElement("button");
+function renderSelectedFindings() {
 
-                removeButton.type =
-                    "button";
+    selectedContainer.innerHTML = "";
 
-                removeButton.className =
-                    "remove-tag";
+    if (selectedFindings.length === 0) {
 
-                removeButton.textContent =
-                    "×";
+        const empty =
+            document.createElement("span");
 
-                removeButton.setAttribute(
-                    "aria-label",
-                    "Remove " + findingName
-                );
+        empty.className = "no-findings";
+        empty.textContent = "No findings selected";
 
-                removeButton.addEventListener(
-                    "click",
-                    function() {
+        selectedContainer.appendChild(empty);
 
-                        removeFinding(
-                            findingName
-                        );
+        return;
+    }
 
-                    }
-                );
+    selectedFindings.forEach(findingName => {
 
-                tag.appendChild(label);
-                tag.appendChild(removeButton);
+        const tag =
+            document.createElement("div");
 
-                selectedContainer.appendChild(
-                    tag
-                );
+        tag.className = "finding-tag";
+
+        const label =
+            document.createElement("span");
+
+        label.textContent = findingName;
+
+        const removeButton =
+            document.createElement("button");
+
+        removeButton.type = "button";
+        removeButton.className = "remove-tag";
+        removeButton.textContent = "×";
+
+        removeButton.addEventListener(
+            "click",
+            function() {
+
+                removeFinding(findingName);
 
             }
         );
 
-    }
+        tag.appendChild(label);
+        tag.appendChild(removeButton);
+
+        selectedContainer.appendChild(tag);
+
+    });
+
+}
 
 
-    document.addEventListener(
-        "mousedown",
-        function(event) {
+document.addEventListener(
+    "mousedown",
+    function(event) {
 
-            if (
-                !event.target.closest(
-                    ".search-wrapper"
-                )
-            ) {
-
-                suggestions.style.display =
-                    "none";
-
-            }
-
+        if (!event.target.closest(".search-wrapper")) {
+            suggestions.style.display = "none";
         }
-    );
+
+    }
+);
 
 
-    analyzeButton.addEventListener(
-        "click",
-        analyzePatient
-    );
+/* =========================================================
+   DIFFERENTIAL SCORING
+========================================================= */
+
+document
+    .getElementById("analyzeButton")
+    .addEventListener("click", analyzePatient);
 
 
-    function analyzePatient() {
+function getVitals() {
 
-        const hr =
-            document.getElementById(
-                "hr"
-            ).value;
+    return {
+        hr: document.getElementById("hr").value,
+        bp: document.getElementById("bp").value,
+        breathing: document.getElementById("breathing").value,
+        o2: document.getElementById("o2").value,
+        temp: document.getElementById("temp").value,
+        bgl: document.getElementById("bgl").value
+    };
+}
 
-        const bp =
-            document.getElementById(
-                "bp"
-            ).value;
 
-        const breathing =
-            document.getElementById(
-                "breathing"
-            ).value;
+function prettyVital(key, value) {
 
-        const o2 =
-            document.getElementById(
-                "o2"
-            ).value;
+    const labels = {
 
-        const temp =
-            document.getElementById(
-                "temp"
-            ).value;
+        hr: {
+            tachycardic: "Fast heart rate",
+            normal: "Normal heart rate",
+            bradycardic: "Slow heart rate"
+        },
 
-        const bgl =
-            document.getElementById(
-                "bgl"
-            ).value;
+        bp: {
+            hypotensive: "Low blood pressure",
+            normal: "Normal blood pressure",
+            hypertensive: "High blood pressure"
+        },
 
-        const results =
-            document.getElementById(
-                "results"
-            );
+        breathing: {
+            fast: "Fast breathing",
+            normal: "Normal breathing",
+            slow: "Slow breathing"
+        },
 
-        const content =
-            document.getElementById(
-                "resultContent"
-            );
+        o2: {
+            normal: "Normal oxygen level",
+            low: "Low oxygen level"
+        },
 
-        results.style.display =
-            "block";
+        temp: {
+            warm: "Warm / elevated temperature",
+            normal: "Normal temperature",
+            cool: "Cool temperature"
+        },
 
-        if (
-            !hr &&
-            !bp &&
-            !breathing &&
-            !o2 &&
-            !temp &&
-            !bgl &&
-            selectedFindings.length === 0
-        ) {
+        bgl: {
+            high: "High blood sugar",
+            normal: "Normal blood sugar",
+            low: "Low blood sugar"
+        }
 
-            content.innerHTML = `
-                <div class="result-card">
-                    Select at least one vital or clinical finding.
-                </div>
-            `;
+    };
 
+    return labels[key]?.[value] || value;
+}
+
+
+function scoreCondition(condition, vitals) {
+
+    let score = 0;
+
+    const evidence = [];
+
+
+    selectedFindings.forEach(finding => {
+
+        const weight =
+            condition.findings[finding];
+
+        if (weight) {
+
+            score += weight;
+
+            evidence.push({
+                text: finding,
+                weight: weight
+            });
+        }
+
+    });
+
+
+    Object.keys(vitals).forEach(vitalName => {
+
+        const value = vitals[vitalName];
+
+        if (!value) {
             return;
         }
 
-        const vitalDescriptions = [];
+        const conditionVital =
+            condition.vitals[vitalName];
 
-        if (hr)
-            vitalDescriptions.push(
-                "Heart Rate: " + hr
-            );
+        if (!conditionVital) {
+            return;
+        }
 
-        if (bp)
-            vitalDescriptions.push(
-                "Blood Pressure: " + bp
-            );
+        const weight =
+            conditionVital[value];
 
-        if (breathing)
-            vitalDescriptions.push(
-                "Breathing: " + breathing
-            );
+        if (weight) {
 
-        if (o2)
-            vitalDescriptions.push(
-                "O₂: " + o2
-            );
+            score += weight;
 
-        if (temp)
-            vitalDescriptions.push(
-                "Temperature: " + temp
-            );
+            evidence.push({
+                text: prettyVital(
+                    vitalName,
+                    value
+                ),
+                weight: weight
+            });
+        }
 
-        if (bgl)
-            vitalDescriptions.push(
-                "Blood Sugar: " + bgl
-            );
+    });
+
+
+    evidence.sort(
+        (a, b) => b.weight - a.weight
+    );
+
+
+    return {
+        condition: condition,
+        score: score,
+        evidence: evidence
+    };
+}
+
+
+function getSuspicion(score) {
+
+    if (score >= 11) {
+
+        return {
+            label: "HIGHER SUSPICION",
+            css: "high"
+        };
+    }
+
+    if (score >= 7) {
+
+        return {
+            label: "MODERATE SUSPICION",
+            css: "moderate"
+        };
+    }
+
+    return {
+        label: "LOWER SUSPICION",
+        css: "lower"
+    };
+}
+
+
+function getConditionWarning(conditionName, vitals) {
+
+    if (
+        conditionName === "ACS / Heart Attack"
+        &&
+        vitals.bp === "hypotensive"
+    ) {
+
+        return `
+            <div class="warning-box">
+                ⚠️ Low blood pressure selected. Carefully evaluate
+                contraindications before medications that may lower blood pressure.
+            </div>
+        `;
+    }
+
+
+    if (
+        conditionName === "Opioid Overdose"
+        &&
+        (
+            vitals.breathing === "slow"
+            ||
+            selectedFindings.includes(
+                "Inadequate / Very Slow Breathing"
+            )
+            ||
+            selectedFindings.includes(
+                "Not Breathing"
+            )
+        )
+    ) {
+
+        return `
+            <div class="warning-box">
+                ⚠️ Breathing failure is a priority finding. Ventilation and
+                airway support should not be delayed while waiting for naloxone.
+            </div>
+        `;
+    }
+
+
+    if (
+        conditionName === "Anaphylaxis"
+        &&
+        vitals.bp === "hypotensive"
+    ) {
+
+        return `
+            <div class="warning-box">
+                ⚠️ Low blood pressure with suspected anaphylaxis may indicate
+                severe systemic involvement.
+            </div>
+        `;
+    }
+
+
+    return "";
+}
+
+
+function analyzePatient() {
+
+    const vitals = getVitals();
+
+    const results =
+        document.getElementById("results");
+
+    const content =
+        document.getElementById("resultContent");
+
+    results.style.display = "block";
+
+
+    const hasVital =
+        Object.values(vitals).some(
+            value => value !== ""
+        );
+
+
+    if (
+        !hasVital
+        &&
+        selectedFindings.length === 0
+    ) {
 
         content.innerHTML = `
-            <div class="result-card">
+            <div class="no-match">
+                Select at least one vital or clinical finding.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    const scored =
+        conditions
+            .map(condition =>
+                scoreCondition(
+                    condition,
+                    vitals
+                )
+            )
+            .filter(result =>
+                result.score >= 4
+            )
+            .sort(
+                (a, b) =>
+                    b.score - a.score
+            )
+            .slice(0, 3);
+
+
+    if (scored.length === 0) {
+
+        content.innerHTML = `
+            <div class="no-match">
 
                 <strong>
-                    Current Inputs
+                    No strong match from the current 10-condition database.
                 </strong>
 
                 <p>
-                    ${
-                        vitalDescriptions.length
-                            ?
-                            vitalDescriptions.join(
-                                "<br>"
-                            )
-                            :
-                            "No vitals selected."
-                    }
-                </p>
-
-                <strong>
-                    Clinical Findings
-                </strong>
-
-                <p>
-                    ${
-                        selectedFindings.length
-                            ?
-                            selectedFindings.join(
-                                ", "
-                            )
-                            :
-                            "None selected."
-                    }
+                    The entered findings do not currently create enough
+                    supporting evidence for one of the conditions in this
+                    early version of the differential engine.
                 </p>
 
                 <p>
-                    Differential engine coming next.
+                    Continue the patient assessment and consider causes
+                    outside the current database.
                 </p>
 
             </div>
         `;
 
+        return;
     }
+
+
+    content.innerHTML = "";
+
+
+    scored.forEach(result => {
+
+        const suspicion =
+            getSuspicion(result.score);
+
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            `result-card ${suspicion.css}`;
+
+
+        const evidenceHTML =
+            result.evidence
+                .map(item =>
+                    `<li>${item.text}</li>`
+                )
+                .join("");
+
+
+        card.innerHTML = `
+
+            <div class="suspicion">
+                ${suspicion.label}
+            </div>
+
+            <div class="condition-name">
+                ${result.condition.name}
+            </div>
+
+
+            <div class="result-subheading">
+                Findings supporting this:
+            </div>
+
+            <ul class="evidence-list">
+                ${evidenceHTML}
+            </ul>
+
+
+            <div class="result-subheading">
+                Treatment considerations:
+            </div>
+
+            <div class="treatment-text">
+                ${result.condition.treatment}
+            </div>
+
+            ${
+                getConditionWarning(
+                    result.condition.name,
+                    vitals
+                )
+            }
+
+        `;
+
+
+        content.appendChild(card);
+
+    });
+
+}
 
 </script>
 
