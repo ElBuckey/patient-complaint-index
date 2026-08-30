@@ -133,48 +133,73 @@
 
     <!-- VITALS -->
 
-    <div class="section">
-        <h2>Vitals</h2>
+<div class="section">
+    <h2>Vitals</h2>
 
-        <div class="vitals">
+    <div class="vitals">
 
-            <div>
-                <label>Heart Rate</label>
-                <input type="number" id="hr" placeholder="HR">
-            </div>
-
-            <div>
-                <label>Systolic BP</label>
-                <input type="number" id="sbp" placeholder="SBP">
-            </div>
-
-            <div>
-                <label>Respiratory Rate</label>
-                <input type="number" id="rr" placeholder="RR">
-            </div>
-
-            <div>
-                <label>SpO₂</label>
-                <input type="number" id="spo2" placeholder="%">
-            </div>
-
-            <div>
-                <label>EtCO₂</label>
-                <input type="number" id="etco2" placeholder="mmHg">
-            </div>
-
-            <div>
-                <label>Temperature</label>
-                <input type="number" id="temp" step="0.1" placeholder="°F">
-            </div>
-
-            <div>
-                <label>BGL</label>
-                <input type="number" id="bgl" placeholder="mg/dL">
-            </div>
-
+        <div>
+            <label>Heart Rate</label>
+            <select id="hr">
+                <option value="">Select</option>
+                <option value="tachycardic">Tachycardic / Fast</option>
+                <option value="normal">Normal</option>
+                <option value="bradycardic">Bradycardic / Slow</option>
+            </select>
         </div>
+
+        <div>
+            <label>Blood Pressure (BP)</label>
+            <select id="bp">
+                <option value="">Select</option>
+                <option value="hypotensive">Hypotensive / Low</option>
+                <option value="normal">Normal</option>
+                <option value="hypertensive">Hypertensive / High</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Breathing</label>
+            <select id="breathing">
+                <option value="">Select</option>
+                <option value="fast">Fast</option>
+                <option value="normal">Normal</option>
+                <option value="slow">Slow</option>
+            </select>
+        </div>
+
+        <div>
+            <label>O₂</label>
+            <select id="o2">
+                <option value="">Select</option>
+                <option value="high">High</option>
+                <option value="normal">Normal</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Temperature</label>
+            <select id="temp">
+                <option value="">Select</option>
+                <option value="warm">Warm</option>
+                <option value="normal">Normal</option>
+                <option value="cool">Cool</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Blood Sugar</label>
+            <select id="bgl">
+                <option value="">Select</option>
+                <option value="high">High</option>
+                <option value="normal">Normal</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
+
     </div>
+</div>
 
 
     <!-- SIGNS / SYMPTOMS -->
