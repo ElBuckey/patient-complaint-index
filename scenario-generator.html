@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EMS Scenario Generator</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#101820;color:#fff}header{background:#18242f;padding:20px;text-align:center;border-bottom:3px solid #e63946}header h1{margin:0}header p{margin:6px 0 0;color:#b8c1c8}.top-nav{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}.top-nav a{color:#fff;text-decoration:none;background:#253542;border:1px solid #4d5c68;padding:8px 14px;border-radius:999px;font-size:14px}.top-nav a:hover,.top-nav a.active{background:#e63946;border-color:#e63946}.container{max-width:1000px;margin:auto;padding:20px}.section{background:#18242f;padding:20px;margin-bottom:20px;border-radius:10px}.section h2{margin-top:0;border-bottom:1px solid #344451;padding-bottom:10px}.controls{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}label{display:block;margin-bottom:6px;color:#d5dce1}select{width:100%;min-height:44px;padding:10px 12px;background:#101820;color:#fff;border:1px solid #4d5c68;border-radius:6px;font-size:15px}.generate{width:100%;min-height:54px;border:none;border-radius:8px;background:#e63946;color:#fff;font-size:18px;font-weight:bold;cursor:pointer}.generate:hover{background:#c92f3b}.scenario{display:none}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.badge{background:#253542;border:1px solid #4d5c68;border-radius:999px;padding:6px 10px;font-size:13px}.card{background:#101820;border-radius:8px;padding:17px;margin-bottom:14px;border-left:4px solid #4d5c68}.card h3{margin:0 0 9px;font-size:18px}.card p{margin:0;line-height:1.6;color:#d9e0e5}.dispatch{border-left-color:#e63946}.scene{border-left-color:#7d98a1}.reveal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.reveal-btn,.stage-btn,.diagnosis-btn{min-height:46px;border:1px solid #4d5c68;border-radius:7px;background:#253542;color:#fff;font-weight:bold;cursor:pointer;padding:10px}.reveal-btn:hover,.stage-btn:hover{background:#344957}.reveal-btn.revealed{background:#344451;color:#aebac3;cursor:default}.hidden-info{display:none}.stage-card{border-left-color:#f0a202}.stage-card.critical{border-left-color:#e63946}.diagnosis-btn{width:100%;background:#e63946;border-color:#e63946;font-size:16px;margin-top:8px}.diagnosis-btn:hover{background:#c92f3b}.diagnosis-card{display:none;border:2px solid #e63946;background:#25171a}.diagnosis-title{font-size:24px;font-weight:bold;margin-bottom:10px}.subheading{font-weight:bold;margin:13px 0 5px}.detail-list{margin:0;padding-left:21px;line-height:1.6;color:#d9e0e5}.fto-title{font-size:12px;font-weight:bold;letter-spacing:.7px;color:#ffbbc1;margin-bottom:6px}.notice{font-size:13px;color:#9caab5;text-align:center;line-height:1.5;margin-top:20px}.empty{background:#101820;padding:18px;border-radius:8px;color:#d9e0e5}.stage-controls{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.stage-btn{flex:1;min-width:180px}.scenario-counter{color:#9caab5;font-size:13px;margin-top:8px;text-align:center}@media(max-width:850px){.controls{grid-template-columns:repeat(2,1fr)}.controls>div:last-child{grid-column:span 2}.reveal-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.container{padding:12px}.section{padding:15px}.controls{grid-template-columns:1fr}.controls>div:last-child{grid-column:auto}.reveal-grid{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#101820;color:#fff}header{background:#18242f;padding:20px;text-align:center;border-bottom:3px solid #e63946}header h1{margin:0}header p{margin:6px 0 0;color:#b8c1c8}.top-nav{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}.top-nav a{color:#fff;text-decoration:none;background:#253542;border:1px solid #4d5c68;padding:8px 14px;border-radius:999px;font-size:14px}.top-nav a:hover,.top-nav a.active{background:#e63946;border-color:#e63946}.container{max-width:1000px;margin:auto;padding:20px}.section{background:#18242f;padding:20px;margin-bottom:20px;border-radius:10px}.section h2{margin-top:0;border-bottom:1px solid #344451;padding-bottom:10px}.controls{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}label{display:block;margin-bottom:6px;color:#d5dce1}select{width:100%;min-height:44px;padding:10px 12px;background:#101820;color:#fff;border:1px solid #4d5c68;border-radius:6px;font-size:15px}.generate{width:100%;min-height:54px;border:none;border-radius:8px;background:#e63946;color:#fff;font-size:18px;font-weight:bold;cursor:pointer}.generate:hover{background:#c92f3b}.scenario{display:none}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.badge{background:#253542;border:1px solid #4d5c68;border-radius:999px;padding:6px 10px;font-size:13px}.card{background:#101820;border-radius:8px;padding:17px;margin-bottom:14px;border-left:4px solid #4d5c68}.card h3{margin:0 0 9px;font-size:18px}.card p{margin:0;line-height:1.6;color:#d9e0e5}.dispatch{border-left-color:#e63946}.scene{border-left-color:#7d98a1}.reveal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.reveal-btn,.stage-btn,.diagnosis-btn{min-height:46px;border:1px solid #4d5c68;border-radius:7px;background:#253542;color:#fff;font-weight:bold;cursor:pointer;padding:10px}.reveal-btn:hover,.stage-btn:hover{background:#344957}.reveal-btn.revealed{background:#344451;color:#aebac3;cursor:default}.hidden-info{display:none}.stage-card{border-left-color:#f0a202}.stage-card.critical{border-left-color:#e63946}.diagnosis-btn{width:100%;background:#e63946;border-color:#e63946;font-size:16px;margin-top:8px}.diagnosis-btn:hover{background:#c92f3b}.diagnosis-card{display:none;border:2px solid #e63946;background:#25171a}.diagnosis-title{font-size:24px;font-weight:bold;margin-bottom:10px}.subheading{font-weight:bold;margin:13px 0 5px}.detail-list{margin:0;padding-left:21px;line-height:1.6;color:#d9e0e5}.fto-title{font-size:12px;font-weight:bold;letter-spacing:.7px;color:#ffbbc1;margin-bottom:6px}.notice{font-size:13px;color:#9caab5;text-align:center;line-height:1.5;margin-top:20px}.empty{background:#101820;padding:18px;border-radius:8px;color:#d9e0e5}.stage-controls{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.stage-btn{flex:1;min-width:180px}.scenario-counter{color:#9caab5;font-size:13px;margin-top:8px;text-align:center}@media(max-width:850px){.controls{grid-template-columns:repeat(2,1fr)}.controls>div:last-child{grid-column:span 2}.reveal-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.container{padding:12px}.section{padding:15px}.controls{grid-template-columns:1fr}.controls>div:last-child{grid-column:auto}.reveal-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -19,6 +19,7 @@
 <div><label for="patient">Patient</label><select id="patient"><option value="Adult">Adult</option><option value="Geriatric">Geriatric</option></select></div>
 <div><label for="progression">Progression</label><select id="progression"><option value="Static">Static</option><option value="Dynamic">Dynamic</option></select></div>
 <div><label for="mode">Mode</label><select id="mode"><option value="Student">Student</option><option value="FTO">FTO</option></select></div>
+<div id="specificWrap" style="display:none"><label for="specific">Specific Scenario</label><select id="specific"><option value="Random">Random</option></select></div>
 </div>
 </div>
 <button id="generate" class="generate" type="button">GENERATE SCENARIO</button>
@@ -83,11 +84,37 @@ function patientData(group){if(group==="Geriatric")return{age:Math.floor(Math.ra
 function fill(t,p){return (t||"").replaceAll("{age}",p.age).replaceAll("{sex}",p.sex);}
 function card(title,text,cls=""){return `<div class="card ${cls}"><h3>${title}</h3><p>${text}</p></div>`}
 function list(items){return `<ul class="detail-list">${items.map(x=>`<li>${x}</li>`).join("")}</ul>`}
+function focusFor(s){
+ const c=s.condition;
+ if(c.includes("Asthma")) return "Asthma";
+ if(c.includes("Burn")) return "Burns";
+ if(c==="SVT") return "SVT";
+ if(c.includes("Atrial Fibrillation")) return "A-Fib RVR";
+ if(c==="Ventricular Tachycardia") return "V-Tach";
+ if(c.includes("Ventricular Fibrillation")) return "V-Fib / Cardiac Arrest";
+ if(c.includes("Bradycardia")) return "Bradycardia";
+ if(c.includes("ACS / Heart Attack")) return "Heart Attack / ACS";
+ if(c.includes("Pneumothorax")) return c;
+ if(c.includes("Hemorrhage") || c.includes("Bleeding")) return c;
+ return c;
+}
+function updateSpecificOptions(){
+ const wrap=$("specificWrap"),sel=$("specific");
+ if($("mode").value!=="FTO"){wrap.style.display="none";sel.innerHTML='<option value="Random">Random</option>';return;}
+ wrap.style.display="block";
+ const type=$("type").value,difficulty=$("difficulty").value;
+ const eligible=scenarios.filter(s=>s.difficulty===difficulty && (type==="Random"||s.type===type));
+ const focuses=[...new Set(eligible.map(focusFor))].sort((a,b)=>a.localeCompare(b));
+ const previous=sel.value;
+ sel.innerHTML='<option value="Random">Random</option>'+focuses.map(f=>`<option value="${f}">${f}</option>`).join("");
+ if(focuses.includes(previous)) sel.value=previous;
+}
 function generate(){
  const type=$("type").value,difficulty=$("difficulty").value,patient=$("patient").value,progression=$("progression").value,mode=$("mode").value;
- let pool=scenarios.filter(s=>s.difficulty===difficulty && (type==="Random"||s.type===type));
+ const specific=mode==="FTO" ? $("specific").value : "Random";
+ let pool=scenarios.filter(s=>s.difficulty===difficulty && (type==="Random"||s.type===type) && (specific==="Random"||focusFor(s)===specific));
  const out=$("scenario");out.style.display="block";
- if(!pool.length){out.innerHTML=`<h2>Scenario</h2><div class="empty">There are no ${difficulty} ${type} scenarios in the current library yet. Choose Random or another type/difficulty.</div>`;return;}
+ if(!pool.length){out.innerHTML=`<h2>Scenario</h2><div class="empty">There are no matching scenarios in the current library for those selections. Choose Random or another type/difficulty/specific scenario.</div>`;return;}
  const s=rnd(pool),p=patientData(patient);out.innerHTML=`<h2>${mode==="FTO"?"FTO Scenario":"Student Scenario"}</h2><div class="meta"><span class="badge">${s.type}</span><span class="badge">${s.difficulty}</span><span class="badge">${patient}: ${p.age}</span><span class="badge">${progression}</span><span class="badge">${mode} Mode</span></div>`;
  out.innerHTML+=card("Dispatch",fill(s.dispatch,p),"dispatch")+card("Scene",fill(s.scene,p),"scene");
  if(mode==="FTO") renderFTO(out,s,p,progression); else renderStudent(out,s,p,progression);
@@ -112,6 +139,10 @@ function renderFTO(out,s,p,progression){
  out.insertAdjacentHTML("beforeend",`<div class="card"><h3>Expected Management</h3>${list(s.management)}${s.criticalActions?`<div class="subheading">Critical Actions</div>${list(s.criticalActions)}`:""}${s.scopeNotes?`<div class="subheading">Server Scope / Training Notes</div>${list(s.scopeNotes)}`:""}${s.harmfulActions?`<div class="subheading">Potentially Harmful / Incorrect Actions</div>${list(s.harmfulActions)}`:""}<div class="subheading">Teaching Points</div>${list(s.teaching)}</div>`);
 }
 $("generate").addEventListener("click",generate);
+$("mode").addEventListener("change",updateSpecificOptions);
+$("type").addEventListener("change",updateSpecificOptions);
+$("difficulty").addEventListener("change",updateSpecificOptions);
+updateSpecificOptions();
 </script>
 </body>
 </html>
