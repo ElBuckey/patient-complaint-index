@@ -54,8 +54,6 @@
             padding-bottom: 10px;
         }
 
-        /* VITALS */
-
         .vitals {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -73,13 +71,10 @@
             width: 100%;
             min-height: 44px;
             padding: 10px 12px;
-
             background: #101820;
             color: white;
-
             border: 1px solid #4d5c68;
             border-radius: 6px;
-
             font-size: 16px;
         }
 
@@ -89,35 +84,27 @@
             outline-offset: 1px;
         }
 
-        /* SEARCH */
-
         .search-wrapper {
             position: relative;
         }
 
         .suggestions {
             display: none;
-
             position: absolute;
             left: 0;
             right: 0;
             top: calc(100% + 4px);
-
             background: #101820;
-
             border: 1px solid #4d5c68;
             border-radius: 7px;
-
             max-height: 320px;
             overflow-y: auto;
-
             z-index: 100;
         }
 
         .suggestion {
             padding: 12px 14px;
             cursor: pointer;
-
             border-bottom: 1px solid #293844;
         }
 
@@ -136,7 +123,6 @@
 
         .suggestion-category {
             margin-top: 3px;
-
             font-size: 12px;
             color: #8fa0ad;
         }
@@ -146,25 +132,49 @@
             color: #8fa0ad;
         }
 
-        /* SELECTED FINDINGS */
-
+        .quick-heading,
         .selected-heading {
-            margin-top: 22px;
+            margin-top: 20px;
             margin-bottom: 9px;
+            font-weight: bold;
+        }
 
+        .quick-picks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .quick-pill {
+            width: auto;
+            min-height: 36px;
+            padding: 7px 12px;
+            border: 1px solid #4d5c68;
+            border-radius: 999px;
+            background: #253542;
+            color: white;
+            font-size: 14px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .quick-pill:hover {
+            background: #344957;
+        }
+
+        .quick-pill.selected {
+            background: #e63946;
+            border-color: #e63946;
             font-weight: bold;
         }
 
         .selected-findings {
             min-height: 55px;
-
             display: flex;
             flex-wrap: wrap;
             align-items: flex-start;
             gap: 8px;
-
             background: #101820;
-
             padding: 10px;
             border-radius: 7px;
         }
@@ -178,34 +188,25 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
             background: #344451;
-
             border-radius: 20px;
             padding: 7px 8px 7px 12px;
-
             font-size: 14px;
         }
 
         .remove-tag {
             width: 26px;
             height: 26px;
-
             padding: 0;
-
             display: inline-flex;
             justify-content: center;
             align-items: center;
-
             border: 0;
             border-radius: 50%;
-
             background: #202e39;
             color: white;
-
             font-size: 18px;
             line-height: 1;
-
             cursor: pointer;
         }
 
@@ -213,21 +214,15 @@
             background: #e63946;
         }
 
-        /* ANALYZE */
-
         .analyze-button {
             width: 100%;
             min-height: 54px;
-
             border: none;
             border-radius: 8px;
-
             background: #e63946;
             color: white;
-
             font-size: 18px;
             font-weight: bold;
-
             cursor: pointer;
         }
 
@@ -242,27 +237,20 @@
 
         .result-card {
             background: #101820;
-
             padding: 16px;
             border-radius: 8px;
-
             line-height: 1.5;
         }
 
         .notice {
             font-size: 13px;
             color: #9caab5;
-
             text-align: center;
             line-height: 1.5;
-
             margin-top: 20px;
         }
 
-        /* MOBILE */
-
         @media (max-width: 700px) {
-
             .vitals {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -277,31 +265,23 @@
         }
 
         @media (max-width: 430px) {
-
             .vitals {
                 grid-template-columns: 1fr;
             }
         }
     </style>
-
 </head>
 
 
 <body>
 
 <header>
-
     <h1>EMS Clinical Assistant</h1>
-
     <p>Clinical findings & differential reference</p>
-
 </header>
 
 
 <div class="container">
-
-
-    <!-- VITALS -->
 
     <div class="section">
 
@@ -309,185 +289,77 @@
 
         <div class="vitals">
 
-
             <div>
-
-                <label for="hr">
-                    Heart Rate
-                </label>
-
+                <label for="hr">Heart Rate</label>
                 <select id="hr">
-
                     <option value="">Select</option>
-
-                    <option value="tachycardic">
-                        Tachycardic / Fast
-                    </option>
-
-                    <option value="normal">
-                        Normal
-                    </option>
-
-                    <option value="bradycardic">
-                        Bradycardic / Slow
-                    </option>
-
+                    <option value="tachycardic">Tachycardic / Fast</option>
+                    <option value="normal">Normal</option>
+                    <option value="bradycardic">Bradycardic / Slow</option>
                 </select>
-
             </div>
 
-
             <div>
-
-                <label for="bp">
-                    Blood Pressure
-                </label>
-
+                <label for="bp">Blood Pressure</label>
                 <select id="bp">
-
                     <option value="">Select</option>
-
-                    <option value="hypotensive">
-                        Hypotensive / Low
-                    </option>
-
-                    <option value="normal">
-                        Normal
-                    </option>
-
-                    <option value="hypertensive">
-                        Hypertensive / High
-                    </option>
-
+                    <option value="hypotensive">Hypotensive / Low</option>
+                    <option value="normal">Normal</option>
+                    <option value="hypertensive">Hypertensive / High</option>
                 </select>
-
             </div>
 
-
             <div>
-
-                <label for="breathing">
-                    Breathing
-                </label>
-
+                <label for="breathing">Breathing</label>
                 <select id="breathing">
-
                     <option value="">Select</option>
-
-                    <option value="fast">
-                        Fast
-                    </option>
-
-                    <option value="normal">
-                        Normal
-                    </option>
-
-                    <option value="slow">
-                        Slow
-                    </option>
-
+                    <option value="fast">Fast</option>
+                    <option value="normal">Normal</option>
+                    <option value="slow">Slow</option>
                 </select>
-
             </div>
 
-
             <div>
-
-                <label for="o2">
-                    O₂
-                </label>
-
+                <label for="o2">O₂</label>
                 <select id="o2">
-
                     <option value="">Select</option>
-
-                    <option value="high">
-                        High
-                    </option>
-
-                    <option value="normal">
-                        Normal
-                    </option>
-
-                    <option value="low">
-                        Low
-                    </option>
-
+                    <option value="normal">Normal</option>
+                    <option value="low">Low</option>
                 </select>
-
             </div>
 
-
             <div>
-
-                <label for="temp">
-                    Temperature
-                </label>
-
+                <label for="temp">Temperature</label>
                 <select id="temp">
-
                     <option value="">Select</option>
-
-                    <option value="warm">
-                        Warm
-                    </option>
-
-                    <option value="normal">
-                        Normal
-                    </option>
-
-                    <option value="cool">
-                        Cool
-                    </option>
-
+                    <option value="warm">Warm</option>
+                    <option value="normal">Normal</option>
+                    <option value="cool">Cool</option>
                 </select>
-
             </div>
-
 
             <div>
-
-                <label for="bgl">
-                    Blood Sugar
-                </label>
-
+                <label for="bgl">Blood Sugar</label>
                 <select id="bgl">
-
                     <option value="">Select</option>
-
-                    <option value="high">
-                        High
-                    </option>
-
-                    <option value="normal">
-                        Normal
-                    </option>
-
-                    <option value="low">
-                        Low
-                    </option>
-
+                    <option value="high">High</option>
+                    <option value="normal">Normal</option>
+                    <option value="low">Low</option>
                 </select>
-
             </div>
-
 
         </div>
 
     </div>
 
 
-    <!-- CLINICAL FINDINGS -->
-
     <div class="section">
 
         <h2>Clinical Findings</h2>
 
-
         <label for="findingSearch">
             Search signs, symptoms, or assessment findings
         </label>
-
 
         <div class="search-wrapper">
 
@@ -498,10 +370,40 @@
                 autocomplete="off"
             >
 
-            <div
-                id="suggestions"
-                class="suggestions"
-            ></div>
+            <div id="suggestions" class="suggestions"></div>
+
+        </div>
+
+
+        <div class="quick-heading">
+            Common Findings
+        </div>
+
+        <div class="quick-picks">
+
+            <button class="quick-pill" type="button" data-finding="Chest Pain">
+                Chest Pain
+            </button>
+
+            <button class="quick-pill" type="button" data-finding="Dyspnea">
+                Dyspnea
+            </button>
+
+            <button class="quick-pill" type="button" data-finding="Altered Mental Status">
+                AMS
+            </button>
+
+            <button class="quick-pill" type="button" data-finding="Syncope / Near Syncope">
+                Syncope
+            </button>
+
+            <button class="quick-pill" type="button" data-finding="Seizure">
+                Seizure
+            </button>
+
+            <button class="quick-pill" type="button" data-finding="Weakness">
+                Weakness
+            </button>
 
         </div>
 
@@ -510,11 +412,7 @@
             Selected Findings
         </div>
 
-
-        <div
-            id="selectedFindings"
-            class="selected-findings"
-        >
+        <div id="selectedFindings" class="selected-findings">
 
             <span class="no-findings">
                 No findings selected
@@ -525,8 +423,6 @@
     </div>
 
 
-    <!-- ANALYZE -->
-
     <button
         type="button"
         id="analyzeButton"
@@ -536,16 +432,9 @@
     </button>
 
 
-    <!-- RESULTS -->
+    <div id="results" class="section">
 
-    <div
-        id="results"
-        class="section"
-    >
-
-        <h2>
-            Clinical Considerations
-        </h2>
+        <h2>Clinical Considerations</h2>
 
         <div id="resultContent"></div>
 
@@ -553,27 +442,16 @@
 
 
     <div class="notice">
-
-        Educational clinical reference only.
-        Not a substitute for local protocols,
+        Educational clinical reference only. Not a substitute for local protocols,
         medical direction, or clinical judgment.
-
     </div>
-
 
 </div>
 
 
 <script>
 
-    /* =========================================================
-       FINDING DATABASE
-       aliases = additional words that can find that item
-       ========================================================= */
-
     const findings = [
-
-        /* SYMPTOMS */
 
         {
             name: "Altered Mental Status",
@@ -758,9 +636,6 @@
             ]
         },
 
-
-        /* RESPIRATORY */
-
         {
             name: "Wheezing",
             category: "Respiratory",
@@ -843,9 +718,6 @@
             ]
         },
 
-
-        /* CARDIOVASCULAR */
-
         {
             name: "JVD",
             category: "Cardiovascular",
@@ -892,9 +764,6 @@
                 "irregular heart rate"
             ]
         },
-
-
-        /* NEUROLOGICAL */
 
         {
             name: "Focal Neurological Deficit",
@@ -970,9 +839,6 @@
             ]
         },
 
-
-        /* SKIN / GENERAL */
-
         {
             name: "Pale",
             category: "Skin / General",
@@ -1028,9 +894,6 @@
             ]
         },
 
-
-        /* ABDOMINAL */
-
         {
             name: "Abdominal Tenderness",
             category: "Abdominal",
@@ -1072,10 +935,6 @@
     ];
 
 
-    /* =========================================================
-       STATE
-       ========================================================= */
-
     let selectedFindings = [];
 
     let currentMatches = [];
@@ -1095,37 +954,28 @@
     const analyzeButton =
         document.getElementById("analyzeButton");
 
+    const quickPills =
+        document.querySelectorAll(".quick-pill");
 
-    /* =========================================================
-       SEARCH
-       ========================================================= */
 
     function normalizeText(text) {
-
         return text
             .toLowerCase()
             .trim();
-
     }
 
 
     function findingMatches(finding, query) {
 
         const searchableText = [
-
             finding.name,
-
             finding.category,
-
             ...finding.aliases
-
         ]
         .join(" ")
         .toLowerCase();
 
-
         return searchableText.includes(query);
-
     }
 
 
@@ -1134,36 +984,25 @@
         const query =
             normalizeText(searchInput.value);
 
-
         suggestions.innerHTML = "";
-
         highlightedIndex = -1;
 
-
         if (!query) {
-
             suggestions.style.display = "none";
-
             currentMatches = [];
-
             return;
-
         }
-
 
         currentMatches =
             findings.filter(finding => {
 
                 return (
                     findingMatches(finding, query)
-
                     &&
-
                     !selectedFindings.includes(finding.name)
                 );
 
             });
-
 
         if (currentMatches.length === 0) {
 
@@ -1182,9 +1021,7 @@
                 "block";
 
             return;
-
         }
-
 
         currentMatches
             .slice(0, 12)
@@ -1196,7 +1033,6 @@
                 item.className =
                     "suggestion";
 
-
                 const name =
                     document.createElement("div");
 
@@ -1205,7 +1041,6 @@
 
                 name.textContent =
                     finding.name;
-
 
                 const category =
                     document.createElement("div");
@@ -1216,11 +1051,8 @@
                 category.textContent =
                     finding.category;
 
-
                 item.appendChild(name);
-
                 item.appendChild(category);
-
 
                 item.addEventListener(
                     "mousedown",
@@ -1235,15 +1067,12 @@
                     }
                 );
 
-
                 suggestions.appendChild(item);
 
             });
 
-
         suggestions.style.display =
             "block";
-
     }
 
 
@@ -1260,18 +1089,12 @@
             if (
                 searchInput.value.trim() !== ""
             ) {
-
                 performSearch();
-
             }
 
         }
     );
 
-
-    /* =========================================================
-       KEYBOARD SEARCH SUPPORT
-       ========================================================= */
 
     searchInput.addEventListener(
         "keydown",
@@ -1282,7 +1105,6 @@
                     ".suggestion"
                 );
 
-
             if (event.key === "ArrowDown") {
 
                 event.preventDefault();
@@ -1292,15 +1114,11 @@
                 if (
                     highlightedIndex >= items.length
                 ) {
-
                     highlightedIndex = 0;
-
                 }
 
                 updateHighlightedItem(items);
-
             }
-
 
             else if (
                 event.key === "ArrowUp"
@@ -1313,16 +1131,12 @@
                 if (
                     highlightedIndex < 0
                 ) {
-
                     highlightedIndex =
                         items.length - 1;
-
                 }
 
                 updateHighlightedItem(items);
-
             }
-
 
             else if (
                 event.key === "Enter"
@@ -1360,7 +1174,6 @@
 
             }
 
-
             else if (
                 event.key === "Escape"
             ) {
@@ -1390,20 +1203,38 @@
     }
 
 
-    /* =========================================================
-       ADD / REMOVE FINDINGS
-       ========================================================= */
+    quickPills.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const finding =
+                    button.dataset.finding;
+
+                if (
+                    selectedFindings.includes(finding)
+                ) {
+                    removeFinding(finding);
+                }
+
+                else {
+                    addFinding(finding);
+                }
+
+            }
+        );
+
+    });
+
 
     function addFinding(name) {
 
         if (
             !selectedFindings.includes(name)
         ) {
-
             selectedFindings.push(name);
-
         }
-
 
         searchInput.value = "";
 
@@ -1412,12 +1243,8 @@
         suggestions.style.display =
             "none";
 
-
         renderSelectedFindings();
-
-
-        searchInput.focus();
-
+        updateQuickPills();
     }
 
 
@@ -1429,8 +1256,24 @@
                     finding !== name
             );
 
-
         renderSelectedFindings();
+        updateQuickPills();
+    }
+
+
+    function updateQuickPills() {
+
+        quickPills.forEach(button => {
+
+            const finding =
+                button.dataset.finding;
+
+            button.classList.toggle(
+                "selected",
+                selectedFindings.includes(finding)
+            );
+
+        });
 
     }
 
@@ -1438,7 +1281,6 @@
     function renderSelectedFindings() {
 
         selectedContainer.innerHTML = "";
-
 
         if (
             selectedFindings.length === 0
@@ -1458,9 +1300,7 @@
             );
 
             return;
-
         }
-
 
         selectedFindings.forEach(
             findingName => {
@@ -1471,13 +1311,11 @@
                 tag.className =
                     "finding-tag";
 
-
                 const label =
                     document.createElement("span");
 
                 label.textContent =
                     findingName;
-
 
                 const removeButton =
                     document.createElement("button");
@@ -1496,7 +1334,6 @@
                     "Remove " + findingName
                 );
 
-
                 removeButton.addEventListener(
                     "click",
                     function() {
@@ -1508,13 +1345,8 @@
                     }
                 );
 
-
                 tag.appendChild(label);
-
-                tag.appendChild(
-                    removeButton
-                );
-
+                tag.appendChild(removeButton);
 
                 selectedContainer.appendChild(
                     tag
@@ -1525,10 +1357,6 @@
 
     }
 
-
-    /* =========================================================
-       CLOSE SEARCH WHEN CLICKING AWAY
-       ========================================================= */
 
     document.addEventListener(
         "mousedown",
@@ -1548,10 +1376,6 @@
         }
     );
 
-
-    /* =========================================================
-       ANALYZE
-       ========================================================= */
 
     analyzeButton.addEventListener(
         "click",
@@ -1591,7 +1415,6 @@
                 "bgl"
             ).value;
 
-
         const results =
             document.getElementById(
                 "results"
@@ -1602,10 +1425,8 @@
                 "resultContent"
             );
 
-
         results.style.display =
             "block";
-
 
         if (
             !hr &&
@@ -1618,62 +1439,47 @@
         ) {
 
             content.innerHTML = `
-
                 <div class="result-card">
-
-                    Select at least one vital
-                    or clinical finding.
-
+                    Select at least one vital or clinical finding.
                 </div>
-
             `;
 
             return;
-
         }
 
-
         const vitalDescriptions = [];
-
 
         if (hr)
             vitalDescriptions.push(
                 "Heart Rate: " + hr
             );
 
-
         if (bp)
             vitalDescriptions.push(
                 "Blood Pressure: " + bp
             );
-
 
         if (breathing)
             vitalDescriptions.push(
                 "Breathing: " + breathing
             );
 
-
         if (o2)
             vitalDescriptions.push(
                 "O₂: " + o2
             );
-
 
         if (temp)
             vitalDescriptions.push(
                 "Temperature: " + temp
             );
 
-
         if (bgl)
             vitalDescriptions.push(
                 "Blood Sugar: " + bgl
             );
 
-
         content.innerHTML = `
-
             <div class="result-card">
 
                 <strong>
@@ -1681,7 +1487,6 @@
                 </strong>
 
                 <p>
-
                     ${
                         vitalDescriptions.length
                             ?
@@ -1691,7 +1496,6 @@
                             :
                             "No vitals selected."
                     }
-
                 </p>
 
                 <strong>
@@ -1699,7 +1503,6 @@
                 </strong>
 
                 <p>
-
                     ${
                         selectedFindings.length
                             ?
@@ -1709,16 +1512,13 @@
                             :
                             "None selected."
                     }
-
                 </p>
 
                 <p>
-                    Differential engine
-                    coming next.
+                    Differential engine coming next.
                 </p>
 
             </div>
-
         `;
 
     }
