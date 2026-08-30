@@ -31,7 +31,7 @@
         }
 
         header p {
-            margin-bottom: 0;
+            margin: 6px 0 0;
             color: #b8c1c8;
         }
 
@@ -54,9 +54,11 @@
             padding-bottom: 10px;
         }
 
+        /* VITALS */
+
         .vitals {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 14px;
         }
 
@@ -69,53 +71,53 @@
         select,
         input {
             width: 100%;
-            padding: 12px;
+            min-height: 44px;
+            padding: 10px 12px;
+
             background: #101820;
+            color: white;
+
             border: 1px solid #4d5c68;
             border-radius: 6px;
-            color: white;
+
             font-size: 16px;
         }
 
-        button {
-            border: none;
-            border-radius: 8px;
-            background: #e63946;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+        select:focus,
+        input:focus {
+            outline: 2px solid #e63946;
+            outline-offset: 1px;
         }
 
-        button:hover {
-            background: #c92f3b;
-        }
+        /* SEARCH */
 
-        .analyze-button {
-            width: 100%;
-            padding: 16px;
-            font-size: 18px;
-        }
-
-        .finding-search-container {
+        .search-wrapper {
             position: relative;
         }
 
         .suggestions {
             display: none;
+
             position: absolute;
-            width: 100%;
-            max-height: 280px;
-            overflow-y: auto;
+            left: 0;
+            right: 0;
+            top: calc(100% + 4px);
+
             background: #101820;
+
             border: 1px solid #4d5c68;
-            border-radius: 6px;
-            z-index: 10;
+            border-radius: 7px;
+
+            max-height: 320px;
+            overflow-y: auto;
+
+            z-index: 100;
         }
 
         .suggestion {
-            padding: 12px;
+            padding: 12px 14px;
             cursor: pointer;
+
             border-bottom: 1px solid #293844;
         }
 
@@ -123,77 +125,114 @@
             border-bottom: none;
         }
 
-        .suggestion:hover {
+        .suggestion:hover,
+        .suggestion.active {
             background: #243442;
         }
 
+        .suggestion-name {
+            font-weight: bold;
+        }
+
         .suggestion-category {
+            margin-top: 3px;
+
             font-size: 12px;
             color: #8fa0ad;
-            margin-top: 3px;
         }
 
-        .quick-title,
-        .selected-title {
-            margin-top: 20px;
-            margin-bottom: 10px;
+        .no-results {
+            padding: 14px;
+            color: #8fa0ad;
+        }
+
+        /* SELECTED FINDINGS */
+
+        .selected-heading {
+            margin-top: 22px;
+            margin-bottom: 9px;
+
             font-weight: bold;
-            color: #d5dce1;
-        }
-
-        .quick-picks {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .quick-picks button {
-            width: auto;
-            padding: 9px 13px;
-            background: #344451;
-            font-size: 14px;
-        }
-
-        .quick-picks button:hover {
-            background: #435766;
         }
 
         .selected-findings {
+            min-height: 55px;
+
             display: flex;
             flex-wrap: wrap;
+            align-items: flex-start;
             gap: 8px;
-            min-height: 50px;
-            padding: 10px;
+
             background: #101820;
-            border-radius: 6px;
-        }
 
-        .finding-tag {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            padding: 8px 11px;
-            background: #344451;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        .finding-tag button {
-            width: auto;
-            padding: 0;
-            background: none;
-            font-size: 18px;
-            line-height: 1;
-        }
-
-        .finding-tag button:hover {
-            background: none;
-            color: #ff8b94;
+            padding: 10px;
+            border-radius: 7px;
         }
 
         .no-findings {
+            padding: 7px 4px;
             color: #82909b;
-            padding: 5px;
+        }
+
+        .finding-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: #344451;
+
+            border-radius: 20px;
+            padding: 7px 8px 7px 12px;
+
+            font-size: 14px;
+        }
+
+        .remove-tag {
+            width: 26px;
+            height: 26px;
+
+            padding: 0;
+
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+
+            border: 0;
+            border-radius: 50%;
+
+            background: #202e39;
+            color: white;
+
+            font-size: 18px;
+            line-height: 1;
+
+            cursor: pointer;
+        }
+
+        .remove-tag:hover {
+            background: #e63946;
+        }
+
+        /* ANALYZE */
+
+        .analyze-button {
+            width: 100%;
+            min-height: 54px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #e63946;
+            color: white;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .analyze-button:hover {
+            background: #c92f3b;
         }
 
         #results {
@@ -203,20 +242,31 @@
 
         .result-card {
             background: #101820;
-            padding: 15px;
+
+            padding: 16px;
             border-radius: 8px;
-            margin-top: 10px;
+
+            line-height: 1.5;
         }
 
         .notice {
             font-size: 13px;
             color: #9caab5;
+
             text-align: center;
-            margin-top: 20px;
             line-height: 1.5;
+
+            margin-top: 20px;
         }
 
-        @media (max-width: 600px) {
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .vitals {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .container {
                 padding: 12px;
             }
@@ -224,564 +274,1456 @@
             .section {
                 padding: 15px;
             }
+        }
 
-            header {
-                padding: 16px;
+        @media (max-width: 430px) {
+
+            .vitals {
+                grid-template-columns: 1fr;
             }
         }
     </style>
+
 </head>
 
 
 <body>
 
-    <header>
-        <h1>EMS Clinical Assistant</h1>
-        <p>Clinical findings & differential reference</p>
-    </header>
+<header>
+
+    <h1>EMS Clinical Assistant</h1>
+
+    <p>Clinical findings & differential reference</p>
+
+</header>
 
 
-    <div class="container">
-
-        <!-- VITALS -->
-
-        <div class="section">
-
-            <h2>Vitals</h2>
-
-            <div class="vitals">
-
-                <div>
-                    <label for="hr">Heart Rate</label>
-                    <select id="hr">
-                        <option value="">Select</option>
-                        <option value="tachycardic">Tachycardic / Fast</option>
-                        <option value="normal">Normal</option>
-                        <option value="bradycardic">Bradycardic / Slow</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="bp">Blood Pressure</label>
-                    <select id="bp">
-                        <option value="">Select</option>
-                        <option value="hypotensive">Hypotensive / Low</option>
-                        <option value="normal">Normal</option>
-                        <option value="hypertensive">Hypertensive / High</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="breathing">Breathing</label>
-                    <select id="breathing">
-                        <option value="">Select</option>
-                        <option value="fast">Fast</option>
-                        <option value="normal">Normal</option>
-                        <option value="slow">Slow</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="o2">O₂</label>
-                    <select id="o2">
-                        <option value="">Select</option>
-                        <option value="high">High</option>
-                        <option value="normal">Normal</option>
-                        <option value="low">Low</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="temp">Temperature</label>
-                    <select id="temp">
-                        <option value="">Select</option>
-                        <option value="warm">Warm</option>
-                        <option value="normal">Normal</option>
-                        <option value="cool">Cool</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="bgl">Blood Sugar</label>
-                    <select id="bgl">
-                        <option value="">Select</option>
-                        <option value="high">High</option>
-                        <option value="normal">Normal</option>
-                        <option value="low">Low</option>
-                    </select>
-                </div>
-
-            </div>
-
-        </div>
+<div class="container">
 
 
-        <!-- CLINICAL FINDINGS -->
+    <!-- VITALS -->
 
-        <div class="section">
+    <div class="section">
 
-            <h2>Clinical Findings</h2>
+        <h2>Vitals</h2>
 
-            <label for="findingSearch">
-                Add signs, symptoms, or assessment findings
-            </label>
+        <div class="vitals">
 
-            <div class="finding-search-container">
 
-                <input
-                    type="text"
-                    id="findingSearch"
-                    placeholder="Search findings..."
-                    autocomplete="off"
-                >
+            <div>
 
-                <div id="suggestions" class="suggestions"></div>
+                <label for="hr">
+                    Heart Rate
+                </label>
+
+                <select id="hr">
+
+                    <option value="">Select</option>
+
+                    <option value="tachycardic">
+                        Tachycardic / Fast
+                    </option>
+
+                    <option value="normal">
+                        Normal
+                    </option>
+
+                    <option value="bradycardic">
+                        Bradycardic / Slow
+                    </option>
+
+                </select>
 
             </div>
 
 
-            <div class="quick-title">
-                Common Findings
-            </div>
+            <div>
 
-            <div class="quick-picks">
+                <label for="bp">
+                    Blood Pressure
+                </label>
 
-                <button type="button" onclick="addFinding('Chest Pain')">
-                    Chest Pain
-                </button>
+                <select id="bp">
 
-                <button type="button" onclick="addFinding('Dyspnea')">
-                    Dyspnea
-                </button>
+                    <option value="">Select</option>
 
-                <button type="button" onclick="addFinding('Altered Mental Status')">
-                    AMS
-                </button>
+                    <option value="hypotensive">
+                        Hypotensive / Low
+                    </option>
 
-                <button type="button" onclick="addFinding('Syncope / Near Syncope')">
-                    Syncope
-                </button>
+                    <option value="normal">
+                        Normal
+                    </option>
 
-                <button type="button" onclick="addFinding('Seizure')">
-                    Seizure
-                </button>
+                    <option value="hypertensive">
+                        Hypertensive / High
+                    </option>
 
-                <button type="button" onclick="addFinding('Weakness')">
-                    Weakness
-                </button>
+                </select>
 
             </div>
 
 
-            <div class="selected-title">
-                Selected Findings
+            <div>
+
+                <label for="breathing">
+                    Breathing
+                </label>
+
+                <select id="breathing">
+
+                    <option value="">Select</option>
+
+                    <option value="fast">
+                        Fast
+                    </option>
+
+                    <option value="normal">
+                        Normal
+                    </option>
+
+                    <option value="slow">
+                        Slow
+                    </option>
+
+                </select>
+
             </div>
 
-            <div id="selectedFindings" class="selected-findings">
 
-                <span class="no-findings">
-                    No findings selected
-                </span>
+            <div>
+
+                <label for="o2">
+                    O₂
+                </label>
+
+                <select id="o2">
+
+                    <option value="">Select</option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                    <option value="normal">
+                        Normal
+                    </option>
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                </select>
 
             </div>
 
-        </div>
+
+            <div>
+
+                <label for="temp">
+                    Temperature
+                </label>
+
+                <select id="temp">
+
+                    <option value="">Select</option>
+
+                    <option value="warm">
+                        Warm
+                    </option>
+
+                    <option value="normal">
+                        Normal
+                    </option>
+
+                    <option value="cool">
+                        Cool
+                    </option>
+
+                </select>
+
+            </div>
 
 
-        <button
-            class="analyze-button"
-            type="button"
-            onclick="analyzePatient()"
-        >
-            ANALYZE FINDINGS
-        </button>
+            <div>
+
+                <label for="bgl">
+                    Blood Sugar
+                </label>
+
+                <select id="bgl">
+
+                    <option value="">Select</option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                    <option value="normal">
+                        Normal
+                    </option>
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                </select>
+
+            </div>
 
 
-        <!-- RESULTS -->
-
-        <div id="results" class="section">
-
-            <h2>Clinical Considerations</h2>
-
-            <div id="resultContent"></div>
-
-        </div>
-
-
-        <div class="notice">
-            Educational clinical reference only. Not a substitute for local protocols,
-            medical direction, or clinical judgment.
         </div>
 
     </div>
 
 
-    <script>
+    <!-- CLINICAL FINDINGS -->
 
-        const findings = [
+    <div class="section">
 
-            // Symptoms
-            { name: "Altered Mental Status", category: "Symptoms" },
-            { name: "Chest Pain", category: "Symptoms" },
-            { name: "Dyspnea", category: "Symptoms" },
-            { name: "Syncope / Near Syncope", category: "Symptoms" },
-            { name: "Dizziness", category: "Symptoms" },
-            { name: "Weakness", category: "Symptoms" },
-            { name: "Diaphoresis", category: "Symptoms" },
-            { name: "Nausea / Vomiting", category: "Symptoms" },
-            { name: "Headache", category: "Symptoms" },
-            { name: "Seizure", category: "Symptoms" },
-            { name: "Fever / Chills", category: "Symptoms" },
-            { name: "Abdominal Pain", category: "Symptoms" },
-            { name: "Back Pain", category: "Symptoms" },
-            { name: "Palpitations", category: "Symptoms" },
-            { name: "Cough", category: "Symptoms" },
-            { name: "Hemoptysis", category: "Symptoms" },
-            { name: "Difficulty Swallowing", category: "Symptoms" },
-            { name: "Allergic Exposure", category: "Symptoms" },
-            { name: "Recent Illness", category: "Symptoms" },
-            { name: "Sudden Onset", category: "Symptoms" },
-            { name: "Gradual Onset", category: "Symptoms" },
-
-            // Respiratory
-            { name: "Wheezing", category: "Respiratory" },
-            { name: "Crackles", category: "Respiratory" },
-            { name: "Rhonchi", category: "Respiratory" },
-            { name: "Stridor", category: "Respiratory" },
-            { name: "Diminished Lung Sounds", category: "Respiratory" },
-            { name: "Unilateral Absent Lung Sounds", category: "Respiratory" },
-            { name: "Increased Work of Breathing", category: "Respiratory" },
-            { name: "Apnea / Inadequate Respirations", category: "Respiratory" },
-            { name: "Cyanosis", category: "Respiratory" },
-
-            // Cardiovascular
-            { name: "JVD", category: "Cardiovascular" },
-            { name: "Peripheral Edema", category: "Cardiovascular" },
-            { name: "Weak Peripheral Pulses", category: "Cardiovascular" },
-            { name: "Bounding Pulses", category: "Cardiovascular" },
-            { name: "Irregular Pulse", category: "Cardiovascular" },
-
-            // Neurological
-            { name: "Focal Neurological Deficit", category: "Neurological" },
-            { name: "Facial Droop", category: "Neurological" },
-            { name: "Slurred Speech", category: "Neurological" },
-            { name: "Unilateral Weakness", category: "Neurological" },
-            { name: "Pinpoint Pupils", category: "Neurological" },
-            { name: "Dilated Pupils", category: "Neurological" },
-            { name: "Unequal Pupils", category: "Neurological" },
-            { name: "Postictal", category: "Neurological" },
-
-            // Skin / General
-            { name: "Pale", category: "Skin / General" },
-            { name: "Cool / Clammy", category: "Skin / General" },
-            { name: "Flushed", category: "Skin / General" },
-            { name: "Hives / Urticaria", category: "Skin / General" },
-            { name: "Angioedema", category: "Skin / General" },
-            { name: "Dry Skin", category: "Skin / General" },
-
-            // Abdominal
-            { name: "Abdominal Tenderness", category: "Abdominal" },
-            { name: "Abdominal Distention", category: "Abdominal" },
-            { name: "Rigid Abdomen", category: "Abdominal" },
-            { name: "GI Bleeding", category: "Abdominal" }
-
-        ];
+        <h2>Clinical Findings</h2>
 
 
-        let selectedFindings = [];
+        <label for="findingSearch">
+            Search signs, symptoms, or assessment findings
+        </label>
 
 
-        const search =
-            document.getElementById("findingSearch");
+        <div class="search-wrapper">
 
-        const suggestions =
-            document.getElementById("suggestions");
+            <input
+                type="text"
+                id="findingSearch"
+                placeholder="Example: JVD, wheezing, facial droop..."
+                autocomplete="off"
+            >
 
+            <div
+                id="suggestions"
+                class="suggestions"
+            ></div>
 
-        search.addEventListener("input", function () {
-
-            const query =
-                search.value.toLowerCase().trim();
-
-            suggestions.innerHTML = "";
-
-            if (query === "") {
-                suggestions.style.display = "none";
-                return;
-            }
+        </div>
 
 
-            const matches = findings.filter(finding =>
-
-                finding.name.toLowerCase().includes(query)
-
-                &&
-
-                !selectedFindings.includes(finding.name)
-
-            );
+        <div class="selected-heading">
+            Selected Findings
+        </div>
 
 
-            if (matches.length === 0) {
+        <div
+            id="selectedFindings"
+            class="selected-findings"
+        >
 
-                suggestions.style.display = "none";
-                return;
+            <span class="no-findings">
+                No findings selected
+            </span>
 
-            }
+        </div>
+
+    </div>
 
 
-            matches.forEach(finding => {
+    <!-- ANALYZE -->
+
+    <button
+        type="button"
+        id="analyzeButton"
+        class="analyze-button"
+    >
+        ANALYZE FINDINGS
+    </button>
+
+
+    <!-- RESULTS -->
+
+    <div
+        id="results"
+        class="section"
+    >
+
+        <h2>
+            Clinical Considerations
+        </h2>
+
+        <div id="resultContent"></div>
+
+    </div>
+
+
+    <div class="notice">
+
+        Educational clinical reference only.
+        Not a substitute for local protocols,
+        medical direction, or clinical judgment.
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    /* =========================================================
+       FINDING DATABASE
+       aliases = additional words that can find that item
+       ========================================================= */
+
+    const findings = [
+
+        /* SYMPTOMS */
+
+        {
+            name: "Altered Mental Status",
+            category: "Symptoms",
+            aliases: ["ams", "altered", "confusion", "confused"]
+        },
+
+        {
+            name: "Chest Pain",
+            category: "Symptoms",
+            aliases: ["chest discomfort", "pressure", "cp"]
+        },
+
+        {
+            name: "Dyspnea",
+            category: "Symptoms",
+            aliases: [
+                "shortness of breath",
+                "sob",
+                "difficulty breathing",
+                "breathing difficulty"
+            ]
+        },
+
+        {
+            name: "Syncope / Near Syncope",
+            category: "Symptoms",
+            aliases: [
+                "syncope",
+                "fainting",
+                "passed out",
+                "near syncope"
+            ]
+        },
+
+        {
+            name: "Dizziness",
+            category: "Symptoms",
+            aliases: [
+                "dizzy",
+                "lightheaded",
+                "lightheadedness"
+            ]
+        },
+
+        {
+            name: "Weakness",
+            category: "Symptoms",
+            aliases: [
+                "weak",
+                "general weakness"
+            ]
+        },
+
+        {
+            name: "Diaphoresis",
+            category: "Symptoms",
+            aliases: [
+                "sweating",
+                "sweaty"
+            ]
+        },
+
+        {
+            name: "Nausea / Vomiting",
+            category: "Symptoms",
+            aliases: [
+                "nausea",
+                "vomiting",
+                "emesis"
+            ]
+        },
+
+        {
+            name: "Headache",
+            category: "Symptoms",
+            aliases: ["head pain"]
+        },
+
+        {
+            name: "Seizure",
+            category: "Symptoms",
+            aliases: [
+                "convulsion",
+                "convulsions"
+            ]
+        },
+
+        {
+            name: "Fever / Chills",
+            category: "Symptoms",
+            aliases: [
+                "fever",
+                "chills",
+                "febrile"
+            ]
+        },
+
+        {
+            name: "Abdominal Pain",
+            category: "Symptoms",
+            aliases: [
+                "abd pain",
+                "stomach pain",
+                "belly pain"
+            ]
+        },
+
+        {
+            name: "Back Pain",
+            category: "Symptoms",
+            aliases: ["back"]
+        },
+
+        {
+            name: "Palpitations",
+            category: "Symptoms",
+            aliases: [
+                "heart racing",
+                "racing heart"
+            ]
+        },
+
+        {
+            name: "Cough",
+            category: "Symptoms",
+            aliases: ["coughing"]
+        },
+
+        {
+            name: "Hemoptysis",
+            category: "Symptoms",
+            aliases: [
+                "coughing blood",
+                "blood in sputum"
+            ]
+        },
+
+        {
+            name: "Difficulty Swallowing",
+            category: "Symptoms",
+            aliases: [
+                "dysphagia",
+                "swallowing difficulty"
+            ]
+        },
+
+        {
+            name: "Allergic Exposure",
+            category: "Symptoms",
+            aliases: [
+                "allergen",
+                "allergy exposure",
+                "allergic reaction"
+            ]
+        },
+
+        {
+            name: "Recent Illness",
+            category: "Symptoms",
+            aliases: [
+                "sick recently",
+                "infection"
+            ]
+        },
+
+        {
+            name: "Sudden Onset",
+            category: "Symptoms",
+            aliases: [
+                "sudden",
+                "acute onset"
+            ]
+        },
+
+        {
+            name: "Gradual Onset",
+            category: "Symptoms",
+            aliases: [
+                "gradual",
+                "progressive"
+            ]
+        },
+
+
+        /* RESPIRATORY */
+
+        {
+            name: "Wheezing",
+            category: "Respiratory",
+            aliases: [
+                "wheeze",
+                "wheezes"
+            ]
+        },
+
+        {
+            name: "Crackles",
+            category: "Respiratory",
+            aliases: [
+                "rales",
+                "wet lungs"
+            ]
+        },
+
+        {
+            name: "Rhonchi",
+            category: "Respiratory",
+            aliases: [
+                "rhonchus"
+            ]
+        },
+
+        {
+            name: "Stridor",
+            category: "Respiratory",
+            aliases: []
+        },
+
+        {
+            name: "Diminished Lung Sounds",
+            category: "Respiratory",
+            aliases: [
+                "diminished",
+                "decreased lung sounds"
+            ]
+        },
+
+        {
+            name: "Unilateral Absent Lung Sounds",
+            category: "Respiratory",
+            aliases: [
+                "absent lung sounds",
+                "one sided lung sounds",
+                "unilateral lung sounds"
+            ]
+        },
+
+        {
+            name: "Increased Work of Breathing",
+            category: "Respiratory",
+            aliases: [
+                "work of breathing",
+                "accessory muscles",
+                "labored breathing",
+                "retractions"
+            ]
+        },
+
+        {
+            name: "Apnea / Inadequate Respirations",
+            category: "Respiratory",
+            aliases: [
+                "apnea",
+                "apneic",
+                "inadequate breathing",
+                "respiratory depression"
+            ]
+        },
+
+        {
+            name: "Cyanosis",
+            category: "Respiratory",
+            aliases: [
+                "cyanotic",
+                "blue"
+            ]
+        },
+
+
+        /* CARDIOVASCULAR */
+
+        {
+            name: "JVD",
+            category: "Cardiovascular",
+            aliases: [
+                "jugular",
+                "jugular vein distention",
+                "jugular venous distention",
+                "neck veins"
+            ]
+        },
+
+        {
+            name: "Peripheral Edema",
+            category: "Cardiovascular",
+            aliases: [
+                "edema",
+                "leg swelling",
+                "swollen legs"
+            ]
+        },
+
+        {
+            name: "Weak Peripheral Pulses",
+            category: "Cardiovascular",
+            aliases: [
+                "weak pulse",
+                "weak pulses"
+            ]
+        },
+
+        {
+            name: "Bounding Pulses",
+            category: "Cardiovascular",
+            aliases: [
+                "bounding pulse"
+            ]
+        },
+
+        {
+            name: "Irregular Pulse",
+            category: "Cardiovascular",
+            aliases: [
+                "irregular rhythm",
+                "irregular heart rate"
+            ]
+        },
+
+
+        /* NEUROLOGICAL */
+
+        {
+            name: "Focal Neurological Deficit",
+            category: "Neurological",
+            aliases: [
+                "neuro deficit",
+                "neurologic deficit"
+            ]
+        },
+
+        {
+            name: "Facial Droop",
+            category: "Neurological",
+            aliases: [
+                "face droop",
+                "facial weakness"
+            ]
+        },
+
+        {
+            name: "Slurred Speech",
+            category: "Neurological",
+            aliases: [
+                "dysarthria",
+                "speech difficulty"
+            ]
+        },
+
+        {
+            name: "Unilateral Weakness",
+            category: "Neurological",
+            aliases: [
+                "one sided weakness",
+                "left sided weakness",
+                "right sided weakness"
+            ]
+        },
+
+        {
+            name: "Pinpoint Pupils",
+            category: "Neurological",
+            aliases: [
+                "pinpoint",
+                "constricted pupils",
+                "miosis"
+            ]
+        },
+
+        {
+            name: "Dilated Pupils",
+            category: "Neurological",
+            aliases: [
+                "dilated",
+                "mydriasis"
+            ]
+        },
+
+        {
+            name: "Unequal Pupils",
+            category: "Neurological",
+            aliases: [
+                "anisocoria",
+                "unequal"
+            ]
+        },
+
+        {
+            name: "Postictal",
+            category: "Neurological",
+            aliases: [
+                "post seizure",
+                "after seizure"
+            ]
+        },
+
+
+        /* SKIN / GENERAL */
+
+        {
+            name: "Pale",
+            category: "Skin / General",
+            aliases: [
+                "pallor"
+            ]
+        },
+
+        {
+            name: "Cool / Clammy",
+            category: "Skin / General",
+            aliases: [
+                "clammy",
+                "cool skin",
+                "diaphoretic skin"
+            ]
+        },
+
+        {
+            name: "Flushed",
+            category: "Skin / General",
+            aliases: [
+                "red skin"
+            ]
+        },
+
+        {
+            name: "Hives / Urticaria",
+            category: "Skin / General",
+            aliases: [
+                "hives",
+                "urticaria",
+                "rash"
+            ]
+        },
+
+        {
+            name: "Angioedema",
+            category: "Skin / General",
+            aliases: [
+                "facial swelling",
+                "tongue swelling",
+                "lip swelling",
+                "airway swelling"
+            ]
+        },
+
+        {
+            name: "Dry Skin",
+            category: "Skin / General",
+            aliases: [
+                "dry"
+            ]
+        },
+
+
+        /* ABDOMINAL */
+
+        {
+            name: "Abdominal Tenderness",
+            category: "Abdominal",
+            aliases: [
+                "tender abdomen",
+                "abdominal tenderness"
+            ]
+        },
+
+        {
+            name: "Abdominal Distention",
+            category: "Abdominal",
+            aliases: [
+                "distended abdomen",
+                "abdominal distension"
+            ]
+        },
+
+        {
+            name: "Rigid Abdomen",
+            category: "Abdominal",
+            aliases: [
+                "rigidity",
+                "abdominal rigidity"
+            ]
+        },
+
+        {
+            name: "GI Bleeding",
+            category: "Abdominal",
+            aliases: [
+                "hematemesis",
+                "melena",
+                "bloody stool",
+                "vomiting blood"
+            ]
+        }
+
+    ];
+
+
+    /* =========================================================
+       STATE
+       ========================================================= */
+
+    let selectedFindings = [];
+
+    let currentMatches = [];
+
+    let highlightedIndex = -1;
+
+
+    const searchInput =
+        document.getElementById("findingSearch");
+
+    const suggestions =
+        document.getElementById("suggestions");
+
+    const selectedContainer =
+        document.getElementById("selectedFindings");
+
+    const analyzeButton =
+        document.getElementById("analyzeButton");
+
+
+    /* =========================================================
+       SEARCH
+       ========================================================= */
+
+    function normalizeText(text) {
+
+        return text
+            .toLowerCase()
+            .trim();
+
+    }
+
+
+    function findingMatches(finding, query) {
+
+        const searchableText = [
+
+            finding.name,
+
+            finding.category,
+
+            ...finding.aliases
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+        return searchableText.includes(query);
+
+    }
+
+
+    function performSearch() {
+
+        const query =
+            normalizeText(searchInput.value);
+
+
+        suggestions.innerHTML = "";
+
+        highlightedIndex = -1;
+
+
+        if (!query) {
+
+            suggestions.style.display = "none";
+
+            currentMatches = [];
+
+            return;
+
+        }
+
+
+        currentMatches =
+            findings.filter(finding => {
+
+                return (
+                    findingMatches(finding, query)
+
+                    &&
+
+                    !selectedFindings.includes(finding.name)
+                );
+
+            });
+
+
+        if (currentMatches.length === 0) {
+
+            const noResults =
+                document.createElement("div");
+
+            noResults.className =
+                "no-results";
+
+            noResults.textContent =
+                "No matching findings";
+
+            suggestions.appendChild(noResults);
+
+            suggestions.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        currentMatches
+            .slice(0, 12)
+            .forEach((finding, index) => {
 
                 const item =
                     document.createElement("div");
 
-                item.className = "suggestion";
+                item.className =
+                    "suggestion";
 
-                item.innerHTML = `
-                    <strong>${finding.name}</strong>
-                    <div class="suggestion-category">
-                        ${finding.category}
-                    </div>
-                `;
 
-                item.addEventListener("click", function () {
-                    addFinding(finding.name);
-                });
+                const name =
+                    document.createElement("div");
+
+                name.className =
+                    "suggestion-name";
+
+                name.textContent =
+                    finding.name;
+
+
+                const category =
+                    document.createElement("div");
+
+                category.className =
+                    "suggestion-category";
+
+                category.textContent =
+                    finding.category;
+
+
+                item.appendChild(name);
+
+                item.appendChild(category);
+
+
+                item.addEventListener(
+                    "mousedown",
+                    function(event) {
+
+                        event.preventDefault();
+
+                        addFinding(
+                            finding.name
+                        );
+
+                    }
+                );
+
 
                 suggestions.appendChild(item);
 
             });
 
 
-            suggestions.style.display = "block";
+        suggestions.style.display =
+            "block";
 
-        });
+    }
 
 
-        document.addEventListener("click", function (event) {
+    searchInput.addEventListener(
+        "input",
+        performSearch
+    );
+
+
+    searchInput.addEventListener(
+        "focus",
+        function() {
 
             if (
-                !event.target.closest(".finding-search-container")
+                searchInput.value.trim() !== ""
             ) {
-                suggestions.style.display = "none";
-            }
 
-        });
-
-
-        function addFinding(name) {
-
-            if (!selectedFindings.includes(name)) {
-
-                selectedFindings.push(name);
+                performSearch();
 
             }
-
-            search.value = "";
-
-            suggestions.style.display = "none";
-
-            displaySelectedFindings();
 
         }
+    );
 
 
-        function removeFinding(name) {
+    /* =========================================================
+       KEYBOARD SEARCH SUPPORT
+       ========================================================= */
 
-            selectedFindings =
-                selectedFindings.filter(
-                    finding => finding !== name
+    searchInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            const items =
+                suggestions.querySelectorAll(
+                    ".suggestion"
                 );
 
-            displaySelectedFindings();
 
-        }
+            if (event.key === "ArrowDown") {
 
+                event.preventDefault();
 
-        function displaySelectedFindings() {
+                highlightedIndex++;
 
-            const container =
-                document.getElementById("selectedFindings");
+                if (
+                    highlightedIndex >= items.length
+                ) {
 
-            container.innerHTML = "";
+                    highlightedIndex = 0;
 
+                }
 
-            if (selectedFindings.length === 0) {
-
-                container.innerHTML = `
-                    <span class="no-findings">
-                        No findings selected
-                    </span>
-                `;
-
-                return;
+                updateHighlightedItem(items);
 
             }
 
 
-            selectedFindings.forEach(finding => {
+            else if (
+                event.key === "ArrowUp"
+            ) {
+
+                event.preventDefault();
+
+                highlightedIndex--;
+
+                if (
+                    highlightedIndex < 0
+                ) {
+
+                    highlightedIndex =
+                        items.length - 1;
+
+                }
+
+                updateHighlightedItem(items);
+
+            }
+
+
+            else if (
+                event.key === "Enter"
+            ) {
+
+                if (
+                    highlightedIndex >= 0
+                    &&
+                    currentMatches[
+                        highlightedIndex
+                    ]
+                ) {
+
+                    event.preventDefault();
+
+                    addFinding(
+                        currentMatches[
+                            highlightedIndex
+                        ].name
+                    );
+
+                }
+
+                else if (
+                    currentMatches.length === 1
+                ) {
+
+                    event.preventDefault();
+
+                    addFinding(
+                        currentMatches[0].name
+                    );
+
+                }
+
+            }
+
+
+            else if (
+                event.key === "Escape"
+            ) {
+
+                suggestions.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    function updateHighlightedItem(items) {
+
+        items.forEach(
+            (item, index) => {
+
+                item.classList.toggle(
+                    "active",
+                    index === highlightedIndex
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       ADD / REMOVE FINDINGS
+       ========================================================= */
+
+    function addFinding(name) {
+
+        if (
+            !selectedFindings.includes(name)
+        ) {
+
+            selectedFindings.push(name);
+
+        }
+
+
+        searchInput.value = "";
+
+        suggestions.innerHTML = "";
+
+        suggestions.style.display =
+            "none";
+
+
+        renderSelectedFindings();
+
+
+        searchInput.focus();
+
+    }
+
+
+    function removeFinding(name) {
+
+        selectedFindings =
+            selectedFindings.filter(
+                finding =>
+                    finding !== name
+            );
+
+
+        renderSelectedFindings();
+
+    }
+
+
+    function renderSelectedFindings() {
+
+        selectedContainer.innerHTML = "";
+
+
+        if (
+            selectedFindings.length === 0
+        ) {
+
+            const empty =
+                document.createElement("span");
+
+            empty.className =
+                "no-findings";
+
+            empty.textContent =
+                "No findings selected";
+
+            selectedContainer.appendChild(
+                empty
+            );
+
+            return;
+
+        }
+
+
+        selectedFindings.forEach(
+            findingName => {
 
                 const tag =
                     document.createElement("div");
 
-                tag.className = "finding-tag";
+                tag.className =
+                    "finding-tag";
 
 
-                const text =
+                const label =
                     document.createElement("span");
 
-                text.textContent = finding;
+                label.textContent =
+                    findingName;
 
 
                 const removeButton =
                     document.createElement("button");
 
-                removeButton.type = "button";
+                removeButton.type =
+                    "button";
 
-                removeButton.textContent = "×";
+                removeButton.className =
+                    "remove-tag";
+
+                removeButton.textContent =
+                    "×";
 
                 removeButton.setAttribute(
                     "aria-label",
-                    "Remove " + finding
+                    "Remove " + findingName
                 );
+
 
                 removeButton.addEventListener(
                     "click",
-                    function () {
-                        removeFinding(finding);
+                    function() {
+
+                        removeFinding(
+                            findingName
+                        );
+
                     }
                 );
 
 
-                tag.appendChild(text);
+                tag.appendChild(label);
 
-                tag.appendChild(removeButton);
-
-                container.appendChild(tag);
-
-            });
-
-        }
+                tag.appendChild(
+                    removeButton
+                );
 
 
-        function analyzePatient() {
+                selectedContainer.appendChild(
+                    tag
+                );
 
-            const results =
-                document.getElementById("results");
+            }
+        );
 
-            const content =
-                document.getElementById("resultContent");
-
-
-            const hr =
-                document.getElementById("hr").value;
-
-            const bp =
-                document.getElementById("bp").value;
-
-            const breathing =
-                document.getElementById("breathing").value;
-
-            const o2 =
-                document.getElementById("o2").value;
-
-            const temp =
-                document.getElementById("temp").value;
-
-            const bgl =
-                document.getElementById("bgl").value;
+    }
 
 
-            results.style.display = "block";
+    /* =========================================================
+       CLOSE SEARCH WHEN CLICKING AWAY
+       ========================================================= */
 
+    document.addEventListener(
+        "mousedown",
+        function(event) {
 
             if (
-                selectedFindings.length === 0
-                &&
-                !hr
-                &&
-                !bp
-                &&
-                !breathing
-                &&
-                !o2
-                &&
-                !temp
-                &&
-                !bgl
+                !event.target.closest(
+                    ".search-wrapper"
+                )
             ) {
 
-                content.innerHTML = `
-                    <div class="result-card">
-                        Select at least one vital or clinical finding.
-                    </div>
-                `;
-
-                return;
+                suggestions.style.display =
+                    "none";
 
             }
 
+        }
+    );
 
-            let vitalList = [];
+
+    /* =========================================================
+       ANALYZE
+       ========================================================= */
+
+    analyzeButton.addEventListener(
+        "click",
+        analyzePatient
+    );
 
 
-            if (hr) {
-                vitalList.push("Heart Rate: " + hr);
-            }
+    function analyzePatient() {
 
-            if (bp) {
-                vitalList.push("Blood Pressure: " + bp);
-            }
+        const hr =
+            document.getElementById(
+                "hr"
+            ).value;
 
-            if (breathing) {
-                vitalList.push("Breathing: " + breathing);
-            }
+        const bp =
+            document.getElementById(
+                "bp"
+            ).value;
 
-            if (o2) {
-                vitalList.push("O₂: " + o2);
-            }
+        const breathing =
+            document.getElementById(
+                "breathing"
+            ).value;
 
-            if (temp) {
-                vitalList.push("Temperature: " + temp);
-            }
+        const o2 =
+            document.getElementById(
+                "o2"
+            ).value;
 
-            if (bgl) {
-                vitalList.push("Blood Sugar: " + bgl);
-            }
+        const temp =
+            document.getElementById(
+                "temp"
+            ).value;
 
+        const bgl =
+            document.getElementById(
+                "bgl"
+            ).value;
+
+
+        const results =
+            document.getElementById(
+                "results"
+            );
+
+        const content =
+            document.getElementById(
+                "resultContent"
+            );
+
+
+        results.style.display =
+            "block";
+
+
+        if (
+            !hr &&
+            !bp &&
+            !breathing &&
+            !o2 &&
+            !temp &&
+            !bgl &&
+            selectedFindings.length === 0
+        ) {
 
             content.innerHTML = `
+
                 <div class="result-card">
 
-                    <strong>Current Inputs</strong>
-
-                    <p>
-                        ${
-                            vitalList.length
-                                ? vitalList.join("<br>")
-                                : "No vitals selected."
-                        }
-                    </p>
-
-                    <p>
-                        <strong>Clinical Findings:</strong><br>
-                        ${
-                            selectedFindings.length
-                                ? selectedFindings.join(", ")
-                                : "None selected."
-                        }
-                    </p>
-
-                    <p>
-                        Differential engine coming next.
-                    </p>
+                    Select at least one vital
+                    or clinical finding.
 
                 </div>
+
             `;
+
+            return;
 
         }
 
-    </script>
+
+        const vitalDescriptions = [];
+
+
+        if (hr)
+            vitalDescriptions.push(
+                "Heart Rate: " + hr
+            );
+
+
+        if (bp)
+            vitalDescriptions.push(
+                "Blood Pressure: " + bp
+            );
+
+
+        if (breathing)
+            vitalDescriptions.push(
+                "Breathing: " + breathing
+            );
+
+
+        if (o2)
+            vitalDescriptions.push(
+                "O₂: " + o2
+            );
+
+
+        if (temp)
+            vitalDescriptions.push(
+                "Temperature: " + temp
+            );
+
+
+        if (bgl)
+            vitalDescriptions.push(
+                "Blood Sugar: " + bgl
+            );
+
+
+        content.innerHTML = `
+
+            <div class="result-card">
+
+                <strong>
+                    Current Inputs
+                </strong>
+
+                <p>
+
+                    ${
+                        vitalDescriptions.length
+                            ?
+                            vitalDescriptions.join(
+                                "<br>"
+                            )
+                            :
+                            "No vitals selected."
+                    }
+
+                </p>
+
+                <strong>
+                    Clinical Findings
+                </strong>
+
+                <p>
+
+                    ${
+                        selectedFindings.length
+                            ?
+                            selectedFindings.join(
+                                ", "
+                            )
+                            :
+                            "None selected."
+                    }
+
+                </p>
+
+                <p>
+                    Differential engine
+                    coming next.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+</script>
 
 </body>
 
