@@ -33,54 +33,1726 @@
 </div>
 <script>
 const scenarios=[
-{condition:"Hypoglycemia",type:"Medical",difficulty:"Basic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} reported to be confused and acting strangely.",scene:"You find the patient seated at the kitchen table. Family states the patient was normal earlier today but became sweaty, irritable, and confused over the last 20 minutes.",initial:"Airway is patent. Breathing is regular and adequate. Radial pulse is fast and strong. Patient is confused but follows simple commands.",history:"History of diabetes. Family reports the patient took insulin this morning and ate very little afterward.",exam:"Skin is pale, cool, and sweaty. No facial droop or one-sided weakness is noted. No evidence of trauma.",vitals:"HR 112, BP 138/82, RR 18, SpO₂ 97%, Temp 98.1°F, BGL 42 mg/dL.",additional:"No seizure activity has been witnessed. Patient can currently follow commands but is becoming less cooperative.",diagnosis:"Hypoglycemia",management:["Confirm low blood glucose.","Treat glucose according to mental status and ability to swallow.","Reassess mental status and BGL after treatment.","Evaluate why the episode occurred and consider transport."],teaching:["AMS can mimic stroke or intoxication.","BGL should be checked early in unexplained altered mental status."],stages:[{title:"Stage 2",text:"Without treatment, the patient becomes increasingly lethargic and is no longer safe to give anything by mouth. Repeat BGL is 34 mg/dL."},{title:"Stage 3",text:"The patient becomes unresponsive and has a brief generalized seizure. Airway and glucose correction are now immediate priorities.",critical:true}]},
-{condition:"Asthma Exacerbation",type:"Medical",difficulty:"Basic",dispatch:"Medic 1, respond to an apartment for a {age}-year-old {sex} with difficulty breathing.",scene:"The patient is sitting upright near an open window and speaking in short sentences. An inhaler is on the table nearby.",initial:"Airway is patent. Respirations are fast and labored with accessory muscle use. Radial pulse is fast and strong.",history:"History of asthma. Symptoms worsened after cleaning a dusty room. The rescue inhaler has provided little relief today.",exam:"Diffuse expiratory wheezing bilaterally. No hives or facial swelling. Skin is warm and slightly sweaty.",vitals:"HR 118, BP 146/84, RR 28, SpO₂ 91%, Temp 98.6°F.",additional:"The patient denies chest trauma or fever.",diagnosis:"Asthma Exacerbation",management:["Support oxygenation and ventilation.","Administer bronchodilator therapy per protocol.","Reassess lung sounds, work of breathing, and mental status.","Escalate ventilatory support if the patient begins to fail."],teaching:["Worsening asthma may become quieter as air movement decreases.","Mental-status change is a late and concerning finding."],stages:[{title:"Stage 2",text:"The patient becomes more fatigued. RR 34, SpO₂ 86%. Wheezing is now quieter and breath sounds are diminished."},{title:"Stage 3",text:"The patient is minimally responsive with shallow respirations at 10/min and nearly absent breath sounds. Respiratory failure is developing.",critical:true}]},
-{condition:"Syncope / Near Syncope",type:"Medical",difficulty:"Basic",dispatch:"Medic 1, respond to a public location for a {age}-year-old {sex} who fainted.",scene:"The patient is now awake and seated on the floor. Bystanders report a brief loss of consciousness lasting less than a minute.",initial:"Airway is patent, respirations are normal, and radial pulse is regular. Patient is alert and oriented now.",history:"Patient reports standing for a long period and feeling lightheaded just before fainting. No known seizure history.",exam:"No obvious trauma. Neuro exam is grossly normal. Skin is slightly pale.",vitals:"HR 88, BP 108/68, RR 16, SpO₂ 98%, BGL 102 mg/dL.",additional:"Patient denies chest pain and shortness of breath.",diagnosis:"Syncope / Near Syncope",management:["Assess for dangerous causes including cardiac, neurologic, bleeding, and metabolic problems.","Obtain ECG and BGL when appropriate.","Treat injuries from the fall if present.","Transport based on risk factors and clinical findings."],teaching:["Syncope is a symptom, not a final diagnosis.","A normal exam after the event does not rule out a serious cause."],stages:[]},
-{condition:"Pneumonia",type:"Medical",difficulty:"Basic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with weakness and difficulty breathing.",scene:"The patient is in bed and looks ill. A family member reports several days of cough and fever.",initial:"Airway is patent. Respirations are fast but adequate. Radial pulse is fast.",history:"Three days of productive cough, fever, chills, and worsening fatigue.",exam:"Crackles are heard at the right lung base. Skin is warm. Patient has a frequent productive cough with yellow sputum.",vitals:"HR 108, BP 124/74, RR 24, SpO₂ 92%, Temp 101.8°F.",additional:"Patient reports pleuritic discomfort when coughing.",diagnosis:"Pneumonia",management:["Support oxygenation as needed.","Assess for sepsis and respiratory failure.","Provide supportive care and transport."],teaching:["Pneumonia may progress to sepsis or respiratory failure, especially in older adults."],stages:[{title:"Stage 2",text:"The patient becomes more fatigued. HR 118, RR 30, SpO₂ 88%, and BP falls to 104/64."},{title:"Stage 3",text:"The patient becomes confused and hypotensive at 86/52 with persistent hypoxia, suggesting progression to severe infection/sepsis.",critical:true}]},
-{condition:"Alcohol Intoxication",type:"Toxicology",difficulty:"Basic",dispatch:"Medic 1, respond to a parking lot for a {age}-year-old {sex} who is unable to walk steadily.",scene:"The patient is seated against a wall with friends nearby. An odor of alcohol is present.",initial:"Airway is patent. Breathing is adequate. Radial pulse is strong. Patient responds appropriately but is slow and slurs words.",history:"Friends report heavy alcohol intake over several hours. They deny known drug use.",exam:"Unsteady gait, slurred speech, and mild nausea. No obvious trauma is found on initial exam.",vitals:"HR 96, BP 118/72, RR 16, SpO₂ 97%, Temp 97.4°F, BGL 91 mg/dL.",additional:"Patient vomited once before EMS arrival.",diagnosis:"Alcohol Intoxication",management:["Protect the airway and monitor breathing.","Check BGL and assess for trauma or other causes of AMS.","Provide supportive care and transport as appropriate."],teaching:["Do not assume alcohol explains every altered patient.","Occult trauma and hypoglycemia are important mimics."],stages:[]},
-{condition:"Heat Exhaustion",type:"Environmental",difficulty:"Basic",dispatch:"Medic 1, respond to an outdoor work site for a {age}-year-old {sex} with weakness and dizziness.",scene:"The patient is sitting in the shade and is soaked with sweat after working outside for several hours.",initial:"Airway is patent. Breathing is rapid but adequate. Pulse is fast and slightly weak. Patient is alert.",history:"Several hours of heavy work in hot weather with limited fluid intake.",exam:"Skin is cool and clammy despite the hot environment. Patient reports weakness, nausea, dizziness, and muscle cramps.",vitals:"HR 114, BP 102/64, RR 24, SpO₂ 98%, Temp 100.4°F.",additional:"No confusion or seizure activity is present.",diagnosis:"Heat Exhaustion",management:["Remove from heat and begin cooling.","Place supine as tolerated and remove excess clothing.","Replace fluids as appropriate.","Watch closely for progression to heat stroke."],teaching:["Normal mental status helps distinguish heat exhaustion from heat stroke."],stages:[{title:"Stage 2",text:"If the patient remains in the heat, weakness worsens and BP falls to 92/56. The patient is still oriented but increasingly exhausted."},{title:"Stage 3",text:"The patient develops confusion and a core temperature above 104°F. The scenario has progressed to heat stroke.",critical:true}]},
-{condition:"Simple Pneumothorax",type:"Trauma",difficulty:"Basic",dispatch:"Medic 1, respond to a sports facility for a {age}-year-old {sex} with chest pain after blunt chest trauma.",scene:"The patient is sitting upright after being struck hard in the side of the chest. They are anxious and mildly short of breath.",initial:"Airway is patent. Respirations are fast but adequate. Radial pulse is strong.",history:"No major medical history. Symptoms began immediately after the impact.",exam:"Tenderness over the affected lateral chest. Breath sounds are diminished on that side. No open wound or JVD.",vitals:"HR 104, BP 132/78, RR 24, SpO₂ 93%.",additional:"The patient reports sharp pain worse with inspiration.",diagnosis:"Simple Pneumothorax",management:["Support oxygenation and ventilation as needed.","Monitor closely for progression to tension physiology.","Transport for definitive evaluation."],teaching:["A simple pneumothorax can become a tension pneumothorax, especially with positive-pressure ventilation."],stages:[{title:"Stage 2",text:"Breathing becomes more difficult. SpO₂ drops to 88%, RR 30, and breath sounds on the affected side become nearly absent."},{title:"Stage 3",text:"BP falls to 82/48, the patient becomes confused, and neck veins become distended. Tension physiology is now present.",critical:true}]},
-
-{condition:"Anaphylaxis",type:"Medical",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a restaurant for a {age}-year-old {sex} with an allergic reaction.",scene:"The patient is seated on the floor and appears frightened. Staff report symptoms started shortly after eating.",initial:"Airway is currently patent but voice is becoming hoarse. Breathing is labored with wheezing. Pulse is rapid.",history:"Known severe food allergy. Patient believes the meal may have contained the allergen.",exam:"Hives across the chest and arms with swelling of the lips. Wheezing is present bilaterally.",vitals:"HR 126, BP 88/54, RR 28, SpO₂ 90%.",additional:"Patient reports nausea and throat tightness.",diagnosis:"Anaphylaxis",management:["Administer IM epinephrine when indicated by protocol.","Support airway, oxygenation, and ventilation.","Establish vascular access and treat hypotension with fluids as appropriate.","Reassess frequently for worsening airway swelling."],teaching:["Epinephrine is the key treatment for anaphylaxis.","Skin findings may be absent in some severe reactions."],stages:[{title:"Stage 2",text:"Stridor develops and the patient can only speak one or two words at a time. BP is 76/42 and SpO₂ is 84%."},{title:"Stage 3",text:"The patient becomes minimally responsive with severe airway swelling and inadequate respirations.",critical:true}]},
-{condition:"COPD Exacerbation",type:"Medical",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with worsening shortness of breath.",scene:"The patient is seated in a tripod position with home oxygen tubing in place.",initial:"Airway is patent. Respirations are labored and prolonged. Pulse is fast.",history:"History of COPD with several days of increased cough and sputum production.",exam:"Diffuse wheezing and diminished breath sounds. Accessory muscle use is present.",vitals:"HR 110, BP 148/86, RR 28, SpO₂ 86% on home oxygen.",additional:"Patient denies sudden chest pain and has no unilateral leg swelling.",diagnosis:"COPD Exacerbation",management:["Support oxygenation and ventilation.","Administer bronchodilators per protocol.","Consider CPAP/NIV when indicated.","Watch for fatigue and respiratory failure."],teaching:["Treat the patient, not a feared oxygen number alone.","Declining mental status or respiratory rate may signal failure rather than improvement."],stages:[{title:"Stage 2",text:"After continued work of breathing the patient becomes tired. RR falls from 30 to 20, but tidal volume is poor and mental status is slowing."},{title:"Stage 3",text:"The patient is difficult to arouse with shallow respirations and worsening hypoxia, indicating respiratory failure.",critical:true}]},
-{condition:"Upper GI Bleed",type:"Medical",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} vomiting blood.",scene:"The patient is seated beside a trash can containing dark red and coffee-ground appearing emesis.",initial:"Airway is patent. Breathing is mildly rapid. Radial pulse is fast and weak. Patient appears pale.",history:"Several days of upper abdominal discomfort and dark stools. Patient takes frequent NSAIDs.",exam:"Pale, cool, clammy skin. Mild epigastric tenderness without rigidity.",vitals:"HR 118, BP 96/58, RR 22, SpO₂ 97%.",additional:"Patient reports dizziness when standing and black tarry stools since yesterday.",diagnosis:"Upper GI Bleed",management:["Protect the airway and have suction ready.","Establish vascular access and treat shock according to protocol.","Keep the patient warm and transport promptly."],teaching:["Coffee-ground emesis and melena suggest upper GI bleeding.","Normal SpO₂ does not indicate adequate circulating volume."],stages:[{title:"Stage 2",text:"The patient has another large episode of hematemesis. HR rises to 132 and BP falls to 82/46."},{title:"Stage 3",text:"The patient becomes confused, cool, and profoundly weak with a barely palpable radial pulse.",critical:true}]},
-{condition:"Hemothorax",type:"Trauma",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a motor vehicle collision for a {age}-year-old {sex} with chest trauma.",scene:"The patient is restrained in the vehicle and complains of severe chest pain and shortness of breath after a significant side impact.",initial:"Airway is patent. Breathing is rapid and labored. Radial pulse is fast and weak.",history:"No relevant medical history is immediately available.",exam:"Bruising over one side of the chest with markedly decreased breath sounds on that side. Neck veins are flat. Skin is pale and clammy.",vitals:"HR 126, BP 92/58, RR 30, SpO₂ 89%.",additional:"No open chest wound is seen.",diagnosis:"Hemothorax",management:["Support oxygenation and ventilation.","Treat for hemorrhagic shock and maintain warmth.","Rapid trauma-center transport is important."],teaching:["Hemothorax can cause both respiratory compromise and significant blood loss.","Flat neck veins support volume loss rather than obstructive shock."],stages:[{title:"Stage 2",text:"Breath sounds become nearly absent on the affected side. BP falls to 80/44 and mental status begins to decline."},{title:"Stage 3",text:"The patient becomes unresponsive with severe shock and worsening respiratory compromise.",critical:true}]},
-{condition:"Carbon Monoxide Poisoning",type:"Toxicology",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a residence for multiple people with headache and nausea.",scene:"A family has exited the home after a carbon monoxide alarm activated. Your patient is a {age}-year-old {sex} complaining of headache and dizziness.",initial:"Airway and breathing appear normal. Pulse is mildly elevated. Patient is alert but slow to answer.",history:"The furnace has been running all morning. Several people in the home developed similar symptoms.",exam:"No focal neurologic deficits. Skin appearance is nonspecific. Pulse oximetry appears normal.",vitals:"HR 104, BP 136/80, RR 20, SpO₂ 99% on room air.",additional:"Patient reports nausea and a pounding headache. A second family member briefly fainted.",diagnosis:"Carbon Monoxide Poisoning",management:["Remove from the source and provide high-concentration oxygen.","Cardiac monitoring and transport are appropriate.","Consider hyperbaric consultation based on severity and local guidance."],teaching:["Standard pulse oximetry may appear normal in carbon monoxide poisoning.","Multiple patients with similar symptoms in the same environment is an important clue."],stages:[{title:"Stage 2",text:"The patient becomes increasingly confused and develops chest discomfort."},{title:"Stage 3",text:"The patient has a generalized seizure and becomes unresponsive, indicating severe toxicity.",critical:true}]},
-{condition:"Opioid Overdose",type:"Toxicology",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} who is difficult to wake.",scene:"The patient is lying on a couch. Drug paraphernalia is present nearby.",initial:"Patient responds only to painful stimulus. Respirations are slow and shallow. Radial pulse is slow but present.",history:"A bystander reports possible fentanyl use shortly before the patient became unresponsive.",exam:"Pinpoint pupils, cool skin, and very poor respiratory effort. No major trauma is seen.",vitals:"HR 58, BP 98/60, RR 6, SpO₂ 79%.",additional:"The patient has a pulse but is not protecting the airway well.",diagnosis:"Opioid Overdose",management:["Ventilation and airway support are the immediate priorities.","Administer naloxone per protocol while continuing ventilation.","Titrate treatment toward adequate breathing and reassess frequently."],teaching:["Do not delay ventilation while waiting for naloxone.","The goal is adequate ventilation, not necessarily complete awakening."],stages:[{title:"Stage 2",text:"Without ventilation, SpO₂ falls further and the heart rate drops into the 40s."},{title:"Stage 3",text:"The patient becomes apneic. A pulse is still present initially, making this a respiratory arrest.",critical:true}]},
-
-{condition:"ACS / Heart Attack",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with chest pressure and sweating.",scene:"The patient is seated on the couch, pale and visibly uncomfortable, clutching the center of the chest.",initial:"Airway is patent. Breathing is mildly rapid. Radial pulse is regular but fast.",history:"Crushing central chest pressure began 30 minutes ago and radiates to the left arm. History of hypertension and high cholesterol.",exam:"Pale, cool, diaphoretic skin. Lung sounds are clear. No chest-wall tenderness reproduces the pain.",vitals:"HR 104, BP 154/92, RR 22, SpO₂ 96%.",additional:"12-lead ECG shows ST elevation in II, III, and aVF with reciprocal changes in aVL.",ecg:"Inferior STEMI pattern: ST elevation in II, III, aVF with reciprocal depression in aVL.",diagnosis:"ACS / Inferior STEMI",management:["Obtain and interpret a 12-lead ECG.","Give aspirin when indicated and without contraindication.","Use oxygen only when clinically indicated.","Evaluate blood pressure and contraindications before nitroglycerin.","Activate STEMI transport/notification procedures."],teaching:["Inferior STEMI can involve the right ventricle.","Hypotension should change how preload-reducing medications are approached."],stages:[{title:"Stage 2",text:"The patient becomes nauseated and BP falls to 94/60. HR is now 58. A right-sided ECG shows ST elevation in V4R."},{title:"Stage 3",text:"The patient suddenly becomes unresponsive and pulseless with ventricular fibrillation on the monitor.",critical:true}]},
-{condition:"Stroke",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with sudden weakness and speech difficulty.",scene:"The patient is seated at a table with family present. One side of the face is visibly drooping.",initial:"Airway is patent and respirations are adequate. Pulse is regular. Patient is alert but has difficulty speaking.",history:"Family states symptoms began suddenly 25 minutes ago. Last known well was immediately before onset.",exam:"Facial droop, slurred speech, and marked weakness of the right arm and leg. No seizure witnessed.",vitals:"HR 86, BP 188/104, RR 18, SpO₂ 97%, BGL 118 mg/dL.",additional:"Patient takes an anticoagulant for atrial fibrillation.",diagnosis:"Acute Stroke",management:["Determine last known well time.","Perform a stroke assessment and check BGL.","Protect airway as needed and avoid unnecessary delays.","Rapidly transport to an appropriate stroke-capable facility with prenotification."],teaching:["Do not treat hypertension casually in suspected stroke without protocol/medical direction.","Anticoagulant use is important information for the receiving stroke team."],stages:[{title:"Stage 2",text:"Speech becomes more difficult and the patient develops increasing drowsiness while still maintaining the airway."},{title:"Stage 3",text:"The patient vomits and becomes unable to protect the airway, requiring aggressive airway management.",critical:true}]},
-{condition:"Tension Pneumothorax",type:"Trauma",difficulty:"Paramedic",dispatch:"Medic 1, respond to a construction site for a {age}-year-old {sex} struck in the chest by heavy equipment.",scene:"The patient is supine and in severe respiratory distress after blunt chest trauma.",initial:"Airway is patent. Respirations are rapid and shallow. Radial pulse is fast and weak.",history:"Symptoms worsened quickly over several minutes after the impact.",exam:"Breath sounds are absent on the left. Neck veins are distended. The left chest appears hyperexpanded. Skin is cool and sweaty.",vitals:"HR 138, BP 78/44, RR 34, SpO₂ 81%.",additional:"Mental status is deteriorating rapidly.",diagnosis:"Tension Pneumothorax",management:["Support airway and oxygenation.","Perform immediate chest decompression when clinically indicated and authorized by protocol.","Reassess after decompression and transport rapidly."],teaching:["The key distinction from a simple pneumothorax is hemodynamic compromise.","Do not wait for every classic sign if the overall presentation strongly supports tension physiology."],stages:[{title:"Stage 2",text:"Without decompression the patient becomes minimally responsive, BP is unobtainable, and the radial pulse disappears."},{title:"Stage 3",text:"The patient becomes pulseless. Traumatic cardiac arrest is now present unless the obstructive cause is rapidly corrected.",critical:true}]},
-{condition:"Cardiac Tamponade",type:"Trauma",difficulty:"Paramedic",dispatch:"Medic 1, respond to an assault for a {age}-year-old {sex} with a penetrating chest injury.",scene:"The patient is sitting against a wall with a small penetrating wound near the left chest. External bleeding is limited.",initial:"Airway is patent. Breathing is rapid. Radial pulse is very weak and fast.",history:"Injury occurred about 10 minutes ago.",exam:"Neck veins are distended. Heart sounds are distant. Lung sounds are present bilaterally. Skin is pale and clammy.",vitals:"HR 132, BP 82/58, RR 28, SpO₂ 93%.",additional:"Pulse pressure is narrowing and mental status is beginning to decline.",diagnosis:"Cardiac Tamponade",management:["Support ABCs and treat shock.","Rapid transport to definitive surgical care is essential.","Perform pericardial decompression only when within scope/protocol and clinically indicated."],teaching:["Beck's triad is JVD, hypotension, and muffled heart sounds.","Bilateral breath sounds with obstructive shock can help distinguish tamponade from tension pneumothorax."],stages:[{title:"Stage 2",text:"BP falls to 68/48 and the patient becomes increasingly confused. Peripheral pulses are barely palpable."},{title:"Stage 3",text:"The patient becomes pulseless with organized electrical activity on the monitor, consistent with PEA arrest from obstructive shock.",critical:true}]},
-{condition:"DKA",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with vomiting, weakness, and abnormal breathing.",scene:"The patient is lying on a couch, appears dehydrated, and is breathing very deeply and rapidly.",initial:"Airway is patent. Respirations are deep and rapid. Radial pulse is fast and weak. Patient is awake but sluggish.",history:"Type 1 diabetes. Patient has been ill for two days and missed insulin doses because of vomiting.",exam:"Warm, dry skin, dry mucous membranes, and fruity odor on the breath. Generalized abdominal discomfort without guarding.",vitals:"HR 124, BP 96/60, RR 30 deep, SpO₂ 98%, BGL reads HIGH (>600 mg/dL).",additional:"Patient reports intense thirst and frequent urination before becoming too weak to get up.",diagnosis:"Diabetic Ketoacidosis",management:["Support ABCs and monitor ECG.","Establish IV access and begin protocol-directed fluid resuscitation.","Monitor for shock and transport for definitive metabolic management."],teaching:["Kussmaul respirations are compensatory and should not be mistaken for primary anxiety hyperventilation.","DKA commonly produces significant dehydration."],stages:[{title:"Stage 2",text:"The patient becomes more confused. HR 136, BP 84/50, with persistent deep respirations."},{title:"Stage 3",text:"The patient becomes obtunded with worsening shock and poor peripheral perfusion.",critical:true}]},
-{condition:"Status Epilepticus",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} actively seizing.",scene:"You arrive to find generalized tonic-clonic activity ongoing. Family states this is the second seizure without the patient waking up.",initial:"Airway is partially obstructed by secretions during convulsions. Breathing is irregular. Pulse is rapid.",history:"Known seizure disorder. Family is unsure whether medications were taken today.",exam:"Generalized seizure activity continues. No major trauma is seen.",vitals:"HR 142, BP 168/94, RR difficult to assess during seizure, SpO₂ 86%, BGL 104 mg/dL.",additional:"Total continuous/recurrent seizure time is now approximately 7 minutes.",diagnosis:"Status Epilepticus",management:["Protect the airway and oxygenate/ventilate as needed.","Check BGL and establish IV/IO access.","Administer benzodiazepine therapy per protocol.","Reassess for recurrent seizure and respiratory depression after treatment."],teaching:["Status epilepticus is seizure >5 minutes or recurrent seizures without regaining consciousness.","Post-treatment airway and ventilation monitoring is critical."],stages:[{title:"Stage 2",text:"Convulsions continue and SpO₂ falls despite basic airway positioning. The patient remains unresponsive between movements."},{title:"Stage 3",text:"After seizure activity stops, respirations are slow and inadequate and the patient remains deeply unresponsive.",critical:true}]},
-{condition:"Pesticide / Nerve Agent Overdose",type:"Toxicology",difficulty:"Paramedic",dispatch:"Medic 1, respond to an agricultural property for a {age}-year-old {sex} with vomiting and difficulty breathing after pesticide exposure.",scene:"The patient is outside near spraying equipment. There is a strong chemical odor and visible liquid contamination on clothing.",initial:"Airway contains copious secretions. Respirations are labored with wet lung sounds. Pulse is slow.",history:"Coworkers report an accidental concentrated pesticide exposure shortly before symptoms began.",exam:"Pinpoint pupils, heavy sweating, salivation, tearing, vomiting, diarrhea, and diffuse bronchial secretions.",vitals:"HR 48, BP 90/54, RR 26 with poor air movement, SpO₂ 84%.",additional:"Scene safety and decontamination are required before routine patient care.",diagnosis:"Pesticide / Nerve Agent Overdose",management:["Prioritize scene safety, PPE, and decontamination.","Aggressively manage airway secretions and ventilation.","Administer atropine and other antidotal therapy according to protocol."],teaching:["Think wet: salivation, lacrimation, urination, GI symptoms, emesis, and bronchorrhea.","Responder contamination is a major hazard."],stages:[{title:"Stage 2",text:"Secretions worsen and the patient becomes increasingly hypoxic and confused."},{title:"Stage 3",text:"The patient becomes apneic with severe bradycardia and impending cardiac arrest.",critical:true}]},
-{condition:"Heat Stroke",type:"Environmental",difficulty:"Paramedic",dispatch:"Medic 1, respond to a road race for a {age}-year-old {sex} who collapsed in the heat.",scene:"The patient is on the ground near the finish area. Bystanders say the patient became confused before collapsing.",initial:"Airway is patent. Respirations are fast. Pulse is very rapid. Patient is confused and combative.",history:"Prolonged exertion in hot, humid weather.",exam:"Skin is very hot. Patient has severe CNS dysfunction and cannot answer questions appropriately.",vitals:"HR 148, BP 92/50, RR 32, SpO₂ 95%, core Temp 105.6°F.",additional:"A brief generalized seizure occurs during assessment.",diagnosis:"Heat Stroke",management:["Begin immediate rapid active cooling.","Support oxygenation and ventilation as needed.","Establish IV access and treat circulatory compromise per protocol.","Monitor ECG and transport while cooling continues when feasible."],teaching:["Heat stroke is defined by severe hyperthermia plus CNS dysfunction.","Cooling should not be delayed for transport preparations."],stages:[{title:"Stage 2",text:"The patient becomes less responsive and BP falls to 78/42 despite ongoing tachycardia."},{title:"Stage 3",text:"The patient becomes comatose with abnormal respirations and severe shock.",critical:true}]},
-
-{condition:"Dangerously High Potassium",type:"Medical",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to a dialysis center for a {age}-year-old {sex} with weakness and a slow heart rate.",scene:"The patient is pale and weak after missing a scheduled dialysis session.",initial:"Airway is patent. Breathing is adequate. Radial pulse is slow and irregular.",history:"End-stage renal disease on hemodialysis. Patient missed the last treatment because of transportation problems.",exam:"Generalized weakness and mild peripheral edema. No focal neurologic deficits.",vitals:"HR 38, BP 88/54, RR 20, SpO₂ 96%.",additional:"ECG shows tall peaked T waves progressing to QRS widening.",ecg:"Marked peaked T waves with widening QRS and bradycardia, concerning for severe hyperkalemia.",diagnosis:"Severe Hyperkalemia",management:["Continuous cardiac monitoring and rapid recognition are critical.","Establish IV/IO access and provide supportive treatment within the Critical Care Paramedic scope.","Treat unstable bradycardia/dysrhythmias within protocol and arrange rapid transport for definitive treatment/dialysis."],criticalActions:["Recognize severe hyperkalemia from the dialysis history, bradycardia, peaked T waves, and widening QRS.","Place the patient on continuous cardiac monitoring and closely reassess for progression toward arrest.","Establish IV/IO access and expedite transport for definitive treatment/dialysis."],scopeNotes:["The supplied server medication matrix lists Calcium Chloride for prevention of hypocalcemia with pre-hospital transfusions; it does not specifically list a hyperkalemia medication protocol. This scenario therefore does not require a medication that is not supported by the supplied training guide."],teaching:["Severe hyperkalemia can rapidly progress from peaked T waves to wide-complex rhythms and arrest.","Pacing alone may be ineffective until the metabolic problem is treated."],stages:[{title:"Stage 2",text:"QRS widens further and HR falls to 28. BP is 70/40 and the patient becomes drowsy."},{title:"Stage 3",text:"The rhythm degenerates into a near sine-wave pattern followed by pulseless electrical activity.",critical:true}]},
-{condition:"Sepsis",type:"Medical",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with fever, weakness, and confusion.",scene:"The patient is in bed, lethargic and ill appearing. Family reports worsening symptoms over two days.",initial:"Airway is patent. Respirations are rapid. Pulse is very fast and weak. Patient is confused.",history:"Recent urinary infection treated incompletely. Oral intake has been poor.",exam:"Hot skin, dry mucous membranes, and suprapubic discomfort. Peripheral perfusion is delayed.",vitals:"HR 132, BP 78/44, RR 30, SpO₂ 93%, Temp 103.1°F.",additional:"Lactate, if available in your system, is markedly elevated. Patient has produced very little urine today.",diagnosis:"Septic Shock",management:["Support oxygenation and ventilation.","Establish vascular access and begin protocol-directed fluid resuscitation.","Consider vasopressor support when shock persists after appropriate volume resuscitation and according to critical-care protocol.","Rapid transport and sepsis notification are appropriate."],teaching:["Shock can persist even when the skin initially feels warm.","Reassess perfusion response rather than relying on a single blood-pressure value."],stages:[{title:"Stage 2",text:"After initial fluid resuscitation BP remains 76/42 with worsening confusion and mottled extremities."},{title:"Stage 3",text:"The patient becomes minimally responsive with profound vasodilatory shock and impending cardiovascular collapse.",critical:true}]},
-{condition:"Blood Transfusion Reaction",type:"Medical",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to an infusion center for a {age}-year-old {sex} who became acutely ill during a blood transfusion.",scene:"The patient is reclined in an infusion chair with blood still running through an IV line. Staff report symptoms began minutes after the transfusion started.",initial:"Airway is patent. Breathing is fast with new wheezing. Pulse is rapid.",history:"Patient was receiving packed red blood cells for anemia. No symptoms were present before the transfusion.",exam:"Facial flushing, chills, hives, chest discomfort, and flank pain. Patient appears anxious and ill.",vitals:"HR 128, BP 86/50, RR 28, SpO₂ 90%, Temp 101.5°F.",additional:"Symptoms are temporally associated with the active transfusion.",diagnosis:"Acute Blood Transfusion Reaction",management:["Stop the transfusion immediately while maintaining appropriate IV access with compatible fluid per protocol.","Support airway, breathing, and circulation.","Treat anaphylaxis, shock, or other reaction features as indicated.","Preserve transfusion information and notify the receiving facility."],teaching:["A sudden reaction during transfusion should be assumed serious until proven otherwise.","Treatment depends on the reaction phenotype, but stopping the transfusion is immediate."],stages:[{title:"Stage 2",text:"Hypotension worsens and respiratory distress increases. Hives spread and the patient becomes confused."},{title:"Stage 3",text:"The patient develops severe shock with inadequate respirations and is nearing cardiac arrest.",critical:true}]},
-{condition:"Severe Hypothermia",type:"Environmental",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to a remote outdoor location for a {age}-year-old {sex} found after prolonged cold exposure.",scene:"The patient has been moved to a sheltered area. Clothing is wet and partially frozen. The patient appears lifeless at first glance.",initial:"Patient is unresponsive. Breathing is extremely slow and shallow. A central pulse is faint and requires prolonged assessment to detect.",history:"Estimated exposure time is several hours in freezing conditions.",exam:"Skin is very cold. No shivering is present. Muscles are stiff. Handle the patient gently.",vitals:"HR 24 irregular, BP difficult to obtain, RR 4, SpO₂ unreliable, core Temp 78°F.",additional:"Monitor shows atrial fibrillation with frequent ventricular ectopy.",ecg:"Profound bradycardia with atrial fibrillation/ventricular irritability in severe hypothermia.",diagnosis:"Severe Hypothermia",management:["Confirm pulse and respirations carefully for an extended period.","Handle gently and keep the patient horizontal.","Remove wet clothing, prevent further heat loss, and begin appropriate active core rewarming.","Use warmed humidified oxygen and warmed IV fluids when available and indicated.","Follow hypothermic resuscitation/defibrillation guidance if arrest occurs."],teaching:["Severe hypothermia can mimic death.","Rough handling can precipitate ventricular dysrhythmias."],stages:[{title:"Stage 2",text:"The patient loses the detectable pulse and develops ventricular fibrillation during movement."},{title:"Stage 3",text:"Cardiac arrest continues in profound hypothermia; resuscitation and rewarming proceed under hypothermia-specific protocol.",critical:true}]},
-{condition:"DIC",type:"Medical",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to a hospital transfer unit for a {age}-year-old {sex} with worsening bleeding and shock.",scene:"The patient is critically ill with oozing from multiple IV and puncture sites.",initial:"Airway is patent. Breathing is fast. Pulse is rapid and weak. Patient is confused.",history:"Patient is being treated for severe sepsis and has developed increasing bleeding over the last hour.",exam:"Diffuse bruising, petechiae, and persistent oozing from vascular-access sites. Skin is cool and mottled.",vitals:"HR 136, BP 74/40, RR 30, SpO₂ 94%.",additional:"Laboratory information provided for transport shows falling platelets and abnormal coagulation studies.",diagnosis:"Disseminated Intravascular Coagulation (DIC)",management:["Support ABCs and treat shock.","Control external bleeding where possible without causing additional trauma.","Continue treatment of the underlying cause and transport with appropriate blood-product support per critical-care plan."],teaching:["DIC causes simultaneous widespread clotting and consumption of clotting factors, leading to bleeding.","Sepsis, major trauma, burns, obstetric emergencies, and massive transfusion are important causes."],stages:[{title:"Stage 2",text:"Bleeding increases from IV sites and mucous membranes while BP remains critically low."},{title:"Stage 3",text:"The patient develops profound shock with worsening mental status and multisystem failure.",critical:true}]},
-{condition:"Respiratory Failure",type:"Medical",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to a long-term care facility for a {age}-year-old {sex} with worsening respiratory distress and decreasing responsiveness.",scene:"The patient is upright in bed with staff providing oxygen. Respiratory effort is visibly tiring.",initial:"Airway is patent. Respirations are shallow and increasingly ineffective. Pulse is fast. Patient answers only with brief responses.",history:"Several days of respiratory illness with chronic lung disease.",exam:"Diffuse diminished breath sounds with scattered crackles. Accessory muscle use is becoming less pronounced as fatigue worsens.",vitals:"HR 124, BP 108/64, RR 18 shallow after previously being in the 30s, SpO₂ 82% despite oxygen.",additional:"Mental status is declining. If capnography is available, ventilation is inadequate with rising CO₂.",diagnosis:"Acute Respiratory Failure",management:["Recognize that decreasing respiratory rate may reflect fatigue, not improvement.","Provide escalating ventilatory support, including BVM/NIV/advanced airway as clinically appropriate.","Treat the underlying cause while maintaining oxygenation and ventilation."],teaching:["AMS is a major warning sign distinguishing respiratory failure from uncomplicated distress.","Work of breathing may decrease just before arrest because the patient is exhausted."],stages:[{title:"Stage 2",text:"The patient becomes minimally responsive with RR 10 and very poor tidal volume. SpO₂ falls to 74%."},{title:"Stage 3",text:"The patient stops breathing but still has a pulse, producing respiratory arrest.",critical:true}]}
-,{condition:"Anaphylaxis",type:"Medical",difficulty:"Basic",dispatch:"Medic 1, respond to a restaurant for a {age}-year-old {sex} with a severe allergic reaction.",scene:"The patient is seated on the floor, anxious, scratching at widespread hives. A family member says symptoms started minutes after eating.",initial:"Airway is patent but the voice is becoming hoarse. Breathing is labored with wheezing. Radial pulse is fast and weak.",history:"Known severe food allergy. The patient has an epinephrine auto-injector but has not used it.",exam:"Diffuse hives, swelling of the lips, wheezing, and cool clammy skin.",vitals:"HR 126, BP 88/54, RR 28, SpO₂ 90%.",additional:"The patient reports throat tightness and increasing difficulty swallowing.",diagnosis:"Anaphylaxis",management:["Recognize anaphylaxis early.","Administer IM epinephrine per server protocol.","Support airway and oxygenation; prepare to assist ventilations if needed.","Reassess frequently and transport promptly."],criticalActions:["IM epinephrine without unnecessary delay.","Airway and breathing reassessment after treatment."],scopeNotes:["Basic/EMT+ scope in the supplied matrix includes IM epinephrine for anaphylaxis."],teaching:["Skin findings plus respiratory or circulatory compromise should raise immediate concern for anaphylaxis.","Do not delay epinephrine while waiting for complete airway obstruction or profound shock."],stages:[{title:"Stage 2",text:"Without epinephrine, BP falls to 74/42, wheezing worsens, and the patient can speak only one or two words at a time."},{title:"Stage 3",text:"The patient becomes barely responsive with severe airway swelling and inadequate respirations.",critical:true}]}
-,{condition:"Closed Long-Bone Fracture",type:"Trauma",difficulty:"Basic",dispatch:"Medic 1, respond to a fall for a {age}-year-old {sex} with a leg injury.",scene:"The patient is seated on the ground after falling from several feet. There is obvious deformity of the lower leg but no open wound.",initial:"Airway and breathing are normal. Radial pulse is strong. Patient is alert and complaining of severe leg pain.",history:"The patient slipped while climbing down from a ladder and landed awkwardly. No loss of consciousness.",exam:"Closed deformity with swelling and tenderness. Distal pulse, motor function, and sensation are present but movement increases pain.",vitals:"HR 104, BP 138/82, RR 20, SpO₂ 98%.",additional:"No other major injuries are found on head-to-toe exam.",diagnosis:"Closed Long-Bone Fracture",management:["Check distal circulation, motor function, and sensation before and after splinting.","Immobilize the injury in a position of comfort using appropriate splinting.","Use ice/elevation when appropriate and monitor for shock.","Transport for definitive care."],criticalActions:["Document distal neurovascular status before and after splinting."],scopeNotes:["The supplied trauma guide emphasizes splinting and checking circulation before and after immobilization."],teaching:["A closed fracture can still cause significant bleeding and shock.","Neurovascular reassessment after splinting is essential."],stages:[]}
-,{condition:"Major External Bleeding",type:"Trauma",difficulty:"Basic",dispatch:"Medic 1, respond to an industrial site for a {age}-year-old {sex} with severe bleeding from an arm injury.",scene:"The patient is seated against a wall with a deep laceration to the forearm. Bright red blood is soaking through improvised dressings.",initial:"Airway is patent. Breathing is rapid. Radial pulse is fast and weak. Patient is pale and anxious.",history:"The arm was cut on a sharp piece of metal several minutes ago.",exam:"Deep extremity wound with brisk bleeding. No impaled object. Distal sensation is present.",vitals:"HR 122, BP 96/60, RR 26, SpO₂ 98%.",additional:"Bleeding continues despite light pressure from bystanders.",diagnosis:"Major External Hemorrhage",management:["Apply firm direct pressure and an appropriate dressing.","If severe extremity bleeding is not controlled, apply a tourniquet according to training.","Treat for shock and prevent heat loss.","Rapid transport is appropriate."],criticalActions:["Control catastrophic bleeding before completing a lengthy secondary exam."],scopeNotes:["The supplied guide allows tourniquets for severe extremity bleeding and emphasizes pressure dressings."],teaching:["Major external hemorrhage can become life-threatening quickly.","Do not repeatedly remove effective dressings just to look at the wound."],stages:[{title:"Stage 2",text:"If bleeding is not controlled, the patient becomes dizzy with HR 138 and BP 78/44."},{title:"Stage 3",text:"The patient becomes confused and then unresponsive from hemorrhagic shock.",critical:true}]}
-,{condition:"Drowning / Near Drowning",type:"Environmental",difficulty:"Basic",dispatch:"Medic 1, respond to a swimming area for a {age}-year-old {sex} pulled from the water.",scene:"Bystanders have removed the patient from the water and placed them on the ground. The patient is coughing forcefully and appears frightened.",initial:"Airway is patent but wet. Breathing is rapid and labored. Radial pulse is fast and strong. Patient is alert.",history:"Witnesses report the patient was submerged briefly after becoming exhausted while swimming.",exam:"Persistent coughing, coarse breath sounds, and mild cyanosis around the lips. No obvious trauma.",vitals:"HR 118, BP 132/78, RR 30, SpO₂ 88%, Temp 96.8°F.",additional:"The patient vomited immediately after rescue.",diagnosis:"Drowning with Respiratory Distress",management:["Secure the airway and improve oxygenation.","Suction as needed and assist ventilations if breathing becomes inadequate.","Protect from further heat loss and assess for associated trauma.","Transport for further evaluation."],criticalActions:["Prioritize airway and oxygenation rather than attempting to drain water from the lungs."],scopeNotes:["The supplied drowning guide emphasizes airway stabilization, oxygen/BVM support, suction, and warming."],teaching:["Vomiting and aspiration are common after drowning.","Respiratory status can worsen after the initial rescue."],stages:[{title:"Stage 2",text:"The patient becomes more fatigued, SpO₂ falls to 82%, and respirations become shallow."},{title:"Stage 3",text:"The patient becomes unresponsive and stops breathing while a pulse remains present.",critical:true}]}
-,{condition:"Mild Hypothermia",type:"Environmental",difficulty:"Basic",dispatch:"Medic 1, respond to a roadside area for a {age}-year-old {sex} exposed to cold rain.",scene:"The patient is awake inside a vehicle after spending several hours outdoors in wet clothing.",initial:"Airway is patent. Breathing is normal. Pulse is slightly fast. Patient is alert and shivering vigorously.",history:"Prolonged cold and wet exposure with no major trauma.",exam:"Cold skin, intense shivering, and mild difficulty with fine motor tasks. Speech is clear.",vitals:"HR 102, BP 126/74, RR 18, SpO₂ 98%, Temp 94.8°F.",additional:"No confusion or loss of consciousness is present.",diagnosis:"Mild Hypothermia",management:["Move the patient to a warm environment.","Remove wet clothing and dry the patient.","Insulate with blankets and use gentle external warming.","Monitor for deterioration during transport."],criticalActions:["Prevent additional heat loss."],scopeNotes:["The supplied hypothermia guide defines hypothermia below 35°C/95°F and emphasizes warming and monitoring."],teaching:["Shivering is common in mild hypothermia and generates heat.","Worsening mental status and loss of shivering suggest progression."],stages:[{title:"Stage 2",text:"Continued exposure causes slurred speech, clumsiness, and decreasing shivering. Core temperature falls further."},{title:"Stage 3",text:"The patient becomes lethargic with marked bradycardia and very slow respirations, indicating severe progression.",critical:true}]}
-,{condition:"Ingested Poison",type:"Toxicology",difficulty:"Basic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} who accidentally swallowed a potentially toxic substance.",scene:"The patient is awake in the kitchen. A household product container is on the counter and family is unsure how much was swallowed.",initial:"Airway is patent. Breathing and circulation are currently stable. Patient is anxious but oriented.",history:"Exposure occurred approximately 30 minutes ago. The patient denies vomiting so far.",exam:"No burns around the mouth, no drooling, and no respiratory distress are noted.",vitals:"HR 94, BP 128/76, RR 18, SpO₂ 99%.",additional:"The exact product label is available to bring with the patient.",diagnosis:"Acute Ingested Poison Exposure",management:["Identify the substance, amount, and approximate time of exposure.","Monitor vitals and mental status for delayed toxicity.","Activated charcoal may be considered only when the server criteria are met and the substance is appropriate.","Transport and seek poison/medical-control guidance as appropriate."],criticalActions:["Do not give charcoal to a vomiting patient or after corrosive/opioid ingestion as outlined in the supplied matrix."],scopeNotes:["The supplied matrix lists activated charcoal PO for ingested toxins within one hour with specific contraindications."],teaching:["The container or medication list can be clinically valuable.","Some ingestions have delayed effects even when the initial exam is normal."],stages:[]}
-,{condition:"Dehydration",type:"Medical",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with weakness and dizziness.",scene:"The patient is lying on a couch and reports several days of poor oral intake during a gastrointestinal illness.",initial:"Airway is patent. Breathing is normal. Radial pulse is rapid and slightly weak. Patient is alert.",history:"Two days of vomiting and diarrhea with very little fluid intake.",exam:"Dry mouth, delayed skin recoil, dizziness on standing, and decreased urine output.",vitals:"HR 116, BP 94/58, RR 20, SpO₂ 98%.",additional:"No active bleeding is found. BGL is normal.",diagnosis:"Moderate to Severe Dehydration",management:["Assess for the cause and for signs of shock.","Establish IV access and begin normal saline replacement per server training when oral intake is not appropriate.","Reassess HR, BP, mental status, and symptoms after fluids.","Transport if symptoms are significant or fail to improve."],criticalActions:["Recognize hypovolemia and provide appropriate fluid replacement within scope."],scopeNotes:["The supplied Advanced EMT guide allows IV saline for fluid therapy/dehydration."],teaching:["Dehydration can produce tachycardia, hypotension, dizziness, and reduced urine output."],stages:[{title:"Stage 2",text:"Without fluid replacement, BP falls to 82/50 and the patient becomes increasingly weak and lightheaded."},{title:"Stage 3",text:"The patient becomes confused with a very weak radial pulse, consistent with worsening hypovolemic shock.",critical:true}]}
-,{condition:"Catastrophic Hemorrhage",type:"Trauma",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a machinery accident for a {age}-year-old {sex} with severe extremity trauma.",scene:"Coworkers have applied a tourniquet to a badly injured leg. A large amount of blood is present on the floor.",initial:"Airway is patent. Breathing is rapid. Radial pulse is weak and very fast. Patient is pale, cool, and anxious.",history:"The injury occurred less than 20 minutes ago. No known anticoagulant use.",exam:"Tourniquet is controlling active extremity hemorrhage. No major chest or abdominal injury is obvious on rapid exam.",vitals:"HR 138, BP 78/46, RR 30, SpO₂ 97%.",additional:"The patient remains alert but repeatedly says they feel faint.",diagnosis:"Hemorrhagic Shock from Catastrophic Bleeding",management:["Maintain effective hemorrhage control and do not remove a functioning tourniquet in the field.","Obtain IV/IO access and begin appropriate fluid therapy.","Administer TXA when the server criteria are met.","Prevent hypothermia and transport rapidly."],criticalActions:["Control hemorrhage.","Recognize shock and minimize delay to definitive care."],scopeNotes:["The supplied Advanced EMT matrix includes TXA IV/IO for suspected severe hemorrhage and saline for fluid therapy."],teaching:["Hemorrhage control is the first priority.","A temporarily normal mental status does not mean the patient is stable."],stages:[{title:"Stage 2",text:"Despite bleeding control, the patient becomes lethargic. BP is 68/38 and HR 146."},{title:"Stage 3",text:"The patient becomes unresponsive with an absent radial pulse and impending traumatic arrest.",critical:true}]}
-,{condition:"Moderate Hypothermia",type:"Environmental",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a rural property for a {age}-year-old {sex} found after prolonged cold exposure.",scene:"The patient is indoors now but remains in soaked clothing and is confused.",initial:"Airway is patent. Breathing is slow but adequate. Pulse is bradycardic. Patient responds to voice but is disoriented.",history:"Several hours outside overnight in cold rain.",exam:"Cold skin, impaired coordination, slurred speech, and reduced shivering.",vitals:"HR 48, BP 92/58, RR 12, SpO₂ 95%, core Temp 88°F.",additional:"No major trauma is identified.",diagnosis:"Moderate Hypothermia",management:["Handle gently and prevent further heat loss.","Remove wet clothing and insulate the patient.","Consider IV access with warmed normal saline per supplied Advanced EMT guidance.","Monitor closely for dysrhythmia and further decline."],criticalActions:["Gentle handling and active prevention of further cooling."],scopeNotes:["The supplied guide specifically notes warm IV saline for Advanced EMT+ and warns against adrenaline below 30°C/86°F."],teaching:["Bradycardia may be physiologic in hypothermia.","Aggressive movement can increase dysrhythmia risk as hypothermia worsens."],stages:[{title:"Stage 2",text:"Core temperature falls to 84°F, shivering stops, and the patient becomes minimally responsive."},{title:"Stage 3",text:"The patient develops severe bradycardia with ventricular irritability and is at high risk for arrest.",critical:true}]}
-,{condition:"Ventricular Fibrillation Cardiac Arrest",type:"Medical",difficulty:"Advanced EMT",dispatch:"Medic 1, respond to a public location for a {age}-year-old {sex} who suddenly collapsed.",scene:"Bystanders are performing CPR. The patient is unresponsive and apneic.",initial:"No pulse is present. CPR is in progress. AED/monitor pads can be applied immediately.",history:"Witnesses report sudden collapse after the patient complained of chest pressure.",exam:"No signs of major trauma. Pupils are nonreactive during the initial arrest exam.",vitals:"Pulseless and apneic.",additional:"First rhythm check shows ventricular fibrillation.",ecg:"Ventricular fibrillation — shockable cardiac-arrest rhythm.",diagnosis:"Ventricular Fibrillation Cardiac Arrest",management:["Continue high-quality CPR with minimal interruptions.","Defibrillate VF according to the resuscitation sequence.","Obtain IV/IO access and administer cardiac-arrest epinephrine per server protocol.","Manage the airway within scope and search for reversible causes."],criticalActions:["Immediate CPR and defibrillation.","Do not delay shocks for IV access or medication preparation."],scopeNotes:["The supplied Advanced EMT cardiac-arrest guide includes IV adrenaline/epinephrine in arrest and CPR/AED management."],teaching:["Early defibrillation is the key intervention for VF.","Medication supports resuscitation but does not replace CPR and shocks."],stages:[{title:"Stage 2",text:"After defibrillation and CPR, the rhythm becomes coarse VF again with no pulse."},{title:"Stage 3",text:"After another treatment cycle, ROSC is obtained with a weak pulse and BP 86/54.",critical:true}]}
-,{condition:"Symptomatic Bradycardia",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with dizziness and near-syncope.",scene:"The patient is pale and seated on the floor after nearly passing out while walking.",initial:"Airway is patent. Breathing is adequate. Radial pulse is very slow and weak. Patient is alert but lightheaded.",history:"Symptoms began suddenly. The patient denies significant bleeding and has no obvious trauma.",exam:"Pale cool skin, delayed capillary refill, and generalized weakness. No focal neurologic deficit.",vitals:"HR 34, BP 76/44, RR 18, SpO₂ 96%.",additional:"The patient remains symptomatic despite being placed supine.",ecg:"Marked symptomatic bradycardia at approximately 34 bpm. No advanced interpretation is required for the scenario.",diagnosis:"Unstable Symptomatic Bradycardia",management:["Support ABCs and place on continuous cardiac monitoring.","Establish IV/IO access.","Administer atropine according to the server paramedic protocol when appropriate.","Prepare for escalation if perfusion does not improve."],criticalActions:["Recognize that the slow rate is causing poor perfusion."],scopeNotes:["The supplied paramedic matrix lists atropine IV/IO for absolute bradycardia with HR below 40."],teaching:["Treat the patient, not just the number; hypotension and near-syncope make this bradycardia unstable."],stages:[{title:"Stage 2",text:"Without effective treatment, HR falls to 28, BP 64/38, and the patient becomes confused."},{title:"Stage 3",text:"The patient becomes unresponsive and loses pulses, progressing to cardiac arrest.",critical:true}]}
-,{condition:"SVT",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a workplace for a {age}-year-old {sex} with sudden palpitations and dizziness.",scene:"The patient is seated, anxious, and reports the heart suddenly started racing.",initial:"Airway is patent. Breathing is mildly rapid. Radial pulse is extremely fast and regular.",history:"Abrupt onset of palpitations while at rest. No recent stimulant use is reported.",exam:"Skin is pale and slightly sweaty. No focal neurologic findings or respiratory distress.",vitals:"HR 188 regular, BP 102/66, RR 22, SpO₂ 98%.",additional:"The patient reports chest pressure but remains alert.",ecg:"Regular narrow-complex tachycardia consistent with SVT at approximately 190 bpm.",diagnosis:"Supraventricular Tachycardia (SVT)",management:["Assess stability and obtain continuous cardiac monitoring/12-lead when feasible.","Establish vascular access and follow the server tachycardia treatment pathway.","If the patient becomes unstable, escalate treatment promptly according to protocol."],criticalActions:["Determine whether the tachycardia is producing hemodynamic instability."],scopeNotes:["This scenario intentionally tests recognition and management of SVT without requiring advanced rhythm morphology analysis."],teaching:["Sudden onset and a very regular narrow-complex rhythm support SVT.","Mental status and blood pressure matter more than the heart-rate number alone."],stages:[{title:"Stage 2",text:"The patient becomes more diaphoretic. BP falls to 82/48 and chest pressure worsens."},{title:"Stage 3",text:"The patient becomes confused and profoundly hypotensive, representing unstable tachycardia.",critical:true}]}
-,{condition:"Atrial Fibrillation with RVR",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with palpitations and weakness.",scene:"The patient is seated upright and says the heartbeat feels fast and irregular.",initial:"Airway is patent. Breathing is adequate. Radial pulse is rapid and irregular.",history:"History of intermittent atrial fibrillation. Symptoms started several hours ago.",exam:"Mild dyspnea and fatigue without focal neurologic deficit.",vitals:"HR 156 irregular, BP 104/68, RR 22, SpO₂ 96%.",additional:"No active bleeding or major trauma is present.",ecg:"Atrial fibrillation with rapid ventricular response, ventricular rate approximately 150–160 bpm.",diagnosis:"Atrial Fibrillation with Rapid Ventricular Response",management:["Assess hemodynamic stability and obtain cardiac monitoring/12-lead.","Establish vascular access and treat according to the server tachyarrhythmia pathway.","Watch closely for hypotension, chest pain, altered mental status, or pulmonary edema."],criticalActions:["Identify whether the patient is stable or unstable rather than over-focusing on detailed ECG interpretation."],scopeNotes:["The scenario is deliberately limited to recognition of A-Fib with RVR and appropriate instability assessment."],teaching:["An irregularly irregular rapid pulse is a useful bedside clue.","Deterioration changes the urgency of treatment."],stages:[{title:"Stage 2",text:"The patient develops worsening dyspnea and BP falls to 84/52."},{title:"Stage 3",text:"The patient becomes confused with severe hypotension and chest discomfort, now clearly unstable.",critical:true}]}
-,{condition:"Ventricular Tachycardia",type:"Medical",difficulty:"Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with chest discomfort and near-syncope.",scene:"The patient is pale, sweaty, and struggling to remain upright.",initial:"Airway is patent. Breathing is rapid. Radial pulse is very fast and weak.",history:"Known cardiac disease. Sudden onset of palpitations and chest discomfort.",exam:"Cool clammy skin and delayed capillary refill. Patient is anxious and lightheaded.",vitals:"HR 176, BP 78/46, RR 26, SpO₂ 94%.",additional:"The patient is becoming less responsive.",ecg:"Regular wide-complex tachycardia consistent with ventricular tachycardia with a pulse.",diagnosis:"Unstable Ventricular Tachycardia with a Pulse",management:["Recognize the patient as unstable and maintain continuous monitoring.","Establish IV/IO access if it does not delay definitive treatment.","Follow the server unstable tachycardia pathway and be prepared for deterioration to pulseless VT/VF.","Continue airway and perfusion support."],criticalActions:["Do not allow IV access or a lengthy history to delay treatment of an unstable wide-complex tachycardia."],scopeNotes:["The scenario requires recognition of VT and instability, not advanced morphology interpretation."],teaching:["Wide-complex tachycardia with hypotension and altered perfusion is a high-risk rhythm.","The patient may deteriorate into cardiac arrest at any time."],stages:[{title:"Stage 2",text:"The patient loses consciousness and the pulse becomes difficult to detect."},{title:"Stage 3",text:"No pulse is present. The rhythm remains ventricular tachycardia and should now be managed as a shockable cardiac arrest.",critical:true}]}
-,{condition:"Major Burn with Airway Risk",type:"Trauma",difficulty:"Paramedic",dispatch:"Medic 1, respond to a structure fire for a {age}-year-old {sex} with burns and smoke exposure.",scene:"The patient has been removed from the building and is sitting on the curb. Clothing is burned over the upper chest and arms.",initial:"Airway is patent. Breathing is rapid. Pulse is fast. Patient is alert but anxious.",history:"The patient was trapped in a smoke-filled room for several minutes before escape.",exam:"Partial-thickness burns to the upper chest and arms. Soot is present around the mouth with singed nasal hair and a hoarse voice.",vitals:"HR 122, BP 136/80, RR 26, SpO₂ 94%.",additional:"No stridor is present yet, but the voice is progressively more hoarse.",diagnosis:"Major Burn with Suspected Inhalation Injury",management:["Stop the burning process and remove contaminated/burned clothing as appropriate.","Assess burn depth, location, and circumferential involvement.","Provide oxygen and closely monitor the airway.","Consider early advanced airway management if airway swelling is progressing, according to paramedic protocol.","Cover burns appropriately and transport to an appropriate facility."],criticalActions:["Recognize impending airway edema before complete obstruction develops."],scopeNotes:["The supplied burn guide highlights soot, singed hair, facial/neck burns, and airway monitoring; the paramedic airway guide includes RSI."],teaching:["A currently patent airway can deteriorate rapidly after inhalation injury.","Pulse oximetry may not reflect carbon monoxide exposure accurately."],stages:[{title:"Stage 2",text:"Hoarseness worsens and stridor develops. The patient is increasingly anxious and has difficulty handling secretions."},{title:"Stage 3",text:"Severe upper-airway edema causes rapidly worsening obstruction and inadequate ventilation.",critical:true}]}
-,{condition:"Massive Hemorrhage Requiring SWiFT",type:"Trauma",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to an interfacility transfer for a {age}-year-old {sex} with ongoing hemorrhagic shock after major trauma.",scene:"The patient is packaged for transfer with hemorrhage controlled but remains profoundly hypotensive. Multiple large-bore access sites are present.",initial:"Airway is secured. Ventilation is adequate. Pulse is rapid and weak. Patient is sedated but has poor peripheral perfusion.",history:"Major traumatic blood loss before arrival at the sending facility. Crystalloid alone has not restored perfusion.",exam:"Pale cool skin, delayed capillary refill, and ongoing signs of severe hypovolemia. No new external hemorrhage is seen.",vitals:"HR 142, BP 70/38, RR 20 assisted, SpO₂ 98%.",additional:"Sending team requests continued blood-product resuscitation during transport.",diagnosis:"Hemorrhagic Shock Requiring Blood Product Resuscitation",management:["Maintain hemorrhage control and prevent hypothermia.","Continue SWiFT/blood-product resuscitation according to the critical-care transport plan.","Use packed red blood cells and freeze-dried/lyophilized plasma as indicated by the supplied server matrix.","Monitor closely for transfusion reaction and changes in perfusion."],criticalActions:["Prioritize blood-product resuscitation over excessive crystalloid in severe hemorrhagic shock when operating under the supplied critical-care plan."],scopeNotes:["The supplied Critical Care Paramedic matrix lists packed red blood cells and freeze-dried plasma under SWiFT."],teaching:["Blood products address oxygen-carrying capacity and clotting-factor loss in major hemorrhage.","Hypothermia worsens coagulopathy and should be actively prevented."],stages:[{title:"Stage 2",text:"After appropriate blood-product resuscitation, BP improves to 88/54 and peripheral perfusion begins to improve."},{title:"Stage 3",text:"If resuscitation is delayed, the patient develops worsening shock with bradycardia and impending arrest.",critical:true}]}
-,{condition:"Severe Asthma Refractory to Initial Therapy",type:"Medical",difficulty:"Critical Care Paramedic",dispatch:"Medic 1, respond to a residence for a {age}-year-old {sex} with severe asthma not improving after initial treatment.",scene:"Another EMS crew has already given inhaled bronchodilator therapy. The patient remains in severe respiratory distress.",initial:"Airway is patent. Breathing is extremely labored with poor air movement. Pulse is rapid. Patient is exhausted but still responsive.",history:"Long history of severe asthma with prior hospital admissions.",exam:"Minimal wheezing because air movement is poor. Accessory muscle use is marked and the patient can only speak single words.",vitals:"HR 138, BP 148/86, RR 34, SpO₂ 84% despite oxygen.",additional:"The patient is becoming drowsy and tiring despite initial bronchodilator treatment.",diagnosis:"Severe Refractory Asthma with Impending Respiratory Failure",management:["Continue aggressive airway and ventilatory support.","Continue protocol-directed bronchodilator/anaphylaxis therapy as clinically indicated.","Consider magnesium sulfate under the supplied Critical Care Paramedic scope when appropriate.","Prepare for advanced airway management if ventilation fails."],criticalActions:["Recognize quiet breath sounds and decreasing mental status as deterioration, not improvement."],scopeNotes:["The supplied Critical Care Paramedic matrix lists magnesium sulfate IV/IO for asthma/anaphylaxis and the airway guide includes RSI/surgical airway options."],teaching:["A patient who becomes quieter may simply be moving less air.","Ventilatory failure is the immediate threat in severe refractory asthma."],stages:[{title:"Stage 2",text:"Respiratory rate falls to 18 but tidal volume becomes very poor. The patient is now confused and SpO₂ is 76%."},{title:"Stage 3",text:"The patient becomes unresponsive with inadequate respirations and requires immediate assisted ventilation/advanced airway management.",critical:true}]}
-
+  {
+    "condition": "Hypoglycemia",
+    "type": "Medical",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} reported to be confused and acting strangely.",
+    "scene": "You find the patient seated at the kitchen table. Family states the patient was normal earlier today but became sweaty, irritable, and confused over the last 20 minutes.",
+    "initial": "Airway is patent. Breathing is regular and adequate. Radial pulse is fast and strong. Patient is confused but follows simple commands.",
+    "history": "History of diabetes. Family reports the patient took insulin this morning and ate very little afterward.",
+    "exam": "Skin is pale, cool, and sweaty. No facial droop or one-sided weakness is noted. No evidence of trauma.",
+    "vitals": "HR 112, BP 138/82, RR 18, SpO₂ 97%, Temp 98.1°F, BGL 42 mg/dL.",
+    "additional": "No seizure activity has been witnessed. Patient can currently follow commands but is becoming less cooperative.",
+    "diagnosis": "Hypoglycemia",
+    "management": [
+      "Confirm low blood glucose.",
+      "Treat glucose according to mental status and ability to swallow.",
+      "Reassess mental status and BGL after treatment.",
+      "Evaluate why the episode occurred and consider transport."
+    ],
+    "teaching": [
+      "AMS can mimic stroke or intoxication.",
+      "BGL should be checked early in unexplained altered mental status."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Without treatment, the patient becomes increasingly lethargic and is no longer safe to give anything by mouth. Repeat BGL is 34 mg/dL."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive and has a brief generalized seizure. Airway and glucose correction are now immediate priorities.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Check blood glucose early in the altered patient.",
+      "Correct the confirmed hypoglycemia with oral glucose when the patient can safely swallow; use the appropriate higher-level glucose route if oral treatment is unsafe.",
+      "Reassess mental status and blood glucose after treatment."
+    ]
+  },
+  {
+    "condition": "Asthma Exacerbation",
+    "type": "Medical",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to an apartment for a {age}-year-old {sex} with difficulty breathing.",
+    "scene": "The patient is sitting upright near an open window and speaking in short sentences. An inhaler is on the table nearby.",
+    "initial": "Airway is patent. Respirations are fast and labored with accessory muscle use. Radial pulse is fast and strong.",
+    "history": "History of asthma. Symptoms worsened after cleaning a dusty room. The rescue inhaler has provided little relief today.",
+    "exam": "Diffuse expiratory wheezing bilaterally. No hives or facial swelling. Skin is warm and slightly sweaty.",
+    "vitals": "HR 118, BP 146/84, RR 28, SpO₂ 91%, Temp 98.6°F.",
+    "additional": "The patient denies chest trauma or fever.",
+    "diagnosis": "Asthma Exacerbation",
+    "management": [
+      "Support oxygenation and ventilation.",
+      "Administer bronchodilator therapy per protocol.",
+      "Reassess lung sounds, work of breathing, and mental status.",
+      "Escalate ventilatory support if the patient begins to fail."
+    ],
+    "teaching": [
+      "Worsening asthma may become quieter as air movement decreases.",
+      "Mental-status change is a late and concerning finding."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes more fatigued. RR 34, SpO₂ 86%. Wheezing is now quieter and breath sounds are diminished."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient is minimally responsive with shallow respirations at 10/min and nearly absent breath sounds. Respiratory failure is developing.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Support oxygenation and breathing.",
+      "Give the server-approved bronchodilator treatment for the asthma exacerbation.",
+      "Reassess for fatigue, decreasing air movement, or worsening mental status."
+    ]
+  },
+  {
+    "condition": "Syncope / Near Syncope",
+    "type": "Medical",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a public location for a {age}-year-old {sex} who fainted.",
+    "scene": "The patient is now awake and seated on the floor. Bystanders report a brief loss of consciousness lasting less than a minute.",
+    "initial": "Airway is patent, respirations are normal, and radial pulse is regular. Patient is alert and oriented now.",
+    "history": "Patient reports standing for a long period and feeling lightheaded just before fainting. No known seizure history.",
+    "exam": "No obvious trauma. Neuro exam is grossly normal. Skin is slightly pale.",
+    "vitals": "HR 88, BP 108/68, RR 16, SpO₂ 98%, BGL 102 mg/dL.",
+    "additional": "Patient denies chest pain and shortness of breath.",
+    "diagnosis": "Syncope / Near Syncope",
+    "management": [
+      "Assess for dangerous causes including cardiac, neurologic, bleeding, and metabolic problems.",
+      "Obtain ECG and BGL when appropriate.",
+      "Treat injuries from the fall if present.",
+      "Transport based on risk factors and clinical findings."
+    ],
+    "teaching": [
+      "Syncope is a symptom, not a final diagnosis.",
+      "A normal exam after the event does not rule out a serious cause."
+    ],
+    "stages": [],
+    "criticalActions": [
+      "Complete an ABCDE/vital-sign assessment and look for injury from the syncopal event.",
+      "Check blood glucose as part of the evaluation for an unexplained change in consciousness.",
+      "Recognize concerning findings and arrange appropriate transport rather than assuming a simple faint."
+    ]
+  },
+  {
+    "condition": "Pneumonia",
+    "type": "Medical",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with weakness and difficulty breathing.",
+    "scene": "The patient is in bed and looks ill. A family member reports several days of cough and fever.",
+    "initial": "Airway is patent. Respirations are fast but adequate. Radial pulse is fast.",
+    "history": "Three days of productive cough, fever, chills, and worsening fatigue.",
+    "exam": "Crackles are heard at the right lung base. Skin is warm. Patient has a frequent productive cough with yellow sputum.",
+    "vitals": "HR 108, BP 124/74, RR 24, SpO₂ 92%, Temp 101.8°F.",
+    "additional": "Patient reports pleuritic discomfort when coughing.",
+    "diagnosis": "Pneumonia",
+    "management": [
+      "Support oxygenation as needed.",
+      "Assess for sepsis and respiratory failure.",
+      "Provide supportive care and transport."
+    ],
+    "teaching": [
+      "Pneumonia may progress to sepsis or respiratory failure, especially in older adults."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes more fatigued. HR 118, RR 30, SpO₂ 88%, and BP falls to 104/64."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused and hypotensive at 86/52 with persistent hypoxia, suggesting progression to severe infection/sepsis.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Support oxygenation when the patient is hypoxic or in respiratory distress.",
+      "Recognize progression toward respiratory failure or shock/sepsis.",
+      "Transport for further evaluation rather than delaying on scene."
+    ]
+  },
+  {
+    "condition": "Alcohol Intoxication",
+    "type": "Toxicology",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a parking lot for a {age}-year-old {sex} who is unable to walk steadily.",
+    "scene": "The patient is seated against a wall with friends nearby. An odor of alcohol is present.",
+    "initial": "Airway is patent. Breathing is adequate. Radial pulse is strong. Patient responds appropriately but is slow and slurs words.",
+    "history": "Friends report heavy alcohol intake over several hours. They deny known drug use.",
+    "exam": "Unsteady gait, slurred speech, and mild nausea. No obvious trauma is found on initial exam.",
+    "vitals": "HR 96, BP 118/72, RR 16, SpO₂ 97%, Temp 97.4°F, BGL 91 mg/dL.",
+    "additional": "Patient vomited once before EMS arrival.",
+    "diagnosis": "Alcohol Intoxication",
+    "management": [
+      "Protect the airway and monitor breathing.",
+      "Check BGL and assess for trauma or other causes of AMS.",
+      "Provide supportive care and transport as appropriate."
+    ],
+    "teaching": [
+      "Do not assume alcohol explains every altered patient.",
+      "Occult trauma and hypoglycemia are important mimics."
+    ],
+    "stages": [],
+    "criticalActions": [
+      "Protect and continually reassess the airway and breathing in the intoxicated patient.",
+      "Check blood glucose and assess for trauma or another cause of altered mental status.",
+      "Do not assume alcohol is the only cause of the patient's presentation."
+    ]
+  },
+  {
+    "condition": "Heat Exhaustion",
+    "type": "Environmental",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to an outdoor work site for a {age}-year-old {sex} with weakness and dizziness.",
+    "scene": "The patient is sitting in the shade and is soaked with sweat after working outside for several hours.",
+    "initial": "Airway is patent. Breathing is rapid but adequate. Pulse is fast and slightly weak. Patient is alert.",
+    "history": "Several hours of heavy work in hot weather with limited fluid intake.",
+    "exam": "Skin is cool and clammy despite the hot environment. Patient reports weakness, nausea, dizziness, and muscle cramps.",
+    "vitals": "HR 114, BP 102/64, RR 24, SpO₂ 98%, Temp 100.4°F.",
+    "additional": "No confusion or seizure activity is present.",
+    "diagnosis": "Heat Exhaustion",
+    "management": [
+      "Remove from heat and begin cooling.",
+      "Place supine as tolerated and remove excess clothing.",
+      "Replace fluids as appropriate.",
+      "Watch closely for progression to heat stroke."
+    ],
+    "teaching": [
+      "Normal mental status helps distinguish heat exhaustion from heat stroke."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "If the patient remains in the heat, weakness worsens and BP falls to 92/56. The patient is still oriented but increasingly exhausted."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient develops confusion and a core temperature above 104°F. The scenario has progressed to heat stroke.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Remove the patient from the hot environment and begin cooling.",
+      "Reassess mental status closely for progression from heat exhaustion to heat stroke.",
+      "Replace fluids as appropriate and transport if the patient worsens or fails to improve."
+    ]
+  },
+  {
+    "condition": "Simple Pneumothorax",
+    "type": "Trauma",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a sports facility for a {age}-year-old {sex} with chest pain after blunt chest trauma.",
+    "scene": "The patient is sitting upright after being struck hard in the side of the chest. They are anxious and mildly short of breath.",
+    "initial": "Airway is patent. Respirations are fast but adequate. Radial pulse is strong.",
+    "history": "No major medical history. Symptoms began immediately after the impact.",
+    "exam": "Tenderness over the affected lateral chest. Breath sounds are diminished on that side. No open wound or JVD.",
+    "vitals": "HR 104, BP 132/78, RR 24, SpO₂ 93%.",
+    "additional": "The patient reports sharp pain worse with inspiration.",
+    "diagnosis": "Simple Pneumothorax",
+    "management": [
+      "Support oxygenation and ventilation as needed.",
+      "Monitor closely for progression to tension physiology.",
+      "Transport for definitive evaluation."
+    ],
+    "teaching": [
+      "A simple pneumothorax can become a tension pneumothorax, especially with positive-pressure ventilation."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Breathing becomes more difficult. SpO₂ drops to 88%, RR 30, and breath sounds on the affected side become nearly absent."
+      },
+      {
+        "title": "Stage 3",
+        "text": "BP falls to 82/48, the patient becomes confused, and neck veins become distended. Tension physiology is now present.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Support oxygenation and breathing.",
+      "Recognize any progression from a simple pneumothorax to tension physiology.",
+      "Transport promptly for definitive evaluation."
+    ]
+  },
+  {
+    "condition": "Anaphylaxis",
+    "type": "Medical",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a restaurant for a {age}-year-old {sex} with an allergic reaction.",
+    "scene": "The patient is seated on the floor and appears frightened. Staff report symptoms started shortly after eating.",
+    "initial": "Airway is currently patent but voice is becoming hoarse. Breathing is labored with wheezing. Pulse is rapid.",
+    "history": "Known severe food allergy. Patient believes the meal may have contained the allergen.",
+    "exam": "Hives across the chest and arms with swelling of the lips. Wheezing is present bilaterally.",
+    "vitals": "HR 126, BP 88/54, RR 28, SpO₂ 90%.",
+    "additional": "Patient reports nausea and throat tightness.",
+    "diagnosis": "Anaphylaxis",
+    "management": [
+      "Administer IM epinephrine when indicated by protocol.",
+      "Support airway, oxygenation, and ventilation.",
+      "Establish vascular access and treat hypotension with fluids as appropriate.",
+      "Reassess frequently for worsening airway swelling."
+    ],
+    "teaching": [
+      "Epinephrine is the key treatment for anaphylaxis.",
+      "Skin findings may be absent in some severe reactions."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Stridor develops and the patient can only speak one or two words at a time. BP is 76/42 and SpO₂ is 84%."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes minimally responsive with severe airway swelling and inadequate respirations.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Give IM epinephrine promptly for the anaphylactic presentation.",
+      "Support the airway, oxygenation, and ventilation while watching for worsening swelling.",
+      "Establish vascular access and treat hypotension with fluid within Advanced EMT scope."
+    ]
+  },
+  {
+    "condition": "COPD Exacerbation",
+    "type": "Medical",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with worsening shortness of breath.",
+    "scene": "The patient is seated in a tripod position with home oxygen tubing in place.",
+    "initial": "Airway is patent. Respirations are labored and prolonged. Pulse is fast.",
+    "history": "History of COPD with several days of increased cough and sputum production.",
+    "exam": "Diffuse wheezing and diminished breath sounds. Accessory muscle use is present.",
+    "vitals": "HR 110, BP 148/86, RR 28, SpO₂ 86% on home oxygen.",
+    "additional": "Patient denies sudden chest pain and has no unilateral leg swelling.",
+    "diagnosis": "COPD Exacerbation",
+    "management": [
+      "Support oxygenation and ventilation.",
+      "Administer bronchodilators per protocol.",
+      "Consider CPAP/NIV when indicated.",
+      "Watch for fatigue and respiratory failure."
+    ],
+    "teaching": [
+      "Treat the patient, not a feared oxygen number alone.",
+      "Declining mental status or respiratory rate may signal failure rather than improvement."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "After continued work of breathing the patient becomes tired. RR falls from 30 to 20, but tidal volume is poor and mental status is slowing."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient is difficult to arouse with shallow respirations and worsening hypoxia, indicating respiratory failure.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Support oxygenation and ventilation.",
+      "Give the server-approved bronchodilator treatment.",
+      "Recognize fatigue, slowing respirations, or altered mental status as respiratory failure rather than improvement."
+    ]
+  },
+  {
+    "condition": "Upper GI Bleed",
+    "type": "Medical",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} vomiting blood.",
+    "scene": "The patient is seated beside a trash can containing dark red and coffee-ground appearing emesis.",
+    "initial": "Airway is patent. Breathing is mildly rapid. Radial pulse is fast and weak. Patient appears pale.",
+    "history": "Several days of upper abdominal discomfort and dark stools. Patient takes frequent NSAIDs.",
+    "exam": "Pale, cool, clammy skin. Mild epigastric tenderness without rigidity.",
+    "vitals": "HR 118, BP 96/58, RR 22, SpO₂ 97%.",
+    "additional": "Patient reports dizziness when standing and black tarry stools since yesterday.",
+    "diagnosis": "Upper GI Bleed",
+    "management": [
+      "Protect the airway and have suction ready.",
+      "Establish vascular access and treat shock according to protocol.",
+      "Keep the patient warm and transport promptly."
+    ],
+    "teaching": [
+      "Coffee-ground emesis and melena suggest upper GI bleeding.",
+      "Normal SpO₂ does not indicate adequate circulating volume."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient has another large episode of hematemesis. HR rises to 132 and BP falls to 82/46."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused, cool, and profoundly weak with a barely palpable radial pulse.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Protect the airway and have suction immediately available for ongoing hematemesis.",
+      "Establish vascular access and treat shock within scope.",
+      "Keep the patient warm and minimize delay to transport."
+    ]
+  },
+  {
+    "condition": "Hemothorax",
+    "type": "Trauma",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a motor vehicle collision for a {age}-year-old {sex} with chest trauma.",
+    "scene": "The patient is restrained in the vehicle and complains of severe chest pain and shortness of breath after a significant side impact.",
+    "initial": "Airway is patent. Breathing is rapid and labored. Radial pulse is fast and weak.",
+    "history": "No relevant medical history is immediately available.",
+    "exam": "Bruising over one side of the chest with markedly decreased breath sounds on that side. Neck veins are flat. Skin is pale and clammy.",
+    "vitals": "HR 126, BP 92/58, RR 30, SpO₂ 89%.",
+    "additional": "No open chest wound is seen.",
+    "diagnosis": "Hemothorax",
+    "management": [
+      "Support oxygenation and ventilation.",
+      "Treat for hemorrhagic shock and maintain warmth.",
+      "Rapid trauma-center transport is important."
+    ],
+    "teaching": [
+      "Hemothorax can cause both respiratory compromise and significant blood loss.",
+      "Flat neck veins support volume loss rather than obstructive shock."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Breath sounds become nearly absent on the affected side. BP falls to 80/44 and mental status begins to decline."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive with severe shock and worsening respiratory compromise.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Support oxygenation and ventilation after the chest injury.",
+      "Recognize and treat hemorrhagic shock within scope.",
+      "Prevent hypothermia and transport rapidly for definitive trauma care."
+    ]
+  },
+  {
+    "condition": "Carbon Monoxide Poisoning",
+    "type": "Toxicology",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a residence for multiple people with headache and nausea.",
+    "scene": "A family has exited the home after a carbon monoxide alarm activated. Your patient is a {age}-year-old {sex} complaining of headache and dizziness.",
+    "initial": "Airway and breathing appear normal. Pulse is mildly elevated. Patient is alert but slow to answer.",
+    "history": "The furnace has been running all morning. Several people in the home developed similar symptoms.",
+    "exam": "No focal neurologic deficits. Skin appearance is nonspecific. Pulse oximetry appears normal.",
+    "vitals": "HR 104, BP 136/80, RR 20, SpO₂ 99% on room air.",
+    "additional": "Patient reports nausea and a pounding headache. A second family member briefly fainted.",
+    "diagnosis": "Carbon Monoxide Poisoning",
+    "management": [
+      "Remove from the source and provide high-concentration oxygen.",
+      "Cardiac monitoring and transport are appropriate.",
+      "Consider hyperbaric consultation based on severity and local guidance."
+    ],
+    "teaching": [
+      "Standard pulse oximetry may appear normal in carbon monoxide poisoning.",
+      "Multiple patients with similar symptoms in the same environment is an important clue."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes increasingly confused and develops chest discomfort."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient has a generalized seizure and becomes unresponsive, indicating severe toxicity.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Remove the patient from the carbon-monoxide source without creating additional rescuer exposure.",
+      "Give high-concentration oxygen.",
+      "Monitor and transport because pulse oximetry may appear reassuring despite significant exposure."
+    ]
+  },
+  {
+    "condition": "Opioid Overdose",
+    "type": "Toxicology",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} who is difficult to wake.",
+    "scene": "The patient is lying on a couch. Drug paraphernalia is present nearby.",
+    "initial": "Patient responds only to painful stimulus. Respirations are slow and shallow. Radial pulse is slow but present.",
+    "history": "A bystander reports possible fentanyl use shortly before the patient became unresponsive.",
+    "exam": "Pinpoint pupils, cool skin, and very poor respiratory effort. No major trauma is seen.",
+    "vitals": "HR 58, BP 98/60, RR 6, SpO₂ 79%.",
+    "additional": "The patient has a pulse but is not protecting the airway well.",
+    "diagnosis": "Opioid Overdose",
+    "management": [
+      "Ventilation and airway support are the immediate priorities.",
+      "Administer naloxone per protocol while continuing ventilation.",
+      "Titrate treatment toward adequate breathing and reassess frequently."
+    ],
+    "teaching": [
+      "Do not delay ventilation while waiting for naloxone.",
+      "The goal is adequate ventilation, not necessarily complete awakening."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Without ventilation, SpO₂ falls further and the heart rate drops into the 40s."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes apneic. A pulse is still present initially, making this a respiratory arrest.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Support ventilation first when respirations are inadequate.",
+      "Give naloxone according to the server protocol while continuing ventilatory support.",
+      "Reassess breathing and mental status after naloxone rather than treating only for wakefulness."
+    ]
+  },
+  {
+    "condition": "ACS / Heart Attack",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with chest pressure and sweating.",
+    "scene": "The patient is seated on the couch, pale and visibly uncomfortable, clutching the center of the chest.",
+    "initial": "Airway is patent. Breathing is mildly rapid. Radial pulse is regular but fast.",
+    "history": "Crushing central chest pressure began 30 minutes ago and radiates to the left arm. History of hypertension and high cholesterol.",
+    "exam": "Pale, cool, diaphoretic skin. Lung sounds are clear. No chest-wall tenderness reproduces the pain.",
+    "vitals": "HR 104, BP 154/92, RR 22, SpO₂ 96%.",
+    "additional": "12-lead ECG shows ST elevation in II, III, and aVF with reciprocal changes in aVL.",
+    "ecg": "Inferior STEMI pattern: ST elevation in II, III, aVF with reciprocal depression in aVL.",
+    "diagnosis": "ACS / Inferior STEMI",
+    "management": [
+      "Obtain and interpret a 12-lead ECG.",
+      "Give aspirin when indicated and without contraindication.",
+      "Use oxygen only when clinically indicated.",
+      "Evaluate blood pressure and contraindications before nitroglycerin.",
+      "Activate STEMI transport/notification procedures."
+    ],
+    "teaching": [
+      "Inferior STEMI can involve the right ventricle.",
+      "Hypotension should change how preload-reducing medications are approached."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes nauseated and BP falls to 94/60. HR is now 58. A right-sided ECG shows ST elevation in V4R."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient suddenly becomes unresponsive and pulseless with ventricular fibrillation on the monitor.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Obtain a 12-lead ECG and recognize the heart-attack/ACS presentation.",
+      "Give aspirin when indicated and no listed contraindication is present.",
+      "Check blood pressure and contraindications before nitroglycerin and transport appropriately."
+    ]
+  },
+  {
+    "condition": "Stroke",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with sudden weakness and speech difficulty.",
+    "scene": "The patient is seated at a table with family present. One side of the face is visibly drooping.",
+    "initial": "Airway is patent and respirations are adequate. Pulse is regular. Patient is alert but has difficulty speaking.",
+    "history": "Family states symptoms began suddenly 25 minutes ago. Last known well was immediately before onset.",
+    "exam": "Facial droop, slurred speech, and marked weakness of the right arm and leg. No seizure witnessed.",
+    "vitals": "HR 86, BP 188/104, RR 18, SpO₂ 97%, BGL 118 mg/dL.",
+    "additional": "Patient takes an anticoagulant for atrial fibrillation.",
+    "diagnosis": "Acute Stroke",
+    "management": [
+      "Determine last known well time.",
+      "Perform a stroke assessment and check BGL.",
+      "Protect airway as needed and avoid unnecessary delays.",
+      "Rapidly transport to an appropriate stroke-capable facility with prenotification."
+    ],
+    "teaching": [
+      "Do not treat hypertension casually in suspected stroke without protocol/medical direction.",
+      "Anticoagulant use is important information for the receiving stroke team."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Speech becomes more difficult and the patient develops increasing drowsiness while still maintaining the airway."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient vomits and becomes unable to protect the airway, requiring aggressive airway management.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Perform a stroke assessment, determine last-known-well time, and check blood glucose.",
+      "Protect the airway if needed and avoid unnecessary on-scene delays.",
+      "Transport rapidly to an appropriate stroke-capable facility with prenotification."
+    ]
+  },
+  {
+    "condition": "Tension Pneumothorax",
+    "type": "Trauma",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a construction site for a {age}-year-old {sex} struck in the chest by heavy equipment.",
+    "scene": "The patient is supine and in severe respiratory distress after blunt chest trauma.",
+    "initial": "Airway is patent. Respirations are rapid and shallow. Radial pulse is fast and weak.",
+    "history": "Symptoms worsened quickly over several minutes after the impact.",
+    "exam": "Breath sounds are absent on the left. Neck veins are distended. The left chest appears hyperexpanded. Skin is cool and sweaty.",
+    "vitals": "HR 138, BP 78/44, RR 34, SpO₂ 81%.",
+    "additional": "Mental status is deteriorating rapidly.",
+    "diagnosis": "Tension Pneumothorax",
+    "management": [
+      "Support airway and oxygenation.",
+      "Perform immediate chest decompression when clinically indicated and authorized by protocol.",
+      "Reassess after decompression and transport rapidly."
+    ],
+    "teaching": [
+      "The key distinction from a simple pneumothorax is hemodynamic compromise.",
+      "Do not wait for every classic sign if the overall presentation strongly supports tension physiology."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Without decompression the patient becomes minimally responsive, BP is unobtainable, and the radial pulse disappears."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes pulseless. Traumatic cardiac arrest is now present unless the obstructive cause is rapidly corrected.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Recognize tension physiology in the deteriorating chest-trauma patient.",
+      "Perform chest decompression when clinically indicated and within paramedic scope.",
+      "Immediately reassess breathing and perfusion after decompression and transport rapidly."
+    ]
+  },
+  {
+    "condition": "Cardiac Tamponade",
+    "type": "Trauma",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to an assault for a {age}-year-old {sex} with a penetrating chest injury.",
+    "scene": "The patient is sitting against a wall with a small penetrating wound near the left chest. External bleeding is limited.",
+    "initial": "Airway is patent. Breathing is rapid. Radial pulse is very weak and fast.",
+    "history": "Injury occurred about 10 minutes ago.",
+    "exam": "Neck veins are distended. Heart sounds are distant. Lung sounds are present bilaterally. Skin is pale and clammy.",
+    "vitals": "HR 132, BP 82/58, RR 28, SpO₂ 93%.",
+    "additional": "Pulse pressure is narrowing and mental status is beginning to decline.",
+    "diagnosis": "Cardiac Tamponade",
+    "management": [
+      "Support ABCs and treat shock.",
+      "Rapid transport to definitive surgical care is essential.",
+      "Perform pericardial decompression only when within scope/protocol and clinically indicated."
+    ],
+    "teaching": [
+      "Beck's triad is JVD, hypotension, and muffled heart sounds.",
+      "Bilateral breath sounds with obstructive shock can help distinguish tamponade from tension pneumothorax."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "BP falls to 68/48 and the patient becomes increasingly confused. Peripheral pulses are barely palpable."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes pulseless with organized electrical activity on the monitor, consistent with PEA arrest from obstructive shock.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Recognize obstructive shock/tamponade physiology and support ABCs.",
+      "Establish vascular access and treat shock without delaying definitive care.",
+      "Prioritize rapid transport to definitive surgical care."
+    ]
+  },
+  {
+    "condition": "DKA",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with vomiting, weakness, and abnormal breathing.",
+    "scene": "The patient is lying on a couch, appears dehydrated, and is breathing very deeply and rapidly.",
+    "initial": "Airway is patent. Respirations are deep and rapid. Radial pulse is fast and weak. Patient is awake but sluggish.",
+    "history": "Type 1 diabetes. Patient has been ill for two days and missed insulin doses because of vomiting.",
+    "exam": "Warm, dry skin, dry mucous membranes, and fruity odor on the breath. Generalized abdominal discomfort without guarding.",
+    "vitals": "HR 124, BP 96/60, RR 30 deep, SpO₂ 98%, BGL reads HIGH (>600 mg/dL).",
+    "additional": "Patient reports intense thirst and frequent urination before becoming too weak to get up.",
+    "diagnosis": "Diabetic Ketoacidosis",
+    "management": [
+      "Support ABCs and monitor ECG.",
+      "Establish IV access and begin protocol-directed fluid resuscitation.",
+      "Monitor for shock and transport for definitive metabolic management."
+    ],
+    "teaching": [
+      "Kussmaul respirations are compensatory and should not be mistaken for primary anxiety hyperventilation.",
+      "DKA commonly produces significant dehydration."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes more confused. HR 136, BP 84/50, with persistent deep respirations."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes obtunded with worsening shock and poor peripheral perfusion.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Confirm the diabetic/metabolic problem with blood glucose and ongoing assessment.",
+      "Establish IV access and begin protocol-directed fluid replacement.",
+      "Monitor for worsening shock or mental status and transport for definitive care."
+    ]
+  },
+  {
+    "condition": "Status Epilepticus",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} actively seizing.",
+    "scene": "You arrive to find generalized tonic-clonic activity ongoing. Family states this is the second seizure without the patient waking up.",
+    "initial": "Airway is partially obstructed by secretions during convulsions. Breathing is irregular. Pulse is rapid.",
+    "history": "Known seizure disorder. Family is unsure whether medications were taken today.",
+    "exam": "Generalized seizure activity continues. No major trauma is seen.",
+    "vitals": "HR 142, BP 168/94, RR difficult to assess during seizure, SpO₂ 86%, BGL 104 mg/dL.",
+    "additional": "Total continuous/recurrent seizure time is now approximately 7 minutes.",
+    "diagnosis": "Status Epilepticus",
+    "management": [
+      "Protect the airway and oxygenate/ventilate as needed.",
+      "Check BGL and establish IV/IO access.",
+      "Administer benzodiazepine therapy per protocol.",
+      "Reassess for recurrent seizure and respiratory depression after treatment."
+    ],
+    "teaching": [
+      "Status epilepticus is seizure >5 minutes or recurrent seizures without regaining consciousness.",
+      "Post-treatment airway and ventilation monitoring is critical."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Convulsions continue and SpO₂ falls despite basic airway positioning. The patient remains unresponsive between movements."
+      },
+      {
+        "title": "Stage 3",
+        "text": "After seizure activity stops, respirations are slow and inadequate and the patient remains deeply unresponsive.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Protect the airway, support oxygenation/ventilation, and check blood glucose.",
+      "Establish IV/IO access without allowing it to delay seizure treatment.",
+      "Give diazepam for prolonged/ongoing convulsions according to the supplied paramedic medication matrix."
+    ]
+  },
+  {
+    "condition": "Pesticide / Nerve Agent Overdose",
+    "type": "Toxicology",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to an agricultural property for a {age}-year-old {sex} with vomiting and difficulty breathing after pesticide exposure.",
+    "scene": "The patient is outside near spraying equipment. There is a strong chemical odor and visible liquid contamination on clothing.",
+    "initial": "Airway contains copious secretions. Respirations are labored with wet lung sounds. Pulse is slow.",
+    "history": "Coworkers report an accidental concentrated pesticide exposure shortly before symptoms began.",
+    "exam": "Pinpoint pupils, heavy sweating, salivation, tearing, vomiting, diarrhea, and diffuse bronchial secretions.",
+    "vitals": "HR 48, BP 90/54, RR 26 with poor air movement, SpO₂ 84%.",
+    "additional": "Scene safety and decontamination are required before routine patient care.",
+    "diagnosis": "Pesticide / Nerve Agent Overdose",
+    "management": [
+      "Prioritize scene safety, PPE, and decontamination.",
+      "Aggressively manage airway secretions and ventilation.",
+      "Administer atropine and other antidotal therapy according to protocol."
+    ],
+    "teaching": [
+      "Think wet: salivation, lacrimation, urination, GI symptoms, emesis, and bronchorrhea.",
+      "Responder contamination is a major hazard."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Secretions worsen and the patient becomes increasingly hypoxic and confused."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes apneic with severe bradycardia and impending cardiac arrest.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Make scene safety, PPE, and decontamination the first priority when pesticide/nerve-agent exposure is suspected.",
+      "Control airway secretions and support ventilation aggressively.",
+      "Use antidotal therapy only as supported by the active server protocol and reassess continuously."
+    ]
+  },
+  {
+    "condition": "Heat Stroke",
+    "type": "Environmental",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a road race for a {age}-year-old {sex} who collapsed in the heat.",
+    "scene": "The patient is on the ground near the finish area. Bystanders say the patient became confused before collapsing.",
+    "initial": "Airway is patent. Respirations are fast. Pulse is very rapid. Patient is confused and combative.",
+    "history": "Prolonged exertion in hot, humid weather.",
+    "exam": "Skin is very hot. Patient has severe CNS dysfunction and cannot answer questions appropriately.",
+    "vitals": "HR 148, BP 92/50, RR 32, SpO₂ 95%, core Temp 105.6°F.",
+    "additional": "A brief generalized seizure occurs during assessment.",
+    "diagnosis": "Heat Stroke",
+    "management": [
+      "Begin immediate rapid active cooling.",
+      "Support oxygenation and ventilation as needed.",
+      "Establish IV access and treat circulatory compromise per protocol.",
+      "Monitor ECG and transport while cooling continues when feasible."
+    ],
+    "teaching": [
+      "Heat stroke is defined by severe hyperthermia plus CNS dysfunction.",
+      "Cooling should not be delayed for transport preparations."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes less responsive and BP falls to 78/42 despite ongoing tachycardia."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes comatose with abnormal respirations and severe shock.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Recognize heat stroke from hyperthermia plus altered mental status.",
+      "Begin immediate rapid cooling and continue it during transport when feasible.",
+      "Support airway, breathing, and circulation and establish vascular access as indicated."
+    ]
+  },
+  {
+    "condition": "Dangerously High Potassium",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to a dialysis center for a {age}-year-old {sex} with weakness and a slow heart rate.",
+    "scene": "The patient is pale and weak after missing a scheduled dialysis session.",
+    "initial": "Airway is patent. Breathing is adequate. Radial pulse is slow and irregular.",
+    "history": "End-stage renal disease on hemodialysis. Patient missed the last treatment because of transportation problems.",
+    "exam": "Generalized weakness and mild peripheral edema. No focal neurologic deficits.",
+    "vitals": "HR 38, BP 88/54, RR 20, SpO₂ 96%.",
+    "additional": "ECG shows tall peaked T waves progressing to QRS widening.",
+    "ecg": "Marked peaked T waves with widening QRS and bradycardia, concerning for severe hyperkalemia.",
+    "diagnosis": "Severe Hyperkalemia",
+    "management": [
+      "Continuous cardiac monitoring and rapid recognition are critical.",
+      "Establish IV/IO access and provide supportive treatment within the Critical Care Paramedic scope.",
+      "Treat unstable bradycardia/dysrhythmias within protocol and arrange rapid transport for definitive treatment/dialysis."
+    ],
+    "criticalActions": [
+      "Recognize severe hyperkalemia from the dialysis history, bradycardia, peaked T waves, and widening QRS.",
+      "Place the patient on continuous cardiac monitoring and closely reassess for progression toward arrest.",
+      "Establish IV/IO access and expedite transport for definitive treatment/dialysis."
+    ],
+    "scopeNotes": [
+      "The supplied server medication matrix lists Calcium Chloride for prevention of hypocalcemia with pre-hospital transfusions; it does not specifically list a hyperkalemia medication protocol. This scenario therefore does not require a medication that is not supported by the supplied training guide."
+    ],
+    "teaching": [
+      "Severe hyperkalemia can rapidly progress from peaked T waves to wide-complex rhythms and arrest.",
+      "Pacing alone may be ineffective until the metabolic problem is treated."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "QRS widens further and HR falls to 28. BP is 70/40 and the patient becomes drowsy."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The rhythm degenerates into a near sine-wave pattern followed by pulseless electrical activity.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Sepsis",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with fever, weakness, and confusion.",
+    "scene": "The patient is in bed, lethargic and ill appearing. Family reports worsening symptoms over two days.",
+    "initial": "Airway is patent. Respirations are rapid. Pulse is very fast and weak. Patient is confused.",
+    "history": "Recent urinary infection treated incompletely. Oral intake has been poor.",
+    "exam": "Hot skin, dry mucous membranes, and suprapubic discomfort. Peripheral perfusion is delayed.",
+    "vitals": "HR 132, BP 78/44, RR 30, SpO₂ 93%, Temp 103.1°F.",
+    "additional": "Lactate, if available in your system, is markedly elevated. Patient has produced very little urine today.",
+    "diagnosis": "Septic Shock",
+    "management": [
+      "Support oxygenation and ventilation.",
+      "Establish vascular access and begin protocol-directed fluid resuscitation.",
+      "Consider vasopressor support when shock persists after appropriate volume resuscitation and according to critical-care protocol.",
+      "Rapid transport and sepsis notification are appropriate."
+    ],
+    "teaching": [
+      "Shock can persist even when the skin initially feels warm.",
+      "Reassess perfusion response rather than relying on a single blood-pressure value."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "After initial fluid resuscitation BP remains 76/42 with worsening confusion and mottled extremities."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes minimally responsive with profound vasodilatory shock and impending cardiovascular collapse.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Recognize shock in the infected patient and support oxygenation/ventilation.",
+      "Establish vascular access and begin server-appropriate fluid resuscitation.",
+      "Reassess perfusion frequently and transport promptly for definitive sepsis care."
+    ]
+  },
+  {
+    "condition": "Blood Transfusion Reaction",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to an infusion center for a {age}-year-old {sex} who became acutely ill during a blood transfusion.",
+    "scene": "The patient is reclined in an infusion chair with blood still running through an IV line. Staff report symptoms began minutes after the transfusion started.",
+    "initial": "Airway is patent. Breathing is fast with new wheezing. Pulse is rapid.",
+    "history": "Patient was receiving packed red blood cells for anemia. No symptoms were present before the transfusion.",
+    "exam": "Facial flushing, chills, hives, chest discomfort, and flank pain. Patient appears anxious and ill.",
+    "vitals": "HR 128, BP 86/50, RR 28, SpO₂ 90%, Temp 101.5°F.",
+    "additional": "Symptoms are temporally associated with the active transfusion.",
+    "diagnosis": "Acute Blood Transfusion Reaction",
+    "management": [
+      "Stop the transfusion immediately while maintaining appropriate IV access with compatible fluid per protocol.",
+      "Support airway, breathing, and circulation.",
+      "Treat anaphylaxis, shock, or other reaction features as indicated.",
+      "Preserve transfusion information and notify the receiving facility."
+    ],
+    "teaching": [
+      "A sudden reaction during transfusion should be assumed serious until proven otherwise.",
+      "Treatment depends on the reaction phenotype, but stopping the transfusion is immediate."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Hypotension worsens and respiratory distress increases. Hives spread and the patient becomes confused."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient develops severe shock with inadequate respirations and is nearing cardiac arrest.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Stop the blood transfusion immediately when a transfusion reaction is suspected.",
+      "Maintain appropriate vascular access and support airway, breathing, and circulation.",
+      "Treat shock/anaphylactic features as indicated and notify the receiving facility with transfusion details."
+    ]
+  },
+  {
+    "condition": "Severe Hypothermia",
+    "type": "Environmental",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to a remote outdoor location for a {age}-year-old {sex} found after prolonged cold exposure.",
+    "scene": "The patient has been moved to a sheltered area. Clothing is wet and partially frozen. The patient appears lifeless at first glance.",
+    "initial": "Patient is unresponsive. Breathing is extremely slow and shallow. A central pulse is faint and requires prolonged assessment to detect.",
+    "history": "Estimated exposure time is several hours in freezing conditions.",
+    "exam": "Skin is very cold. No shivering is present. Muscles are stiff. Handle the patient gently.",
+    "vitals": "HR 24 irregular, BP difficult to obtain, RR 4, SpO₂ unreliable, core Temp 78°F.",
+    "additional": "Monitor shows atrial fibrillation with frequent ventricular ectopy.",
+    "ecg": "Profound bradycardia with atrial fibrillation/ventricular irritability in severe hypothermia.",
+    "diagnosis": "Severe Hypothermia",
+    "management": [
+      "Confirm pulse and respirations carefully for an extended period.",
+      "Handle gently and keep the patient horizontal.",
+      "Remove wet clothing, prevent further heat loss, and begin appropriate active core rewarming.",
+      "Use warmed humidified oxygen and warmed IV fluids when available and indicated.",
+      "Follow hypothermic resuscitation/defibrillation guidance if arrest occurs."
+    ],
+    "teaching": [
+      "Severe hypothermia can mimic death.",
+      "Rough handling can precipitate ventricular dysrhythmias."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient loses the detectable pulse and develops ventricular fibrillation during movement."
+      },
+      {
+        "title": "Stage 3",
+        "text": "Cardiac arrest continues in profound hypothermia; resuscitation and rewarming proceed under hypothermia-specific protocol.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Handle the severely hypothermic patient gently and prevent additional heat loss.",
+      "Carefully confirm pulse/respirations and support oxygenation/ventilation as needed.",
+      "Begin appropriate rewarming, including warmed oxygen/IV fluid when available within the critical-care plan."
+    ]
+  },
+  {
+    "condition": "DIC",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to a hospital transfer unit for a {age}-year-old {sex} with worsening bleeding and shock.",
+    "scene": "The patient is critically ill with oozing from multiple IV and puncture sites.",
+    "initial": "Airway is patent. Breathing is fast. Pulse is rapid and weak. Patient is confused.",
+    "history": "Patient is being treated for severe sepsis and has developed increasing bleeding over the last hour.",
+    "exam": "Diffuse bruising, petechiae, and persistent oozing from vascular-access sites. Skin is cool and mottled.",
+    "vitals": "HR 136, BP 74/40, RR 30, SpO₂ 94%.",
+    "additional": "Laboratory information provided for transport shows falling platelets and abnormal coagulation studies.",
+    "diagnosis": "Disseminated Intravascular Coagulation (DIC)",
+    "management": [
+      "Support ABCs and treat shock.",
+      "Control external bleeding where possible without causing additional trauma.",
+      "Continue treatment of the underlying cause and transport with appropriate blood-product support per critical-care plan."
+    ],
+    "teaching": [
+      "DIC causes simultaneous widespread clotting and consumption of clotting factors, leading to bleeding.",
+      "Sepsis, major trauma, burns, obstetric emergencies, and massive transfusion are important causes."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Bleeding increases from IV sites and mucous membranes while BP remains critically low."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient develops profound shock with worsening mental status and multisystem failure.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Support ABCs and treat shock while minimizing additional trauma or unnecessary needle sticks.",
+      "Control visible external bleeding where possible.",
+      "Use blood-product support when included in the critical-care transport plan and transport for definitive treatment of the underlying cause."
+    ]
+  },
+  {
+    "condition": "Respiratory Failure",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to a long-term care facility for a {age}-year-old {sex} with worsening respiratory distress and decreasing responsiveness.",
+    "scene": "The patient is upright in bed with staff providing oxygen. Respiratory effort is visibly tiring.",
+    "initial": "Airway is patent. Respirations are shallow and increasingly ineffective. Pulse is fast. Patient answers only with brief responses.",
+    "history": "Several days of respiratory illness with chronic lung disease.",
+    "exam": "Diffuse diminished breath sounds with scattered crackles. Accessory muscle use is becoming less pronounced as fatigue worsens.",
+    "vitals": "HR 124, BP 108/64, RR 18 shallow after previously being in the 30s, SpO₂ 82% despite oxygen.",
+    "additional": "Mental status is declining. If capnography is available, ventilation is inadequate with rising CO₂.",
+    "diagnosis": "Acute Respiratory Failure",
+    "management": [
+      "Recognize that decreasing respiratory rate may reflect fatigue, not improvement.",
+      "Provide escalating ventilatory support, including BVM/NIV/advanced airway as clinically appropriate.",
+      "Treat the underlying cause while maintaining oxygenation and ventilation."
+    ],
+    "teaching": [
+      "AMS is a major warning sign distinguishing respiratory failure from uncomplicated distress.",
+      "Work of breathing may decrease just before arrest because the patient is exhausted."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes minimally responsive with RR 10 and very poor tidal volume. SpO₂ falls to 74%."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient stops breathing but still has a pulse, producing respiratory arrest.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Recognize inadequate ventilation and respiratory fatigue as respiratory failure.",
+      "Provide BVM ventilation when breathing is inadequate and escalate airway management as needed.",
+      "Treat the underlying cause while continuously reassessing oxygenation and ventilation."
+    ]
+  },
+  {
+    "condition": "Anaphylaxis",
+    "type": "Medical",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a restaurant for a {age}-year-old {sex} with a severe allergic reaction.",
+    "scene": "The patient is seated on the floor, anxious, scratching at widespread hives. A family member says symptoms started minutes after eating.",
+    "initial": "Airway is patent but the voice is becoming hoarse. Breathing is labored with wheezing. Radial pulse is fast and weak.",
+    "history": "Known severe food allergy. The patient has an epinephrine auto-injector but has not used it.",
+    "exam": "Diffuse hives, swelling of the lips, wheezing, and cool clammy skin.",
+    "vitals": "HR 126, BP 88/54, RR 28, SpO₂ 90%.",
+    "additional": "The patient reports throat tightness and increasing difficulty swallowing.",
+    "diagnosis": "Anaphylaxis",
+    "management": [
+      "Recognize anaphylaxis early.",
+      "Administer IM epinephrine per server protocol.",
+      "Support airway and oxygenation; prepare to assist ventilations if needed.",
+      "Reassess frequently and transport promptly."
+    ],
+    "criticalActions": [
+      "Give IM epinephrine without unnecessary delay.",
+      "Support and repeatedly reassess the airway and breathing after epinephrine.",
+      "Transport promptly because symptoms can recur or progress."
+    ],
+    "scopeNotes": [
+      "Basic/EMT+ scope in the supplied matrix includes IM epinephrine for anaphylaxis."
+    ],
+    "teaching": [
+      "Skin findings plus respiratory or circulatory compromise should raise immediate concern for anaphylaxis.",
+      "Do not delay epinephrine while waiting for complete airway obstruction or profound shock."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Without epinephrine, BP falls to 74/42, wheezing worsens, and the patient can speak only one or two words at a time."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes barely responsive with severe airway swelling and inadequate respirations.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Closed Long-Bone Fracture",
+    "type": "Trauma",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a fall for a {age}-year-old {sex} with a leg injury.",
+    "scene": "The patient is seated on the ground after falling from several feet. There is obvious deformity of the lower leg but no open wound.",
+    "initial": "Airway and breathing are normal. Radial pulse is strong. Patient is alert and complaining of severe leg pain.",
+    "history": "The patient slipped while climbing down from a ladder and landed awkwardly. No loss of consciousness.",
+    "exam": "Closed deformity with swelling and tenderness. Distal pulse, motor function, and sensation are present but movement increases pain.",
+    "vitals": "HR 104, BP 138/82, RR 20, SpO₂ 98%.",
+    "additional": "No other major injuries are found on head-to-toe exam.",
+    "diagnosis": "Closed Long-Bone Fracture",
+    "management": [
+      "Check distal circulation, motor function, and sensation before and after splinting.",
+      "Immobilize the injury in a position of comfort using appropriate splinting.",
+      "Use ice/elevation when appropriate and monitor for shock.",
+      "Transport for definitive care."
+    ],
+    "criticalActions": [
+      "Check distal circulation, motor function, and sensation before splinting.",
+      "Immobilize the fracture appropriately.",
+      "Repeat distal neurovascular checks after splinting and monitor for shock."
+    ],
+    "scopeNotes": [
+      "The supplied trauma guide emphasizes splinting and checking circulation before and after immobilization."
+    ],
+    "teaching": [
+      "A closed fracture can still cause significant bleeding and shock.",
+      "Neurovascular reassessment after splinting is essential."
+    ],
+    "stages": []
+  },
+  {
+    "condition": "Major External Bleeding",
+    "type": "Trauma",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to an industrial site for a {age}-year-old {sex} with severe bleeding from an arm injury.",
+    "scene": "The patient is seated against a wall with a deep laceration to the forearm. Bright red blood is soaking through improvised dressings.",
+    "initial": "Airway is patent. Breathing is rapid. Radial pulse is fast and weak. Patient is pale and anxious.",
+    "history": "The arm was cut on a sharp piece of metal several minutes ago.",
+    "exam": "Deep extremity wound with brisk bleeding. No impaled object. Distal sensation is present.",
+    "vitals": "HR 122, BP 96/60, RR 26, SpO₂ 98%.",
+    "additional": "Bleeding continues despite light pressure from bystanders.",
+    "diagnosis": "Major External Hemorrhage",
+    "management": [
+      "Apply firm direct pressure and an appropriate dressing.",
+      "If severe extremity bleeding is not controlled, apply a tourniquet according to training.",
+      "Treat for shock and prevent heat loss.",
+      "Rapid transport is appropriate."
+    ],
+    "criticalActions": [
+      "Control the major external hemorrhage immediately with direct pressure and/or a tourniquet when indicated.",
+      "Treat for shock and prevent heat loss after hemorrhage control.",
+      "Do not delay hemorrhage control for a lengthy secondary assessment."
+    ],
+    "scopeNotes": [
+      "The supplied guide allows tourniquets for severe extremity bleeding and emphasizes pressure dressings."
+    ],
+    "teaching": [
+      "Major external hemorrhage can become life-threatening quickly.",
+      "Do not repeatedly remove effective dressings just to look at the wound."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "If bleeding is not controlled, the patient becomes dizzy with HR 138 and BP 78/44."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused and then unresponsive from hemorrhagic shock.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Drowning / Near Drowning",
+    "type": "Environmental",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a swimming area for a {age}-year-old {sex} pulled from the water.",
+    "scene": "Bystanders have removed the patient from the water and placed them on the ground. The patient is coughing forcefully and appears frightened.",
+    "initial": "Airway is patent but wet. Breathing is rapid and labored. Radial pulse is fast and strong. Patient is alert.",
+    "history": "Witnesses report the patient was submerged briefly after becoming exhausted while swimming.",
+    "exam": "Persistent coughing, coarse breath sounds, and mild cyanosis around the lips. No obvious trauma.",
+    "vitals": "HR 118, BP 132/78, RR 30, SpO₂ 88%, Temp 96.8°F.",
+    "additional": "The patient vomited immediately after rescue.",
+    "diagnosis": "Drowning with Respiratory Distress",
+    "management": [
+      "Secure the airway and improve oxygenation.",
+      "Suction as needed and assist ventilations if breathing becomes inadequate.",
+      "Protect from further heat loss and assess for associated trauma.",
+      "Transport for further evaluation."
+    ],
+    "criticalActions": [
+      "Secure the airway and improve oxygenation/ventilation.",
+      "Use suction/BVM support when needed rather than attempting to drain water from the lungs.",
+      "Prevent additional heat loss and transport for further evaluation."
+    ],
+    "scopeNotes": [
+      "The supplied drowning guide emphasizes airway stabilization, oxygen/BVM support, suction, and warming."
+    ],
+    "teaching": [
+      "Vomiting and aspiration are common after drowning.",
+      "Respiratory status can worsen after the initial rescue."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes more fatigued, SpO₂ falls to 82%, and respirations become shallow."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive and stops breathing while a pulse remains present.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Mild Hypothermia",
+    "type": "Environmental",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a roadside area for a {age}-year-old {sex} exposed to cold rain.",
+    "scene": "The patient is awake inside a vehicle after spending several hours outdoors in wet clothing.",
+    "initial": "Airway is patent. Breathing is normal. Pulse is slightly fast. Patient is alert and shivering vigorously.",
+    "history": "Prolonged cold and wet exposure with no major trauma.",
+    "exam": "Cold skin, intense shivering, and mild difficulty with fine motor tasks. Speech is clear.",
+    "vitals": "HR 102, BP 126/74, RR 18, SpO₂ 98%, Temp 94.8°F.",
+    "additional": "No confusion or loss of consciousness is present.",
+    "diagnosis": "Mild Hypothermia",
+    "management": [
+      "Move the patient to a warm environment.",
+      "Remove wet clothing and dry the patient.",
+      "Insulate with blankets and use gentle external warming.",
+      "Monitor for deterioration during transport."
+    ],
+    "criticalActions": [
+      "Move the patient to a warm environment and prevent further heat loss.",
+      "Remove wet clothing, dry, insulate, and warm gently.",
+      "Monitor for worsening mental status, breathing, or circulation during transport."
+    ],
+    "scopeNotes": [
+      "The supplied hypothermia guide defines hypothermia below 35°C/95°F and emphasizes warming and monitoring."
+    ],
+    "teaching": [
+      "Shivering is common in mild hypothermia and generates heat.",
+      "Worsening mental status and loss of shivering suggest progression."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Continued exposure causes slurred speech, clumsiness, and decreasing shivering. Core temperature falls further."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes lethargic with marked bradycardia and very slow respirations, indicating severe progression.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Ingested Poison",
+    "type": "Toxicology",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} who accidentally swallowed a potentially toxic substance.",
+    "scene": "The patient is awake in the kitchen. A household product container is on the counter and family is unsure how much was swallowed.",
+    "initial": "Airway is patent. Breathing and circulation are currently stable. Patient is anxious but oriented.",
+    "history": "Exposure occurred approximately 30 minutes ago. The patient denies vomiting so far.",
+    "exam": "No burns around the mouth, no drooling, and no respiratory distress are noted.",
+    "vitals": "HR 94, BP 128/76, RR 18, SpO₂ 99%.",
+    "additional": "The exact product label is available to bring with the patient.",
+    "diagnosis": "Acute Ingested Poison Exposure",
+    "management": [
+      "Identify the substance, amount, and approximate time of exposure.",
+      "Monitor vitals and mental status for delayed toxicity.",
+      "Activated charcoal may be considered only when the server criteria are met and the substance is appropriate.",
+      "Transport and seek poison/medical-control guidance as appropriate."
+    ],
+    "criticalActions": [
+      "Identify the ingested substance, approximate amount, and time of ingestion.",
+      "Assess airway, vitals, and mental status for delayed toxicity.",
+      "Only use activated charcoal when the supplied server criteria are met and no listed contraindication is present."
+    ],
+    "scopeNotes": [
+      "The supplied matrix lists activated charcoal PO for ingested toxins within one hour with specific contraindications."
+    ],
+    "teaching": [
+      "The container or medication list can be clinically valuable.",
+      "Some ingestions have delayed effects even when the initial exam is normal."
+    ],
+    "stages": []
+  },
+  {
+    "condition": "Dehydration",
+    "type": "Medical",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with weakness and dizziness.",
+    "scene": "The patient is lying on a couch and reports several days of poor oral intake during a gastrointestinal illness.",
+    "initial": "Airway is patent. Breathing is normal. Radial pulse is rapid and slightly weak. Patient is alert.",
+    "history": "Two days of vomiting and diarrhea with very little fluid intake.",
+    "exam": "Dry mouth, delayed skin recoil, dizziness on standing, and decreased urine output.",
+    "vitals": "HR 116, BP 94/58, RR 20, SpO₂ 98%.",
+    "additional": "No active bleeding is found. BGL is normal.",
+    "diagnosis": "Moderate to Severe Dehydration",
+    "management": [
+      "Assess for the cause and for signs of shock.",
+      "Establish IV access and begin normal saline replacement per server training when oral intake is not appropriate.",
+      "Reassess HR, BP, mental status, and symptoms after fluids.",
+      "Transport if symptoms are significant or fail to improve."
+    ],
+    "criticalActions": [
+      "Recognize clinically significant dehydration/hypovolemia.",
+      "Establish IV access and replace fluid with normal saline within Advanced EMT scope when oral intake is not appropriate.",
+      "Reassess HR, BP, mental status, and symptoms after fluid replacement."
+    ],
+    "scopeNotes": [
+      "The supplied Advanced EMT guide allows IV saline for fluid therapy/dehydration."
+    ],
+    "teaching": [
+      "Dehydration can produce tachycardia, hypotension, dizziness, and reduced urine output."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Without fluid replacement, BP falls to 82/50 and the patient becomes increasingly weak and lightheaded."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused with a very weak radial pulse, consistent with worsening hypovolemic shock.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Catastrophic Hemorrhage",
+    "type": "Trauma",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a machinery accident for a {age}-year-old {sex} with severe extremity trauma.",
+    "scene": "Coworkers have applied a tourniquet to a badly injured leg. A large amount of blood is present on the floor.",
+    "initial": "Airway is patent. Breathing is rapid. Radial pulse is weak and very fast. Patient is pale, cool, and anxious.",
+    "history": "The injury occurred less than 20 minutes ago. No known anticoagulant use.",
+    "exam": "Tourniquet is controlling active extremity hemorrhage. No major chest or abdominal injury is obvious on rapid exam.",
+    "vitals": "HR 138, BP 78/46, RR 30, SpO₂ 97%.",
+    "additional": "The patient remains alert but repeatedly says they feel faint.",
+    "diagnosis": "Hemorrhagic Shock from Catastrophic Bleeding",
+    "management": [
+      "Maintain effective hemorrhage control and do not remove a functioning tourniquet in the field.",
+      "Obtain IV/IO access and begin appropriate fluid therapy.",
+      "Administer TXA when the server criteria are met.",
+      "Prevent hypothermia and transport rapidly."
+    ],
+    "criticalActions": [
+      "Maintain immediate hemorrhage control and do not remove an effective tourniquet in the field.",
+      "Establish IV/IO access and treat shock without delaying transport.",
+      "Give TXA when the supplied server criteria for severe hemorrhage are met and prevent hypothermia."
+    ],
+    "scopeNotes": [
+      "The supplied Advanced EMT matrix includes TXA IV/IO for suspected severe hemorrhage and saline for fluid therapy."
+    ],
+    "teaching": [
+      "Hemorrhage control is the first priority.",
+      "A temporarily normal mental status does not mean the patient is stable."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Despite bleeding control, the patient becomes lethargic. BP is 68/38 and HR 146."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive with an absent radial pulse and impending traumatic arrest.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Moderate Hypothermia",
+    "type": "Environmental",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a rural property for a {age}-year-old {sex} found after prolonged cold exposure.",
+    "scene": "The patient is indoors now but remains in soaked clothing and is confused.",
+    "initial": "Airway is patent. Breathing is slow but adequate. Pulse is bradycardic. Patient responds to voice but is disoriented.",
+    "history": "Several hours outside overnight in cold rain.",
+    "exam": "Cold skin, impaired coordination, slurred speech, and reduced shivering.",
+    "vitals": "HR 48, BP 92/58, RR 12, SpO₂ 95%, core Temp 88°F.",
+    "additional": "No major trauma is identified.",
+    "diagnosis": "Moderate Hypothermia",
+    "management": [
+      "Handle gently and prevent further heat loss.",
+      "Remove wet clothing and insulate the patient.",
+      "Consider IV access with warmed normal saline per supplied Advanced EMT guidance.",
+      "Monitor closely for dysrhythmia and further decline."
+    ],
+    "criticalActions": [
+      "Handle the patient gently and prevent additional cooling.",
+      "Remove wet clothing, insulate, and begin appropriate rewarming.",
+      "Use warmed normal saline when indicated within Advanced EMT scope and monitor for dysrhythmia."
+    ],
+    "scopeNotes": [
+      "The supplied guide specifically notes warm IV saline for Advanced EMT+ and warns against adrenaline below 30°C/86°F."
+    ],
+    "teaching": [
+      "Bradycardia may be physiologic in hypothermia.",
+      "Aggressive movement can increase dysrhythmia risk as hypothermia worsens."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Core temperature falls to 84°F, shivering stops, and the patient becomes minimally responsive."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient develops severe bradycardia with ventricular irritability and is at high risk for arrest.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Ventricular Fibrillation Cardiac Arrest",
+    "type": "Medical",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a public location for a {age}-year-old {sex} who suddenly collapsed.",
+    "scene": "Bystanders are performing CPR. The patient is unresponsive and apneic.",
+    "initial": "No pulse is present. CPR is in progress. AED/monitor pads can be applied immediately.",
+    "history": "Witnesses report sudden collapse after the patient complained of chest pressure.",
+    "exam": "No signs of major trauma. Pupils are nonreactive during the initial arrest exam.",
+    "vitals": "Pulseless and apneic.",
+    "additional": "First rhythm check shows ventricular fibrillation.",
+    "ecg": "Ventricular fibrillation — shockable cardiac-arrest rhythm.",
+    "diagnosis": "Ventricular Fibrillation Cardiac Arrest",
+    "management": [
+      "Continue high-quality CPR with minimal interruptions.",
+      "Defibrillate VF according to the resuscitation sequence.",
+      "Obtain IV/IO access and administer cardiac-arrest epinephrine per server protocol.",
+      "Manage the airway within scope and search for reversible causes."
+    ],
+    "criticalActions": [
+      "Begin high-quality CPR and defibrillate VF without unnecessary delay.",
+      "Provide airway/ventilatory support while minimizing interruptions in compressions.",
+      "Obtain IV/IO access and give cardiac-arrest epinephrine according to the supplied Advanced EMT arrest guide."
+    ],
+    "scopeNotes": [
+      "The supplied Advanced EMT cardiac-arrest guide includes IV adrenaline/epinephrine in arrest and CPR/AED management."
+    ],
+    "teaching": [
+      "Early defibrillation is the key intervention for VF.",
+      "Medication supports resuscitation but does not replace CPR and shocks."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "After defibrillation and CPR, the rhythm becomes coarse VF again with no pulse."
+      },
+      {
+        "title": "Stage 3",
+        "text": "After another treatment cycle, ROSC is obtained with a weak pulse and BP 86/54.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Symptomatic Bradycardia",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with dizziness and near-syncope.",
+    "scene": "The patient is pale and seated on the floor after nearly passing out while walking.",
+    "initial": "Airway is patent. Breathing is adequate. Radial pulse is very slow and weak. Patient is alert but lightheaded.",
+    "history": "Symptoms began suddenly. The patient denies significant bleeding and has no obvious trauma.",
+    "exam": "Pale cool skin, delayed capillary refill, and generalized weakness. No focal neurologic deficit.",
+    "vitals": "HR 34, BP 76/44, RR 18, SpO₂ 96%.",
+    "additional": "The patient remains symptomatic despite being placed supine.",
+    "ecg": "Marked symptomatic bradycardia at approximately 34 bpm. No advanced interpretation is required for the scenario.",
+    "diagnosis": "Unstable Symptomatic Bradycardia",
+    "management": [
+      "Support ABCs and place on continuous cardiac monitoring.",
+      "Establish IV/IO access.",
+      "Administer atropine according to the server paramedic protocol when appropriate.",
+      "Prepare for escalation if perfusion does not improve."
+    ],
+    "criticalActions": [
+      "Recognize that the severe bradycardia is producing poor perfusion.",
+      "Place the patient on cardiac monitoring and obtain IV/IO access.",
+      "Give atropine according to the supplied paramedic matrix when the bradycardia meets the server indication."
+    ],
+    "scopeNotes": [
+      "The supplied paramedic matrix lists atropine IV/IO for absolute bradycardia with HR below 40."
+    ],
+    "teaching": [
+      "Treat the patient, not just the number; hypotension and near-syncope make this bradycardia unstable."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Without effective treatment, HR falls to 28, BP 64/38, and the patient becomes confused."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive and loses pulses, progressing to cardiac arrest.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "SVT",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a workplace for a {age}-year-old {sex} with sudden palpitations and dizziness.",
+    "scene": "The patient is seated, anxious, and reports the heart suddenly started racing.",
+    "initial": "Airway is patent. Breathing is mildly rapid. Radial pulse is extremely fast and regular.",
+    "history": "Abrupt onset of palpitations while at rest. No recent stimulant use is reported.",
+    "exam": "Skin is pale and slightly sweaty. No focal neurologic findings or respiratory distress.",
+    "vitals": "HR 188 regular, BP 102/66, RR 22, SpO₂ 98%.",
+    "additional": "The patient reports chest pressure but remains alert.",
+    "ecg": "Regular narrow-complex tachycardia consistent with SVT at approximately 190 bpm.",
+    "diagnosis": "Supraventricular Tachycardia (SVT)",
+    "management": [
+      "Assess stability and obtain continuous cardiac monitoring/12-lead when feasible.",
+      "Establish vascular access and follow the server tachycardia treatment pathway.",
+      "If the patient becomes unstable, escalate treatment promptly according to protocol."
+    ],
+    "criticalActions": [
+      "Identify SVT and determine whether the patient is hemodynamically stable or unstable.",
+      "Place the patient on cardiac monitoring/12-lead and establish vascular access without unnecessary delay.",
+      "Escalate promptly if hypotension, altered mental status, ischemic chest discomfort, or other instability develops."
+    ],
+    "scopeNotes": [
+      "This scenario intentionally tests recognition and management of SVT without requiring advanced rhythm morphology analysis."
+    ],
+    "teaching": [
+      "Sudden onset and a very regular narrow-complex rhythm support SVT.",
+      "Mental status and blood pressure matter more than the heart-rate number alone."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes more diaphoretic. BP falls to 82/48 and chest pressure worsens."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused and profoundly hypotensive, representing unstable tachycardia.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Atrial Fibrillation with RVR",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with palpitations and weakness.",
+    "scene": "The patient is seated upright and says the heartbeat feels fast and irregular.",
+    "initial": "Airway is patent. Breathing is adequate. Radial pulse is rapid and irregular.",
+    "history": "History of intermittent atrial fibrillation. Symptoms started several hours ago.",
+    "exam": "Mild dyspnea and fatigue without focal neurologic deficit.",
+    "vitals": "HR 156 irregular, BP 104/68, RR 22, SpO₂ 96%.",
+    "additional": "No active bleeding or major trauma is present.",
+    "ecg": "Atrial fibrillation with rapid ventricular response, ventricular rate approximately 150–160 bpm.",
+    "diagnosis": "Atrial Fibrillation with Rapid Ventricular Response",
+    "management": [
+      "Assess hemodynamic stability and obtain cardiac monitoring/12-lead.",
+      "Establish vascular access and treat according to the server tachyarrhythmia pathway.",
+      "Watch closely for hypotension, chest pain, altered mental status, or pulmonary edema."
+    ],
+    "criticalActions": [
+      "Identify A-Fib with RVR and determine whether the patient is stable or unstable.",
+      "Use cardiac monitoring/12-lead and establish vascular access.",
+      "Escalate promptly if the patient develops hypotension, altered mental status, chest discomfort, or pulmonary edema."
+    ],
+    "scopeNotes": [
+      "The scenario is deliberately limited to recognition of A-Fib with RVR and appropriate instability assessment."
+    ],
+    "teaching": [
+      "An irregularly irregular rapid pulse is a useful bedside clue.",
+      "Deterioration changes the urgency of treatment."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient develops worsening dyspnea and BP falls to 84/52."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused with severe hypotension and chest discomfort, now clearly unstable.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Ventricular Tachycardia",
+    "type": "Medical",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with chest discomfort and near-syncope.",
+    "scene": "The patient is pale, sweaty, and struggling to remain upright.",
+    "initial": "Airway is patent. Breathing is rapid. Radial pulse is very fast and weak.",
+    "history": "Known cardiac disease. Sudden onset of palpitations and chest discomfort.",
+    "exam": "Cool clammy skin and delayed capillary refill. Patient is anxious and lightheaded.",
+    "vitals": "HR 176, BP 78/46, RR 26, SpO₂ 94%.",
+    "additional": "The patient is becoming less responsive.",
+    "ecg": "Regular wide-complex tachycardia consistent with ventricular tachycardia with a pulse.",
+    "diagnosis": "Unstable Ventricular Tachycardia with a Pulse",
+    "management": [
+      "Recognize the patient as unstable and maintain continuous monitoring.",
+      "Establish IV/IO access if it does not delay definitive treatment.",
+      "Follow the server unstable tachycardia pathway and be prepared for deterioration to pulseless VT/VF.",
+      "Continue airway and perfusion support."
+    ],
+    "criticalActions": [
+      "Recognize the wide-complex tachycardia as unstable ventricular tachycardia with a pulse.",
+      "Do not allow IV placement or a prolonged history to delay definitive unstable-tachycardia treatment.",
+      "Prepare immediately for deterioration to pulseless VT/VF and cardiac arrest."
+    ],
+    "scopeNotes": [
+      "The scenario requires recognition of VT and instability, not advanced morphology interpretation."
+    ],
+    "teaching": [
+      "Wide-complex tachycardia with hypotension and altered perfusion is a high-risk rhythm.",
+      "The patient may deteriorate into cardiac arrest at any time."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient loses consciousness and the pulse becomes difficult to detect."
+      },
+      {
+        "title": "Stage 3",
+        "text": "No pulse is present. The rhythm remains ventricular tachycardia and should now be managed as a shockable cardiac arrest.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Major Burn with Airway Risk",
+    "type": "Trauma",
+    "difficulty": "Paramedic",
+    "dispatch": "Medic 1, respond to a structure fire for a {age}-year-old {sex} with burns and smoke exposure.",
+    "scene": "The patient has been removed from the building and is sitting on the curb. Clothing is burned over the upper chest and arms.",
+    "initial": "Airway is patent. Breathing is rapid. Pulse is fast. Patient is alert but anxious.",
+    "history": "The patient was trapped in a smoke-filled room for several minutes before escape.",
+    "exam": "Partial-thickness burns to the upper chest and arms. Soot is present around the mouth with singed nasal hair and a hoarse voice.",
+    "vitals": "HR 122, BP 136/80, RR 26, SpO₂ 94%.",
+    "additional": "No stridor is present yet, but the voice is progressively more hoarse.",
+    "diagnosis": "Major Burn with Suspected Inhalation Injury",
+    "management": [
+      "Stop the burning process and remove contaminated/burned clothing as appropriate.",
+      "Assess burn depth, location, and circumferential involvement.",
+      "Provide oxygen and closely monitor the airway.",
+      "Consider early advanced airway management if airway swelling is progressing, according to paramedic protocol.",
+      "Cover burns appropriately and transport to an appropriate facility."
+    ],
+    "criticalActions": [
+      "Recognize the inhalation-injury warning signs and anticipate airway swelling before complete obstruction occurs.",
+      "Provide oxygen and repeatedly reassess the airway.",
+      "Prepare for early advanced airway management when swelling/stridor progresses, according to paramedic airway training."
+    ],
+    "scopeNotes": [
+      "The supplied burn guide highlights soot, singed hair, facial/neck burns, and airway monitoring; the paramedic airway guide includes RSI."
+    ],
+    "teaching": [
+      "A currently patent airway can deteriorate rapidly after inhalation injury.",
+      "Pulse oximetry may not reflect carbon monoxide exposure accurately."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Hoarseness worsens and stridor develops. The patient is increasingly anxious and has difficulty handling secretions."
+      },
+      {
+        "title": "Stage 3",
+        "text": "Severe upper-airway edema causes rapidly worsening obstruction and inadequate ventilation.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Massive Hemorrhage Requiring SWiFT",
+    "type": "Trauma",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to an interfacility transfer for a {age}-year-old {sex} with ongoing hemorrhagic shock after major trauma.",
+    "scene": "The patient is packaged for transfer with hemorrhage controlled but remains profoundly hypotensive. Multiple large-bore access sites are present.",
+    "initial": "Airway is secured. Ventilation is adequate. Pulse is rapid and weak. Patient is sedated but has poor peripheral perfusion.",
+    "history": "Major traumatic blood loss before arrival at the sending facility. Crystalloid alone has not restored perfusion.",
+    "exam": "Pale cool skin, delayed capillary refill, and ongoing signs of severe hypovolemia. No new external hemorrhage is seen.",
+    "vitals": "HR 142, BP 70/38, RR 20 assisted, SpO₂ 98%.",
+    "additional": "Sending team requests continued blood-product resuscitation during transport.",
+    "diagnosis": "Hemorrhagic Shock Requiring Blood Product Resuscitation",
+    "management": [
+      "Maintain hemorrhage control and prevent hypothermia.",
+      "Continue SWiFT/blood-product resuscitation according to the critical-care transport plan.",
+      "Use packed red blood cells and freeze-dried/lyophilized plasma as indicated by the supplied server matrix.",
+      "Monitor closely for transfusion reaction and changes in perfusion."
+    ],
+    "criticalActions": [
+      "Maintain hemorrhage control and actively prevent hypothermia.",
+      "Continue blood-product/SWiFT resuscitation according to the critical-care transport plan.",
+      "Continuously reassess perfusion and watch for a transfusion reaction during transport."
+    ],
+    "scopeNotes": [
+      "The supplied Critical Care Paramedic matrix lists packed red blood cells and freeze-dried plasma under SWiFT."
+    ],
+    "teaching": [
+      "Blood products address oxygen-carrying capacity and clotting-factor loss in major hemorrhage.",
+      "Hypothermia worsens coagulopathy and should be actively prevented."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "After appropriate blood-product resuscitation, BP improves to 88/54 and peripheral perfusion begins to improve."
+      },
+      {
+        "title": "Stage 3",
+        "text": "If resuscitation is delayed, the patient develops worsening shock with bradycardia and impending arrest.",
+        "critical": true
+      }
+    ]
+  },
+  {
+    "condition": "Severe Asthma Refractory to Initial Therapy",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with severe asthma not improving after initial treatment.",
+    "scene": "Another EMS crew has already given inhaled bronchodilator therapy. The patient remains in severe respiratory distress.",
+    "initial": "Airway is patent. Breathing is extremely labored with poor air movement. Pulse is rapid. Patient is exhausted but still responsive.",
+    "history": "Long history of severe asthma with prior hospital admissions.",
+    "exam": "Minimal wheezing because air movement is poor. Accessory muscle use is marked and the patient can only speak single words.",
+    "vitals": "HR 138, BP 148/86, RR 34, SpO₂ 84% despite oxygen.",
+    "additional": "The patient is becoming drowsy and tiring despite initial bronchodilator treatment.",
+    "diagnosis": "Severe Refractory Asthma with Impending Respiratory Failure",
+    "management": [
+      "Continue aggressive airway and ventilatory support.",
+      "Continue protocol-directed bronchodilator/anaphylaxis therapy as clinically indicated.",
+      "Consider magnesium sulfate under the supplied Critical Care Paramedic scope when appropriate.",
+      "Prepare for advanced airway management if ventilation fails."
+    ],
+    "criticalActions": [
+      "Recognize quiet breath sounds and declining mental status as impending respiratory failure, not improvement.",
+      "Continue oxygen/bronchodilator support and consider magnesium within the supplied Critical Care Paramedic medication scope.",
+      "Escalate to assisted ventilation/advanced airway management immediately if ventilation becomes inadequate."
+    ],
+    "scopeNotes": [
+      "The supplied Critical Care Paramedic matrix lists magnesium sulfate IV/IO for asthma/anaphylaxis and the airway guide includes RSI/surgical airway options."
+    ],
+    "teaching": [
+      "A patient who becomes quieter may simply be moving less air.",
+      "Ventilatory failure is the immediate threat in severe refractory asthma."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Respiratory rate falls to 18 but tidal volume becomes very poor. The patient is now confused and SpO₂ is 76%."
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive with inadequate respirations and requires immediate assisted ventilation/advanced airway management.",
+        "critical": true
+      }
+    ]
+  }
 ];
 
 const $=id=>document.getElementById(id);
@@ -184,38 +1856,61 @@ function renderStudent(out,s,p,progression){
  const did=`dx-${Date.now()}`;out.insertAdjacentHTML("beforeend",`<button class="diagnosis-btn" data-dx="${did}">REVEAL DIAGNOSIS & EXPECTED MANAGEMENT</button><div id="${did}" class="card diagnosis-card"><div class="diagnosis-title">${s.diagnosis}</div><div class="subheading">Expected Management</div>${list(s.management)}<div class="subheading">Teaching Points</div>${list(s.teaching)}</div>`);const db=out.querySelector(`[data-dx="${did}"]`);db.addEventListener("click",()=>{document.getElementById(did).style.display="block";db.style.display="none"});
 }
 const treatmentCatalog={
- "Basic":["Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","CPR / AED","Cardiac Monitor","Blood Glucose Check","Oral Glucose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Direct Pressure / Dressing","Tourniquet","Splinting","Spinal Motion Restriction","Warming / Cooling","Rapid Transport"],
- "Advanced EMT":["Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","CPR / AED","Cardiac Monitor","12-Lead ECG","Blood Glucose Check","Oral Glucose","IV / IO Access","IV Fluids","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Cardiac Arrest Epinephrine","TXA","Acetaminophen","Direct Pressure / Dressing","Tourniquet","Splinting","Warming / Cooling","Rapid Transport"],
- "Paramedic":["Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","Advanced Airway / RSI","CPR / Defibrillation","Cardiac Monitor","12-Lead ECG","Blood Glucose Check","IV / IO Access","IV Fluids","IV Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","Atropine","Epinephrine","Diazepam","Ketamine","Rocuronium","Ondansetron","Morphine","TXA","Needle Decompression","Direct Pressure / Dressing","Tourniquet","Splinting","Warming / Cooling","Rapid Transport"],
- "Critical Care Paramedic":["Airway Positioning","Suction","Oxygen","BVM Ventilation","Advanced Airway / RSI","Ventilator Management","CPR / Defibrillation","Cardiac Monitor","12-Lead ECG","IV / IO Access","IV Fluids","Blood Products / SWiFT","IV Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","Atropine","Epinephrine","Fentanyl","Ketamine","Rocuronium","Magnesium","Calcium Chloride","Antibiotic","TXA","Needle Decompression","Open Thoracostomy / Surgical Airway","Warming / Cooling","Rapid Transport"]
+ "Basic":["Initial ABCDE / Vitals","Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","CPR / AED","Cardiac Monitor","Blood Glucose Check","Oral Glucose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Direct Pressure / Dressing","Tourniquet","Neurovascular Check","Splinting","Spinal Motion Restriction","Warming / Cooling","Scene Safety / Remove from Source","Exposure Identification","Activated Charcoal","Rapid Transport"],
+ "Advanced EMT":["Initial ABCDE / Vitals","Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","CPR / AED","Cardiac Monitor","12-Lead ECG","Blood Glucose Check","Oral Glucose","IV / IO Access","IV Fluids","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Cardiac Arrest Epinephrine","TXA","Acetaminophen","Direct Pressure / Dressing","Tourniquet","Neurovascular Check","Splinting","Warming / Cooling","Gentle Handling / Prevent Heat Loss","Scene Safety / Remove from Source","Exposure Identification","Activated Charcoal","Rapid Transport"],
+ "Paramedic":["Initial ABCDE / Vitals","Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","Advanced Airway / RSI","CPR / Defibrillation","Cardiac Monitor","12-Lead ECG","Synchronized Cardioversion","Stroke Assessment / LKW","Blood Glucose Check","IV / IO Access","IV Fluids","IV Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","Atropine","Epinephrine","Diazepam","Ketamine","Rocuronium","Ondansetron","Morphine","TXA","Needle Decompression","Direct Pressure / Dressing","Tourniquet","Neurovascular Check","Splinting","Warming / Cooling","Rapid Cooling","Gentle Handling / Prevent Heat Loss","Scene Safety / Remove from Source","Decontamination / PPE","Rapid Transport"],
+ "Critical Care Paramedic":["Initial ABCDE / Vitals","Airway Positioning","Suction","Oxygen","BVM Ventilation","Advanced Airway / RSI","Ventilator Management","CPR / Defibrillation","Cardiac Monitor","12-Lead ECG","Synchronized Cardioversion","Stroke Assessment / LKW","IV / IO Access","IV Fluids","Blood Products / SWiFT","Stop Transfusion","IV Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","Atropine","Epinephrine","Fentanyl","Ketamine","Rocuronium","Magnesium","Calcium Chloride","Antibiotic","TXA","Needle Decompression","Open Thoracostomy / Surgical Airway","Direct Pressure / Dressing","Warming / Cooling","Rapid Cooling","Gentle Handling / Prevent Heat Loss","Scene Safety / Remove from Source","Decontamination / PPE","Rapid Transport"]
 };
 function treatmentRules(s){
  const d=(s.diagnosis||s.condition).toLowerCase();
  let beneficial=[],critical=[],harmful=[];
  const add=(arr,...x)=>x.forEach(v=>!arr.includes(v)&&arr.push(v));
- add(beneficial,"Rapid Transport");
- if(/asthma/.test(d)){add(beneficial,"Oxygen","Albuterol / Ipratropium");add(critical,"Albuterol / Ipratropium");if(s.difficulty==="Critical Care Paramedic")add(beneficial,"Magnesium","Ventilator Management");}
- if(/anaphyl/.test(d)){add(beneficial,"Oxygen","IM Epinephrine","IV / IO Access","IV Fluids");add(critical,"IM Epinephrine");}
- if(/hypogly/.test(d)){add(beneficial,"Blood Glucose Check","Oral Glucose","IV Dextrose");add(critical,"Oral Glucose","IV Dextrose");}
- if(/hemorr|bleed|varice|gi bleed/.test(d)){add(beneficial,"Direct Pressure / Dressing","Tourniquet","IV / IO Access","IV Fluids","TXA","Blood Products / SWiFT","Warming / Cooling");if(/major external|catastrophic|external hemorrhage/.test(d))add(critical,"Direct Pressure / Dressing","Tourniquet");}
- if(/pneumothorax/.test(d)){add(beneficial,"Oxygen","Needle Decompression","Open Thoracostomy / Surgical Airway");if(/tension/.test(d))add(critical,"Needle Decompression","Open Thoracostomy / Surgical Airway");}
- if(/drowning|respiratory failure/.test(d)){add(beneficial,"Airway Positioning","Suction","Oxygen","BVM Ventilation","Advanced Airway / RSI");add(critical,"Oxygen","BVM Ventilation");}
- if(/opioid/.test(d)){add(beneficial,"Airway Positioning","Oxygen","BVM Ventilation","Naloxone");add(critical,"BVM Ventilation");}
- if(/acs|heart attack/.test(d)){add(beneficial,"12-Lead ECG","Aspirin","IV / IO Access","Nitroglycerin","Oxygen");add(critical,"12-Lead ECG","Aspirin");}
- if(/svt|atrial fibrillation/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Oxygen","Synchronized Cardioversion");add(critical,"Cardiac Monitor");if(/unstable/.test(d))add(critical,"Synchronized Cardioversion");}
- if(/ventricular tachycardia/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Oxygen","Synchronized Cardioversion");add(critical,"Synchronized Cardioversion");}
- if(/ventricular fibrillation|cardiac arrest/.test(d)){add(beneficial,"CPR / AED","CPR / Defibrillation","BVM Ventilation","Cardiac Arrest Epinephrine","Epinephrine","IV / IO Access");add(critical,"CPR / AED","CPR / Defibrillation");}
- if(/bradycardia/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Atropine","Oxygen");add(critical,"Cardiac Monitor");}
+ add(beneficial,"Initial ABCDE / Vitals","Rapid Transport");
+
+ if(/hypogly/.test(d)){add(beneficial,"Blood Glucose Check","Oral Glucose","IV Dextrose");add(critical,"Blood Glucose Check","Oral Glucose","IV Dextrose");add(harmful,"Nitroglycerin");}
+ if(/asthma/.test(d)){add(beneficial,"Oxygen","Albuterol / Ipratropium");add(critical,"Albuterol / Ipratropium");if(s.difficulty==="Critical Care Paramedic")add(beneficial,"Magnesium","BVM Ventilation","Advanced Airway / RSI","Ventilator Management");}
+ if(/syncope|near syncope/.test(d)){add(beneficial,"Blood Glucose Check","Cardiac Monitor","Rapid Transport");add(critical,"Initial ABCDE / Vitals","Blood Glucose Check");}
+ if(/pneumonia/.test(d)){add(beneficial,"Oxygen","Rapid Transport");add(critical,"Oxygen","Rapid Transport");}
+ if(/alcohol intox/.test(d)){add(beneficial,"Airway Positioning","Blood Glucose Check","Rapid Transport");add(critical,"Blood Glucose Check");}
+ if(/heat exhaustion/.test(d)){add(beneficial,"Warming / Cooling","Rapid Transport");add(critical,"Warming / Cooling");}
+ if(/simple pneumothorax/.test(d)){add(beneficial,"Oxygen","Rapid Transport");add(critical,"Oxygen","Rapid Transport");}
+ if(/anaphyl/.test(d)){add(beneficial,"Oxygen","IM Epinephrine","IV / IO Access","IV Fluids","BVM Ventilation");add(critical,"IM Epinephrine");}
+ if(/copd/.test(d)){add(beneficial,"Oxygen","Albuterol / Ipratropium","BVM Ventilation");add(critical,"Albuterol / Ipratropium");}
+ if(/upper gi bleed|variceal|gi bleed/.test(d)){add(beneficial,"Suction","IV / IO Access","IV Fluids","Warming / Cooling","Rapid Transport");add(critical,"Suction","IV / IO Access","Rapid Transport");add(harmful,"Nitroglycerin");}
+ if(/hemothorax/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Warming / Cooling","Rapid Transport");add(critical,"Oxygen","Rapid Transport");add(harmful,"Nitroglycerin");}
+ if(/carbon monoxide/.test(d)){add(beneficial,"Scene Safety / Remove from Source","Oxygen","Cardiac Monitor","Rapid Transport");add(critical,"Scene Safety / Remove from Source","Oxygen");}
+ if(/opioid/.test(d)){add(beneficial,"Airway Positioning","Oxygen","BVM Ventilation","Naloxone");add(critical,"BVM Ventilation","Naloxone");}
+ if(/acs|heart attack/.test(d)){add(beneficial,"12-Lead ECG","Aspirin","IV / IO Access","Nitroglycerin","Oxygen","Rapid Transport");add(critical,"12-Lead ECG","Aspirin");}
+ if(/stroke/.test(d)){add(beneficial,"Stroke Assessment / LKW","Blood Glucose Check","Oxygen","Rapid Transport");add(critical,"Stroke Assessment / LKW","Blood Glucose Check","Rapid Transport");}
+ if(/tension pneumothorax/.test(d)){add(beneficial,"Oxygen","Needle Decompression","Open Thoracostomy / Surgical Airway","Rapid Transport");add(critical,"Needle Decompression","Open Thoracostomy / Surgical Airway");}
+ if(/cardiac tamponade/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Rapid Transport");}
+ if(/dka|diabetic ketoacidosis/.test(d)){add(beneficial,"Blood Glucose Check","IV / IO Access","IV Fluids","Cardiac Monitor","Rapid Transport");add(critical,"IV / IO Access","IV Fluids");}
+ if(/status epilepticus/.test(d)){add(beneficial,"Airway Positioning","Oxygen","BVM Ventilation","Blood Glucose Check","IV / IO Access","Diazepam");add(critical,"Diazepam","BVM Ventilation");}
+ if(/pesticide|nerve agent/.test(d)){add(beneficial,"Scene Safety / Remove from Source","Decontamination / PPE","Suction","BVM Ventilation","Atropine","Rapid Transport");add(critical,"Decontamination / PPE","BVM Ventilation");}
+ if(/heat stroke/.test(d)){add(beneficial,"Rapid Cooling","Warming / Cooling","Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Rapid Cooling");}
  if(/hyperkal/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Oxygen","Rapid Transport");add(critical,"Cardiac Monitor","IV / IO Access","Rapid Transport");}
- if(/hypothermia|frostbite|immersion/.test(d)){add(beneficial,"Warming / Cooling","Oxygen");add(critical,"Warming / Cooling");}
- if(/heat/.test(d)){add(beneficial,"Warming / Cooling","IV / IO Access","IV Fluids");add(critical,"Warming / Cooling");}
- if(/fracture/.test(d))add(beneficial,"Splinting");
- if(/burn/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Warming / Cooling","Advanced Airway / RSI");}
- if(/seizure|status/.test(d)){add(beneficial,"Oxygen","BVM Ventilation","IV / IO Access","Diazepam","Blood Glucose Check");}
- if(/carbon monoxide/.test(d)){add(beneficial,"Oxygen");add(critical,"Oxygen");}
- if(/dehydration|shock/.test(d)){add(beneficial,"IV / IO Access","IV Fluids","Blood Products / SWiFT");}
- if(/hypogly/.test(d))add(harmful,"Nitroglycerin");
- if(/hemorr|shock/.test(d))add(harmful,"Nitroglycerin");
+ if(/sepsis/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"IV / IO Access","IV Fluids","Rapid Transport");}
+ if(/transfusion reaction/.test(d)){add(beneficial,"Stop Transfusion","Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Stop Transfusion");}
+ if(/severe hypothermia/.test(d)){add(beneficial,"Gentle Handling / Prevent Heat Loss","Warming / Cooling","Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Gentle Handling / Prevent Heat Loss","Warming / Cooling");}
+ if(/disseminated intravascular coagulation|dic/.test(d)){add(beneficial,"Direct Pressure / Dressing","Blood Products / SWiFT","Warming / Cooling","Rapid Transport");add(critical,"Direct Pressure / Dressing","Rapid Transport");}
+ if(/respiratory failure/.test(d)){add(beneficial,"Airway Positioning","Suction","Oxygen","BVM Ventilation","Advanced Airway / RSI","Ventilator Management","Rapid Transport");add(critical,"BVM Ventilation");}
+ if(/closed long-bone fracture|fracture/.test(d)){add(beneficial,"Neurovascular Check","Splinting","Rapid Transport");add(critical,"Neurovascular Check","Splinting");}
+ if(/major external bleeding/.test(d)){add(beneficial,"Direct Pressure / Dressing","Tourniquet","Warming / Cooling","Rapid Transport");add(critical,"Direct Pressure / Dressing","Tourniquet");add(harmful,"Nitroglycerin");}
+ if(/drowning/.test(d)){add(beneficial,"Airway Positioning","Suction","Oxygen","BVM Ventilation","Warming / Cooling","Rapid Transport");add(critical,"Oxygen","BVM Ventilation");}
+ if(/mild hypothermia|moderate hypothermia/.test(d)){add(beneficial,"Gentle Handling / Prevent Heat Loss","Warming / Cooling","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Warming / Cooling");}
+ if(/ingested poison/.test(d)){add(beneficial,"Exposure Identification","Activated Charcoal","Rapid Transport");add(critical,"Exposure Identification");}
+ if(/dehydration/.test(d)){add(beneficial,"IV / IO Access","IV Fluids","Rapid Transport");add(critical,"IV / IO Access","IV Fluids");}
+ if(/catastrophic hemorrhage/.test(d)){add(beneficial,"Direct Pressure / Dressing","Tourniquet","IV / IO Access","IV Fluids","TXA","Warming / Cooling","Rapid Transport");add(critical,"Direct Pressure / Dressing","Tourniquet");add(harmful,"Nitroglycerin");}
+ if(/ventricular fibrillation|cardiac arrest/.test(d)){add(beneficial,"CPR / AED","CPR / Defibrillation","BVM Ventilation","Cardiac Arrest Epinephrine","Epinephrine","IV / IO Access");add(critical,"CPR / AED","CPR / Defibrillation");}
+ if(/symptomatic bradycardia|bradycardia/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Atropine","Oxygen");add(critical,"Cardiac Monitor","Atropine");}
+ if(/svt/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Synchronized Cardioversion","Rapid Transport");add(critical,"Cardiac Monitor");}
+ if(/atrial fibrillation/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Synchronized Cardioversion","Rapid Transport");add(critical,"Cardiac Monitor");}
+ if(/ventricular tachycardia/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Oxygen","Synchronized Cardioversion");add(critical,"Synchronized Cardioversion");}
+ if(/major burn|inhalation injury/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Advanced Airway / RSI","Rapid Transport");add(critical,"Oxygen","Advanced Airway / RSI");}
+ if(/hemorrhagic shock requiring blood product|swift/.test(d)){add(beneficial,"Blood Products / SWiFT","Warming / Cooling","Rapid Transport");add(critical,"Blood Products / SWiFT");}
+
+ // Fallback so every scenario always has a visible must-address item even if a new scenario is added later.
+ if(!critical.length) add(critical,"Initial ABCDE / Vitals");
  return {beneficial,critical,harmful};
 }
 function timingRules(s,rules){
