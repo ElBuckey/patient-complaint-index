@@ -13,6 +13,12 @@
 @media(max-width:700px){.action-groups,.sim-header{grid-template-columns:1fr}}@media(max-width:380px){.sim-controls{grid-template-columns:1fr}}
 
 .student-treatment-panel{margin-top:18px;border:1px solid #4d5c68;border-radius:10px;padding:16px;background:#2b2b2b;border-left:4px solid #801a17}.student-treatment-panel h3{margin-top:0}.student-treatment-help{color:#c8d0d6;line-height:1.5;margin:0 0 10px}.student-treatment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}.student-treatment-btn{position:relative;min-height:46px;background:#3a3a3a;color:#fff;border:1px solid #555;border-radius:8px;padding:10px 34px 10px 10px;cursor:pointer;text-align:left;font-weight:600;overflow-wrap:anywhere}.student-treatment-btn.selected{border-color:#9aa7b0;background:#474747}.student-treatment-btn.selected::after{content:"•";position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:22px;color:#d9e0e5}.student-treatment-btn.correct{background:#234d2d;border-color:#55a868;color:#eefbf1}.student-treatment-btn.correct::after{content:"✓";position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:20px;font-weight:900}.student-treatment-btn.wrong{background:#5b1c1a;border-color:#a94743;color:#fff1f0}.student-treatment-btn.wrong::after{content:"✕";position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:19px;font-weight:900}.student-treatment-btn.missed{background:#65541d;border-color:#c5a83d;color:#fff7d6}.student-treatment-btn.missed::after{content:"!";position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:21px;font-weight:900}.student-treatment-btn.neutral{opacity:.6}.student-treatment-btn:disabled{cursor:default}.student-submit-btn{width:100%;min-height:50px;border:0;border-radius:8px;background:#801a17;color:#fff;font-size:16px;font-weight:800;cursor:pointer;margin-top:4px}.student-submit-btn:disabled{opacity:.65;cursor:default}.student-treatment-results{margin-top:12px}.student-score-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:#d9e0e5}.legend-chip{display:inline-flex;align-items:center;gap:6px}.legend-mark{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-weight:900}.legend-good{background:#234d2d}.legend-bad{background:#5b1c1a}.legend-missed{background:#65541d}.student-treatment-summary{background:#333;border:1px solid #555;border-radius:8px;padding:12px;line-height:1.55}.student-treatment-summary strong{color:#fff}@media(max-width:700px){.student-treatment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:430px){.student-treatment-grid{grid-template-columns:1fr}}
+
+/* Revised setup, grouped treatments, neutral grading, and MCI layout */
+.controls{grid-template-columns:repeat(4,minmax(0,1fr));align-items:start}.difficulty-control{grid-column:span 2}.label-note{font-size:12px;color:#aebac3}.multi-check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:#2b2b2b;border:1px solid #4d5c68;border-radius:7px;padding:8px}.multi-check label{margin:0;color:#fff;font-size:13px;display:flex;gap:6px;align-items:center}.multi-check input{accent-color:#801a17}.multi-actions{display:flex;gap:6px;margin-top:6px}.multi-actions button{border:1px solid #4d5c68;background:#253542;color:#fff;border-radius:6px;padding:6px 9px;font-size:11px;font-weight:bold;cursor:pointer}.tx-group{background:#303030;border:1px solid #505050;border-radius:9px;padding:10px;margin:10px 0}.tx-group-title{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#c6d0d8;font-weight:800;margin-bottom:8px}.tx-group-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.student-treatment-btn.acceptable{background:#32424d;border-color:#647b8a;color:#edf5fa}.student-treatment-btn.acceptable::after{content:"○";position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:19px;font-weight:900}.legend-neutral{background:#32424d}.mci-header{border-left-color:#f0a202}.mci-patient{border:1px solid #555;border-radius:12px;padding:14px;margin:18px 0;background:#333}.mci-patient-title{margin:0 0 10px;font-size:22px}.mci-patient .section-divider{height:1px;background:#555;margin:14px 0}.vital-flag{font-weight:800}.vital-high{color:#ffb4b0}.vital-low{color:#ffd56a}.vital-normal{color:#a9dbb5}.patient-submeta{margin-bottom:10px}.acceptable-note{color:#bcd0dc}.treatment-grid{display:block}.student-treatment-grid{display:block}
+@media(max-width:850px){.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.difficulty-control{grid-column:span 2}.tx-group-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.controls{grid-template-columns:1fr}.difficulty-control{grid-column:auto}.multi-check{grid-template-columns:1fr}.tx-group-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -22,10 +28,12 @@
 <h2>Scenario Setup</h2>
 <div class="controls">
 <div><label for="type">Scenario Type</label><select id="type"><option value="Random">Random</option><option value="Medical">Medical</option><option value="Trauma">Trauma</option><option value="Environmental">Environmental</option><option value="Toxicology">Toxicology</option></select></div>
-<div><label for="difficulty">Difficulty</label><select id="difficulty"><option value="Basic">Basic</option><option value="Advanced EMT">Advanced EMT</option><option value="Paramedic">Paramedic</option><option value="Critical Care Paramedic">Critical Care Paramedic</option></select></div>
+<div class="difficulty-control"><label>Difficulty <span class="label-note">(select one or more)</span></label><div id="difficultyOptions" class="multi-check"><label><input class="difficulty-check" type="checkbox" value="Basic" checked> Basic</label><label><input class="difficulty-check" type="checkbox" value="Advanced EMT" checked> Advanced EMT</label><label><input class="difficulty-check" type="checkbox" value="Paramedic" checked> Paramedic</label><label><input class="difficulty-check" type="checkbox" value="Critical Care Paramedic" checked> Critical Care Paramedic</label></div><div class="multi-actions"><button type="button" id="selectAllDifficulty">SELECT ALL</button><button type="button" id="clearDifficulty">CLEAR</button></div></div>
 <div><label for="patient">Patient</label><select id="patient"><option value="Adult">Adult</option><option value="Geriatric">Geriatric</option></select></div>
 <div><label for="progression">Progression</label><select id="progression"><option value="Static">Static</option><option value="Dynamic">Dynamic</option></select></div>
 <div><label for="mode">Mode</label><select id="mode"><option value="Student">Student</option><option value="FTO">FTO</option></select></div>
+<div><label for="scenarioFormat">Format</label><select id="scenarioFormat"><option value="Single">Single Patient</option><option value="MCI">MCI - Multiple Patients</option></select></div>
+<div id="patientCountWrap" style="display:none"><label for="patientCount">MCI Patient Count</label><select id="patientCount"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div>
 <div id="specificWrap" style="display:none"><label for="specific">Specific Scenario</label><select id="specific"><option value="Random">Random</option></select></div>
 </div>
 </div>
@@ -72,7 +80,23 @@ const scenarios=[
       "Check blood glucose early in the altered patient.",
       "Correct the confirmed hypoglycemia with oral glucose when the patient can safely swallow; use the appropriate higher-level glucose route if oral treatment is unsafe.",
       "Reassess mental status and blood glucose after treatment."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Blood Glucose Check"
+        ],
+        [
+          "Oral Glucose"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Asthma Exacerbation",
@@ -111,7 +135,24 @@ const scenarios=[
       "Support oxygenation and breathing.",
       "Give the server-approved bronchodilator treatment for the asthma exacerbation.",
       "Reassess for fatigue, decreasing air movement, or worsening mental status."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Albuterol"
+        ],
+        [
+          "Ipratropium"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Cardiac Monitoring",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Syncope / Near Syncope",
@@ -140,7 +181,20 @@ const scenarios=[
       "Complete an ABCDE/vital-sign assessment and look for injury from the syncopal event.",
       "Check blood glucose as part of the evaluation for an unexplained change in consciousness.",
       "Recognize concerning findings and arrange appropriate transport rather than assuming a simple faint."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Blood Glucose Check"
+        ]
+      ],
+      "beneficial": [
+        "Cardiac Monitoring",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Pneumonia",
@@ -177,7 +231,19 @@ const scenarios=[
       "Support oxygenation when the patient is hypoxic or in respiratory distress.",
       "Recognize progression toward respiratory failure or shock/sepsis.",
       "Transport for further evaluation rather than delaying on scene."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ]
+      ],
+      "beneficial": [
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Alcohol Intoxication",
@@ -205,7 +271,21 @@ const scenarios=[
       "Protect and continually reassess the airway and breathing in the intoxicated patient.",
       "Check blood glucose and assess for trauma or another cause of altered mental status.",
       "Do not assume alcohol is the only cause of the patient's presentation."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Blood Glucose Check"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "Suction",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Heat Exhaustion",
@@ -243,7 +323,19 @@ const scenarios=[
       "Remove the patient from the hot environment and begin cooling.",
       "Reassess mental status closely for progression from heat exhaustion to heat stroke.",
       "Replace fluids as appropriate and transport if the patient worsens or fails to improve."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Passive Cooling"
+        ]
+      ],
+      "beneficial": [
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Simple Pneumothorax",
@@ -280,25 +372,37 @@ const scenarios=[
       "Support oxygenation and breathing.",
       "Recognize any progression from a simple pneumothorax to tension physiology.",
       "Transport promptly for definitive evaluation."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ]
+      ],
+      "beneficial": [
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "Anaphylaxis",
+    "condition": "Severe Anaphylaxis with Shock",
     "type": "Medical",
     "difficulty": "Advanced EMT",
     "dispatch": "Medic 1, respond to a restaurant for a {age}-year-old {sex} with an allergic reaction.",
     "scene": "The patient is seated on the floor and appears frightened. Staff report symptoms started shortly after eating.",
-    "initial": "Airway is currently patent but voice is becoming hoarse. Breathing is labored with wheezing. Pulse is rapid.",
+    "initial": "The patient can still speak, but breathing is labored. The pulse at the wrist is fast and weak. The patient looks pale and is becoming lightheaded.",
     "history": "Known severe food allergy. Patient believes the meal may have contained the allergen.",
     "exam": "Hives across the chest and arms with swelling of the lips. Wheezing is present bilaterally.",
-    "vitals": "HR 126, BP 88/54, RR 28, SpO₂ 90%.",
-    "additional": "Patient reports nausea and throat tightness.",
-    "diagnosis": "Anaphylaxis",
+    "vitals": "HR 132, BP 78/44, RR 30, SpO₂ 88%.",
+    "additional": "The patient has widespread hives, wheezing, facial swelling, and signs of shock despite still being awake.",
+    "diagnosis": "Severe Anaphylaxis with Shock",
     "management": [
-      "Administer IM epinephrine when indicated by protocol.",
-      "Support airway, oxygenation, and ventilation.",
-      "Establish vascular access and treat hypotension with fluids as appropriate.",
-      "Reassess frequently for worsening airway swelling."
+      "Give intramuscular epinephrine immediately for anaphylaxis.",
+      "Support oxygenation and breathing.",
+      "Establish IV/IO access and give Saline for shock.",
+      "Reassess frequently and transport rapidly."
     ],
     "teaching": [
       "Epinephrine is the key treatment for anaphylaxis.",
@@ -316,15 +420,37 @@ const scenarios=[
       }
     ],
     "criticalActions": [
-      "Give IM epinephrine promptly for the anaphylactic presentation.",
-      "Support the airway, oxygenation, and ventilation while watching for worsening swelling.",
-      "Establish vascular access and treat hypotension with fluid within Advanced EMT scope."
-    ]
+      "Perform Initial ABCDE / Vitals.",
+      "Give Epinephrine (IM - Anaphylaxis) without unnecessary delay.",
+      "Establish IV/IO access and give Saline for persistent shock.",
+      "Reassess breathing, blood pressure, and mental status."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Epinephrine (IM - Anaphylaxis)"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Saline"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Albuterol",
+        "Ipratropium",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "COPD Exacerbation",
     "type": "Medical",
-    "difficulty": "Advanced EMT",
+    "difficulty": "Basic",
     "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with worsening shortness of breath.",
     "scene": "The patient is seated in a tripod position with home oxygen tubing in place.",
     "initial": "Airway is patent. Respirations are labored and prolonged. Pulse is fast.",
@@ -358,7 +484,24 @@ const scenarios=[
       "Support oxygenation and ventilation.",
       "Give the server-approved bronchodilator treatment.",
       "Recognize fatigue, slowing respirations, or altered mental status as respiratory failure rather than improvement."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Albuterol"
+        ],
+        [
+          "Ipratropium"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Cardiac Monitoring",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Upper GI Bleed",
@@ -396,7 +539,27 @@ const scenarios=[
       "Protect the airway and have suction immediately available for ongoing hematemesis.",
       "Establish vascular access and treat shock within scope.",
       "Keep the patient warm and minimize delay to transport."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Tranexamic Acid (TXA)"
+        ]
+      ],
+      "beneficial": [
+        "Suction",
+        "Saline",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": [
+        "Nitroglycerin"
+      ]
+    }
   },
   {
     "condition": "Hemothorax",
@@ -434,12 +597,34 @@ const scenarios=[
       "Support oxygenation and ventilation after the chest injury.",
       "Recognize and treat hemorrhagic shock within scope.",
       "Prevent hypothermia and transport rapidly for definitive trauma care."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Tranexamic Acid (TXA)"
+        ]
+      ],
+      "beneficial": [
+        "Saline",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": [
+        "Nitroglycerin"
+      ]
+    }
   },
   {
     "condition": "Carbon Monoxide Poisoning",
     "type": "Toxicology",
-    "difficulty": "Advanced EMT",
+    "difficulty": "Basic",
     "dispatch": "Medic 1, respond to a residence for multiple people with headache and nausea.",
     "scene": "A family has exited the home after a carbon monoxide alarm activated. Your patient is a {age}-year-old {sex} complaining of headache and dizziness.",
     "initial": "Airway and breathing appear normal. Pulse is mildly elevated. Patient is alert but slow to answer.",
@@ -472,12 +657,25 @@ const scenarios=[
       "Remove the patient from the carbon-monoxide source without creating additional rescuer exposure.",
       "Give high-concentration oxygen.",
       "Monitor and transport because pulse oximetry may appear reassuring despite significant exposure."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ]
+      ],
+      "beneficial": [
+        "Cardiac Monitoring",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Opioid Overdose",
     "type": "Toxicology",
-    "difficulty": "Advanced EMT",
+    "difficulty": "Basic",
     "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} who is difficult to wake.",
     "scene": "The patient is lying on a couch. Drug paraphernalia is present nearby.",
     "initial": "Patient responds only to painful stimulus. Respirations are slow and shallow. Radial pulse is slow but present.",
@@ -510,7 +708,28 @@ const scenarios=[
       "Support ventilation first when respirations are inadequate.",
       "Give naloxone according to the server protocol while continuing ventilatory support.",
       "Reassess breathing and mental status after naloxone rather than treating only for wakefulness."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "BVM Ventilation"
+        ],
+        [
+          "Naloxone"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "Suction",
+        "OPA",
+        "NPA",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": [
+        "Nitroglycerin"
+      ]
+    }
   },
   {
     "condition": "ACS / Heart Attack",
@@ -522,15 +741,15 @@ const scenarios=[
     "history": "Crushing central chest pressure began 30 minutes ago and radiates to the left arm. History of hypertension and high cholesterol.",
     "exam": "Pale, cool, diaphoretic skin. Lung sounds are clear. No chest-wall tenderness reproduces the pain.",
     "vitals": "HR 104, BP 154/92, RR 22, SpO₂ 96%.",
-    "additional": "12-lead ECG shows ST elevation in II, III, and aVF with reciprocal changes in aVL.",
+    "additional": "Cardiac Monitoring shows ST elevation in II, III, and aVF with reciprocal changes in aVL. No contraindication to Nitroglycerin is identified in this scenario.",
     "ecg": "Inferior STEMI pattern: ST elevation in II, III, aVF with reciprocal depression in aVL.",
     "diagnosis": "ACS / Inferior STEMI",
     "management": [
-      "Obtain and interpret a 12-lead ECG.",
-      "Give aspirin when indicated and without contraindication.",
-      "Use oxygen only when clinically indicated.",
-      "Evaluate blood pressure and contraindications before nitroglycerin.",
-      "Activate STEMI transport/notification procedures."
+      "Perform Initial ABCDE / Vitals and start Cardiac Monitoring.",
+      "Give Aspirin and Nitroglycerin when the scenario information does not show a contraindication.",
+      "Establish IV/IO access.",
+      "Treat pain with Morphine when appropriate and reassess symptoms / blood pressure.",
+      "Transport promptly for definitive cardiac care."
     ],
     "teaching": [
       "Inferior STEMI can involve the right ventricle.",
@@ -548,10 +767,32 @@ const scenarios=[
       }
     ],
     "criticalActions": [
-      "Obtain a 12-lead ECG and recognize the heart-attack/ACS presentation.",
-      "Give aspirin when indicated and no listed contraindication is present.",
-      "Check blood pressure and contraindications before nitroglycerin and transport appropriately."
-    ]
+      "Perform Initial ABCDE / Vitals.",
+      "Start Cardiac Monitoring.",
+      "Give Aspirin and Nitroglycerin when appropriate.",
+      "Reassess pain, blood pressure, and cardiac status."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "Aspirin"
+        ],
+        [
+          "Nitroglycerin"
+        ]
+      ],
+      "beneficial": [
+        "IV / IO Access",
+        "Morphine",
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Stroke",
@@ -590,7 +831,27 @@ const scenarios=[
       "Perform a stroke assessment, determine last-known-well time, and check blood glucose.",
       "Protect the airway if needed and avoid unnecessary on-scene delays.",
       "Transport rapidly to an appropriate stroke-capable facility with prenotification."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Stroke Assessment / Last Known Well"
+        ],
+        [
+          "Blood Glucose Check"
+        ],
+        [
+          "Rapid Transport"
+        ]
+      ],
+      "beneficial": [
+        "Cardiac Monitoring",
+        "IV / IO Access",
+        "Oxygen (Non-Rebreather)"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Tension Pneumothorax",
@@ -628,7 +889,24 @@ const scenarios=[
       "Recognize tension physiology in the deteriorating chest-trauma patient.",
       "Perform chest decompression when clinically indicated and within paramedic scope.",
       "Immediately reassess breathing and perfusion after decompression and transport rapidly."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ],
+        [
+          "DART (Chest Decompression)"
+        ]
+      ],
+      "beneficial": [
+        "IV / IO Access",
+        "Saline",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Cardiac Tamponade",
@@ -666,12 +944,32 @@ const scenarios=[
       "Recognize obstructive shock/tamponade physiology and support ABCs.",
       "Establish vascular access and treat shock without delaying definitive care.",
       "Prioritize rapid transport to definitive surgical care."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Rapid Transport"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Saline",
+        "Warming"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "DKA",
+    "condition": "Hyperglycemia / High Blood Sugar",
     "type": "Medical",
-    "difficulty": "Paramedic",
+    "difficulty": "Advanced EMT",
     "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with vomiting, weakness, and abnormal breathing.",
     "scene": "The patient is lying on a couch, appears dehydrated, and is breathing very deeply and rapidly.",
     "initial": "Airway is patent. Respirations are deep and rapid. Radial pulse is fast and weak. Patient is awake but sluggish.",
@@ -679,11 +977,11 @@ const scenarios=[
     "exam": "Warm, dry skin, dry mucous membranes, and fruity odor on the breath. Generalized abdominal discomfort without guarding.",
     "vitals": "HR 124, BP 96/60, RR 30 deep, SpO₂ 98%, BGL reads HIGH (>600 mg/dL).",
     "additional": "Patient reports intense thirst and frequent urination before becoming too weak to get up.",
-    "diagnosis": "Diabetic Ketoacidosis",
+    "diagnosis": "Hyperglycemia / High Blood Sugar",
     "management": [
-      "Support ABCs and monitor ECG.",
-      "Establish IV access and begin protocol-directed fluid resuscitation.",
-      "Monitor for shock and transport for definitive metabolic management."
+      "Check blood glucose and perform a complete assessment.",
+      "Establish IV/IO access and give Saline when the patient is dehydrated or poorly perfused.",
+      "Monitor mental status and transport for definitive evaluation."
     ],
     "teaching": [
       "Kussmaul respirations are compensatory and should not be mistaken for primary anxiety hyperventilation.",
@@ -701,13 +999,32 @@ const scenarios=[
       }
     ],
     "criticalActions": [
-      "Confirm the diabetic/metabolic problem with blood glucose and ongoing assessment.",
-      "Establish IV access and begin protocol-directed fluid replacement.",
-      "Monitor for worsening shock or mental status and transport for definitive care."
-    ]
+      "Perform Initial ABCDE / Vitals and check blood glucose.",
+      "Establish IV/IO access.",
+      "Give Saline for dehydration / poor perfusion and reassess."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Blood Glucose Check"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Saline"
+        ]
+      ],
+      "beneficial": [
+        "Cardiac Monitoring",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "Status Epilepticus",
+    "condition": "Seizures",
     "type": "Medical",
     "difficulty": "Paramedic",
     "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} actively seizing.",
@@ -717,12 +1034,12 @@ const scenarios=[
     "exam": "Generalized seizure activity continues. No major trauma is seen.",
     "vitals": "HR 142, BP 168/94, RR difficult to assess during seizure, SpO₂ 86%, BGL 104 mg/dL.",
     "additional": "Total continuous/recurrent seizure time is now approximately 7 minutes.",
-    "diagnosis": "Status Epilepticus",
+    "diagnosis": "Ongoing / Recurrent Seizures",
     "management": [
-      "Protect the airway and oxygenate/ventilate as needed.",
-      "Check BGL and establish IV/IO access.",
-      "Administer benzodiazepine therapy per protocol.",
-      "Reassess for recurrent seizure and respiratory depression after treatment."
+      "Protect the airway and support oxygenation/ventilation as needed.",
+      "Check blood glucose early.",
+      "Establish IV/IO access when feasible and give Diazepam according to the server seizure pathway.",
+      "Reassess for recurrent seizure activity and respiratory depression."
     ],
     "teaching": [
       "Status epilepticus is seizure >5 minutes or recurrent seizures without regaining consciousness.",
@@ -740,10 +1057,30 @@ const scenarios=[
       }
     ],
     "criticalActions": [
-      "Protect the airway, support oxygenation/ventilation, and check blood glucose.",
-      "Establish IV/IO access without allowing it to delay seizure treatment.",
-      "Give diazepam for prolonged/ongoing convulsions according to the supplied paramedic medication matrix."
-    ]
+      "Perform Initial ABCDE / Vitals and check blood glucose.",
+      "Give Diazepam for ongoing/recurrent seizure activity according to the server protocol.",
+      "Use BVM Ventilation if breathing becomes inadequate."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Blood Glucose Check"
+        ],
+        [
+          "Diazepam"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "Suction",
+        "Oxygen (Non-Rebreather)",
+        "BVM Ventilation",
+        "IV / IO Access",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Pesticide / Nerve Agent Overdose",
@@ -781,12 +1118,31 @@ const scenarios=[
       "Make scene safety, PPE, and decontamination the first priority when pesticide/nerve-agent exposure is suspected.",
       "Control airway secretions and support ventilation aggressively.",
       "Use antidotal therapy only as supported by the active server protocol and reassess continuously."
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Decontamination / PPE"
+        ],
+        [
+          "Atropine"
+        ]
+      ],
+      "beneficial": [
+        "Suction",
+        "Oxygen (Non-Rebreather)",
+        "BVM Ventilation",
+        "IV / IO Access",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Heat Stroke",
     "type": "Environmental",
-    "difficulty": "Paramedic",
+    "difficulty": "Advanced EMT",
     "dispatch": "Medic 1, respond to a road race for a {age}-year-old {sex} who collapsed in the heat.",
     "scene": "The patient is on the ground near the finish area. Bystanders say the patient became confused before collapsing.",
     "initial": "Airway is patent. Respirations are fast. Pulse is very rapid. Patient is confused and combative.",
@@ -796,10 +1152,10 @@ const scenarios=[
     "additional": "A brief generalized seizure occurs during assessment.",
     "diagnosis": "Heat Stroke",
     "management": [
-      "Begin immediate rapid active cooling.",
-      "Support oxygenation and ventilation as needed.",
-      "Establish IV access and treat circulatory compromise per protocol.",
-      "Monitor ECG and transport while cooling continues when feasible."
+      "Begin Rapid Cooling immediately.",
+      "Support oxygenation as needed.",
+      "Establish IV/IO access and give Saline when indicated for dehydration/poor perfusion.",
+      "Reassess temperature and mental status during rapid transport."
     ],
     "teaching": [
       "Heat stroke is defined by severe hyperthermia plus CNS dysfunction.",
@@ -820,132 +1176,31 @@ const scenarios=[
       "Recognize heat stroke from hyperthermia plus altered mental status.",
       "Begin immediate rapid cooling and continue it during transport when feasible.",
       "Support airway, breathing, and circulation and establish vascular access as indicated."
-    ]
-  },
-  {
-    "condition": "Dangerously High Potassium",
-    "type": "Medical",
-    "difficulty": "Critical Care Paramedic",
-    "dispatch": "Medic 1, respond to a dialysis center for a {age}-year-old {sex} with weakness and a slow heart rate.",
-    "scene": "The patient is pale and weak after missing a scheduled dialysis session.",
-    "initial": "Airway is patent. Breathing is adequate. Radial pulse is slow and irregular.",
-    "history": "End-stage renal disease on hemodialysis. Patient missed the last treatment because of transportation problems.",
-    "exam": "Generalized weakness and mild peripheral edema. No focal neurologic deficits.",
-    "vitals": "HR 38, BP 88/54, RR 20, SpO₂ 96%.",
-    "additional": "ECG shows tall peaked T waves progressing to QRS widening.",
-    "ecg": "Marked peaked T waves with widening QRS and bradycardia, concerning for severe hyperkalemia.",
-    "diagnosis": "Severe Hyperkalemia",
-    "management": [
-      "Continuous cardiac monitoring and rapid recognition are critical.",
-      "Establish IV/IO access and provide supportive treatment within the Critical Care Paramedic scope.",
-      "Treat unstable bradycardia/dysrhythmias within protocol and arrange rapid transport for definitive treatment/dialysis."
     ],
-    "criticalActions": [
-      "Recognize severe hyperkalemia from the dialysis history, bradycardia, peaked T waves, and widening QRS.",
-      "Place the patient on continuous cardiac monitoring and closely reassess for progression toward arrest.",
-      "Establish IV/IO access and expedite transport for definitive treatment/dialysis."
-    ],
-    "scopeNotes": [
-      "The supplied server medication matrix lists Calcium Chloride for prevention of hypocalcemia with pre-hospital transfusions; it does not specifically list a hyperkalemia medication protocol. This scenario therefore does not require a medication that is not supported by the supplied training guide."
-    ],
-    "teaching": [
-      "Severe hyperkalemia can rapidly progress from peaked T waves to wide-complex rhythms and arrest.",
-      "Pacing alone may be ineffective until the metabolic problem is treated."
-    ],
-    "stages": [
-      {
-        "title": "Stage 2",
-        "text": "QRS widens further and HR falls to 28. BP is 70/40 and the patient becomes drowsy."
-      },
-      {
-        "title": "Stage 3",
-        "text": "The rhythm degenerates into a near sine-wave pattern followed by pulseless electrical activity.",
-        "critical": true
-      }
-    ]
-  },
-  {
-    "condition": "Sepsis",
-    "type": "Medical",
-    "difficulty": "Critical Care Paramedic",
-    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with fever, weakness, and confusion.",
-    "scene": "The patient is in bed, lethargic and ill appearing. Family reports worsening symptoms over two days.",
-    "initial": "Airway is patent. Respirations are rapid. Pulse is very fast and weak. Patient is confused.",
-    "history": "Recent urinary infection treated incompletely. Oral intake has been poor.",
-    "exam": "Hot skin, dry mucous membranes, and suprapubic discomfort. Peripheral perfusion is delayed.",
-    "vitals": "HR 132, BP 78/44, RR 30, SpO₂ 93%, Temp 103.1°F.",
-    "additional": "Lactate, if available in your system, is markedly elevated. Patient has produced very little urine today.",
-    "diagnosis": "Septic Shock",
-    "management": [
-      "Support oxygenation and ventilation.",
-      "Establish vascular access and begin protocol-directed fluid resuscitation.",
-      "Consider vasopressor support when shock persists after appropriate volume resuscitation and according to critical-care protocol.",
-      "Rapid transport and sepsis notification are appropriate."
-    ],
-    "teaching": [
-      "Shock can persist even when the skin initially feels warm.",
-      "Reassess perfusion response rather than relying on a single blood-pressure value."
-    ],
-    "stages": [
-      {
-        "title": "Stage 2",
-        "text": "After initial fluid resuscitation BP remains 76/42 with worsening confusion and mottled extremities."
-      },
-      {
-        "title": "Stage 3",
-        "text": "The patient becomes minimally responsive with profound vasodilatory shock and impending cardiovascular collapse.",
-        "critical": true
-      }
-    ],
-    "criticalActions": [
-      "Recognize shock in the infected patient and support oxygenation/ventilation.",
-      "Establish vascular access and begin server-appropriate fluid resuscitation.",
-      "Reassess perfusion frequently and transport promptly for definitive sepsis care."
-    ]
-  },
-  {
-    "condition": "Blood Transfusion Reaction",
-    "type": "Medical",
-    "difficulty": "Critical Care Paramedic",
-    "dispatch": "Medic 1, respond to an infusion center for a {age}-year-old {sex} who became acutely ill during a blood transfusion.",
-    "scene": "The patient is reclined in an infusion chair with blood still running through an IV line. Staff report symptoms began minutes after the transfusion started.",
-    "initial": "Airway is patent. Breathing is fast with new wheezing. Pulse is rapid.",
-    "history": "Patient was receiving packed red blood cells for anemia. No symptoms were present before the transfusion.",
-    "exam": "Facial flushing, chills, hives, chest discomfort, and flank pain. Patient appears anxious and ill.",
-    "vitals": "HR 128, BP 86/50, RR 28, SpO₂ 90%, Temp 101.5°F.",
-    "additional": "Symptoms are temporally associated with the active transfusion.",
-    "diagnosis": "Acute Blood Transfusion Reaction",
-    "management": [
-      "Stop the transfusion immediately while maintaining appropriate IV access with compatible fluid per protocol.",
-      "Support airway, breathing, and circulation.",
-      "Treat anaphylaxis, shock, or other reaction features as indicated.",
-      "Preserve transfusion information and notify the receiving facility."
-    ],
-    "teaching": [
-      "A sudden reaction during transfusion should be assumed serious until proven otherwise.",
-      "Treatment depends on the reaction phenotype, but stopping the transfusion is immediate."
-    ],
-    "stages": [
-      {
-        "title": "Stage 2",
-        "text": "Hypotension worsens and respiratory distress increases. Hives spread and the patient becomes confused."
-      },
-      {
-        "title": "Stage 3",
-        "text": "The patient develops severe shock with inadequate respirations and is nearing cardiac arrest.",
-        "critical": true
-      }
-    ],
-    "criticalActions": [
-      "Stop the blood transfusion immediately when a transfusion reaction is suspected.",
-      "Maintain appropriate vascular access and support airway, breathing, and circulation.",
-      "Treat shock/anaphylactic features as indicated and notify the receiving facility with transfusion details."
-    ]
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Rapid Cooling"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Saline"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Severe Hypothermia",
     "type": "Environmental",
-    "difficulty": "Critical Care Paramedic",
+    "difficulty": "Basic",
     "dispatch": "Medic 1, respond to a remote outdoor location for a {age}-year-old {sex} found after prolonged cold exposure.",
     "scene": "The patient has been moved to a sheltered area. Clothing is wet and partially frozen. The patient appears lifeless at first glance.",
     "initial": "Patient is unresponsive. Breathing is extremely slow and shallow. A central pulse is faint and requires prolonged assessment to detect.",
@@ -959,7 +1214,7 @@ const scenarios=[
       "Confirm pulse and respirations carefully for an extended period.",
       "Handle gently and keep the patient horizontal.",
       "Remove wet clothing, prevent further heat loss, and begin appropriate active core rewarming.",
-      "Use warmed humidified oxygen and warmed IV fluids when available and indicated.",
+      "Use warmed humidified oxygen and warmed Saline when available and indicated.",
       "Follow hypothermic resuscitation/defibrillation guidance if arrest occurs."
     ],
     "teaching": [
@@ -980,84 +1235,23 @@ const scenarios=[
     "criticalActions": [
       "Handle the severely hypothermic patient gently and prevent additional heat loss.",
       "Carefully confirm pulse/respirations and support oxygenation/ventilation as needed.",
-      "Begin appropriate rewarming, including warmed oxygen/IV fluid when available within the critical-care plan."
-    ]
-  },
-  {
-    "condition": "DIC",
-    "type": "Medical",
-    "difficulty": "Critical Care Paramedic",
-    "dispatch": "Medic 1, respond to a hospital transfer unit for a {age}-year-old {sex} with worsening bleeding and shock.",
-    "scene": "The patient is critically ill with oozing from multiple IV and puncture sites.",
-    "initial": "Airway is patent. Breathing is fast. Pulse is rapid and weak. Patient is confused.",
-    "history": "Patient is being treated for severe sepsis and has developed increasing bleeding over the last hour.",
-    "exam": "Diffuse bruising, petechiae, and persistent oozing from vascular-access sites. Skin is cool and mottled.",
-    "vitals": "HR 136, BP 74/40, RR 30, SpO₂ 94%.",
-    "additional": "Laboratory information provided for transport shows falling platelets and abnormal coagulation studies.",
-    "diagnosis": "Disseminated Intravascular Coagulation (DIC)",
-    "management": [
-      "Support ABCs and treat shock.",
-      "Control external bleeding where possible without causing additional trauma.",
-      "Continue treatment of the underlying cause and transport with appropriate blood-product support per critical-care plan."
+      "Begin appropriate rewarming, including warmed oxygen/Saline when available within the critical-care plan."
     ],
-    "teaching": [
-      "DIC causes simultaneous widespread clotting and consumption of clotting factors, leading to bleeding.",
-      "Sepsis, major trauma, burns, obstetric emergencies, and massive transfusion are important causes."
-    ],
-    "stages": [
-      {
-        "title": "Stage 2",
-        "text": "Bleeding increases from IV sites and mucous membranes while BP remains critically low."
-      },
-      {
-        "title": "Stage 3",
-        "text": "The patient develops profound shock with worsening mental status and multisystem failure.",
-        "critical": true
-      }
-    ],
-    "criticalActions": [
-      "Support ABCs and treat shock while minimizing additional trauma or unnecessary needle sticks.",
-      "Control visible external bleeding where possible.",
-      "Use blood-product support when included in the critical-care transport plan and transport for definitive treatment of the underlying cause."
-    ]
-  },
-  {
-    "condition": "Respiratory Failure",
-    "type": "Medical",
-    "difficulty": "Critical Care Paramedic",
-    "dispatch": "Medic 1, respond to a long-term care facility for a {age}-year-old {sex} with worsening respiratory distress and decreasing responsiveness.",
-    "scene": "The patient is upright in bed with staff providing oxygen. Respiratory effort is visibly tiring.",
-    "initial": "Airway is patent. Respirations are shallow and increasingly ineffective. Pulse is fast. Patient answers only with brief responses.",
-    "history": "Several days of respiratory illness with chronic lung disease.",
-    "exam": "Diffuse diminished breath sounds with scattered crackles. Accessory muscle use is becoming less pronounced as fatigue worsens.",
-    "vitals": "HR 124, BP 108/64, RR 18 shallow after previously being in the 30s, SpO₂ 82% despite oxygen.",
-    "additional": "Mental status is declining. If capnography is available, ventilation is inadequate with rising CO₂.",
-    "diagnosis": "Acute Respiratory Failure",
-    "management": [
-      "Recognize that decreasing respiratory rate may reflect fatigue, not improvement.",
-      "Provide escalating ventilatory support, including BVM/NIV/advanced airway as clinically appropriate.",
-      "Treat the underlying cause while maintaining oxygenation and ventilation."
-    ],
-    "teaching": [
-      "AMS is a major warning sign distinguishing respiratory failure from uncomplicated distress.",
-      "Work of breathing may decrease just before arrest because the patient is exhausted."
-    ],
-    "stages": [
-      {
-        "title": "Stage 2",
-        "text": "The patient becomes minimally responsive with RR 10 and very poor tidal volume. SpO₂ falls to 74%."
-      },
-      {
-        "title": "Stage 3",
-        "text": "The patient stops breathing but still has a pulse, producing respiratory arrest.",
-        "critical": true
-      }
-    ],
-    "criticalActions": [
-      "Recognize inadequate ventilation and respiratory fatigue as respiratory failure.",
-      "Provide BVM ventilation when breathing is inadequate and escalate airway management as needed.",
-      "Treat the underlying cause while continuously reassessing oxygenation and ventilation."
-    ]
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Warming"
+        ]
+      ],
+      "beneficial": [
+        "Gentle Handling / Prevent Heat Loss",
+        "Oxygen (Non-Rebreather)",
+        "Cardiac Monitoring",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Anaphylaxis",
@@ -1099,7 +1293,22 @@ const scenarios=[
         "text": "The patient becomes barely responsive with severe airway swelling and inadequate respirations.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Epinephrine (IM - Anaphylaxis)"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Albuterol",
+        "Ipratropium",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Closed Long-Bone Fracture",
@@ -1122,7 +1331,7 @@ const scenarios=[
     "criticalActions": [
       "Check distal circulation, motor function, and sensation before splinting.",
       "Immobilize the fracture appropriately.",
-      "Repeat distal neurovascular checks after splinting and monitor for shock."
+      "Repeat distal PMS (Pulse, Motor, Sensory) / Nerve Checks after splinting and monitor for shock."
     ],
     "scopeNotes": [
       "The supplied trauma guide emphasizes splinting and checking circulation before and after immobilization."
@@ -1131,10 +1340,26 @@ const scenarios=[
       "A closed fracture can still cause significant bleeding and shock.",
       "Neurovascular reassessment after splinting is essential."
     ],
-    "stages": []
+    "stages": [],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "PMS (Pulse, Motor, Sensory) / Nerve Check"
+        ],
+        [
+          "Splinting"
+        ]
+      ],
+      "beneficial": [
+        "Spinal Motion Restriction",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "Major External Bleeding",
+    "condition": "Major External Bleeding - Extremity",
     "type": "Trauma",
     "difficulty": "Basic",
     "dispatch": "Medic 1, respond to an industrial site for a {age}-year-old {sex} with severe bleeding from an arm injury.",
@@ -1144,12 +1369,11 @@ const scenarios=[
     "exam": "Deep extremity wound with brisk bleeding. No impaled object. Distal sensation is present.",
     "vitals": "HR 122, BP 96/60, RR 26, SpO₂ 98%.",
     "additional": "Bleeding continues despite light pressure from bystanders.",
-    "diagnosis": "Major External Hemorrhage",
+    "diagnosis": "Major External Hemorrhage - Extremity",
     "management": [
-      "Apply firm direct pressure and an appropriate dressing.",
-      "If severe extremity bleeding is not controlled, apply a tourniquet according to training.",
-      "Treat for shock and prevent heat loss.",
-      "Rapid transport is appropriate."
+      "Control the severe extremity bleeding immediately.",
+      "Apply a Tourniquet when the bleeding is life-threatening or not controlled by simple pressure.",
+      "Treat for shock, keep the patient warm, and transport rapidly."
     ],
     "criticalActions": [
       "Control the major external hemorrhage immediately with direct pressure and/or a tourniquet when indicated.",
@@ -1173,7 +1397,23 @@ const scenarios=[
         "text": "The patient becomes confused and then unresponsive from hemorrhagic shock.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Tourniquet"
+        ]
+      ],
+      "beneficial": [
+        "Direct Pressure / Dressing",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": [
+        "Nitroglycerin"
+      ]
+    }
   },
   {
     "condition": "Drowning / Near Drowning",
@@ -1215,7 +1455,23 @@ const scenarios=[
         "text": "The patient becomes unresponsive and stops breathing while a pulse remains present.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "Suction",
+        "BVM Ventilation",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Mild Hypothermia",
@@ -1257,7 +1513,20 @@ const scenarios=[
         "text": "The patient becomes lethargic with marked bradycardia and very slow respirations, indicating severe progression.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Warming"
+        ]
+      ],
+      "beneficial": [
+        "Gentle Handling / Prevent Heat Loss",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Ingested Poison",
@@ -1266,16 +1535,16 @@ const scenarios=[
     "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} who accidentally swallowed a potentially toxic substance.",
     "scene": "The patient is awake in the kitchen. A household product container is on the counter and family is unsure how much was swallowed.",
     "initial": "Airway is patent. Breathing and circulation are currently stable. Patient is anxious but oriented.",
-    "history": "Exposure occurred approximately 30 minutes ago. The patient denies vomiting so far.",
-    "exam": "No burns around the mouth, no drooling, and no respiratory distress are noted.",
+    "history": "The exposure occurred about 30 minutes ago. The product is a charcoal-appropriate ingested toxin under the server training guide. The patient has not vomited.",
+    "exam": "The patient is awake, oriented, able to swallow, and has no burns around the mouth, drooling, or breathing difficulty.",
     "vitals": "HR 94, BP 128/76, RR 18, SpO₂ 99%.",
-    "additional": "The exact product label is available to bring with the patient.",
+    "additional": "No listed Activated Charcoal contraindication is present: the patient is alert enough to protect the airway, has not ingested a caustic/corrosive or hydrocarbon product, and the ingestion occurred within the server time window.",
     "diagnosis": "Acute Ingested Poison Exposure",
     "management": [
-      "Identify the substance, amount, and approximate time of exposure.",
-      "Monitor vitals and mental status for delayed toxicity.",
-      "Activated charcoal may be considered only when the server criteria are met and the substance is appropriate.",
-      "Transport and seek poison/medical-control guidance as appropriate."
+      "Perform Initial ABCDE / Vitals and identify what was swallowed, how much, and when.",
+      "Confirm that no server-listed Activated Charcoal contraindication is present.",
+      "Give Activated Charcoal when the supplied criteria are met.",
+      "Monitor for delayed toxicity and transport."
     ],
     "criticalActions": [
       "Identify the ingested substance, approximate amount, and time of ingestion.",
@@ -1289,7 +1558,19 @@ const scenarios=[
       "The container or medication list can be clinically valuable.",
       "Some ingestions have delayed effects even when the initial exam is normal."
     ],
-    "stages": []
+    "stages": [],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Activated Charcoal"
+        ]
+      ],
+      "beneficial": [
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Dehydration",
@@ -1315,7 +1596,7 @@ const scenarios=[
       "Reassess HR, BP, mental status, and symptoms after fluid replacement."
     ],
     "scopeNotes": [
-      "The supplied Advanced EMT guide allows IV saline for fluid therapy/dehydration."
+      "The supplied Advanced EMT guide allows IV saline for Saline therapy/dehydration."
     ],
     "teaching": [
       "Dehydration can produce tachycardia, hypotension, dizziness, and reduced urine output."
@@ -1330,10 +1611,25 @@ const scenarios=[
         "text": "The patient becomes confused with a very weak radial pulse, consistent with worsening hypovolemic shock.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Saline"
+        ]
+      ],
+      "beneficial": [
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "Catastrophic Hemorrhage",
+    "condition": "Catastrophic Hemorrhage - Extremity",
     "type": "Trauma",
     "difficulty": "Advanced EMT",
     "dispatch": "Medic 1, respond to a machinery accident for a {age}-year-old {sex} with severe extremity trauma.",
@@ -1343,20 +1639,20 @@ const scenarios=[
     "exam": "Tourniquet is controlling active extremity hemorrhage. No major chest or abdominal injury is obvious on rapid exam.",
     "vitals": "HR 138, BP 78/46, RR 30, SpO₂ 97%.",
     "additional": "The patient remains alert but repeatedly says they feel faint.",
-    "diagnosis": "Hemorrhagic Shock from Catastrophic Bleeding",
+    "diagnosis": "Hemorrhagic Shock from Catastrophic Extremity Bleeding",
     "management": [
-      "Maintain effective hemorrhage control and do not remove a functioning tourniquet in the field.",
-      "Obtain IV/IO access and begin appropriate fluid therapy.",
-      "Administer TXA when the server criteria are met.",
-      "Prevent hypothermia and transport rapidly."
+      "Control the bleeding first with a Tourniquet and/or direct pressure as appropriate.",
+      "Perform Initial ABCDE / Vitals after immediate life-threatening bleeding is addressed.",
+      "Establish IV/IO access and give Tranexamic Acid (TXA) when the server criteria are met.",
+      "Give Saline when indicated for shock, keep the patient warm, and transport rapidly."
     ],
     "criticalActions": [
       "Maintain immediate hemorrhage control and do not remove an effective tourniquet in the field.",
       "Establish IV/IO access and treat shock without delaying transport.",
-      "Give TXA when the supplied server criteria for severe hemorrhage are met and prevent hypothermia."
+      "Give Tranexamic Acid (TXA) when the supplied server criteria for severe hemorrhage are met and prevent hypothermia."
     ],
     "scopeNotes": [
-      "The supplied Advanced EMT matrix includes TXA IV/IO for suspected severe hemorrhage and saline for fluid therapy."
+      "The supplied Advanced EMT matrix includes Tranexamic Acid (TXA) IV/IO for suspected severe hemorrhage and saline for Saline therapy."
     ],
     "teaching": [
       "Hemorrhage control is the first priority.",
@@ -1372,12 +1668,35 @@ const scenarios=[
         "text": "The patient becomes unresponsive with an absent radial pulse and impending traumatic arrest.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Tourniquet"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Tranexamic Acid (TXA)"
+        ]
+      ],
+      "beneficial": [
+        "Direct Pressure / Dressing",
+        "Saline",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": [
+        "Nitroglycerin"
+      ]
+    }
   },
   {
     "condition": "Moderate Hypothermia",
     "type": "Environmental",
-    "difficulty": "Advanced EMT",
+    "difficulty": "Basic",
     "dispatch": "Medic 1, respond to a rural property for a {age}-year-old {sex} found after prolonged cold exposure.",
     "scene": "The patient is indoors now but remains in soaked clothing and is confused.",
     "initial": "Airway is patent. Breathing is slow but adequate. Pulse is bradycardic. Patient responds to voice but is disoriented.",
@@ -1414,10 +1733,23 @@ const scenarios=[
         "text": "The patient develops severe bradycardia with ventricular irritability and is at high risk for arrest.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Warming"
+        ]
+      ],
+      "beneficial": [
+        "Gentle Handling / Prevent Heat Loss",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "Ventricular Fibrillation Cardiac Arrest",
+    "condition": "Shockable Cardiac Arrest",
     "type": "Medical",
     "difficulty": "Advanced EMT",
     "dispatch": "Medic 1, respond to a public location for a {age}-year-old {sex} who suddenly collapsed.",
@@ -1428,17 +1760,17 @@ const scenarios=[
     "vitals": "Pulseless and apneic.",
     "additional": "First rhythm check shows ventricular fibrillation.",
     "ecg": "Ventricular fibrillation — shockable cardiac-arrest rhythm.",
-    "diagnosis": "Ventricular Fibrillation Cardiac Arrest",
+    "diagnosis": "Shockable Cardiac Arrest (VF / Pulseless VT)",
     "management": [
-      "Continue high-quality CPR with minimal interruptions.",
-      "Defibrillate VF according to the resuscitation sequence.",
-      "Obtain IV/IO access and administer cardiac-arrest epinephrine per server protocol.",
-      "Manage the airway within scope and search for reversible causes."
+      "Start high-quality CPR immediately.",
+      "Deliver Defibrillation / AED Shock when a shockable rhythm is identified.",
+      "Support the airway and ventilation.",
+      "Establish IV/IO access and give Epinephrine (Cardiac Arrest) according to the server arrest pathway."
     ],
     "criticalActions": [
-      "Begin high-quality CPR and defibrillate VF without unnecessary delay.",
-      "Provide airway/ventilatory support while minimizing interruptions in compressions.",
-      "Obtain IV/IO access and give cardiac-arrest epinephrine according to the supplied Advanced EMT arrest guide."
+      "Perform Initial ABCDE / Vitals and recognize cardiac arrest.",
+      "Start CPR and deliver Defibrillation / AED Shock for the shockable rhythm.",
+      "Establish IV/IO access and give Epinephrine (Cardiac Arrest) while continuing the arrest algorithm."
     ],
     "scopeNotes": [
       "The supplied Advanced EMT cardiac-arrest guide includes IV adrenaline/epinephrine in arrest and CPR/AED management."
@@ -1457,7 +1789,33 @@ const scenarios=[
         "text": "After another treatment cycle, ROSC is obtained with a weak pulse and BP 86/54.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "CPR"
+        ],
+        [
+          "Defibrillation / AED Shock"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Epinephrine (Cardiac Arrest)"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "OPA",
+        "NPA",
+        "Suction",
+        "BVM Ventilation",
+        "Cardiac Monitoring"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Symptomatic Bradycardia",
@@ -1499,29 +1857,49 @@ const scenarios=[
         "text": "The patient becomes unresponsive and loses pulses, progressing to cardiac arrest.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Atropine"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "SVT",
+    "condition": "Unstable SVT",
     "type": "Medical",
-    "difficulty": "Paramedic",
+    "difficulty": "Critical Care Paramedic",
     "dispatch": "Medic 1, respond to a workplace for a {age}-year-old {sex} with sudden palpitations and dizziness.",
     "scene": "The patient is seated, anxious, and reports the heart suddenly started racing.",
     "initial": "Airway is patent. Breathing is mildly rapid. Radial pulse is extremely fast and regular.",
     "history": "Abrupt onset of palpitations while at rest. No recent stimulant use is reported.",
     "exam": "Skin is pale and slightly sweaty. No focal neurologic findings or respiratory distress.",
-    "vitals": "HR 188 regular, BP 102/66, RR 22, SpO₂ 98%.",
-    "additional": "The patient reports chest pressure but remains alert.",
+    "vitals": "HR 190 regular, BP 78/46, RR 24, SpO₂ 95%.",
+    "additional": "The patient has worsening chest pressure, sweating, and lightheadedness with low blood pressure.",
     "ecg": "Regular narrow-complex tachycardia consistent with SVT at approximately 190 bpm.",
-    "diagnosis": "Supraventricular Tachycardia (SVT)",
+    "diagnosis": "Unstable Supraventricular Tachycardia (SVT)",
     "management": [
-      "Assess stability and obtain continuous cardiac monitoring/12-lead when feasible.",
-      "Establish vascular access and follow the server tachycardia treatment pathway.",
-      "If the patient becomes unstable, escalate treatment promptly according to protocol."
+      "Perform Initial ABCDE / Vitals and place the patient on Cardiac Monitoring.",
+      "Establish IV/IO access without delaying treatment.",
+      "Treat the unstable tachyarrhythmia with Synchronized Cardioversion according to the server CCP pathway.",
+      "Reassess rhythm, blood pressure, mental status, and symptoms."
     ],
     "criticalActions": [
       "Identify SVT and determine whether the patient is hemodynamically stable or unstable.",
-      "Place the patient on cardiac monitoring/12-lead and establish vascular access without unnecessary delay.",
+      "Place the patient on Cardiac Monitoring and establish vascular access without unnecessary delay.",
       "Escalate promptly if hypotension, altered mental status, ischemic chest discomfort, or other instability develops."
     ],
     "scopeNotes": [
@@ -1541,29 +1919,49 @@ const scenarios=[
         "text": "The patient becomes confused and profoundly hypotensive, representing unstable tachycardia.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Synchronized Cardioversion"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "Atrial Fibrillation with RVR",
+    "condition": "Unstable Atrial Fibrillation with RVR",
     "type": "Medical",
-    "difficulty": "Paramedic",
+    "difficulty": "Critical Care Paramedic",
     "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with palpitations and weakness.",
     "scene": "The patient is seated upright and says the heartbeat feels fast and irregular.",
     "initial": "Airway is patent. Breathing is adequate. Radial pulse is rapid and irregular.",
     "history": "History of intermittent atrial fibrillation. Symptoms started several hours ago.",
     "exam": "Mild dyspnea and fatigue without focal neurologic deficit.",
-    "vitals": "HR 156 irregular, BP 104/68, RR 22, SpO₂ 96%.",
-    "additional": "No active bleeding or major trauma is present.",
+    "vitals": "HR 164 irregular, BP 82/48, RR 26, SpO₂ 94%.",
+    "additional": "The patient is sweaty, weak, and increasingly confused with worsening shortness of breath.",
     "ecg": "Atrial fibrillation with rapid ventricular response, ventricular rate approximately 150–160 bpm.",
-    "diagnosis": "Atrial Fibrillation with Rapid Ventricular Response",
+    "diagnosis": "Unstable Atrial Fibrillation with Rapid Ventricular Response",
     "management": [
-      "Assess hemodynamic stability and obtain cardiac monitoring/12-lead.",
-      "Establish vascular access and treat according to the server tachyarrhythmia pathway.",
-      "Watch closely for hypotension, chest pain, altered mental status, or pulmonary edema."
+      "Perform Initial ABCDE / Vitals and place the patient on Cardiac Monitoring.",
+      "Establish IV/IO access without delaying definitive treatment.",
+      "Treat the unstable tachyarrhythmia with Synchronized Cardioversion according to the server CCP pathway.",
+      "Reassess rhythm, perfusion, mental status, and breathing."
     ],
     "criticalActions": [
       "Identify A-Fib with RVR and determine whether the patient is stable or unstable.",
-      "Use cardiac monitoring/12-lead and establish vascular access.",
+      "Use Cardiac Monitoring and establish vascular access.",
       "Escalate promptly if the patient develops hypotension, altered mental status, chest discomfort, or pulmonary edema."
     ],
     "scopeNotes": [
@@ -1583,12 +1981,31 @@ const scenarios=[
         "text": "The patient becomes confused with severe hypotension and chest discomfort, now clearly unstable.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Synchronized Cardioversion"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
-    "condition": "Ventricular Tachycardia",
+    "condition": "Unstable V-Tach with a Pulse",
     "type": "Medical",
-    "difficulty": "Paramedic",
+    "difficulty": "Critical Care Paramedic",
     "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} with chest discomfort and near-syncope.",
     "scene": "The patient is pale, sweaty, and struggling to remain upright.",
     "initial": "Airway is patent. Breathing is rapid. Radial pulse is very fast and weak.",
@@ -1599,10 +2016,10 @@ const scenarios=[
     "ecg": "Regular wide-complex tachycardia consistent with ventricular tachycardia with a pulse.",
     "diagnosis": "Unstable Ventricular Tachycardia with a Pulse",
     "management": [
-      "Recognize the patient as unstable and maintain continuous monitoring.",
-      "Establish IV/IO access if it does not delay definitive treatment.",
-      "Follow the server unstable tachycardia pathway and be prepared for deterioration to pulseless VT/VF.",
-      "Continue airway and perfusion support."
+      "Perform Initial ABCDE / Vitals and place the patient on Cardiac Monitoring.",
+      "Establish IV/IO access if it does not delay treatment.",
+      "Treat unstable V-Tach with a pulse using Synchronized Cardioversion according to the server CCP pathway.",
+      "Prepare for immediate CPR and defibrillation if the patient loses pulses."
     ],
     "criticalActions": [
       "Recognize the wide-complex tachycardia as unstable ventricular tachycardia with a pulse.",
@@ -1626,7 +2043,26 @@ const scenarios=[
         "text": "No pulse is present. The rhythm remains ventricular tachycardia and should now be managed as a shockable cardiac arrest.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Synchronized Cardioversion"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Major Burn with Airway Risk",
@@ -1669,33 +2105,55 @@ const scenarios=[
         "text": "Severe upper-airway edema causes rapidly worsening obstruction and inadequate ventilation.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ],
+        [
+          "Advanced Airway / RSI"
+        ]
+      ],
+      "beneficial": [
+        "IV / IO Access",
+        "Saline",
+        "Morphine",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Massive Hemorrhage Requiring SWiFT",
     "type": "Trauma",
     "difficulty": "Critical Care Paramedic",
-    "dispatch": "Medic 1, respond to an interfacility transfer for a {age}-year-old {sex} with ongoing hemorrhagic shock after major trauma.",
-    "scene": "The patient is packaged for transfer with hemorrhage controlled but remains profoundly hypotensive. Multiple large-bore access sites are present.",
-    "initial": "Airway is secured. Ventilation is adequate. Pulse is rapid and weak. Patient is sedated but has poor peripheral perfusion.",
-    "history": "Major traumatic blood loss before arrival at the sending facility. Crystalloid alone has not restored perfusion.",
-    "exam": "Pale cool skin, delayed capillary refill, and ongoing signs of severe hypovolemia. No new external hemorrhage is seen.",
-    "vitals": "HR 142, BP 70/38, RR 20 assisted, SpO₂ 98%.",
-    "additional": "Sending team requests continued blood-product resuscitation during transport.",
-    "diagnosis": "Hemorrhagic Shock Requiring Blood Product Resuscitation",
+    "dispatch": "Medic 1, respond to a major vehicle collision for a {age}-year-old {sex} with catastrophic bleeding and signs of shock.",
+    "scene": "The patient has a severely injured leg with uncontrolled life-threatening bleeding. Bystanders are applying ineffective pressure. The patient is pale, weak, and confused.",
+    "initial": "The patient is speaking only a few words. Breathing is fast. The pulse at the wrist is very fast and weak. Severe extremity bleeding is still present.",
+    "history": "The injury occurred less than 15 minutes ago. There is no known anticoagulant use. Estimated blood loss is large.",
+    "exam": "Severe extremity trauma with active major hemorrhage. Skin is pale, cool, and sweaty with delayed capillary refill. No obvious open chest wound is present.",
+    "vitals": "HR 148, BP 68/38, RR 30, SpO₂ 95%.",
+    "additional": "The patient meets the server training criteria for SWiFT resuscitation after hemorrhage control and Tranexamic Acid (TXA).",
+    "diagnosis": "Massive Hemorrhage Requiring SWiFT",
     "management": [
-      "Maintain hemorrhage control and prevent hypothermia.",
-      "Continue SWiFT/blood-product resuscitation according to the critical-care transport plan.",
-      "Use packed red blood cells and freeze-dried/lyophilized plasma as indicated by the supplied server matrix.",
-      "Monitor closely for transfusion reaction and changes in perfusion."
+      "Stop the bleeding immediately with a Tourniquet / direct pressure.",
+      "Perform Initial ABCDE / Vitals and establish IV/IO access.",
+      "Give Tranexamic Acid (TXA) according to the server severe-hemorrhage pathway.",
+      "Administer Lyophilised Plasma and Packed Red Blood Cells as part of SWiFT.",
+      "Give Calcium Chloride as required by the server SWiFT matrix.",
+      "Keep the patient warm and continuously reassess perfusion."
     ],
     "criticalActions": [
-      "Maintain hemorrhage control and actively prevent hypothermia.",
-      "Continue blood-product/SWiFT resuscitation according to the critical-care transport plan.",
-      "Continuously reassess perfusion and watch for a transfusion reaction during transport."
+      "Stop the life-threatening bleeding first.",
+      "Perform Initial ABCDE / Vitals, establish IV/IO access, and give Tranexamic Acid (TXA).",
+      "Use Lyophilised Plasma, Packed Red Blood Cells, and Calcium Chloride during SWiFT.",
+      "Continue reassessment and prevent hypothermia."
     ],
     "scopeNotes": [
-      "The supplied Critical Care Paramedic matrix lists packed red blood cells and freeze-dried plasma under SWiFT."
+      "The supplied Critical Care Paramedic matrix requires the SWiFT components to be performed individually: Calcium Chloride, Lyophilised Plasma, and Packed Red Blood Cells."
     ],
     "teaching": [
       "Blood products address oxygen-carrying capacity and clotting-factor loss in major hemorrhage.",
@@ -1711,7 +2169,36 @@ const scenarios=[
         "text": "If resuscitation is delayed, the patient develops worsening shock with bradycardia and impending arrest.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Tourniquet"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Tranexamic Acid (TXA)"
+        ],
+        [
+          "Lyophilised Plasma"
+        ],
+        [
+          "Packed Red Blood Cells"
+        ],
+        [
+          "Calcium Chloride"
+        ]
+      ],
+      "beneficial": [
+        "Direct Pressure / Dressing",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   },
   {
     "condition": "Severe Asthma Refractory to Initial Therapy",
@@ -1726,18 +2213,18 @@ const scenarios=[
     "additional": "The patient is becoming drowsy and tiring despite initial bronchodilator treatment.",
     "diagnosis": "Severe Refractory Asthma with Impending Respiratory Failure",
     "management": [
-      "Continue aggressive airway and ventilatory support.",
-      "Continue protocol-directed bronchodilator/anaphylaxis therapy as clinically indicated.",
-      "Consider magnesium sulfate under the supplied Critical Care Paramedic scope when appropriate.",
-      "Prepare for advanced airway management if ventilation fails."
+      "Perform Initial ABCDE / Vitals and support oxygenation.",
+      "Give Albuterol and Ipratropium as separate treatments.",
+      "Establish IV/IO access and give Magnesium Sulphate according to the CCP drug matrix.",
+      "Use BVM Ventilation and prepare for Advanced Airway / RSI if breathing becomes inadequate."
     ],
     "criticalActions": [
-      "Recognize quiet breath sounds and declining mental status as impending respiratory failure, not improvement.",
-      "Continue oxygen/bronchodilator support and consider magnesium within the supplied Critical Care Paramedic medication scope.",
-      "Escalate to assisted ventilation/advanced airway management immediately if ventilation becomes inadequate."
+      "Recognize severe asthma with poor air movement and fatigue.",
+      "Give Albuterol, Ipratropium, and Magnesium Sulphate.",
+      "Escalate to BVM Ventilation / advanced airway management if ventilation becomes inadequate."
     ],
     "scopeNotes": [
-      "The supplied Critical Care Paramedic matrix lists magnesium sulfate IV/IO for asthma/anaphylaxis and the airway guide includes RSI/surgical airway options."
+      "The supplied Critical Care Paramedic matrix lists Magnesium Sulphate IV/IO for asthma/anaphylaxis and the airway guide includes RSI/surgical airway options."
     ],
     "teaching": [
       "A patient who becomes quieter may simply be moving less air.",
@@ -1753,259 +2240,772 @@ const scenarios=[
         "text": "The patient becomes unresponsive with inadequate respirations and requires immediate assisted ventilation/advanced airway management.",
         "critical": true
       }
-    ]
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Oxygen (Non-Rebreather)"
+        ],
+        [
+          "Albuterol"
+        ],
+        [
+          "Ipratropium"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Magnesium Sulphate"
+        ]
+      ],
+      "beneficial": [
+        "BVM Ventilation",
+        "Advanced Airway / RSI",
+        "Cardiac Monitoring",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Open Chest Wound - Major External Bleeding",
+    "type": "Trauma",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to an outdoor work site for a {age}-year-old {sex} with a penetrating chest injury.",
+    "scene": "The patient is sitting upright with a bleeding open wound to the side of the chest. Air can be heard moving through the wound with breathing.",
+    "initial": "The patient can speak but is short of breath. Breathing is fast and painful. The pulse at the wrist is fast and present.",
+    "history": "A sharp piece of metal struck the chest several minutes ago. The object is no longer in the wound.",
+    "exam": "Open chest wound with bubbling blood and decreased breath sounds on the injured side. No severe extremity bleeding is present.",
+    "vitals": "HR 122, BP 104/68, RR 30, SpO₂ 89%.",
+    "additional": "The wound is open to the chest and is appropriate for a Chest Seal.",
+    "diagnosis": "Open Chest Wound / Sucking Chest Wound",
+    "management": [
+      "Perform Initial ABCDE / Vitals.",
+      "Apply a Chest Seal to the open chest wound.",
+      "Give Oxygen (Non-Rebreather) as indicated and monitor for worsening breathing or tension physiology.",
+      "Transport rapidly."
+    ],
+    "teaching": [
+      "A Chest Seal treats an open chest wound; a Tourniquet is for severe extremity bleeding.",
+      "Watch for worsening respiratory distress after sealing the chest."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Breathing becomes more difficult. HR 132 (HIGH), RR 34 (HIGH), SpO₂ 84% (LOW).",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused with severe respiratory distress and signs of developing tension physiology.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Apply a Chest Seal and support breathing.",
+      "Reassess for worsening respiratory distress after sealing the wound."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Chest Seal"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Catastrophic Hemorrhage - Open Chest Wound",
+    "type": "Trauma",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a construction accident for a {age}-year-old {sex} with a severe penetrating chest injury and shock.",
+    "scene": "The patient has an open bleeding chest wound with significant blood loss and is pale, weak, and short of breath.",
+    "initial": "The patient can answer briefly. Breathing is fast and labored. The pulse at the wrist is very fast and weak.",
+    "history": "The injury happened less than 20 minutes ago. No anticoagulant use is known.",
+    "exam": "Open chest wound with bubbling blood. No major extremity bleeding is present. Skin is cool and sweaty.",
+    "vitals": "HR 136, BP 80/48, RR 30, SpO₂ 87%.",
+    "additional": "The patient meets the server training criteria for Tranexamic Acid (TXA) because of severe traumatic hemorrhage.",
+    "diagnosis": "Open Chest Wound with Hemorrhagic Shock",
+    "management": [
+      "Apply a Chest Seal first.",
+      "Perform Initial ABCDE / Vitals and support oxygenation.",
+      "Establish IV/IO access and give Tranexamic Acid (TXA).",
+      "Give Saline when indicated for shock, keep the patient warm, and transport rapidly."
+    ],
+    "teaching": [
+      "Advanced care builds on Basic care: the chest wound still has to be sealed before IV medications solve anything.",
+      "Treat the cause of shock and do not let vascular access delay immediate chest wound management."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes more confused. HR 146, BP 68/40, SpO₂ 80%.",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive with a very weak central pulse and impending arrest.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Apply a Chest Seal.",
+      "Perform Initial ABCDE / Vitals.",
+      "Establish IV/IO access and give Tranexamic Acid (TXA)."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Chest Seal"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Tranexamic Acid (TXA)"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Saline",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Non-Shockable Cardiac Arrest",
+    "type": "Medical",
+    "difficulty": "Advanced EMT",
+    "dispatch": "Medic 1, respond to a residence for a {age}-year-old {sex} who collapsed and is not breathing normally.",
+    "scene": "The patient is unresponsive on the floor. A bystander has started CPR.",
+    "initial": "The patient is unresponsive, is not breathing normally, and has no pulse.",
+    "history": "The collapse was witnessed several minutes ago. No major trauma is reported.",
+    "exam": "No pulse or normal breathing is present. Cardiac Monitoring shows a non-shockable rhythm (PEA / asystole training pathway).",
+    "vitals": "No pulse, no measurable BP, respirations absent.",
+    "additional": "This is a NON-SHOCKABLE arrest. Defibrillation / AED Shock is not indicated for the current rhythm.",
+    "diagnosis": "Non-Shockable Cardiac Arrest (PEA / Asystole)",
+    "management": [
+      "Perform Initial ABCDE / Vitals and recognize cardiac arrest.",
+      "Continue high-quality CPR and provide airway/ventilation support.",
+      "Establish IV/IO access and give Epinephrine (Cardiac Arrest) according to the server arrest pathway.",
+      "Do not deliver a shock unless the rhythm changes to a shockable rhythm."
+    ],
+    "teaching": [
+      "PEA and asystole are non-shockable rhythms.",
+      "A change to VF/pulseless VT changes the treatment pathway."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The rhythm remains non-shockable with no pulse. Continue CPR, medications, and reassessment.",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "Without effective resuscitation the patient remains pulseless.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Start/continue CPR.",
+      "Establish IV/IO access and give Epinephrine (Cardiac Arrest).",
+      "Do not defibrillate a non-shockable rhythm."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "CPR"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Epinephrine (Cardiac Arrest)"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "OPA",
+        "NPA",
+        "Suction",
+        "BVM Ventilation",
+        "Cardiac Monitoring"
+      ],
+      "neutral": [],
+      "harmful": [
+        "Defibrillation / AED Shock"
+      ]
+    }
+  },
+  {
+    "condition": "Stab Wound",
+    "type": "Trauma",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond for a {age}-year-old {sex} with a stab wound to the abdomen.",
+    "scene": "The patient is seated and holding a towel against a single abdominal stab wound. Bleeding is present but not spraying.",
+    "initial": "The patient can speak. Breathing is fast but adequate. The pulse at the wrist is fast and present.",
+    "history": "The injury occurred a few minutes ago. The weapon is no longer present.",
+    "exam": "Single penetrating abdominal wound with external bleeding. The abdomen is tender. No object remains impaled.",
+    "vitals": "HR 116, BP 102/64, RR 24, SpO₂ 97%.",
+    "additional": "There is no open chest wound and no severe extremity hemorrhage.",
+    "diagnosis": "Abdominal Stab Wound",
+    "management": [
+      "Perform Initial ABCDE / Vitals.",
+      "Control external bleeding with Direct Pressure / Dressing without packing protruding organs.",
+      "Keep the patient warm and transport rapidly."
+    ],
+    "teaching": [
+      "Penetrating torso trauma can hide serious internal bleeding even when external bleeding looks limited."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes pale and more lightheaded. HR 128, BP 88/54.",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused with worsening signs of shock.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Control external bleeding and recognize the risk of internal hemorrhage.",
+      "Transport rapidly."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Direct Pressure / Dressing"
+        ],
+        [
+          "Rapid Transport"
+        ]
+      ],
+      "beneficial": [
+        "Warming"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Impalement",
+    "type": "Trauma",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond to a work site for a {age}-year-old {sex} impaled by a metal object.",
+    "scene": "The patient is awake with a metal rod still embedded through the thigh. Coworkers have not removed it.",
+    "initial": "The patient can speak. Breathing is normal. The pulse at the wrist is fast and strong.",
+    "history": "The patient fell onto the metal rod a few minutes ago.",
+    "exam": "The object remains embedded in the thigh with moderate bleeding around it. The foot has a pulse and the patient can move and feel the toes.",
+    "vitals": "HR 108, BP 124/76, RR 20, SpO₂ 98%.",
+    "additional": "The object is stable enough to be secured in place for transport and is not obstructing CPR or the airway.",
+    "diagnosis": "Extremity Impalement",
+    "management": [
+      "Perform Initial ABCDE / Vitals.",
+      "Do not remove the impaled object. Stabilize the Impaled Object in place.",
+      "Control bleeding around the object and perform PMS (Pulse, Motor, Sensory) / Nerve Check before and after stabilization.",
+      "Transport."
+    ],
+    "teaching": [
+      "Impaled objects are generally stabilized in place unless a specific lifesaving reason requires removal."
+    ],
+    "stages": [],
+    "criticalActions": [
+      "Stabilize the Impaled Object.",
+      "Perform PMS (Pulse, Motor, Sensory) / Nerve Check."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Stabilize Impaled Object"
+        ],
+        [
+          "PMS (Pulse, Motor, Sensory) / Nerve Check"
+        ]
+      ],
+      "beneficial": [
+        "Direct Pressure / Dressing",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Animal Attack",
+    "type": "Trauma",
+    "difficulty": "Basic",
+    "dispatch": "Medic 1, respond for a {age}-year-old {sex} injured in an animal attack.",
+    "scene": "The animal is no longer near the patient. The patient has multiple deep bites and tears to one lower leg with heavy bleeding.",
+    "initial": "The patient can speak. Breathing is fast. The pulse at the wrist is fast and becoming weak.",
+    "history": "The attack happened less than 10 minutes ago.",
+    "exam": "Multiple deep wounds to the lower leg with severe ongoing bleeding. No chest or abdominal injury is seen.",
+    "vitals": "HR 126, BP 94/58, RR 26, SpO₂ 98%.",
+    "additional": "Bleeding remains severe despite a towel held over the wounds.",
+    "diagnosis": "Animal Attack with Severe Extremity Hemorrhage",
+    "management": [
+      "Perform Initial ABCDE / Vitals.",
+      "Control severe bleeding with Direct Pressure / Dressing and a Tourniquet when indicated.",
+      "Perform PMS (Pulse, Motor, Sensory) / Nerve Check after hemorrhage control.",
+      "Keep the patient warm and transport."
+    ],
+    "teaching": [
+      "Immediate hemorrhage control comes before detailed wound cleaning in a life-threatening bleed."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "Bleeding continues. HR 138, BP 78/44, and the patient becomes dizzy.",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes confused and very weak from blood loss.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Control severe extremity bleeding with a Tourniquet when needed."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Tourniquet"
+        ]
+      ],
+      "beneficial": [
+        "Direct Pressure / Dressing",
+        "PMS (Pulse, Motor, Sensory) / Nerve Check",
+        "Warming",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Polymorphic V-Tach / Torsades",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond for a {age}-year-old {sex} with palpitations, near-syncope, and recurrent episodes of a very fast rhythm.",
+    "scene": "The patient is pale and weak but still has a pulse. Cardiac Monitoring shows a rapid polymorphic ventricular rhythm consistent with Torsades de Pointes.",
+    "initial": "The patient can answer briefly. Breathing is fast. The pulse at the wrist is very fast and weak.",
+    "history": "The patient has had repeated near-syncopal episodes and reports a history of a prolonged QT problem.",
+    "exam": "Pale, sweaty skin and intermittent lightheadedness. No major bleeding or trauma is present.",
+    "vitals": "HR 210 irregular/polymorphic, BP 88/54, RR 26, SpO₂ 95%.",
+    "additional": "The patient still has a pulse. The server CCP drug matrix includes Magnesium Sulphate for this type of rhythm emergency.",
+    "ecg": "Cardiac Cardiac Monitoringing: rapid polymorphic ventricular tachycardia with twisting QRS appearance around the baseline.",
+    "diagnosis": "Polymorphic Ventricular Tachycardia / Torsades de Pointes",
+    "management": [
+      "Perform Initial ABCDE / Vitals and use Cardiac Monitoring.",
+      "Establish IV/IO access.",
+      "Give Magnesium Sulphate according to the CCP drug matrix.",
+      "Prepare for CPR and Defibrillation / AED Shock if the patient becomes pulseless."
+    ],
+    "teaching": [
+      "Polymorphic V-Tach / Torsades is a different treatment problem than a regular narrow-complex tachyarrhythmia.",
+      "If pulses are lost, transition immediately to the shockable cardiac-arrest pathway."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes more confused and the pulse becomes difficult to feel.",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient loses pulses and now requires CPR and defibrillation as a shockable cardiac arrest.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Use Cardiac Monitoring, establish IV/IO access, and give Magnesium Sulphate."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Magnesium Sulphate"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Unstable Bradycardia Requiring Pacing",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond for a {age}-year-old {sex} with severe weakness, chest discomfort, and repeated near-syncope.",
+    "scene": "The patient is pale and confused. The pulse at the wrist is extremely slow and weak.",
+    "initial": "The patient can answer only simple questions. Breathing is adequate. The pulse is very slow with poor perfusion.",
+    "history": "Symptoms began suddenly. Atropine has already been given without meaningful improvement.",
+    "exam": "Cool sweaty skin, delayed capillary refill, and altered mental status from poor perfusion.",
+    "vitals": "HR 26, BP 62/36, RR 20, SpO₂ 95%.",
+    "additional": "The patient remains profoundly unstable after Atropine. This scenario is designed to require Transcutaneous Pacing.",
+    "ecg": "Cardiac Cardiac Monitoringing: severe bradycardia / high-grade conduction problem with a ventricular rate in the 20s.",
+    "diagnosis": "Unstable Bradycardia Requiring Transcutaneous Pacing",
+    "management": [
+      "Perform Initial ABCDE / Vitals and use Cardiac Monitoring.",
+      "Establish IV/IO access.",
+      "Begin Transcutaneous Pacing because severe instability persists despite Atropine.",
+      "Reassess mechanical capture, pulse, blood pressure, and mental status."
+    ],
+    "teaching": [
+      "Electrical capture is not enough; confirm a pulse and improved perfusion with each paced beat."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes barely responsive. HR remains in the 20s and BP falls further.",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes unresponsive and is close to losing pulses.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Use Cardiac Monitoring and establish IV/IO access.",
+      "Start Transcutaneous Pacing and confirm mechanical capture."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Cardiac Monitoring"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Transcutaneous Pacing"
+        ]
+      ],
+      "beneficial": [
+        "Oxygen (Non-Rebreather)",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
+  },
+  {
+    "condition": "Anaphylaxis with Respiratory Failure",
+    "type": "Medical",
+    "difficulty": "Critical Care Paramedic",
+    "dispatch": "Medic 1, respond for a {age}-year-old {sex} with a severe allergic reaction and worsening breathing.",
+    "scene": "The patient has widespread hives, facial swelling, and severe breathing difficulty after an allergen exposure.",
+    "initial": "The patient is barely responsive. Breathing is shallow and inadequate. The pulse at the wrist is fast and weak.",
+    "history": "Symptoms began rapidly after a known allergen exposure. No major trauma is present.",
+    "exam": "Facial/tongue swelling, wheezing, very poor air movement, hives, and signs of shock.",
+    "vitals": "HR 142, BP 70/40, RR 10 shallow, SpO₂ 76%.",
+    "additional": "Breathing is inadequate now; this is not a patient who only needs a non-rebreather mask.",
+    "diagnosis": "Severe Anaphylaxis with Respiratory Failure",
+    "management": [
+      "Perform Initial ABCDE / Vitals.",
+      "Give Epinephrine (IM - Anaphylaxis).",
+      "Provide BVM Ventilation because breathing is inadequate.",
+      "Establish IV/IO access and give Saline for shock.",
+      "Prepare for Advanced Airway / RSI if ventilation cannot be maintained; Magnesium Sulphate may be used under the CCP matrix when appropriate."
+    ],
+    "teaching": [
+      "Oxygen by mask is not enough when the patient is no longer ventilating adequately."
+    ],
+    "stages": [
+      {
+        "title": "Stage 2",
+        "text": "The patient becomes unresponsive and breathing slows further.",
+        "critical": false
+      },
+      {
+        "title": "Stage 3",
+        "text": "The patient becomes apneic with a weak pulse and requires immediate ventilation / airway control.",
+        "critical": true
+      }
+    ],
+    "criticalActions": [
+      "Give Epinephrine (IM - Anaphylaxis), BVM Ventilation, IV/IO access, and Saline.",
+      "Escalate to Advanced Airway / RSI if BVM ventilation is inadequate."
+    ],
+    "treatmentPlan": {
+      "criticalGroups": [
+        [
+          "Epinephrine (IM - Anaphylaxis)"
+        ],
+        [
+          "BVM Ventilation"
+        ],
+        [
+          "IV / IO Access"
+        ],
+        [
+          "Saline"
+        ]
+      ],
+      "beneficial": [
+        "Airway Positioning",
+        "Suction",
+        "Advanced Airway / RSI",
+        "Magnesium Sulphate",
+        "Rapid Transport"
+      ],
+      "neutral": [],
+      "harmful": []
+    }
   }
 ];
 
+
 const $=id=>document.getElementById(id);
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const uid=(p='id')=>`${p}-${Date.now()}-${Math.floor(Math.random()*1e9)}`;
 function patientData(group){if(group==="Geriatric")return{age:Math.floor(Math.random()*26)+65,sex:rnd(["male","female"])};return{age:Math.floor(Math.random()*47)+18,sex:rnd(["male","female"])};}
 function fill(t,p){return (t||"").replaceAll("{age}",p.age).replaceAll("{sex}",p.sex);}
+function plain(t){
+ let x=t||"";
+ const reps=[
+  [/Airway is patent\.?/gi,'There is no obvious blockage in the airway.'],
+  [/airway is patent/gi,'there is no obvious blockage in the airway'],
+  [/patent airway/gi,'open airway with no obvious blockage'],
+  [/radial pulse/gi,'pulse at the wrist'],
+  [/respirations/gi,'breathing'],
+  [/diaphoresis/gi,'heavy sweating'],
+  [/diaphoretic/gi,'sweaty'],
+  [/cyanosis/gi,'bluish skin discoloration'],
+  [/altered mental status/gi,'change in alertness / confusion'],
+  [/hypotensive/gi,'with low blood pressure'],
+  [/tachypneic/gi,'breathing fast'],
+  [/tachycardic/gi,'with a fast heart rate'],
+  [/bradycardic/gi,'with a slow heart rate']
+ ];
+ reps.forEach(([a,b])=>x=x.replace(a,b)); return x;
+}
+function classifyVital(kind,val1,val2){
+ const n=Number(val1); if(!Number.isFinite(n))return '';
+ if(kind==='HR') return n<60?'LOW':n>100?'HIGH':'NORMAL';
+ if(kind==='BP'){const d=Number(val2);return n<90?'LOW':(n>140||d>90)?'HIGH':'NORMAL';}
+ if(kind==='RR') return n<12?'LOW':n>20?'HIGH':'NORMAL';
+ if(kind==='SpO₂') return n<95?'LOW':'NORMAL';
+ if(kind==='Temp') return n<95?'LOW':n>100.4?'HIGH':'NORMAL';
+ if(kind==='BGL') return n<70?'LOW':n>140?'HIGH':'NORMAL';
+ if(kind==='EtCO₂') return n<35?'LOW':n>45?'HIGH':'NORMAL';
+ return '';
+}
+function annotateVitals(t){
+ let x=t||'';
+ x=x.replace(/\bHR\s+(\d+)/g,(m,a)=>`${m} (${classifyVital('HR',a)})`);
+ x=x.replace(/\bBP\s+(\d+)\/(\d+)/g,(m,a,b)=>`${m} (${classifyVital('BP',a,b)})`);
+ x=x.replace(/\bRR\s+(\d+)/g,(m,a)=>`${m} (${classifyVital('RR',a)})`);
+ x=x.replace(/\bSpO₂\s+(\d+)%/g,(m,a)=>`${m} (${classifyVital('SpO₂',a)})`);
+ x=x.replace(/\bTemp\s+(\d+(?:\.\d+)?)°F/g,(m,a)=>`${m} (${classifyVital('Temp',a)})`);
+ x=x.replace(/\bBGL\s+(\d+)\s*mg\/dL/g,(m,a)=>`${m} (${classifyVital('BGL',a)})`);
+ x=x.replace(/\bEtCO₂\s+(\d+)/g,(m,a)=>`${m} (${classifyVital('EtCO₂',a)})`);
+ return x;
+}
+function present(t,p){return annotateVitals(plain(fill(t,p)));}
 function card(title,text,cls=""){return `<div class="card ${cls}"><h3>${title}</h3><p>${text}</p></div>`}
-function list(items){return `<ul class="detail-list">${items.map(x=>`<li>${x}</li>`).join("")}</ul>`}
+function list(items){return `<ul class="detail-list">${(items||[]).map(x=>`<li>${x}</li>`).join("")}</ul>`}
+function selectedDifficulties(){return [...document.querySelectorAll('.difficulty-check:checked')].map(x=>x.value);}
 function focusFor(s){
  const c=s.condition;
- if(c.includes("Asthma")) return "Asthma";
- if(c.includes("Burn")) return "Burns";
- if(c==="SVT") return "SVT";
- if(c.includes("Atrial Fibrillation")) return "A-Fib RVR";
- if(c==="Ventricular Tachycardia") return "V-Tach";
- if(c.includes("Ventricular Fibrillation")) return "V-Fib / Cardiac Arrest";
- if(c.includes("Bradycardia")) return "Bradycardia";
- if(c.includes("ACS / Heart Attack")) return "Heart Attack / ACS";
- if(c.includes("Pneumothorax")) return c;
- if(c.includes("Hemorrhage") || c.includes("Bleeding")) return c;
+ if(c.includes('Asthma'))return 'Asthma';
+ if(c.includes('Burn'))return 'Burns';
+ if(c.includes('Stab'))return 'Stab Wounds / Impalements';
+ if(c.includes('Impalement'))return 'Stab Wounds / Impalements';
+ if(c.includes('Animal Attack'))return 'Animal Attacks';
+ if(c.includes('Seizure'))return 'Seizures';
+ if(c.includes('SVT'))return 'SVT';
+ if(c.includes('Atrial Fibrillation'))return 'A-Fib RVR';
+ if(c.includes('V-Tach')||c.includes('Ventricular Tachycardia'))return c.includes('Polymorphic')?'Polymorphic V-Tach':'V-Tach with Pulse';
+ if(c.includes('Cardiac Arrest'))return c.includes('Non-Shockable')?'Non-Shockable Cardiac Arrest':'Shockable Cardiac Arrest';
+ if(c.includes('Bradycardia'))return c.includes('Pacing')?'Bradycardia / Pacing':'Bradycardia';
+ if(c.includes('ACS / Heart Attack'))return 'Heart Attack / ACS';
+ if(c.includes('Major External Bleeding'))return 'Major External Bleeding';
+ if(c.includes('Catastrophic Hemorrhage'))return 'Catastrophic Hemorrhage';
+ if(c.includes('SWiFT'))return 'Massive Hemorrhage / SWiFT';
  return c;
 }
 function updateSpecificOptions(){
  const wrap=$("specificWrap"),sel=$("specific");
  if($("mode").value!=="FTO"){wrap.style.display="none";sel.innerHTML='<option value="Random">Random</option>';return;}
  wrap.style.display="block";
- const type=$("type").value,difficulty=$("difficulty").value;
- const eligible=scenarios.filter(s=>s.difficulty===difficulty && (type==="Random"||s.type===type));
+ const type=$("type").value,diffs=selectedDifficulties();
+ const eligible=scenarios.filter(s=>diffs.includes(s.difficulty)&&(type==="Random"||s.type===type));
  const focuses=[...new Set(eligible.map(focusFor))].sort((a,b)=>a.localeCompare(b));
  const previous=sel.value;
- sel.innerHTML='<option value="Random">Random</option>'+focuses.map(f=>`<option value="${f}">${f}</option>`).join("");
- if(focuses.includes(previous)) sel.value=previous;
+ sel.innerHTML='<option value="Random">Random</option>'+focuses.map(f=>`<option value="${f}">${f}</option>`).join('');
+ if(focuses.includes(previous))sel.value=previous;
 }
+function updateFormat(){ $("patientCountWrap").style.display=$("scenarioFormat").value==='MCI'?'block':'none'; }
 
-const treatmentScope={
- "Basic":["Position / Airway Maneuvers","OPA / NPA","Suction","Oxygen","BVM Ventilation","CPR / AED","Bleeding Control / Pressure","Tourniquet","Splinting / Immobilization","Oral Glucose","Check BGL","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Keep Warm / Prevent Heat Loss","Rapid Transport / Request ALS"],
- "Advanced EMT":["Position / Airway Maneuvers","OPA / NPA","Suction","Oxygen","BVM Ventilation","CPR / AED","Bleeding Control / Pressure","Tourniquet","Splinting / Immobilization","Check BGL","Oral Glucose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","IV / IO Access","Fluid Bolus","TXA","Cardiac Monitor","Keep Warm / Prevent Heat Loss","Rapid Transport / Request ALS"],
- "Paramedic":["Position / Airway Maneuvers","OPA / NPA","Suction","Oxygen","BVM Ventilation","CPR / Defibrillation","Bleeding Control / Pressure","Tourniquet","Splinting / Immobilization","Check BGL","Oral / IV Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","IV / IO Access","Fluid Bolus","TXA","Cardiac Monitor / 12-Lead","Atropine","Synchronized Cardioversion","Advanced Airway / RSI","Needle Decompression","Pain / Nausea Management","Keep Warm / Prevent Heat Loss","Rapid Transport"],
- "Critical Care Paramedic":["Position / Airway Maneuvers","Suction","Oxygen","BVM Ventilation","CPR / Defibrillation","Bleeding Control / Pressure","Tourniquet","Check BGL / Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","IV / IO Access","Fluid Bolus","TXA","Cardiac Monitor / 12-Lead","Atropine","Synchronized Cardioversion","Advanced Airway / RSI","Needle Decompression","Magnesium Sulfate","Blood Products / SWiFT","Pain / Nausea Management","Keep Warm / Prevent Heat Loss","Rapid Transport"]
+const baseGroups={
+ 'Assessment / Monitoring':['Initial ABCDE / Vitals','Blood Glucose Check','Cardiac Monitoring','PMS (Pulse, Motor, Sensory) / Nerve Check','Stroke Assessment / Last Known Well'],
+ 'Airway / Breathing':['Airway Positioning','Suction','OPA','NPA','Oxygen (Non-Rebreather)','BVM Ventilation','Chest Seal'],
+ 'Circulation / Trauma':['CPR','Defibrillation / AED Shock','Direct Pressure / Dressing','Tourniquet','Splinting','Spinal Motion Restriction','Stabilize Impaled Object','Gentle Handling / Prevent Heat Loss','Warming','Passive Cooling','Rapid Cooling','Decontamination / PPE'],
+ 'Medications':['Oral Glucose','Naloxone','Epinephrine (IM - Anaphylaxis)','Albuterol','Ipratropium','Nitroglycerin','Activated Charcoal'],
+ 'Transport':['Rapid Transport']
 };
-function treatmentProfile(s){
- const c=s.condition.toLowerCase(); let good=[],critical=[],harmful=[];
- const add=(arr,...x)=>arr.push(...x);
- if(c.includes('asthma')){add(good,'Oxygen','Albuterol / Ipratropium');add(critical,'Albuterol / Ipratropium'); if(s.difficulty==='Critical Care Paramedic')add(good,'Magnesium Sulfate');}
- if(c.includes('anaphyl')){add(good,'Oxygen','IM Epinephrine','IV / IO Access','Fluid Bolus');add(critical,'IM Epinephrine');}
- if(c.includes('hypogly')){add(good,'Check BGL','Oral Glucose','Oral / IV Dextrose','Check BGL / Dextrose');add(critical,'Check BGL');}
- if(c.includes('opioid')){add(good,'BVM Ventilation','Naloxone','Oxygen');add(critical,'BVM Ventilation');}
- if(c.includes('hemorrhage')||c.includes('bleeding')){add(good,'Bleeding Control / Pressure','Tourniquet','IV / IO Access','Fluid Bolus','TXA','Blood Products / SWiFT','Keep Warm / Prevent Heat Loss');add(critical,'Bleeding Control / Pressure');}
- if(c.includes('fracture'))add(good,'Splinting / Immobilization','Pain / Nausea Management');
- if(c.includes('drowning')){add(good,'Suction','Oxygen','BVM Ventilation','Keep Warm / Prevent Heat Loss');add(critical,'Oxygen');}
- if(c.includes('hypothermia')){add(good,'Keep Warm / Prevent Heat Loss','Oxygen');add(critical,'Keep Warm / Prevent Heat Loss');}
- if(c.includes('pneumothorax')){add(good,'Oxygen','Needle Decompression','Rapid Transport'); if(c.includes('tension'))add(critical,'Needle Decompression');}
- if(c.includes('burn')){add(good,'Oxygen','Keep Warm / Prevent Heat Loss','IV / IO Access','Advanced Airway / RSI','Rapid Transport');}
- if(c.includes('svt')||c.includes('atrial fibrillation')||c.includes('ventricular tachycardia')){add(good,'Cardiac Monitor / 12-Lead','IV / IO Access','Synchronized Cardioversion'); if((s.vitals||'').includes('BP 78')||c.includes('ventricular tachycardia'))add(critical,'Synchronized Cardioversion');}
- if(c.includes('bradycardia'))add(good,'Cardiac Monitor / 12-Lead','IV / IO Access','Atropine');
- if(c.includes('ventricular fibrillation')){add(good,'CPR / Defibrillation','IV / IO Access');add(critical,'CPR / Defibrillation');}
- if(c.includes('acs')||c.includes('heart attack'))add(good,'Cardiac Monitor / 12-Lead','Aspirin','IV / IO Access','Oxygen','Nitroglycerin');
- if(c.includes('massive hemorrhage requiring swift')){add(good,'Blood Products / SWiFT');add(critical,'Blood Products / SWiFT');}
- // Treatments that are particularly inappropriate in selected scenarios. Instructor judgment still controls grading.
- if(c.includes('hypogly'))add(harmful,'Nitroglycerin');
- if(c.includes('opioid'))add(harmful,'Nitroglycerin');
- return {good:[...new Set(good)],critical:[...new Set(critical)],harmful:[...new Set(harmful)]};
-}
-function renderTreatmentPanel(out,s,progression){
- const scope=treatmentScope[s.difficulty]||[]; const profile=treatmentProfile(s); const id='tx-'+Date.now();
- out.insertAdjacentHTML('beforeend',`<div class="card treatment-panel" id="${id}"><div class="fto-private">FTO CONTROL — DO NOT SHOW STUDENT</div><h3>Treatments / Interventions</h3><p>Select actions as the student performs or verbalizes them. Selections carry forward through reassessments.</p><div class="treatment-grid">${scope.map((t,i)=>`<label class="treatment-option"><input type="checkbox" value="${t}"> ${t}</label>`).join('')}</div><button class="reassess-btn" type="button">REASSESS PATIENT</button><div class="response-area"></div></div>`);
- const panel=document.getElementById(id),btn=panel.querySelector('.reassess-btn'),area=panel.querySelector('.response-area'); let step=0;
- btn.addEventListener('click',()=>{
-   const selected=[...panel.querySelectorAll('input:checked')].map(x=>x.value); const has=x=>selected.includes(x);
-   const criticalDone=profile.critical.length===0 || profile.critical.some(has); const beneficial=profile.good.filter(has); const harmful=profile.harmful.filter(has);
-   let status='stable',title='Patient Remains Unchanged',text='No major improvement is seen yet. Continue assessment and treatment.';
-   if(harmful.length){status='worse';title='Patient Deteriorates';text='The patient worsens after an inappropriate intervention. Reassess ABCs and correct the treatment plan.';}
-   else if(criticalDone && beneficial.length){status='improved';title='Patient Improves / Stabilizes';text='The patient shows a clinically appropriate improvement after treatment. Continue monitoring and reassessment.';}
-   else if(!criticalDone){status='worse';title='Patient Deteriorates'; if(progression==='Dynamic'&&s.stages&&s.stages.length){const st=s.stages[Math.min(step,s.stages.length-1)];text=st.text;step++;}else{text='A critical intervention has not been completed and the patient continues to worsen.';}}
-   else if(progression==='Dynamic'&&s.stages&&s.stages.length && beneficial.length===0){status='worse';title='Patient Deteriorates';const st=s.stages[Math.min(step,s.stages.length-1)];text=st.text;step++;}
-   area.innerHTML=`<div class="card response-card ${status}"><h3>${title}</h3><p>${text}</p><div class="fto-private" style="margin-top:12px">FTO FEEDBACK</div><ul class="detail-list"><li>Effective actions selected: ${beneficial.length?beneficial.join(', '):'None yet'}</li><li>Critical action status: ${criticalDone?'Completed / not required':'MISSING — '+profile.critical.join(' or ')}</li>${harmful.length?`<li>Potentially harmful action selected: ${harmful.join(', ')}</li>`:''}</ul><div class="treatment-history">Current documented actions: ${selected.length?selected.join(' • '):'None'}</div></div>`;
- });
-}
-function generate(){
- const type=$("type").value,difficulty=$("difficulty").value,patient=$("patient").value,progression=$("progression").value,mode=$("mode").value;
- const specific=mode==="FTO" ? $("specific").value : "Random";
- let pool=scenarios.filter(s=>s.difficulty===difficulty && (type==="Random"||s.type===type) && (specific==="Random"||focusFor(s)===specific));
- const out=$("scenario");out.style.display="block";
- if(!pool.length){out.innerHTML=`<h2>Scenario</h2><div class="empty">There are no matching scenarios in the current library for those selections. Choose Random or another type/difficulty/specific scenario.</div>`;return;}
- const s=rnd(pool),p=patientData(patient);out.innerHTML=`<h2>${mode==="FTO"?"FTO Scenario":"Student Scenario"}</h2><div class="meta"><span class="badge">${s.type}</span><span class="badge">${s.difficulty}</span><span class="badge">${patient}: ${p.age}</span><span class="badge">${progression}</span><span class="badge">${mode} Mode</span></div>`;
- out.innerHTML+=card("Dispatch",fill(s.dispatch,p),"dispatch")+card("Scene",fill(s.scene,p),"scene");
- if(mode==="FTO") renderFTO(out,s,p,progression); else renderStudent(out,s,p,progression);
-}
-function renderStudent(out,s,p,progression){
- const infos=[["Initial Assessment",s.initial],["History",s.history],["Physical Exam",s.exam],["Vital Signs",s.vitals]];
- if(s.ecg)infos.push(["ECG / Monitor",s.ecg]);
- if(s.additional)infos.push(["Additional Information",s.additional]);
- const ids=infos.map((_,i)=>`info-${Date.now()}-${i}`);
- out.insertAdjacentHTML("beforeend",`<div class="reveal-grid">${infos.map((x,i)=>`<button class="reveal-btn" data-target="${ids[i]}">Reveal ${x[0]}</button>`).join("")}</div>${infos.map((x,i)=>`<div id="${ids[i]}" class="card hidden-info"><h3>${x[0]}</h3><p>${fill(x[1],p)}</p></div>`).join("")}`);
- out.querySelectorAll(".reveal-btn").forEach(b=>b.addEventListener("click",()=>{const c=document.getElementById(b.dataset.target);c.style.display="block";b.classList.add("revealed");b.disabled=true;}));
- if(progression==="Dynamic"&&s.stages.length){
-   out.insertAdjacentHTML("beforeend",`<h3>Scenario Progression</h3><div class="stage-controls">${s.stages.map((st,i)=>`<button class="stage-btn" data-stage="stage-${i}-${Date.now()}">Advance to ${st.title}</button>`).join("")}</div>`);
-   const buttons=[...out.querySelectorAll(".stage-controls .stage-btn")];
-   s.stages.forEach((st,i)=>{const id=buttons[i].dataset.stage;out.insertAdjacentHTML("beforeend",`<div id="${id}" class="card stage-card ${st.critical?"critical":""}" style="display:none"><h3>${st.title}</h3><p>${st.text}</p></div>`);buttons[i].addEventListener("click",()=>{document.getElementById(id).style.display="block";buttons[i].disabled=true;buttons[i].classList.add("revealed")})});
+const levelAdds={
+ 'Basic':{},
+ 'Advanced EMT':{
+  'Circulation / Trauma':['IV / IO Access','Saline'],
+  'Medications':['Tranexamic Acid (TXA)','Epinephrine (Cardiac Arrest)','Acetaminophen']
+ },
+ 'Paramedic':{
+  'Airway / Breathing':['Advanced Airway / RSI','DART (Chest Decompression)','Cricothyrotomy (Crike)'],
+  'Medications':['IV Dextrose','Aspirin','Atropine','Epinephrine (ALS)','Diazepam','Ketamine','Rocuronium Bromide','Ondansetron','Morphine']
+ },
+ 'Critical Care Paramedic':{
+  'Cardiac / CCP':['Synchronized Cardioversion','Transcutaneous Pacing'],
+  'Medications':['Fentanyl','Magnesium Sulphate','Calcium Chloride','Co-Amoxiclav'],
+  'SWiFT Blood Products':['Lyophilised Plasma','Packed Red Blood Cells']
  }
- renderStudentTreatmentPanel(out,s);
- const did=`dx-${Date.now()}`;out.insertAdjacentHTML("beforeend",`<button class="diagnosis-btn" data-dx="${did}">REVEAL DIAGNOSIS & EXPECTED MANAGEMENT</button><div id="${did}" class="card diagnosis-card"><div class="diagnosis-title">${s.diagnosis}</div><div class="subheading">Expected Management</div>${list(s.management)}<div class="subheading">Teaching Points</div>${list(s.teaching)}</div>`);const db=out.querySelector(`[data-dx="${did}"]`);db.addEventListener("click",()=>{document.getElementById(did).style.display="block";db.style.display="none"});
-}
-const treatmentCatalog={
- "Basic":["Initial ABCDE / Vitals","Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","CPR / AED","Cardiac Monitor","Blood Glucose Check","Oral Glucose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Direct Pressure / Dressing","Tourniquet","Neurovascular Check","Splinting","Spinal Motion Restriction","Warming / Cooling","Activated Charcoal","Rapid Transport"],
- "Advanced EMT":["Initial ABCDE / Vitals","Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","CPR / AED","Cardiac Monitor","12-Lead ECG","Blood Glucose Check","Oral Glucose","IV / IO Access","IV Fluids","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Cardiac Arrest Epinephrine","TXA","Acetaminophen","Direct Pressure / Dressing","Tourniquet","Neurovascular Check","Splinting","Warming / Cooling","Gentle Handling / Prevent Heat Loss","Activated Charcoal","Rapid Transport"],
- "Paramedic":["Initial ABCDE / Vitals","Airway Positioning","Suction","OPA / NPA","Oxygen","BVM Ventilation","Advanced Airway / RSI","CPR / Defibrillation","Cardiac Monitor","12-Lead ECG","Synchronized Cardioversion","Stroke Assessment / LKW","Blood Glucose Check","IV / IO Access","IV Fluids","IV Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","Atropine","Epinephrine","Diazepam","Ketamine","Rocuronium","Ondansetron","Morphine","TXA","Needle Decompression","Direct Pressure / Dressing","Tourniquet","Neurovascular Check","Splinting","Warming / Cooling","Rapid Cooling","Gentle Handling / Prevent Heat Loss","Decontamination / PPE","Rapid Transport"],
- "Critical Care Paramedic":["Initial ABCDE / Vitals","Airway Positioning","Suction","Oxygen","BVM Ventilation","Advanced Airway / RSI","Ventilator Management","CPR / Defibrillation","Cardiac Monitor","12-Lead ECG","Synchronized Cardioversion","Stroke Assessment / LKW","IV / IO Access","IV Fluids","Blood Products / SWiFT","Stop Transfusion","IV Dextrose","Naloxone","IM Epinephrine","Albuterol / Ipratropium","Nitroglycerin","Aspirin","Atropine","Epinephrine","Fentanyl","Ketamine","Rocuronium","Magnesium","Calcium Chloride","Antibiotic","TXA","Needle Decompression","Open Thoracostomy / Surgical Airway","Direct Pressure / Dressing","Warming / Cooling","Rapid Cooling","Gentle Handling / Prevent Heat Loss","Decontamination / PPE","Rapid Transport"]
 };
-function treatmentRules(s){
- const d=(s.diagnosis||s.condition).toLowerCase();
- let beneficial=[],critical=[],harmful=[];
- const add=(arr,...x)=>x.forEach(v=>!arr.includes(v)&&arr.push(v));
- add(beneficial,"Initial ABCDE / Vitals","Rapid Transport");
-
- if(/hypogly/.test(d)){add(beneficial,"Blood Glucose Check","Oral Glucose","IV Dextrose");add(critical,"Blood Glucose Check","Oral Glucose","IV Dextrose");add(harmful,"Nitroglycerin");}
- if(/asthma/.test(d)){add(beneficial,"Oxygen","Albuterol / Ipratropium");add(critical,"Albuterol / Ipratropium");if(s.difficulty==="Critical Care Paramedic")add(beneficial,"Magnesium","BVM Ventilation","Advanced Airway / RSI","Ventilator Management");}
- if(/syncope|near syncope/.test(d)){add(beneficial,"Blood Glucose Check","Cardiac Monitor","Rapid Transport");add(critical,"Initial ABCDE / Vitals","Blood Glucose Check");}
- if(/pneumonia/.test(d)){add(beneficial,"Oxygen","Rapid Transport");add(critical,"Oxygen","Rapid Transport");}
- if(/alcohol intox/.test(d)){add(beneficial,"Airway Positioning","Blood Glucose Check","Rapid Transport");add(critical,"Blood Glucose Check");}
- if(/heat exhaustion/.test(d)){add(beneficial,"Warming / Cooling","Rapid Transport");add(critical,"Warming / Cooling");}
- if(/simple pneumothorax/.test(d)){add(beneficial,"Oxygen","Rapid Transport");add(critical,"Oxygen","Rapid Transport");}
- if(/anaphyl/.test(d)){add(beneficial,"Oxygen","IM Epinephrine","IV / IO Access","IV Fluids","BVM Ventilation");add(critical,"IM Epinephrine");}
- if(/copd/.test(d)){add(beneficial,"Oxygen","Albuterol / Ipratropium","BVM Ventilation");add(critical,"Albuterol / Ipratropium");}
- if(/upper gi bleed|variceal|gi bleed/.test(d)){add(beneficial,"Suction","IV / IO Access","IV Fluids","Warming / Cooling","Rapid Transport");add(critical,"Suction","IV / IO Access","Rapid Transport");add(harmful,"Nitroglycerin");}
- if(/hemothorax/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Warming / Cooling","Rapid Transport");add(critical,"Oxygen","Rapid Transport");add(harmful,"Nitroglycerin");}
- if(/carbon monoxide/.test(d)){add(beneficial,"Oxygen","Cardiac Monitor","Rapid Transport");add(critical,"Oxygen");}
- if(/opioid/.test(d)){add(beneficial,"Airway Positioning","Oxygen","BVM Ventilation","Naloxone");add(critical,"BVM Ventilation","Naloxone");}
- if(/acs|heart attack/.test(d)){add(beneficial,"12-Lead ECG","Aspirin","IV / IO Access","Nitroglycerin","Oxygen","Rapid Transport");add(critical,"12-Lead ECG","Aspirin");}
- if(/stroke/.test(d)){add(beneficial,"Stroke Assessment / LKW","Blood Glucose Check","Oxygen","Rapid Transport");add(critical,"Stroke Assessment / LKW","Blood Glucose Check","Rapid Transport");}
- if(/tension pneumothorax/.test(d)){add(beneficial,"Oxygen","Needle Decompression","Open Thoracostomy / Surgical Airway","Rapid Transport");add(critical,"Needle Decompression","Open Thoracostomy / Surgical Airway");}
- if(/cardiac tamponade/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Rapid Transport");}
- if(/dka|diabetic ketoacidosis/.test(d)){add(beneficial,"Blood Glucose Check","IV / IO Access","IV Fluids","Cardiac Monitor","Rapid Transport");add(critical,"IV / IO Access","IV Fluids");}
- if(/status epilepticus/.test(d)){add(beneficial,"Airway Positioning","Oxygen","BVM Ventilation","Blood Glucose Check","IV / IO Access","Diazepam");add(critical,"Diazepam","BVM Ventilation");}
- if(/pesticide|nerve agent/.test(d)){add(beneficial,"Decontamination / PPE","Suction","BVM Ventilation","Atropine","Rapid Transport");add(critical,"Decontamination / PPE","BVM Ventilation");}
- if(/heat stroke/.test(d)){add(beneficial,"Rapid Cooling","Warming / Cooling","Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Rapid Cooling");}
- if(/hyperkal/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Oxygen","Rapid Transport");add(critical,"Cardiac Monitor","IV / IO Access","Rapid Transport");}
- if(/sepsis/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"IV / IO Access","IV Fluids","Rapid Transport");}
- if(/transfusion reaction/.test(d)){add(beneficial,"Stop Transfusion","Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Stop Transfusion");}
- if(/severe hypothermia/.test(d)){add(beneficial,"Gentle Handling / Prevent Heat Loss","Warming / Cooling","Oxygen","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Gentle Handling / Prevent Heat Loss","Warming / Cooling");}
- if(/disseminated intravascular coagulation|dic/.test(d)){add(beneficial,"Direct Pressure / Dressing","Blood Products / SWiFT","Warming / Cooling","Rapid Transport");add(critical,"Direct Pressure / Dressing","Rapid Transport");}
- if(/respiratory failure/.test(d)){add(beneficial,"Airway Positioning","Suction","Oxygen","BVM Ventilation","Advanced Airway / RSI","Ventilator Management","Rapid Transport");add(critical,"BVM Ventilation");}
- if(/closed long-bone fracture|fracture/.test(d)){add(beneficial,"Neurovascular Check","Splinting","Rapid Transport");add(critical,"Neurovascular Check","Splinting");}
- if(/major external bleeding/.test(d)){add(beneficial,"Direct Pressure / Dressing","Tourniquet","Warming / Cooling","Rapid Transport");add(critical,"Direct Pressure / Dressing","Tourniquet");add(harmful,"Nitroglycerin");}
- if(/drowning/.test(d)){add(beneficial,"Airway Positioning","Suction","Oxygen","BVM Ventilation","Warming / Cooling","Rapid Transport");add(critical,"Oxygen","BVM Ventilation");}
- if(/mild hypothermia|moderate hypothermia/.test(d)){add(beneficial,"Gentle Handling / Prevent Heat Loss","Warming / Cooling","IV / IO Access","IV Fluids","Rapid Transport");add(critical,"Warming / Cooling");}
- if(/ingested poison/.test(d)){add(beneficial,"Activated Charcoal","Rapid Transport");add(critical);}
- if(/dehydration/.test(d)){add(beneficial,"IV / IO Access","IV Fluids","Rapid Transport");add(critical,"IV / IO Access","IV Fluids");}
- if(/catastrophic hemorrhage/.test(d)){add(beneficial,"Direct Pressure / Dressing","Tourniquet","IV / IO Access","IV Fluids","TXA","Warming / Cooling","Rapid Transport");add(critical,"Direct Pressure / Dressing","Tourniquet");add(harmful,"Nitroglycerin");}
- if(/ventricular fibrillation|cardiac arrest/.test(d)){add(beneficial,"CPR / AED","CPR / Defibrillation","BVM Ventilation","Cardiac Arrest Epinephrine","Epinephrine","IV / IO Access");add(critical,"CPR / AED","CPR / Defibrillation");}
- if(/symptomatic bradycardia|bradycardia/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Atropine","Oxygen");add(critical,"Cardiac Monitor","Atropine");}
- if(/svt/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Synchronized Cardioversion","Rapid Transport");add(critical,"Cardiac Monitor");}
- if(/atrial fibrillation/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Synchronized Cardioversion","Rapid Transport");add(critical,"Cardiac Monitor");}
- if(/ventricular tachycardia/.test(d)){add(beneficial,"Cardiac Monitor","12-Lead ECG","IV / IO Access","Oxygen","Synchronized Cardioversion");add(critical,"Synchronized Cardioversion");}
- if(/major burn|inhalation injury/.test(d)){add(beneficial,"Oxygen","IV / IO Access","IV Fluids","Advanced Airway / RSI","Rapid Transport");add(critical,"Oxygen","Advanced Airway / RSI");}
- if(/hemorrhagic shock requiring blood product|swift/.test(d)){add(beneficial,"Blood Products / SWiFT","Warming / Cooling","Rapid Transport");add(critical,"Blood Products / SWiFT");}
-
- // Fallback so every scenario always has a visible must-address item even if a new scenario is added later.
- if(!critical.length) add(critical,"Initial ABCDE / Vitals");
- return {beneficial,critical,harmful};
+const levels=['Basic','Advanced EMT','Paramedic','Critical Care Paramedic'];
+function treatmentGroupsFor(level){
+ const out={}; const idx=levels.indexOf(level);
+ for(const [g,arr] of Object.entries(baseGroups))out[g]=[...arr];
+ for(let i=1;i<=idx;i++)for(const [g,arr] of Object.entries(levelAdds[levels[i]]||{})){if(!out[g])out[g]=[];arr.forEach(t=>{if(!out[g].includes(t))out[g].push(t)});}
+ return out;
 }
+function treatmentCatalogFor(level){return Object.values(treatmentGroupsFor(level)).flat();}
+function studentTreatmentLevel(){const selected=selectedDifficulties();let best='Basic',bestIndex=0;selected.forEach(l=>{const i=levels.indexOf(l);if(i>bestIndex){best=l;bestIndex=i}});return best;}
+function treatmentRules(s){
+ const src=s.treatmentPlan||{};
+ const groups=(src.criticalGroups||[]).map(g=>Array.isArray(g)?[...g]:[g]);
+ groups.unshift(['Initial ABCDE / Vitals']);
+ const dedupeGroups=[]; const seen=new Set();
+ groups.forEach(g=>{const k=g.join('|');if(!seen.has(k)){seen.add(k);dedupeGroups.push(g)}});
+ return {criticalGroups:dedupeGroups,beneficial:[...new Set(src.beneficial||[])],neutral:[...new Set(src.neutral||[])],harmful:[...new Set(src.harmful||[])]};
+}
+function renderTreatmentGroups(groups,buttonClass){
+ return Object.entries(groups).map(([name,items])=>`<div class="tx-group"><div class="tx-group-title">${name}</div><div class="tx-group-grid">${items.map(t=>`<button type="button" class="${buttonClass}" data-tx="${t}">${t}</button>`).join('')}</div></div>`).join('');
+}
+function groupSatisfied(group,selected){return group.some(t=>selected.has(t));}
+function criticalLabels(rules,available){return rules.criticalGroups.map(g=>g.filter(t=>available.includes(t))).filter(g=>g.length).map(g=>g.join(' OR '));}
+
 function renderStudentTreatmentPanel(out,s){
- const available=treatmentCatalog[s.difficulty]||treatmentCatalog.Basic;
- const rules=treatmentRules(s);
- const expected=[...new Set([...rules.beneficial,...rules.critical])].filter(t=>available.includes(t));
- const critical=rules.critical.filter(t=>available.includes(t));
- const id=`student-tx-${Date.now()}-${Math.floor(Math.random()*10000)}`;
- out.insertAdjacentHTML('beforeend',`<div id="${id}" class="student-treatment-panel"><h3>Select Your Treatments / Interventions</h3><p class="student-treatment-help">Choose everything you would perform for this patient, then submit your treatment plan. You can change your selections until you submit.</p><div class="student-treatment-grid">${available.map(t=>`<button type="button" class="student-treatment-btn" data-tx="${t}">${t}</button>`).join('')}</div><button type="button" class="student-submit-btn">SUBMIT TREATMENT PLAN</button><div class="student-treatment-results"></div></div>`);
+ const groups=treatmentGroupsFor(studentTreatmentLevel()),available=Object.values(groups).flat(),rules=treatmentRules(s);
+ const criticalGroups=rules.criticalGroups.map(g=>g.filter(t=>available.includes(t))).filter(g=>g.length);
+ const beneficial=rules.beneficial.filter(t=>available.includes(t));
+ const harmful=rules.harmful.filter(t=>available.includes(t));
+ const id=uid('student-tx');
+ out.insertAdjacentHTML('beforeend',`<div id="${id}" class="student-treatment-panel"><h3>Select Your Treatments / Interventions</h3><p class="student-treatment-help">Choose everything you would perform for this patient, then submit. Treatments are grouped by purpose. Reasonable but nonessential care will not be marked wrong.</p><div class="student-treatment-grid">${renderTreatmentGroups(groups,'student-treatment-btn')}</div><button type="button" class="student-submit-btn">SUBMIT TREATMENT PLAN</button><div class="student-treatment-results"></div></div>`);
  const panel=document.getElementById(id),buttons=[...panel.querySelectorAll('.student-treatment-btn')],submit=panel.querySelector('.student-submit-btn'),results=panel.querySelector('.student-treatment-results');
- buttons.forEach(b=>b.addEventListener('click',()=>{if(submit.disabled)return;b.classList.toggle('selected');}));
+ buttons.forEach(b=>b.addEventListener('click',()=>{if(!submit.disabled)b.classList.toggle('selected')}));
  submit.addEventListener('click',()=>{
-   const selected=new Set(buttons.filter(b=>b.classList.contains('selected')).map(b=>b.dataset.tx));
-   const missed=[]; const wrong=[]; const correct=[];
-   buttons.forEach(b=>{
-     const t=b.dataset.tx,chosen=selected.has(t),isExpected=expected.includes(t);
-     b.classList.remove('selected'); b.disabled=true;
-     if(chosen&&isExpected){b.classList.add('correct');correct.push(t);}
-     else if(chosen&&!isExpected){b.classList.add('wrong');wrong.push(t);}
-     else if(!chosen&&isExpected){b.classList.add('missed');missed.push(t);}
-     else{b.classList.add('neutral');}
-   });
-   submit.disabled=true; submit.textContent='TREATMENT PLAN SUBMITTED';
-   const missedCritical=critical.filter(t=>!selected.has(t));
-   results.innerHTML=`<div class="student-treatment-summary"><strong>Treatment Review</strong><div class="student-score-legend"><span class="legend-chip"><span class="legend-mark legend-good">✓</span> Correct / encouraged</span><span class="legend-chip"><span class="legend-mark legend-bad">✕</span> Incorrect / unnecessary</span><span class="legend-chip"><span class="legend-mark legend-missed">!</span> Missed treatment</span></div>${missedCritical.length?`<p style="margin:12px 0 0"><strong>Critical action missed:</strong> ${missedCritical.join(', ')}</p>`:''}<p style="margin:8px 0 0">Review the highlighted options, then reveal the diagnosis and expected management below.</p></div>`;
+  const selected=new Set(buttons.filter(b=>b.classList.contains('selected')).map(b=>b.dataset.tx));
+  const missedCriticalGroups=criticalGroups.filter(g=>!groupSatisfied(g,selected));
+  buttons.forEach(b=>{
+   const t=b.dataset.tx,chosen=selected.has(t),isHarmful=harmful.includes(t),isBeneficial=beneficial.includes(t),criticalGroup=criticalGroups.find(g=>g.includes(t)),critSatisfied=criticalGroup?groupSatisfied(criticalGroup,selected):false;
+   b.classList.remove('selected'); b.disabled=true;
+   if(chosen&&isHarmful)b.classList.add('wrong');
+   else if(chosen&&(isBeneficial||criticalGroup))b.classList.add('correct');
+   else if(chosen)b.classList.add('acceptable');
+   else if(criticalGroup&&!critSatisfied)b.classList.add('missed');
+   else if(isBeneficial)b.classList.add('missed');
+   else b.classList.add('neutral');
+  });
+  submit.disabled=true;submit.textContent='TREATMENT PLAN SUBMITTED';
+  results.innerHTML=`<div class="student-treatment-summary"><strong>Treatment Review</strong><div class="student-score-legend"><span class="legend-chip"><span class="legend-mark legend-good">✓</span> Correct / encouraged</span><span class="legend-chip"><span class="legend-mark legend-missed">!</span> Missed expected treatment</span><span class="legend-chip"><span class="legend-mark legend-neutral">○</span> Acceptable / neutral</span><span class="legend-chip"><span class="legend-mark legend-bad">✕</span> Incorrect / harmful</span></div>${missedCriticalGroups.length?`<p style="margin:12px 0 0"><strong>Critical action missed:</strong> ${missedCriticalGroups.map(g=>g.join(' OR ')).join('; ')}</p>`:''}<p style="margin:8px 0 0">Review the highlights, then reveal the diagnosis and expected management below.</p></div>`;
  });
 }
 
 function timingRules(s,rules){
  const d=(s.diagnosis||s.condition).toLowerCase();
- // Deadlines are simulation pacing defaults for training, not clinical protocol time limits.
- if(/major external hemorrhage/.test(d)) return [{seconds:120,requires:["Direct Pressure / Dressing","Tourniquet"],label:"Control catastrophic extremity bleeding",stage:1},{seconds:240,requires:["Direct Pressure / Dressing","Tourniquet"],label:"Hemorrhage still uncontrolled",stage:2}];
- if(/anaphyl/.test(d)) return [{seconds:120,requires:["IM Epinephrine"],label:"Administer IM epinephrine",stage:1},{seconds:240,requires:["IM Epinephrine"],label:"Anaphylaxis remains untreated",stage:2}];
- if(/opioid/.test(d)) return [{seconds:90,requires:["BVM Ventilation"],label:"Support ventilation",stage:1},{seconds:180,requires:["BVM Ventilation"],label:"Ventilatory failure continues",stage:2}];
- if(/tension pneumothorax/.test(d)) return [{seconds:120,requires:["Needle Decompression","Open Thoracostomy / Surgical Airway"],label:"Relieve tension physiology",stage:1},{seconds:240,requires:["Needle Decompression","Open Thoracostomy / Surgical Airway"],label:"Obstructive shock continues",stage:2}];
- if(/hypogly/.test(d)) return [{seconds:180,requires:["Oral Glucose","IV Dextrose"],label:"Correct hypoglycemia",stage:1},{seconds:300,requires:["Oral Glucose","IV Dextrose"],label:"Glucose remains uncorrected",stage:2}];
- if(/asthma/.test(d)) return [{seconds:180,requires:["Albuterol / Ipratropium"],label:"Begin bronchodilator treatment",stage:1},{seconds:360,requires:["Albuterol / Ipratropium"],label:"Severe bronchospasm remains untreated",stage:2}];
- if(/ventricular fibrillation|cardiac arrest/.test(d)) return [{seconds:60,requires:["CPR / AED","CPR / Defibrillation"],label:"Begin CPR / defibrillation",stage:1},{seconds:180,requires:["CPR / AED","CPR / Defibrillation"],label:"Shockable arrest remains untreated",stage:2}];
- if(/ventricular tachycardia/.test(d)) return [{seconds:120,requires:["Synchronized Cardioversion"],label:"Treat unstable V-Tach",stage:1},{seconds:240,requires:["Synchronized Cardioversion"],label:"Unstable V-Tach persists",stage:2}];
- if(rules.critical.length && (s.stages||[]).length) return [{seconds:180,requires:rules.critical,label:"Complete critical intervention",stage:1},{seconds:360,requires:rules.critical,label:"Critical problem remains untreated",stage:2}];
+ const req=(seconds,groups,label,stage)=>({seconds,requiredGroups:groups,label,stage});
+ if(d.includes('major external hemorrhage')||d.includes('animal attack'))return[req(120,[['Tourniquet']], 'Control life-threatening extremity bleeding',1),req(240,[['Tourniquet']], 'Hemorrhage remains uncontrolled',2)];
+ if(d.includes('open chest wound')||d.includes('sucking chest'))return[req(120,[['Chest Seal']], 'Seal the open chest wound',1),req(240,[['Chest Seal']], 'Open chest injury remains untreated',2)];
+ if(d.includes('anaphyl'))return[req(120,[['Epinephrine (IM - Anaphylaxis)']], 'Give IM Epinephrine',1),req(240,[['Epinephrine (IM - Anaphylaxis)']], 'Anaphylaxis remains untreated',2)];
+ if(d.includes('opioid'))return[req(90,[['BVM Ventilation']], 'Support ventilation',1),req(180,[['BVM Ventilation'],['Naloxone']], 'Ventilatory failure continues',2)];
+ if(d.includes('tension pneumothorax'))return[req(120,[['DART (Chest Decompression)']], 'Perform DART (Chest Decompression)',1),req(240,[['DART (Chest Decompression)']], 'Tension physiology continues',2)];
+ if(d.includes('hypogly'))return[req(180,[['Oral Glucose','IV Dextrose']], 'Correct low blood sugar',1),req(300,[['Oral Glucose','IV Dextrose']], 'Low blood sugar remains untreated',2)];
+ if(d.includes('asthma')){
+  const a=[req(180,[['Albuterol'],['Ipratropium']], 'Begin bronchodilator treatment',1)];
+  if(s.difficulty==='Critical Care Paramedic')a.push(req(300,[['Magnesium Sulphate']], 'Escalate refractory asthma treatment',2));return a;
+ }
+ if(d.includes('shockable cardiac arrest'))return[req(60,[['CPR'],['Defibrillation / AED Shock']], 'Begin CPR and shock the shockable rhythm',1),req(180,[['CPR'],['Defibrillation / AED Shock']], 'Shockable arrest continues',2)];
+ if(d.includes('non-shockable cardiac arrest'))return[req(60,[['CPR']], 'Begin/continue CPR',1),req(180,[['IV / IO Access'],['Epinephrine (Cardiac Arrest)']], 'Continue non-shockable arrest pathway',2)];
+ if(d.includes('synchronized')||d.includes('unstable supraventricular')||d.includes('unstable atrial')||d.includes('unstable ventricular tachycardia'))return[req(120,[['Synchronized Cardioversion']], 'Treat unstable tachyarrhythmia',1),req(240,[['Synchronized Cardioversion']], 'Unstable tachyarrhythmia persists',2)];
+ if(d.includes('pacing'))return[req(120,[['Transcutaneous Pacing']], 'Begin Transcutaneous Pacing',1),req(240,[['Transcutaneous Pacing']], 'Poor perfusion from bradycardia continues',2)];
+ if(d.includes('swift'))return[req(90,[['Tourniquet']], 'Stop the bleeding',1),req(240,[['IV / IO Access'],['Tranexamic Acid (TXA)']], 'Complete IV / TXA phase',1),req(420,[['Lyophilised Plasma'],['Packed Red Blood Cells'],['Calcium Chloride']], 'Complete SWiFT blood-product phase',2)];
+ const nonAbcde=rules.criticalGroups.filter(g=>!g.includes('Initial ABCDE / Vitals'));
+ if(nonAbcde.length&&(s.stages||[]).length)return[req(180,nonAbcde,'Complete critical interventions',1),req(360,nonAbcde,'Critical problem remains untreated',2)];
  return [];
 }
 function fmtTime(sec){sec=Math.max(0,Math.floor(sec));return `${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`;}
 function renderTreatmentPanel(out,s,p,progression){
- const available=treatmentCatalog[s.difficulty]||treatmentCatalog.Basic;
- const rules=treatmentRules(s), deadlines=progression==="Dynamic"?timingRules(s,rules):[];
- const completed=new Map(); let elapsed=0,running=false,lastTick=null,timerId=null,currentStage=0,reassessCount=0;
- const id=`tx-${Date.now()}`;
- const expected=rules.beneficial.filter(t=>available.includes(t));
- const critical=rules.critical.filter(t=>available.includes(t));
- const deadlineFor=t=>{const x=deadlines.find(d=>d.requires.includes(t));return x?fmtTime(x.seconds):""};
- out.insertAdjacentHTML("beforeend",`
- <div class="card fto-actions"><div class="fto-private">FTO QUICK REFERENCE — DO NOT SHOW STUDENT</div><h3>Trainee Expected Actions</h3>
- <div class="action-groups"><div class="action-group action-critical"><h4>Critical / Must Address</h4>${critical.length?critical.map(t=>`<div class="action-item"><span>${t}</span>${deadlineFor(t)?`<span class="action-deadline">by ${deadlineFor(t)}</span>`:""}</div>`).join(""):`<div class="private-note">No single mandatory treatment is defined for this scenario. Grade recognition, supportive care, and appropriate escalation.</div>`}</div>
- <div class="action-group action-expected"><h4>Expected / Beneficial</h4>${expected.length?expected.map(t=>`<div class="action-item"><span>${t}</span></div>`).join(""):`<div class="private-note">Supportive assessment and transport are the primary expectations.</div>`}</div></div>
- ${deadlines.length?`<div class="timer-help">Dynamic deadlines are simulation pacing rules. Missing a critical action by the displayed time automatically advances the untreated patient.</div>`:""}</div>
- <div id="${id}" class="treatment-panel"><h3>FTO Dynamic Control</h3>
- <div class="sim-header"><div class="sim-clock"><div class="sim-clock-label">SCENARIO TIME</div><div class="sim-time">00:00</div><div class="sim-status">Paused</div><div class="sim-controls"><button type="button" class="timer-start primary">START</button><button type="button" class="timer-pause">PAUSE</button><button type="button" class="timer-add">+30 SEC</button><button type="button" class="timer-reset">RESET</button></div></div>
- <div class="patient-state"><span class="stage-indicator">STAGE 1</span><h4>Current Patient Presentation</h4><div class="state-text">${fill(s.initial,p)} ${fill(s.vitals,p)}</div><div class="deadline-area"></div></div></div>
- <p>Select an action <strong>when the trainee actually performs or verbalizes it</strong>. The exact scenario time is recorded immediately.</p>
- <div class="treatment-grid">${available.map(t=>`<button type="button" class="treatment-btn" data-tx="${t}">${t}</button>`).join("")}</div>
- <button type="button" class="reassess-btn secondary">REASSESS PATIENT NOW</button>
- <div class="current-response"></div><div class="timeline"><div class="timeline-title">Scenario Timeline / Debrief Log</div><div class="timeline-list"><div class="timeline-entry"><span class="timeline-time">00:00</span><span class="timeline-text">Scenario loaded — timer paused.</span></div></div></div></div>`);
+ const groups=treatmentGroupsFor(s.difficulty),available=Object.values(groups).flat(),rules=treatmentRules(s),deadlines=progression==='Dynamic'?timingRules(s,rules):[];
+ const criticalGroups=rules.criticalGroups.map(g=>g.filter(t=>available.includes(t))).filter(g=>g.length),beneficial=rules.beneficial.filter(t=>available.includes(t));
+ const completed=new Map();let elapsed=0,running=false,lastTick=null,timerId=null,currentStage=0,reassessCount=0;const id=uid('tx');
+ const labels=criticalGroups.map(g=>g.join(' OR '));
+ const deadlineForGroup=g=>{const x=deadlines.find(d=>d.requiredGroups.some(r=>r.some(t=>g.includes(t))));return x?fmtTime(x.seconds):''};
+ out.insertAdjacentHTML('beforeend',`<div class="card fto-actions"><div class="fto-private">FTO QUICK REFERENCE — DO NOT SHOW STUDENT</div><h3>Trainee Expected Actions</h3><div class="action-groups"><div class="action-group action-critical"><h4>Critical / Must Address</h4>${criticalGroups.map(g=>`<div class="action-item"><span>${g.join(' OR ')}</span>${deadlineForGroup(g)?`<span class="action-deadline">by ${deadlineForGroup(g)}</span>`:''}</div>`).join('')}</div><div class="action-group action-expected"><h4>Expected / Beneficial</h4>${beneficial.length?beneficial.map(t=>`<div class="action-item"><span>${t}</span></div>`).join(''):'<div class="private-note">No additional beneficial treatment is required beyond the critical actions.</div>'}</div></div>${deadlines.length?'<div class="timer-help">Dynamic deadlines are simulation pacing rules, not clinical protocol time limits.</div>':''}</div><div id="${id}" class="treatment-panel"><h3>FTO Dynamic Control</h3><div class="sim-header"><div class="sim-clock"><div class="sim-clock-label">SCENARIO TIME</div><div class="sim-time">00:00</div><div class="sim-status">Paused</div><div class="sim-controls"><button type="button" class="timer-start primary">START</button><button type="button" class="timer-pause">PAUSE</button><button type="button" class="timer-add">+30 SEC</button><button type="button" class="timer-reset">RESET</button></div></div><div class="patient-state"><span class="stage-indicator">STAGE 1</span><h4>Current Patient Presentation</h4><div class="state-text">${present(s.initial,p)} ${present(s.vitals,p)}</div><div class="deadline-area"></div></div></div><p>Select an action <strong>when the trainee actually performs or verbalizes it</strong>. The exact scenario time is recorded immediately.</p><div class="treatment-grid">${renderTreatmentGroups(groups,'treatment-btn')}</div><button type="button" class="reassess-btn secondary">REASSESS PATIENT NOW</button><div class="current-response"></div><div class="timeline"><div class="timeline-title">Scenario Timeline / Debrief Log</div><div class="timeline-list"><div class="timeline-entry"><span class="timeline-time">00:00</span><span class="timeline-text">Scenario loaded — timer paused.</span></div></div></div></div>`);
  const panel=document.getElementById(id),timeEl=panel.querySelector('.sim-time'),statusEl=panel.querySelector('.sim-status'),stageBadge=panel.querySelector('.stage-indicator'),stateText=panel.querySelector('.state-text'),deadlineArea=panel.querySelector('.deadline-area'),timeline=panel.querySelector('.timeline-list'),resp=panel.querySelector('.current-response');
- const logEvent=(text,cls="")=>{timeline.insertAdjacentHTML('beforeend',`<div class="timeline-entry ${cls}"><span class="timeline-time">${fmtTime(elapsed)}</span><span class="timeline-text">${text}</span></div>`);timeline.parentElement.scrollTop=timeline.parentElement.scrollHeight;};
- const requirementMet=req=>req.some(t=>completed.has(t));
- const updateClock=()=>{timeEl.textContent=fmtTime(elapsed);statusEl.textContent=running?'Running':'Paused';};
- const applyStage=(n,reason)=>{if(n<=currentStage)return;currentStage=n;const st=(s.stages||[])[Math.min(n-1,(s.stages||[]).length-1)];stageBadge.textContent=`STAGE ${n+1}`;stageBadge.className=`stage-indicator ${n===1?'stage2':'stage3'}`;if(st){stateText.textContent=st.text;logEvent(`${st.title}: ${reason} ${st.text}`,'warn');}else{stateText.textContent='The patient continues to deteriorate because the underlying critical problem remains untreated.';logEvent(`Patient deteriorated: ${reason}`,'warn');}resp.innerHTML=`<div class="card response-card worse"><h3>AUTOMATIC PROGRESSION — STAGE ${n+1}</h3><p>${st?st.text:'The patient continues to deteriorate.'}</p></div>`;};
- const evaluateDeadlines=()=>{let next=null;deadlines.forEach(d=>{if(elapsed>=d.seconds&&!requirementMet(d.requires)){if(!next||d.stage>next.stage)next=d;}});if(next){deadlineArea.innerHTML=`<div class="deadline-banner">⚠ Missed timed action: <strong>${next.label}</strong> by ${fmtTime(next.seconds)}</div>`;applyStage(next.stage,`Timed critical action missed (${next.label}).`);}else{const future=deadlines.filter(d=>elapsed<d.seconds&&!requirementMet(d.requires)).sort((a,b)=>a.seconds-b.seconds)[0];deadlineArea.innerHTML=future?`<div class="private-note">Next timed checkpoint: <strong>${future.label}</strong> by ${fmtTime(future.seconds)}</div>`:'';}};
- const tick=()=>{if(!running)return;const now=Date.now();elapsed+=(now-lastTick)/1000;lastTick=now;updateClock();evaluateDeadlines();timerId=setTimeout(tick,250);};
- const start=()=>{if(running)return;running=true;lastTick=Date.now();updateClock();logEvent('Scenario timer started.');tick();};
- const pause=()=>{if(!running)return;running=false;if(timerId)clearTimeout(timerId);updateClock();logEvent('Scenario timer paused.');};
- panel.querySelector('.timer-start').addEventListener('click',start);
- panel.querySelector('.timer-pause').addEventListener('click',pause);
- panel.querySelector('.timer-add').addEventListener('click',()=>{elapsed+=30;updateClock();logEvent('FTO advanced simulation clock by 30 seconds.');evaluateDeadlines();});
- panel.querySelector('.timer-reset').addEventListener('click',()=>{pause();elapsed=0;currentStage=0;completed.clear();panel.querySelectorAll('.treatment-btn').forEach(b=>b.classList.remove('done','harmful-picked'));stageBadge.textContent='STAGE 1';stageBadge.className='stage-indicator';stateText.textContent=`${fill(s.initial,p)} ${fill(s.vitals,p)}`;deadlineArea.innerHTML='';resp.innerHTML='';timeline.innerHTML='<div class="timeline-entry"><span class="timeline-time">00:00</span><span class="timeline-text">Scenario reset.</span></div>';updateClock();evaluateDeadlines();});
- panel.querySelectorAll('.treatment-btn').forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.tx;if(completed.has(t))return;completed.set(t,elapsed);b.classList.add('done');if(rules.harmful.includes(t)){b.classList.add('harmful-picked');logEvent(`${t} performed — potentially inappropriate/harmful for this scenario.`,'warn');resp.innerHTML=`<div class="card response-card worse"><h3>NEGATIVE RESPONSE</h3><p>The patient worsens or receives no benefit from an inappropriate intervention. Reassess ABCs and correct the treatment plan.</p></div>`;}else if(rules.beneficial.includes(t)){logEvent(`${t} performed.`,'good');}else{logEvent(`${t} performed.`);}evaluateDeadlines();}));
- panel.querySelector('.reassess-btn').addEventListener('click',()=>{reassessCount++;const criticalMet=rules.critical.length===0||rules.critical.some(t=>completed.has(t));const harmful=[...completed.keys()].filter(t=>rules.harmful.includes(t));const beneficial=[...completed.keys()].filter(t=>rules.beneficial.includes(t));let status='stable',title='UNCHANGED',text='The patient remains largely unchanged. Continue assessment and address the underlying problem.';if(harmful.length){status='worse';title='DETERIORATING';text='An inappropriate intervention has contributed to a worse clinical course.';}else if(criticalMet&&beneficial.length){status='improved';title='IMPROVING / STABILIZING';text=currentStage>0?'The critical problem is now being addressed. Further deterioration slows or stops, but prior physiologic losses do not instantly reverse. Continue resuscitation and reassessment.':'The patient shows an appropriate favorable response to treatment. Continue monitoring and reassessment.';}else if(!criticalMet){status='worse';title='DETERIORATING';text='A critical problem remains untreated.';}resp.innerHTML=`<div class="card response-card ${status}"><h3>Reassessment ${reassessCount}: ${title}</h3><p>${text}</p><div class="private-note"><strong>Critical action:</strong> ${criticalMet?'Completed / not required':'Still missing: '+critical.filter(t=>!completed.has(t)).join(' or ')}<br><strong>Completed actions:</strong> ${[...completed.entries()].map(([t,tm])=>`${t} (${fmtTime(tm)})`).join(', ')||'None'}</div></div>`;logEvent(`Patient reassessed — ${title}.`,status==='improved'?'good':status==='worse'?'warn':'');});
+ const selectedSet=()=>new Set(completed.keys());const groupsMet=gs=>gs.every(g=>groupSatisfied(g,selectedSet()));
+ const logEvent=(text,cls='')=>{timeline.insertAdjacentHTML('beforeend',`<div class="timeline-entry ${cls}"><span class="timeline-time">${fmtTime(elapsed)}</span><span class="timeline-text">${text}</span></div>`);timeline.parentElement.scrollTop=timeline.parentElement.scrollHeight;};
+ const updateClock=()=>{timeEl.textContent=fmtTime(elapsed);statusEl.textContent=running?'Running':'Paused'};
+ const applyStage=(n,reason)=>{if(n<=currentStage)return;currentStage=n;const st=(s.stages||[])[Math.min(n-1,(s.stages||[]).length-1)];stageBadge.textContent=`STAGE ${n+1}`;stageBadge.className=`stage-indicator ${n===1?'stage2':'stage3'}`;const text=st?present(st.text,p):'The patient continues to deteriorate because a critical problem remains untreated.';stateText.textContent=text;logEvent(`${st?st.title:`Stage ${n+1}`}: ${reason} ${text}`,'warn');resp.innerHTML=`<div class="card response-card worse"><h3>AUTOMATIC PROGRESSION — STAGE ${n+1}</h3><p>${text}</p></div>`;};
+ const evaluateDeadlines=()=>{let next=null;deadlines.forEach(d=>{if(elapsed>=d.seconds&&!groupsMet(d.requiredGroups)){if(!next||d.stage>next.stage)next=d}});if(next){deadlineArea.innerHTML=`<div class="deadline-banner">⚠ Missed timed action: <strong>${next.label}</strong> by ${fmtTime(next.seconds)}</div>`;applyStage(next.stage,`Timed critical action missed (${next.label}).`)}else{const future=deadlines.filter(d=>elapsed<d.seconds&&!groupsMet(d.requiredGroups)).sort((a,b)=>a.seconds-b.seconds)[0];deadlineArea.innerHTML=future?`<div class="private-note">Next timed checkpoint: <strong>${future.label}</strong> by ${fmtTime(future.seconds)}</div>`:''}};
+ const tick=()=>{if(!running)return;const now=Date.now();elapsed+=(now-lastTick)/1000;lastTick=now;updateClock();evaluateDeadlines();timerId=setTimeout(tick,250)};
+ const start=()=>{if(running)return;running=true;lastTick=Date.now();updateClock();logEvent('Scenario timer started.');tick()};
+ const pause=()=>{if(!running)return;running=false;if(timerId)clearTimeout(timerId);updateClock();logEvent('Scenario timer paused.')};
+ panel.querySelector('.timer-start').addEventListener('click',start);panel.querySelector('.timer-pause').addEventListener('click',pause);panel.querySelector('.timer-add').addEventListener('click',()=>{elapsed+=30;updateClock();logEvent('FTO advanced simulation clock by 30 seconds.');evaluateDeadlines()});
+ panel.querySelector('.timer-reset').addEventListener('click',()=>{pause();elapsed=0;currentStage=0;completed.clear();panel.querySelectorAll('.treatment-btn').forEach(b=>b.classList.remove('done','harmful-picked'));stageBadge.textContent='STAGE 1';stageBadge.className='stage-indicator';stateText.textContent=`${present(s.initial,p)} ${present(s.vitals,p)}`;deadlineArea.innerHTML='';resp.innerHTML='';timeline.innerHTML='<div class="timeline-entry"><span class="timeline-time">00:00</span><span class="timeline-text">Scenario reset.</span></div>';updateClock();evaluateDeadlines()});
+ panel.querySelectorAll('.treatment-btn').forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.tx;if(completed.has(t))return;completed.set(t,elapsed);b.classList.add('done');if(rules.harmful.includes(t)){b.classList.add('harmful-picked');logEvent(`${t} performed — incorrect / harmful for this scenario.`,'warn');resp.innerHTML='<div class="card response-card worse"><h3>NEGATIVE RESPONSE</h3><p>The patient receives no benefit or may worsen after the inappropriate intervention. Reassess and correct the treatment plan.</p></div>'}else if(rules.beneficial.includes(t)||criticalGroups.some(g=>g.includes(t)))logEvent(`${t} performed.`,'good');else logEvent(`${t} performed — acceptable / neutral.`);evaluateDeadlines()}));
+ panel.querySelector('.reassess-btn').addEventListener('click',()=>{reassessCount++;const criticalMet=criticalGroups.every(g=>groupSatisfied(g,selectedSet())),harmful=[...completed.keys()].filter(t=>rules.harmful.includes(t)),good=[...completed.keys()].filter(t=>rules.beneficial.includes(t)||criticalGroups.some(g=>g.includes(t)));let status='stable',title='UNCHANGED',text='The patient remains largely unchanged. Continue assessment and address the underlying problem.';if(harmful.length){status='worse';title='DETERIORATING';text='An incorrect or harmful intervention has contributed to a worse clinical course.'}else if(criticalMet){status='improved';title='IMPROVING / STABILIZING';text=currentStage>0?'The critical problems are now being addressed. Further deterioration slows or stops, but prior losses do not instantly reverse.':'The patient shows an appropriate favorable response to treatment. Continue monitoring and reassessment.'}else{status='worse';title='DETERIORATING';text='One or more critical problems remain untreated.'}const missing=criticalGroups.filter(g=>!groupSatisfied(g,selectedSet())).map(g=>g.join(' OR '));resp.innerHTML=`<div class="card response-card ${status}"><h3>Reassessment ${reassessCount}: ${title}</h3><p>${text}</p><div class="private-note"><strong>Critical actions:</strong> ${criticalMet?'Completed':'Still missing: '+missing.join('; ')}<br><strong>Completed actions:</strong> ${[...completed.entries()].map(([t,tm])=>`${t} (${fmtTime(tm)})`).join(', ')||'None'}</div></div>`;logEvent(`Patient reassessed — ${title}.`,status==='improved'?'good':status==='worse'?'warn':'')});
  updateClock();evaluateDeadlines();
 }
+function renderStudent(out,s,p,progression){
+ const infos=[["Initial Assessment",s.initial],["History",s.history],["Physical Exam",s.exam],["Vital Signs",s.vitals]];if(s.ecg)infos.push(["Cardiac Monitoring",s.ecg]);if(s.additional)infos.push(["Additional Information",s.additional]);const ids=infos.map(()=>uid('info'));
+ out.insertAdjacentHTML('beforeend',`<div class="reveal-grid">${infos.map((x,i)=>`<button class="reveal-btn" data-target="${ids[i]}">Reveal ${x[0]}</button>`).join('')}</div>${infos.map((x,i)=>`<div id="${ids[i]}" class="card hidden-info"><h3>${x[0]}</h3><p>${present(x[1],p)}</p></div>`).join('')}`);
+ ids.forEach((id,i)=>{const b=out.querySelector(`[data-target="${id}"]`);b.addEventListener('click',()=>{document.getElementById(id).style.display='block';b.classList.add('revealed');b.disabled=true})});
+ if(progression==='Dynamic'&&(s.stages||[]).length){const wrap=uid('stages');out.insertAdjacentHTML('beforeend',`<h3>Scenario Progression</h3><div id="${wrap}" class="stage-controls">${s.stages.map((st,i)=>`<button class="stage-btn" data-i="${i}">Advance to ${st.title}</button>`).join('')}</div>`);const controls=document.getElementById(wrap);s.stages.forEach((st,i)=>{const id=uid('stage');out.insertAdjacentHTML('beforeend',`<div id="${id}" class="card stage-card ${st.critical?'critical':''}" style="display:none"><h3>${st.title}</h3><p>${present(st.text,p)}</p></div>`);const b=controls.querySelector(`[data-i="${i}"]`);b.addEventListener('click',()=>{document.getElementById(id).style.display='block';b.disabled=true;b.classList.add('revealed')})})}
+ renderStudentTreatmentPanel(out,s);const did=uid('dx');out.insertAdjacentHTML('beforeend',`<button class="diagnosis-btn" data-dx="${did}">REVEAL DIAGNOSIS & EXPECTED MANAGEMENT</button><div id="${did}" class="card diagnosis-card"><div class="diagnosis-title">${s.diagnosis}</div><div class="subheading">Expected Management</div>${list(s.management)}<div class="subheading">Teaching Points</div>${list(s.teaching)}</div>`);const db=out.querySelector(`[data-dx="${did}"]`);db.addEventListener('click',()=>{document.getElementById(did).style.display='block';db.style.display='none'});
+}
 function renderFTO(out,s,p,progression){
- out.insertAdjacentHTML("beforeend",`<div class="fto-title">INSTRUCTOR VIEW — ALL INFORMATION VISIBLE</div>${card("Intended Diagnosis",s.diagnosis,"diagnosis-card")}${card("Initial Assessment",fill(s.initial,p))}${card("History",fill(s.history,p))}${card("Physical Exam",fill(s.exam,p))}${card("Vital Signs",fill(s.vitals,p))}${s.ecg?card("ECG / Monitor",s.ecg):""}${s.additional?card("Additional Information",s.additional):""}`);
- if(progression==="Dynamic"&&s.stages.length){out.insertAdjacentHTML("beforeend",`<div class="subheading">Untreated Dynamic Progression — FTO Reference</div>${s.stages.map(st=>card(st.title,st.text,`stage-card ${st.critical?"critical":""}`)).join("")}`)}
- renderTreatmentPanel(out,s,p,progression);
- out.insertAdjacentHTML("beforeend",`<div class="card"><h3>Expected Management</h3>${list(s.management)}${s.criticalActions?`<div class="subheading">Critical Actions</div>${list(s.criticalActions)}`:""}${s.scopeNotes?`<div class="subheading">Server Scope / Training Notes</div>${list(s.scopeNotes)}`:""}${s.harmfulActions?`<div class="subheading">Potentially Harmful / Incorrect Actions</div>${list(s.harmfulActions)}`:""}<div class="subheading">Teaching Points</div>${list(s.teaching)}</div>`);
+ out.insertAdjacentHTML('beforeend',`<div class="fto-title">INSTRUCTOR VIEW — ALL INFORMATION VISIBLE</div>${card('Intended Diagnosis',s.diagnosis,'diagnosis-card')}${card('Initial Assessment',present(s.initial,p))}${card('History',present(s.history,p))}${card('Physical Exam',present(s.exam,p))}${card('Vital Signs',present(s.vitals,p))}${s.ecg?card('Cardiac Monitoring',present(s.ecg,p)):''}${s.additional?card('Additional Information',present(s.additional,p)):''}`);
+ if(progression==='Dynamic'&&(s.stages||[]).length)out.insertAdjacentHTML('beforeend',`<div class="subheading">Untreated Dynamic Progression — FTO Reference</div>${s.stages.map(st=>card(st.title,present(st.text,p),`stage-card ${st.critical?'critical':''}`)).join('')}`);
+ renderTreatmentPanel(out,s,p,progression);out.insertAdjacentHTML('beforeend',`<div class="card"><h3>Expected Management</h3>${list(s.management)}${s.criticalActions?`<div class="subheading">Critical Actions</div>${list(s.criticalActions)}`:''}${s.scopeNotes?`<div class="subheading">Server Scope / Training Notes</div>${list(s.scopeNotes)}`:''}${s.harmfulActions?`<div class="subheading">Potentially Harmful / Incorrect Actions</div>${list(s.harmfulActions)}`:''}<div class="subheading">Teaching Points</div>${list(s.teaching)}</div>`);
+}
+function singlePool(type,diffs,specific){return scenarios.filter(s=>diffs.includes(s.difficulty)&&(type==='Random'||s.type===type)&&(specific==='Random'||focusFor(s)===specific));}
+function renderPatientBlock(parent,s,p,progression,mode,title,showScene=true){
+ const wrap=document.createElement('div');wrap.className='mci-patient';parent.appendChild(wrap);const difficultyBadge=mode==='FTO'?`<span class="badge">${s.difficulty}</span>`:'';wrap.insertAdjacentHTML('beforeend',`<h3 class="mci-patient-title">${title}</h3><div class="meta patient-submeta"><span class="badge">${s.type}</span>${difficultyBadge}<span class="badge">${p.age}-year-old ${p.sex}</span></div>${showScene?card('Dispatch',present(s.dispatch,p),'dispatch')+card('Scene',present(s.scene,p),'scene'):card('Patient Found',`This ${p.age}-year-old ${p.sex} patient is one of the casualties awaiting triage and treatment.`,'scene')}`);if(mode==='FTO')renderFTO(wrap,s,p,progression);else renderStudent(wrap,s,p,progression);
+}
+function mciIntro(type,count){const text={Trauma:`Medic 1 is assigned to a mass-casualty incident with ${count} injured patients after a major traumatic event. Triage and manage each patient separately.`,Environmental:`Medic 1 is assigned to a mass-casualty incident with ${count} patients affected by the same environmental emergency.`,Toxicology:`Medic 1 is assigned to a mass-casualty incident with ${count} patients after a suspected shared toxic exposure.`,Medical:`Medic 1 is assigned to an overloaded medical area at a large event with ${count} simultaneous patients requiring triage and treatment.`};return text[type]||`Medic 1 is assigned to an MCI with ${count} patients requiring triage and treatment.`;}
+function chooseUnique(pool,count){const copy=[...pool],out=[];while(out.length<count&&copy.length){const i=Math.floor(Math.random()*copy.length);out.push(copy.splice(i,1)[0])}while(out.length<count&&pool.length)out.push(rnd(pool));return out;}
+function generate(){
+ const type=$("type").value,diffs=selectedDifficulties(),patient=$("patient").value,progression=$("progression").value,mode=$("mode").value,format=$("scenarioFormat").value,specific=mode==='FTO'?$("specific").value:'Random',out=$("scenario");out.style.display='block';
+ if(!diffs.length){out.innerHTML='<h2>Scenario</h2><div class="empty">Select at least one difficulty level.</div>';return}
+ if(format==='Single'){
+  const pool=singlePool(type,diffs,specific);if(!pool.length){out.innerHTML='<h2>Scenario</h2><div class="empty">There are no matching scenarios for those selections.</div>';return}const s=rnd(pool),p=patientData(patient),difficultyBadge=mode==='FTO'?`<span class="badge">${s.difficulty}</span>`:'';out.innerHTML=`<h2>${mode==='FTO'?'FTO Scenario':'Student Scenario'}</h2><div class="meta"><span class="badge">${s.type}</span>${difficultyBadge}<span class="badge">${patient}: ${p.age}</span><span class="badge">${progression}</span><span class="badge">${mode} Mode</span></div>`;out.innerHTML+=card('Dispatch',present(s.dispatch,p),'dispatch')+card('Scene',present(s.scene,p),'scene');if(mode==='FTO')renderFTO(out,s,p,progression);else renderStudent(out,s,p,progression);return;
+ }
+ const count=Number($("patientCount").value)||3;let mciType=type;if(mciType==='Random'){const types=[...new Set(scenarios.filter(s=>diffs.includes(s.difficulty)).map(s=>s.type))];mciType=rnd(types)}let pool=singlePool(mciType,diffs,specific);if(!pool.length){out.innerHTML='<h2>MCI Scenario</h2><div class="empty">There are no matching patients for this MCI setup. Try Random Specific Scenario or another type / difficulty combination.</div>';return}const picks=chooseUnique(pool,count);out.innerHTML=`<h2>${mode==='FTO'?'FTO MCI Scenario':'Student MCI Scenario'}</h2>${card('MCI Dispatch',mciIntro(mciType,count),'mci-header')}<div class="meta"><span class="badge">${mciType} MCI</span><span class="badge">${count} Patients</span><span class="badge">${progression}</span><span class="badge">${mode} Mode</span></div>`;picks.forEach((s,i)=>renderPatientBlock(out,s,patientData(patient),progression,mode,`Patient ${i+1}`,false));
 }
 
-$("generate").addEventListener("click",generate);
-$("mode").addEventListener("change",updateSpecificOptions);
-$("type").addEventListener("change",updateSpecificOptions);
-$("difficulty").addEventListener("change",updateSpecificOptions);
-updateSpecificOptions();
+$("generate").addEventListener('click',generate);$("mode").addEventListener('change',updateSpecificOptions);$("type").addEventListener('change',updateSpecificOptions);$("scenarioFormat").addEventListener('change',updateFormat);document.querySelectorAll('.difficulty-check').forEach(x=>x.addEventListener('change',updateSpecificOptions));$("selectAllDifficulty").addEventListener('click',()=>{document.querySelectorAll('.difficulty-check').forEach(x=>x.checked=true);updateSpecificOptions()});$("clearDifficulty").addEventListener('click',()=>{document.querySelectorAll('.difficulty-check').forEach(x=>x.checked=false);updateSpecificOptions()});updateSpecificOptions();updateFormat();
+
 </script>
 </body>
 </html>
